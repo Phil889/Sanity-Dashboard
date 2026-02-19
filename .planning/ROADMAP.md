@@ -16,7 +16,7 @@ None
 
 - [ ] **Phase 1: Audit & Assessment** - Map existing workflow, test scripts, identify what works/breaks/is redundant
 - [ ] **Phase 2: Security Hardening** - Fix hardcoded API tokens in 6,000+ files, centralize credentials
-- [ ] **Phase 3: Core Infrastructure** - Shared Sanity client, error handling, utilities for all later phases
+- [x] **Phase 3: Core Infrastructure** - Shared Sanity client, error handling, utilities for all later phases
 - [ ] **Phase 4: Untranslated Page Detection** - Automated query to find German servicePages without English counterparts
 - [ ] **Phase 5: Content Extraction** - Reliable batch extraction of German page content into structured format
 - [ ] **Phase 6: AI-Assisted Translation Engine** - Translation system following all 11 rules with quality output
@@ -55,12 +55,13 @@ Plans:
 **Goal**: Shared Sanity client module, error handling utilities, and config used by all subsequent phases
 **Depends on**: Phase 2
 **Research**: Unlikely (existing @sanity/client patterns)
-**Plans**: 3 plans
+**Plans**: 4 plans
 
 Plans:
-- [ ] 03-01: Create shared Sanity client module with centralized config
-- [ ] 03-02: Build error handling and logging utilities
-- [ ] 03-03: Create TypeScript project config (tsconfig.json, project structure)
+- [x] 03-01: Project foundation (package.json, tsconfig.json, directory structure)
+- [x] 03-02: Shared Sanity client module with centralized config
+- [x] 03-03: Error handling and logging utilities
+- [x] 03-04: EN FAQ batch runner tool
 
 ### Phase 4: Untranslated Page Detection
 **Goal**: Automated, accurate detection of all German servicePages without English translations
@@ -154,9 +155,9 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Audit & Assessment | 0/5 | Not started | - |
-| 2. Security Hardening | 0/3 | Not started | - |
-| 3. Core Infrastructure | 0/3 | Not started | - |
+| 1. Audit & Assessment | 5/5 | Complete | 2026-02-19 |
+| 2. Security Hardening | 3/3 | Complete | 2026-02-19 |
+| 3. Core Infrastructure | 4/4 | Complete | 2026-02-19 |
 | 4. Untranslated Page Detection | 0/3 | Not started | - |
 | 5. Content Extraction | 0/3 | Not started | - |
 | 6. AI-Assisted Translation Engine | 0/5 | Not started | - |

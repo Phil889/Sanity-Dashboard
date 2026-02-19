@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-19)
 
 **Core value:** A reliable, automated pipeline that can translate, upload, and link service pages from German to English without breaking existing content.
-**Current focus:** Phase 3 -- Core Infrastructure (Phase 2 complete)
+**Current focus:** Phase 4 -- Untranslated Page Detection (Phase 3 complete)
 
 ## Current Position
 
-Phase: 2 of 10 **COMPLETE** (Security Hardening)
-Next phase: 3 (Core Infrastructure)
-Status: Phase 2 complete, ready to plan Phase 3
-Last activity: 2026-02-19 -- Phase 2 Security Hardening completed (3 plans: credential infrastructure, token removal, validation)
+Phase: 3 of 10 **COMPLETE** (Core Infrastructure)
+Next phase: 4 (Untranslated Page Detection)
+Status: Phase 3 complete, ready to plan Phase 4
+Last activity: 2026-02-19 -- Phase 3 Core Infrastructure completed (4 plans: foundation, Sanity client, error/logging, FAQ batch runner)
 
-Progress: [====------] 20% (Phase 2 of 10 complete)
+Progress: [======----] 30% (Phase 3 of 10 complete)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 8
-- Average duration: ~40 minutes per plan
-- Total execution time: ~5.25 hours (Phase 1 + Phase 2)
+- Total plans completed: 12
+- Average duration: ~30 minutes per plan
+- Total execution time: ~6.25 hours (Phase 1 + Phase 2 + Phase 3)
 
 **By Phase:**
 
@@ -29,10 +29,11 @@ Progress: [====------] 20% (Phase 2 of 10 complete)
 |-------|-------|-------|----------|
 | 1. Audit & Assessment | 5/5 | ~3.75 hrs | ~45 min |
 | 2. Security Hardening | 3/3 | ~1.5 hrs | ~30 min |
+| 3. Core Infrastructure | 4/4 | ~1.0 hr | ~15 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-04, 01-05, 02-01, 02-02, 02-03 (all complete)
-- Trend: Accelerating -- Phase 2 plans are faster due to well-scoped mechanical changes
+- Last 5 plans: 02-03, 03-01, 03-02, 03-03, 03-04 (all complete)
+- Trend: Accelerating -- Phase 3 used parallel execution (Wave 2 ran 03-02 + 03-03 concurrently)
 
 ## Accumulated Context
 
@@ -71,13 +72,17 @@ Recent decisions affecting current work:
 
 1. `translation.metadata` is authoritative for i18n linking (not `__i18n_base`)
 2. Extraction scripts must be built from scratch (do not exist in repo)
-3. EN FAQ batch runner is a priority (377 export-only files are dead code)
+3. ~~EN FAQ batch runner is a priority (377 export-only files are dead code)~~ **BUILT in Phase 3 Plan 03-04**
 4. Tracker is unreliable; use Sanity queries for status
 5. `de-pages-created/` is reference only, not part of active pipeline
 6. Keep `createOrReplace` pattern for publishing
 7. AI translation needed but must avoid embellishment found in existing translations
 8. All credentials via environment variables with dotenv (Phase 2)
 9. Fallback project IDs in code use correct `wwmm9rbb` (Phase 2)
+10. Shared Sanity client singleton with env validation (Phase 3)
+11. Typed errors: SanityApiError (retryable 429/5xx), ValidationError, ConfigError (Phase 3)
+12. withRetry exponential backoff for all retryable operations (Phase 3)
+13. EN FAQ batch runner: 377 files across 78 slugs, dry-run default, --execute for mutations (Phase 3)
 
 ### Deferred Issues
 
