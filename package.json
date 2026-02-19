@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "faq-batch": "tsx src/tools/faq-batch-runner.ts"
   },
   "dependencies": {
     "@sanity/client": "^7.2.1",
