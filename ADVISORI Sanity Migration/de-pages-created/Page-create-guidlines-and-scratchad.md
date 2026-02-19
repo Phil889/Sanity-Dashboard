@@ -97,7 +97,7 @@ Environment variables:
 SANITY_STUDIO_PROJECT_ID=wwmm9rbb
 SANITY_STUDIO_DATASET=production
 SANITY_STUDIO_API_VERSION=2024-02-14
-SANITY_STUDIO_API_TOKEN=skNQVXst2vXGN6LFXZYE9lVmpg0vI4YOSd85zjdJtduqlVhOvxC8WRbMFdPXflVXgGEQWPlqrBI0yIQ6kVvBgymIjQLN08UJEpZEmnhFtBCfOBwRZwimvSydSft6EvdKgEvOQBMRZ2fIP6OvxtwBrnIK2r2h6SMuBRbCpqjiJ9uy0hC5oPfb
+SANITY_STUDIO_API_TOKEN= # Set in .env file
 
 Make sure the full slug is used in the script.
 
