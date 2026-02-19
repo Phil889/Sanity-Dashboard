@@ -5,7 +5,7 @@ import * as fs from 'fs'
 dotenv.config()
 
 const client = createClient({
-  projectId: process.env.SANITY_PROJECT_ID || 'b0o7vqwz',
+  projectId: process.env.SANITY_PROJECT_ID || 'wwmm9rbb',
   dataset: 'production',
   useCdn: false,
   apiVersion: '2024-01-01',
