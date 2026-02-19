@@ -1,0 +1,77 @@
+import 'dotenv/config'
+import { createClient } from '@sanity/client'
+
+// Create client with direct credentials
+const client = createClient({
+  projectId: 'wwmm9rbb',
+  dataset: 'production',
+  apiVersion: '2024-02-14',
+  token: process.env.SANITY_API_TOKEN,
+  useCdn: false,
+})
+
+// Helper function to generate unique keys
+function generateKey(prefix: string, index: number): string {
+  return `${prefix}_${Date.now()}_${index}`
+}
+
+const run = async () => {
+  try {
+    console.log('Updating ISO 27001 Audit page with FAQ batch 2...')
+    
+    // First, get the existing document
+    console.log('Fetching existing document...')
+    const existingDoc = await client.fetch('*[_id == $id][0]', { id: 'iso-27001-audit' })
+    
+    if (!existingDoc) {
+      throw new Error('Document "iso-27001-audit" not found')
+    }
+    
+    // Create new FAQs for pre-audit preparation and readiness
+    const newFaqs = [
+      {
+        _type: 'object',
+        _key: generateKey('faq', 5),
+        question: 'Welche kritischen Faktoren bestimmen die optimale Timing-Strategie für ISO 27001 Audits?',
+        answer: "Die strategische Timing-Planung für ISO 27001 Audits ist ein komplexer Prozess, der weit über die reine Terminkoordination hinausgeht und entscheidenden Einfluss auf den Audit-Erfolg hat. Eine durchdachte Timing-Strategie berücksichtigt organisatorische, technische und strategische Faktoren für optimale Audit-Bedingungen.\n\n📅 Strategische Timing-Optimierung:\n• Abstimmung der Audit-Termine mit Geschäftszyklen und operativen Spitzenzeiten für minimale Betriebsstörungen\n• Berücksichtigung von Urlaubszeiten und Personalverfügbarkeit für optimale Stakeholder-Beteiligung\n• Integration in übergeordnete Compliance-Zyklen und andere Audit-Aktivitäten für Synergieeffekte\n• Planung ausreichender Vorbereitungszeit für systematische und stressfreie Audit-Vorbereitung\n• Koordination mit strategischen Geschäftsinitiativen und Organisationsveränderungen\n\n🔄 ISMS-Reife und Implementierungsstand:\n• Sicherstellung ausreichender ISMS-Betriebszeit für nachweisbare Wirksamkeit und Prozessreife\n• Berücksichtigung von Lernkurven und Optimierungszyklen nach ISMS-Implementierung\n• Timing nach kritischen Meilensteinen wie Risikobewertungen oder Management-Reviews\n• Abstimmung mit internen Audit-Zyklen für optimale Evidence-Verfügbarkeit\n• Planung nach Abschluss wichtiger Verbesserungsmaßnahmen oder Systemupdates\n\n📊 Evidence-Verfügbarkeit und Dokumentationsreife:\n• Sicherstellung vollständiger Dokumentation aller ISMS-Prozesse und Kontrollmaßnahmen\n• Verfügbarkeit ausreichender Betriebsevidenzen und Performance-Metriken\n• Abschluss aller erforderlichen Risikobewertungen und Treatment-Aktivitäten\n• Vollständigkeit von Management-Reviews und kontinuierlichen Verbesserungsaktivitäten\n• Bereitstellung aller erforderlichen Schulungsnachweise und Kompetenzbelege\n\n🎯 Organisatorische Readiness-Faktoren:\n• Verfügbarkeit aller kritischen Stakeholder und Fachexperten während der Audit-Periode\n• Abschluss interner Vorbereitungsaktivitäten und Stakeholder-Schulungen\n• Stabilität der Organisationsstruktur und minimale Veränderungen während des Audits\n• Verfügbarkeit ausreichender Ressourcen für intensive Audit-Begleitung\n• Optimale Kommunikations- und Koordinationsstrukturen für effiziente Audit-Durchführung\n\n🌐 Externe Faktoren und Marktbedingungen:\n• Berücksichtigung regulatorischer Entwicklungen und Standard-Updates\n• Abstimmung mit Zertifizierungsstellen-Verfügbarkeit und Auditor-Qualifikationen\n• Koordination mit Branchenzyklen und saisonalen Geschäftsanforderungen\n• Integration in strategische Kommunikations- und Marketing-Aktivitäten\n• Berücksichtigung von Wettbewerbsaktivitäten und Marktpositionierung\n\n💡 Kontinuierliche Timing-Optimierung:\n• Entwicklung flexibler Timing-Strategien für verschiedene Audit-Szenarien\n• Aufbau von Puffern und Contingency-Plänen für unvorhergesehene Verzögerungen\n• Regelmäßige Bewertung und Anpassung der Timing-Strategie basierend auf Erfahrungen\n• Integration von Lessons Learned aus vorherigen Audits in zukünftige Timing-Planungen\n• Schaffung nachhaltiger Timing-Frameworks für kontinuierliche Audit-Zyklen"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 6),
+        question: 'Wie entwickelt ADVISORI maßgeschneiderte Evidence-Management-Strategien für komplexe Organisationsstrukturen?',
+        answer: "Evidence-Management für komplexe Organisationsstrukturen erfordert einen systematischen, vielschichtigen Ansatz, der die spezifischen Herausforderungen großer, verteilter oder diversifizierter Organisationen berücksichtigt. ADVISORI entwickelt maßgeschneiderte Evidence-Strategien, die Effizienz, Vollständigkeit und Audit-Readiness in komplexen Umgebungen gewährleisten.\n\n🏗️ Strukturelle Evidence-Architektur:\n• Entwicklung hierarchischer Evidence-Strukturen, die Organisationsebenen und Verantwortlichkeiten widerspiegeln\n• Schaffung einheitlicher Evidence-Standards und Kategorisierungssysteme für alle Organisationseinheiten\n• Design flexibler Evidence-Frameworks, die verschiedene Geschäftsbereiche und Standorte integrieren\n• Aufbau redundanter Evidence-Quellen für kritische Compliance-Bereiche\n• Integration verschiedener Dokumentations- und Informationssysteme in eine kohärente Evidence-Landschaft\n\n📋 Systematische Evidence-Kategorisierung:\n• Entwicklung umfassender Evidence-Taxonomien basierend auf ISO 27001 Anforderungen\n• Kategorisierung nach Audit-Relevanz, Kritikalität und Verfügbarkeitsanforderungen\n• Strukturierung nach Organisationsebenen, Prozessen und Kontrollbereichen\n• Klassifizierung nach Evidence-Typen wie Policies, Verfahren, Aufzeichnungen und Metriken\n• Integration von Cross-Reference-Systemen für effiziente Evidence-Navigation\n\n🔄 Dezentrale Evidence-Koordination:\n• Aufbau verteilter Evidence-Management-Strukturen mit klaren Verantwortlichkeiten\n• Entwicklung standardisierter Evidence-Collection-Prozesse für alle Organisationseinheiten\n• Schaffung zentraler Evidence-Repositories mit dezentraler Pflege und Aktualisierung\n• Implementation von Workflow-Systemen für effiziente Evidence-Koordination\n• Etablierung regelmäßiger Evidence-Review-Zyklen und Qualitätssicherungsprozesse\n\n💻 Technologische Evidence-Integration:\n• Implementation moderner Evidence-Management-Plattformen für zentrale Verwaltung\n• Integration verschiedener Datenquellen und Systeme in einheitliche Evidence-Dashboards\n• Automatisierung von Evidence-Collection und Aktualisierungsprozessen\n• Entwicklung von Self-Service-Portalen für dezentrale Evidence-Bereitstellung\n• Nutzung von KI und Analytics für proaktive Evidence-Lücken-Identifikation\n\n🎯 Audit-optimierte Evidence-Bereitstellung:\n• Entwicklung audit-spezifischer Evidence-Packages für verschiedene Audit-Szenarien\n• Schaffung interaktiver Evidence-Navigation-Systeme für Auditoren\n• Aufbau von Real-time Evidence-Verfügbarkeit für spontane Audit-Anfragen\n• Implementation von Evidence-Traceability-Systemen für vollständige Nachverfolgbarkeit\n• Entwicklung von Evidence-Präsentations-Tools für professionelle Audit-Durchführung\n\n📊 Kontinuierliche Evidence-Optimierung:\n• Etablierung von Evidence-Performance-Metriken und Qualitätsindikatoren\n• Regelmäßige Evidence-Audits und Vollständigkeits-Assessments\n• Aufbau von Feedback-Mechanismen für kontinuierliche Evidence-Verbesserung\n• Integration von Lessons Learned aus Audits in Evidence-Management-Optimierung\n• Entwicklung adaptiver Evidence-Strategien für evolvierende Organisationsanforderungen"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 7),
+        question: 'Welche innovativen Ansätze nutzt ADVISORI zur Optimierung der Auditor-Stakeholder-Interaktion?',
+        answer: "Die Optimierung der Auditor-Stakeholder-Interaktion ist entscheidend für erfolgreiche ISO 27001 Audits und erfordert innovative Ansätze, die über traditionelle Audit-Kommunikation hinausgehen. ADVISORI entwickelt maßgeschneiderte Interaktionsstrategien, die Vertrauen schaffen, Effizienz maximieren und positive Audit-Erfahrungen für alle Beteiligten gewährleisten.\n\n🤝 Strategische Beziehungsgestaltung:\n• Entwicklung proaktiver Auditor-Engagement-Strategien bereits vor dem eigentlichen Audit\n• Aufbau von Vertrauen und Rapport durch professionelle Vorbereitung und Transparenz\n• Schaffung kollaborativer Audit-Atmosphären, die Partnerschaft statt Konfrontation fördern\n• Etablierung klarer Kommunikationskanäle und Erwartungsmanagement für alle Beteiligten\n• Integration von Stakeholder-Präferenzen und Auditor-Stilen in Interaktionsstrategien\n\n💬 Innovative Kommunikationstechnologien:\n• Nutzung digitaler Collaboration-Plattformen für effiziente Audit-Koordination\n• Implementation von Real-time Communication-Tools für spontane Audit-Anfragen\n• Entwicklung interaktiver Audit-Dashboards für transparente Fortschrittsverfolgung\n• Einsatz von Video-Conferencing und Virtual-Reality für Remote-Audit-Unterstützung\n• Integration von KI-gestützten Communication-Assistenten für optimierte Informationsbereitstellung\n\n🎭 Personalisierte Stakeholder-Vorbereitung:\n• Entwicklung individueller Kommunikationsstrategien basierend auf Stakeholder-Profilen\n• Anpassung von Interaktionsstilen an verschiedene Auditor-Persönlichkeiten und Präferenzen\n• Training in kultureller Sensibilität und internationaler Audit-Kommunikation\n• Aufbau von Empathie und Verständnis für Auditor-Perspektiven und Herausforderungen\n• Entwicklung von Conflict-Resolution-Strategien für herausfordernde Audit-Situationen\n\n📊 Datengetriebene Interaktionsoptimierung:\n• Analyse historischer Audit-Daten zur Identifikation optimaler Interaktionsmuster\n• Nutzung von Feedback-Analytics für kontinuierliche Verbesserung der Stakeholder-Erfahrung\n• Implementation von Real-time Sentiment-Analysis für proaktive Interaktionsanpassung\n• Entwicklung von Predictive Models für Audit-Herausforderungen und Lösungsstrategien\n• Integration von Performance-Metriken für objektive Interaktionsqualitäts-Bewertung\n\n🔄 Agile Audit-Facilitation:\n• Anwendung agiler Methoden für flexible und responsive Audit-Durchführung\n• Entwicklung iterativer Feedback-Zyklen für kontinuierliche Audit-Optimierung\n• Implementation von Sprint-basierten Audit-Phasen für fokussierte und effiziente Durchführung\n• Nutzung von Retrospektiven für kontinuierliches Lernen und Verbesserung\n• Schaffung adaptiver Audit-Frameworks, die sich an verändernde Anforderungen anpassen\n\n🎯 Outcome-orientierte Interaktionsgestaltung:\n• Fokussierung auf gemeinsame Ziele und Win-Win-Situationen für alle Audit-Beteiligten\n• Entwicklung von Value-Creation-Strategien, die über reine Compliance hinausgehen\n• Integration von Business-Value-Diskussionen in Audit-Interaktionen\n• Schaffung von Lernmöglichkeiten und Kompetenzentwicklung während des Audits\n• Aufbau langfristiger Beziehungen für nachhaltige Audit-Excellence und kontinuierliche Verbesserung"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 8),
+        question: 'Wie gewährleistet ADVISORI die nahtlose Integration von ISO 27001 Audits in bestehende Compliance-Landschaften?',
+        answer: "Die Integration von ISO 27001 Audits in komplexe Compliance-Landschaften erfordert einen strategischen, ganzheitlichen Ansatz, der Synergien maximiert und Redundanzen minimiert. ADVISORI entwickelt integrierte Audit-Strategien, die ISO 27001 nahtlos in bestehende Compliance-Frameworks einbetten und organisationsweite Effizienz schaffen.\n\n🌐 Ganzheitliche Compliance-Architektur:\n• Mapping bestehender Compliance-Frameworks und Identifikation von Überschneidungen mit ISO 27001\n• Entwicklung integrierter Compliance-Architekturen, die multiple Standards harmonisch verbinden\n• Schaffung einheitlicher Governance-Strukturen für alle Compliance-Bereiche\n• Design von Cross-Standard-Prozessen, die Effizienz und Konsistenz gewährleisten\n• Integration von Compliance-Zyklen für optimierte Ressourcennutzung und minimale Audit-Belastung\n\n🔄 Synergistische Audit-Koordination:\n• Koordination von ISO 27001 Audits mit anderen Compliance-Audits für maximale Effizienz\n• Entwicklung gemeinsamer Evidence-Repositories für multiple Compliance-Anforderungen\n• Schaffung integrierter Audit-Schedules, die Überschneidungen und Konflikte vermeiden\n• Nutzung gemeinsamer Stakeholder-Ressourcen für verschiedene Audit-Aktivitäten\n• Implementation von Multi-Standard-Audit-Methoden für simultane Compliance-Bewertungen\n\n📊 Unified Compliance-Monitoring:\n• Entwicklung integrierter Compliance-Dashboards für ganzheitliche Übersicht\n• Schaffung einheitlicher KPIs und Metriken für alle Compliance-Bereiche\n• Implementation von Cross-Standard-Reporting für effiziente Management-Kommunikation\n• Aufbau zentraler Compliance-Datenbanken mit Multi-Standard-Zugriff\n• Integration von Predictive Analytics für proaktive Compliance-Risikoidentifikation\n\n🎯 Strategische Compliance-Optimierung:\n• Identifikation von Compliance-Synergien und Effizienzpotenzialen zwischen Standards\n• Entwicklung von Shared-Service-Modellen für gemeinsame Compliance-Aktivitäten\n• Schaffung von Center-of-Excellence-Strukturen für standardübergreifende Expertise\n• Implementation von Best-Practice-Sharing zwischen verschiedenen Compliance-Bereichen\n• Aufbau adaptiver Compliance-Frameworks für evolvierende regulatorische Anforderungen\n\n💼 Business-integrierte Compliance-Strategien:\n• Integration von Compliance-Aktivitäten in reguläre Geschäftsprozesse und Entscheidungszyklen\n• Entwicklung von Business-Case-Argumentationen für integrierte Compliance-Ansätze\n• Schaffung von Compliance-Value-Propositions, die über reine Risikominimierung hinausgehen\n• Integration von Compliance-Überlegungen in strategische Planungs- und Entwicklungsprozesse\n• Aufbau von Compliance-Kulturen, die Standards als Business-Enabler positionieren\n\n🔧 Technologische Compliance-Integration:\n• Implementation integrierter GRC-Plattformen für einheitliches Compliance-Management\n• Entwicklung von API-Integrationen zwischen verschiedenen Compliance-Systemen\n• Nutzung von Workflow-Automatisierung für effiziente Multi-Standard-Prozesse\n• Schaffung von Self-Service-Portalen für dezentrale Compliance-Aktivitäten\n• Integration von KI und Machine Learning für intelligente Compliance-Optimierung"
+      }
+    ]
+    
+    // Update the document with new FAQs
+    const updatedFaqs = [...(existingDoc.faq || []), ...newFaqs]
+    
+    console.log(`Adding ${newFaqs.length} new FAQs to the document...`)
+    const transaction = client.transaction()
+    transaction.patch(existingDoc._id, {
+      set: {
+        faq: updatedFaqs
+      }
+    })
+    
+    await transaction.commit()
+    console.log('✅ FAQ batch 2 added successfully')
+  } catch (error) {
+    console.error('Error:', error)
+    throw error
+  }
+}
+
+run()

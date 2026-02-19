@@ -1,0 +1,77 @@
+import 'dotenv/config'
+import { createClient } from '@sanity/client'
+
+// Create client with direct credentials
+const client = createClient({
+  projectId: 'wwmm9rbb',
+  dataset: 'production',
+  apiVersion: '2024-02-14',
+  token: process.env.SANITY_API_TOKEN,
+  useCdn: false,
+})
+
+// Helper function to generate unique keys
+function generateKey(prefix: string, index: number): string {
+  return `${prefix}_${Date.now()}_${index}`
+}
+
+const run = async () => {
+  try {
+    console.log('Updating FRTB Implementation page with FAQs batch 1...')
+    
+    // First, get the existing document
+    console.log('Fetching existing document...')
+    const existingDoc = await client.fetch('*[_id == $id][0]', { id: 'frtb-implementation' })
+    
+    if (!existingDoc) {
+      throw new Error('Document "frtb-implementation" not found')
+    }
+    
+    // Create new FAQs
+    const newFaqs = [
+      {
+        _type: 'object',
+        _key: generateKey('faq', 1),
+        question: "Wie unterstützt ADVISORI Finanzinstitute bei der strategischen Entscheidung zwischen FRTB-Standardansatz und internen Modellen?",
+        answer: "Die Entscheidung zwischen dem FRTB-Standardansatz und internen Modellen ist eine der fundamentalsten strategischen Weichenstellungen im FRTB-Implementierungsprozess mit weitreichenden Auswirkungen auf Kapitalanforderungen, Ressourceneinsatz und operationelle Komplexität. ADVISORI unterstützt Finanzinstitute mit einem umfassenden, faktenbasierten Entscheidungsframework, das alle relevanten Dimensionen berücksichtigt.\n\n🧩 Ganzheitlicher Entscheidungsansatz von ADVISORI:\n• Quantitative Kapitalimpaktanalyse: Durchführung detaillierter Simulationen zur Berechnung der Kapitalanforderungen unter beiden Ansätzen auf Basis historischer Portfoliodaten und Stressszenarien, mit Berücksichtigung von Diversifikationseffekten und NMRF-Aufschlägen.\n• Kosten-Nutzen-Analyse: Umfassende Bewertung der Implementierungs- und Betriebskosten beider Ansätze im Verhältnis zu den potenziellen Kapitalvorteilen, unter Berücksichtigung bestehender Systemlandschaften und Ressourcenkapazitäten.\n• Trading Desk-Optimierung: Entwicklung optimaler Desk-Strukturierungskonzepte, die regulatorische Anforderungen erfüllen und gleichzeitig die Kapitaleffizienz maximieren, mit Identifikation von Desks, die sich besonders für interne Modelle eignen.\n• Zukunftsorientierte Szenarioanalyse: Bewertung der langfristigen Implikationen beider Ansätze unter Berücksichtigung zukünftiger Geschäftsstrategien, Portfolioentwicklungen und potenzieller regulatorischer Änderungen.\n\n📊 Tiefgreifende Analysekomponenten:\n• FRTB-Kapitalberechnungstool: Einsatz unseres proprietären Berechnungstools zur detaillierten Modellierung der Kapitalanforderungen unter verschiedenen Szenarien und Portfoliokonfigurationen.\n• Risk Factor Modellability Assessment: Systematische Analyse der Modellierbarkeit aller relevanten Risikofaktoren anhand regulatorischer RFET-Kriterien mit Identifikation von Datenlücken und Modellierbarkeitsherausforderungen.\n• P&L Attribution Testanalyse: Vorab-Bewertung der Erfolgschancen des P&L Attribution Tests für relevante Desks mit Identifikation kritischer Faktoren und Optimierungspotenziale.\n• Systemanforderungsanalyse: Bewertung der technischen Implementierungsanforderungen beider Ansätze im Kontext der bestehenden Systemlandschaft und IT-Strategie.\n\n🔍 Entscheidungsunterstützung auf mehreren Ebenen:\n• Trading Desk-Ebene: Detaillierte Analyse für jeden Trading Desk mit spezifischen Empfehlungen für den optimalen Ansatz basierend auf Portfoliozusammensetzung, Handelsstrategien und Datenqualität.\n• Institutsebene: Ganzheitliche Bewertung und Roadmap-Entwicklung unter Berücksichtigung übergreifender Faktoren wie Ressourcenverfügbarkeit, Risikomanagementphilosophie und strategischer Positionierung.\n• Zeitliche Dimension: Entwicklung eines phasenbasierten Implementierungsansatzes, der schrittweise Übergänge zwischen Standardansatz und internen Modellen für bestimmte Desks ermöglicht, abhängig von Implementierungsfortschritt und regulatorischen Genehmigungen."
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 2),
+        question: "Welche kritischen Erfolgsfaktoren müssen Banken bei der Implementierung des FRTB-Standardansatzes berücksichtigen?",
+        answer: "Der FRTB-Standardansatz (SA) stellt trotz seiner vermeintlichen Einfachheit im Vergleich zu internen Modellen erhebliche Implementierungsherausforderungen dar. Seine komplexe Berechnungsmethodik, die umfangreichen Datenanforderungen und die Notwendigkeit effizienter Berechnungsprozesse erfordern eine strukturierte Herangehensweise mit Fokus auf spezifische Erfolgsfaktoren.\n\n🔑 Kritische Erfolgsfaktoren für die FRTB-SA-Implementierung:\n• Datenmanagement-Exzellenz: Die Implementierung eines robusten Datenmanagement-Frameworks ist fundamental für den FRTB-SA. Dies umfasst die Sicherstellung vollständiger Markt- und Positionsdaten, konsistente Risikofaktor-Mappings und eine durchgängige Datenlineage für Prüfungs- und Validierungszwecke.\n• Effiziente Sensitivitätsberechnung: Die Entwicklung performanter und akkurater Prozesse zur Berechnung tausender Sensitivitäten (Delta, Vega, Curvature) für das gesamte Handelsbuch ist entscheidend für die tägliche Kapitalberechnung unter dem Standardansatz.\n• Optimierte Aggregationslogik: Die korrekte Implementierung der komplexen Aggregationsregeln mit unterschiedlichen Korrelationsszenarien und Diversifikationseffekten erfordert sowohl methodisches Verständnis als auch effiziente Berechnungsalgorithmen.\n• Flexible Reporting-Infrastruktur: Aufbau einer anpassungsfähigen Reporting-Architektur, die sowohl interne Management-Informationen als auch regulatorische Anforderungen erfüllt und granulare Analysen auf verschiedenen Ebenen ermöglicht.\n\n⚙️ Technische und prozessuale Erfolgsfaktoren:\n• Skalierbare Berechnungsarchitektur: Implementierung einer hochperformanten Berechnungsinfrastruktur, die große Datenmengen verarbeiten kann und die tägliche Berechnung innerhalb der regulatorischen Zeitvorgaben ermöglicht, idealerweise mit Parallelverarbeitungsfähigkeiten.\n• Integrierte Validierungsmechanismen: Einbettung automatisierter Kontrollen und Plausibilitätsprüfungen in den Berechnungsprozess zur frühzeitigen Erkennung von Datenfehlern oder Berechnungsanomalien.\n• Flexible Parametrisierung: Entwicklung eines Systems, das einfache Anpassungen an Risikofaktor-Mappings, Korrelationsparametern und Risikogewichten ermöglicht, um auf regulatorische Änderungen oder interne Anforderungen reagieren zu können.\n• End-to-End-Prozessautomatisierung: Etablierung eines hochautomatisierten Prozesses von der Datenerfassung über die Berechnung bis zum Reporting, um manuelle Eingriffe zu minimieren und die Prozessstabilität zu maximieren.\n\n📋 Governance und organisatorische Erfolgsfaktoren:\n• Klare methodische Dokumentation: Erstellung umfassender und präziser Methodendokumente, die alle Aspekte der FRTB-SA-Implementierung abdecken und den regulatorischen Dokumentationsanforderungen entsprechen.\n• Effektive Cross-Funktionale Zusammenarbeit: Etablierung effizienter Kooperationsstrukturen zwischen Handel, Risikomanagement, IT und Finanzen, um ein gemeinsames Verständnis und konsistente Implementierung sicherzustellen.\n• Robustes Change Management: Implementierung eines strukturierten Prozesses für die Verwaltung von Änderungen an Methodiken, Modellen und Systemen, mit klaren Genehmigungsverfahren und Auswirkungsanalysen.\n• Proaktives regulatorisches Engagement: Kontinuierlicher Dialog mit Aufsichtsbehörden zur Klärung von Interpretationsfragen und frühzeitigen Adressierung potenzieller Compliance-Herausforderungen."
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 3),
+        question: "Wie gestaltet ADVISORI die erfolgreiche Implementierung des P&L Attribution Tests für FRTB interne Modelle?",
+        answer: "Der P&L Attribution Test (PLAT) stellt eine der anspruchsvollsten Komponenten und häufigsten Fallstricke bei der Implementierung interner Modelle unter FRTB dar. Seine strengen Anforderungen an die Erklärung der Unterschiede zwischen Front-Office- und Risiko-P&L erfordern tiefgreifende methodische, datentechnische und prozessuale Anpassungen. ADVISORI hat einen spezialisierten Ansatz entwickelt, der auf zahlreichen erfolgreichen PLAT-Implementierungen basiert.\n\n🔄 Integrierter PLAT-Implementierungsansatz:\n• Ganzheitliche Analyse der P&L-Quellen: Systematische Identifikation und Kategorisierung aller P&L-Komponenten in Front-Office- und Risikosystemen, mit detaillierter Analyse der Bewertungsmethoden, Marktdatenverwendung und Risikofaktormodellierung.\n• End-to-End-Prozessdesign: Entwicklung eines robusten, automatisierten Prozesses für die tägliche P&L-Berechnung, Attribution und Testdurchführung, mit klaren Verantwortlichkeiten, Zeitplänen und Qualitätssicherungsmaßnahmen.\n• Methodische Harmonisierung: Gezielte Angleichung der Bewertungsmethoden zwischen Front Office und Risikomanagement unter Berücksichtigung der spezifischen Desk-Eigenschaften und Produktkomplexität.\n• Technische Integration: Implementierung einer integrierten technischen Lösung, die Front-Office- und Risikosysteme verbindet und eine konsistente, granulare P&L-Berechnung und -Attribution ermöglicht.\n\n📊 Spezialisierte Komponenten für PLAT-Exzellenz:\n• Advanced P&L Vector Analysis: Einsatz fortschrittlicher Analysemethoden zur detaillierten Untersuchung der P&L-Vektoren und präzisen Identifikation der Ursachen für Diskrepanzen zwischen Front-Office- und Risiko-P&L.\n• Dynamic Risk Factor Mapping: Entwicklung dynamischer Mappings zwischen Front-Office- und Risikomodell-Risikofaktoren, die Änderungen in Marktbedingungen, Produktspektrum und Modellierungsansätzen berücksichtigen.\n• Statistical Test Optimization: Kontinuierliche Analyse und Optimierung der statistischen Testeigenschaften zur Maximierung der Erfolgswahrscheinlichkeit unter Einhaltung regulatorischer Anforderungen.\n• Outlier Analysis Framework: Implementierung eines systematischen Ansatzes zur Identifikation und Erklärung von Ausreißern in den täglichen PLAT-Ergebnissen, mit klaren Eskalations- und Maßnahmenprozessen.\n\n🛠️ Praktische Implementierungstools:\n• PLAT-Simulationstool: Einsatz unseres proprietären Tools zur Simulation des P&L Attribution Tests unter verschiedenen Szenarien und Konfigurationen, zur Identifikation optimaler Einstellungen und Schwachstellen.\n• Gap-Priorisierungs-Framework: Systematische Bewertung und Priorisierung identifizierter Diskrepanzen basierend auf ihren Auswirkungen auf die PLAT-Ergebnisse, Implementierungskomplexität und Ressourcenaufwand.\n• Performance Tracking Dashboard: Implementierung eines umfassenden Monitoring-Systems zur kontinuierlichen Überwachung der PLAT-Performance, mit automatischen Alerts und Trendanalysen.\n• Root Cause Analysis Template: Strukturierte Methodik zur tiefgehenden Analyse von PLAT-Fehlschlägen und systematischen Identifikation von Grundursachen und Lösungsansätzen."
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 4),
+        question: "Welche Herausforderungen stellen Non-Modellable Risk Factors (NMRFs) bei der FRTB-Implementierung dar und wie können diese effizient adressiert werden?",
+        answer: "Non-Modellable Risk Factors (NMRFs) repräsentieren eine der komplexesten und potenziell kostspieligsten Komponenten der FRTB-Implementierung für interne Modelle. Die strengen regulatorischen Anforderungen an die Verfügbarkeit 'echter' Marktdaten und die signifikanten Kapitalaufschläge für nicht-modellierbare Risikofaktoren erfordern einen strategischen und methodisch fundierten Ansatz zur NMRF-Behandlung.\n\n🔍 Zentrale Herausforderungen im NMRF-Kontext:\n• Datenqualität und -verfügbarkeit: Die regulatorischen Kriterien für Modellierbarkeit (RFET - Risk Factor Eligibility Test) erfordern mindestens 24 'echte' Preisbeobachtungen pro Jahr mit maximalen Lücken von einem Monat, was für viele Risikofaktoren in illiquiden Märkten oder für exotische Produkte kaum erreichbar ist.\n• Komplexe Identifikations- und Mappingprozesse: Die präzise Identifikation aller relevanten Risikofaktoren und ihr konsistentes Mapping zwischen Handelspositionen, Marktdaten und Risikomodellen stellt eine methodische und technische Herausforderung dar.\n• Aufwändige Kapitalberechnung: Die Berechnung des Stresstestzuschlags für NMRFs erfordert komplexe Kalibrierungsmethoden und rechenintensive Stresstests für jeden nicht-modellierbaren Risikofaktor.\n• Dynamisches Modellierbarkeitsmanagement: Der Modellierbarkeits-Status von Risikofaktoren kann sich im Zeitverlauf ändern, was ein kontinuierliches Monitoring und flexible Anpassungsmechanismen erfordert.\n\n💡 ADVISORI's strategischer NMRF-Ansatz:\n• Ganzheitliche NMRF-Strategie: Entwicklung einer integrierten Strategie zur NMRF-Behandlung, die Datenmanagement, methodische Aspekte, IT-Implementierung und organisatorische Faktoren umfasst und auf Kapitaloptimierung ausgerichtet ist.\n• Systematisches Daten-Sourcing: Etablierung eines strukturierten Prozesses zur Identifikation und Integration zusätzlicher Datenquellen für kritische Risikofaktoren, einschließlich Datenvendoren, Broker-Quotes und Pooling-Initiativen.\n• Optimierte Risikofaktor-Taxonomie: Entwicklung einer granularen, regulatorisch konformen Risikofaktor-Taxonomie, die Modellierbarkeit maximiert und gleichzeitig die methodische Integrität des Risikomodells wahrt.\n• Automatisierte Modellierbarkeits-Assessment-Prozesse: Implementierung effizienter, automatisierter Prozesse zur kontinuierlichen Bewertung und Dokumentation der Risikofaktor-Modellierbarkeit gemäß RFET-Kriterien.\n\n⚙️ Operative Effizienzkomponenten:\n• NMRF-Optimierungstool: Einsatz unseres spezialisierten Tools zur Simulation verschiedener Risikofaktor-Taxonomien und Mapping-Strategien, um die optimale Konfiguration zur Minimierung von NMRFs zu identifizieren.\n• Proxying-Framework: Entwicklung einer robusten Methodik zur regulatorisch konformen Ableitung nicht beobachtbarer Risikofaktoren aus modellierbaren Faktoren, mit transparenten Validierungs- und Dokumentationsprozessen.\n• Integrierte Kapitalsimulation: Implementierung eines End-to-End-Prozesses zur Berechnung der NMRF-Kapitalaufschläge und deren Integration in die Gesamt-FRTB-Kapitalberechnung, mit What-If-Analysefähigkeiten.\n• Risikofaktor-Monitoring-Dashboard: Etablierung eines umfassenden Monitoring-Systems zur kontinuierlichen Überwachung des Modellierbarkeits-Status aller Risikofaktoren, mit Frühwarnindikatoren und automatisierten Alerts bei kritischen Änderungen."
+      }
+    ]
+    
+    // Update the document with new FAQs
+    const updatedFaqs = [...(existingDoc.faq || []), ...newFaqs]
+    
+    console.log(`Adding ${newFaqs.length} new FAQs to the document...`)
+    const transaction = client.transaction()
+    transaction.patch(existingDoc._id, {
+      set: {
+        faq: updatedFaqs
+      }
+    })
+    
+    await transaction.commit()
+    console.log('✅ FAQs batch 1 added successfully')
+  } catch (error) {
+    console.error('Error:', error)
+    throw error
+  }
+}
+
+run()

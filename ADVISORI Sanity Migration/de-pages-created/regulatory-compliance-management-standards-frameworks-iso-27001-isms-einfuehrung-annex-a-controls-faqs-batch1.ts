@@ -1,0 +1,77 @@
+import 'dotenv/config'
+import { createClient } from '@sanity/client'
+
+// Create client with direct credentials
+const client = createClient({
+  projectId: 'wwmm9rbb',
+  dataset: 'production',
+  apiVersion: '2024-02-14',
+  token: process.env.SANITY_API_TOKEN,
+  useCdn: false,
+})
+
+// Helper function to generate unique keys
+function generateKey(prefix: string, index: number): string {
+  return `${prefix}_${Date.now()}_${index}`
+}
+
+const run = async () => {
+  try {
+    console.log('Updating ISMS Einführung Annex A Controls page with C-Level FAQs batch 1 (German)...')
+    
+    // First, get the existing document
+    console.log('Fetching existing document...')
+    const existingDoc = await client.fetch('*[_id == $id][0]', { id: 'regulatory-compliance-management-standards-frameworks-iso-27001-isms-einfuehrung-annex-a-controls' })
+    
+    if (!existingDoc) {
+      throw new Error('Document "regulatory-compliance-management-standards-frameworks-iso-27001-isms-einfuehrung-annex-a-controls" not found')
+    }
+    
+    // Create new C-Level FAQs in German
+    const newFaqs = [
+      {
+        _type: 'object',
+        _key: generateKey('faq', 1),
+        question: "Warum sind die ISO 27001 Annex A Kontrollen für die C-Suite strategisch entscheidend und wie transformieren sie unser Risikomanagement?",
+        answer: "Für C-Level-Führungskräfte repräsentieren die 114 Annex A Sicherheitskontrollen das operative Herzstück einer strategischen Informationssicherheitsstrategie. Diese Kontrollen sind weit mehr als technische Checklisten - sie bilden ein systematisches Framework zur Transformation von Sicherheitsrisiken in strategische Wettbewerbsvorteile und operative Resilienz.\n\n🎯 Strategische Bedeutung der Annex A Kontrollen:\n• Business-driven Risk Mitigation: Jede Kontrollmaßnahme adressiert spezifische Geschäftsrisiken und trägt direkt zur Erhaltung der operativen Kontinuität und des Unternehmenswerts bei.\n• Regulatory Excellence: Systematische Implementierung schafft Compliance-Sicherheit und reduziert regulatorische Risiken, die erhebliche finanzielle und reputative Auswirkungen haben können.\n• Stakeholder Confidence: Nachweisbare Sicherheitskontrollen stärken das Vertrauen von Investoren, Kunden und Partnern in die Fähigkeit des Unternehmens, sensible Informationen zu schützen.\n• Competitive Differentiation: Umfassende Kontrollimplementierung wird zunehmend zu einem Differenzierungsmerkmal bei Ausschreibungen und strategischen Partnerschaften.\n\n🔧 Operative Transformation durch strukturierte Kontrollen:\n• Process Optimization: Die Implementierung von Annex A Kontrollen identifiziert und eliminiert Ineffizienzen in Geschäftsprozessen und schafft operative Exzellenz.\n• Risk Visibility: Systematische Kontrollen schaffen unprecedented Transparenz über Sicherheitsrisiken und ermöglichen datengestützte Entscheidungsfindung.\n• Cost Management: Strukturierte Kontrollansätze optimieren Sicherheitsinvestitionen und maximieren den ROI von Cybersecurity-Ausgaben.\n• Incident Preparedness: Präventive Kontrollen reduzieren die Wahrscheinlichkeit von Sicherheitsvorfällen und minimieren potenzielle Schadenswerte.\n\n🚀 ADVISORIs Executive-focused Annex A Strategy:\n• Business Impact Assessment: Wir bewerten jede Kontrollmaßnahme hinsichtlich ihres Beitrags zu strategischen Geschäftszielen und priorisieren entsprechend.\n• ROI-optimized Implementation: Fokus auf Kontrollen mit dem höchsten Verhältnis von Risikoreduktion zu Implementierungskosten.\n• Executive Dashboard Development: Schaffung von Management-Dashboards, die den Wert und die Effektivität von Sicherheitskontrollen für die C-Suite transparent machen.\n• Strategic Integration: Einbettung von Sicherheitskontrollen in strategische Geschäftsprozesse zur Schaffung von Synergien zwischen Sicherheit und Geschäftswachstum."
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 2),
+        question: "Wie können wir die 114 Annex A Kontrollen strategisch priorisieren, um maximalen Geschäftsnutzen bei optimaler Ressourcenallokation zu erzielen?",
+        answer: "Die strategische Priorisierung der Annex A Kontrollen erfordert einen sophisticated, datengestützten Ansatz, der Geschäftsimpact, Risikoreduktion und Implementierungskosten systematisch balanciert. Für visionäre C-Level-Führungskräfte ist die optimale Kontrollauswahl entscheidend für die Transformation von Compliance-Aufwand in strategischen Geschäftswert.\n\n📊 Framework für strategische Kontrollpriorisierung:\n• Business Impact Scoring: Bewertung jeder Kontrolle basierend auf ihrem direkten Beitrag zu kritischen Geschäftsprozessen, Umsatzgenerierung und Kundenvertrauen.\n• Risk-weighted Value Analysis: Quantifizierung der Risikoreduktion durch jede Kontrollmaßnahme in Relation zu potenziellen Geschäftsausfällen und finanziellen Verlusten.\n• Implementation Complexity Assessment: Systematische Bewertung der Implementierungskosten, -zeit und -ressourcen für jede Kontrollkategorie.\n• Regulatory Priority Mapping: Identifikation von Kontrollen mit hoher regulatorischer Relevanz und Compliance-Kriticalität für Ihre spezifische Branche.\n\n🎯 Strategische Priorisierungsmatrix:\n• Tier 1 - Business Critical Controls: Kontrollen mit direktem Impact auf Geschäftskontinuität, Kundenvertrauen und Umsatzgenerierung (z.B. Access Management, Business Continuity).\n• Tier 2 - Regulatory Essential Controls: Kontrollen mit hoher Compliance-Relevanz und moderatem Geschäftsimpact (z.B. Audit Logging, Incident Management).\n• Tier 3 - Operational Efficiency Controls: Kontrollen zur Optimierung von Sicherheitsprozessen und Kostenreduktion (z.B. Asset Management, Vulnerability Management).\n• Tier 4 - Future-readiness Controls: Kontrollen zur Vorbereitung auf emerging Threats und Technologien (z.B. Cloud Security, IoT Security).\n\n💡 ROI-optimierte Implementierungsstrategie:\n• Quick Wins Identification: Fokus auf Kontrollen mit hohem Geschäftsnutzen und geringer Implementierungskomplexität für schnelle Erfolge.\n• Synergy Mapping: Identifikation von Kontrollclustern, die gemeinsam implementiert werden können, um Economies of Scale zu realisieren.\n• Phased Rollout Planning: Entwicklung einer zeitlich gestaffelten Implementierungsstrategie, die Geschäftsunterbrechungen minimiert.\n• Continuous Value Assessment: Etablierung von KPIs zur kontinuierlichen Bewertung des Geschäftswerts implementierter Kontrollen.\n\n🚀 ADVISORIs Value-driven Priorisierungsansatz:\n• Executive Risk Appetite Alignment: Anpassung der Kontrollpriorisierung an die spezifische Risikotoleranz und strategischen Ziele der Unternehmensführung.\n• Industry Benchmark Analysis: Vergleich mit Best Practices in Ihrer Branche zur Identifikation von Competitive Advantages durch strategische Kontrollauswahl.\n• Technology Integration Roadmap: Synchronisation der Kontrollimplementierung mit Ihrer digitalen Transformationsstrategie und Technologie-Roadmap.\n• Stakeholder Value Communication: Entwicklung von Business Cases für jede Kontrollkategorie zur klaren Kommunikation des Geschäftswerts an alle Stakeholder."
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 3),
+        question: "Welche innovativen Ansätze ermöglichen es, Annex A Kontrollen als Business Enabler zu positionieren statt als Compliance-Belastung?",
+        answer: "Die Transformation von Annex A Kontrollen von Compliance-Overhead zu strategischen Business Enablers erfordert einen paradigmatischen Wandel in der Herangehensweise an Informationssicherheit. Für progressive C-Level-Führungskräfte bietet diese Transformation die Möglichkeit, Sicherheitsinvestitionen in Wachstumsinitiativen und Competitive Advantages umzuwandeln.\n\n🚀 Business Enablement durch strategische Kontrollpositionierung:\n• Innovation Catalyst Integration: Positionierung von Sicherheitskontrollen als Enabler für digitale Innovation, indem sie das notwendige Vertrauen und die Infrastruktur für neue Technologien und Geschäftsmodelle schaffen.\n• Customer Trust Monetization: Nutzung implementierter Kontrollen als differenzierendes Verkaufsargument und Grundlage für Premium-Pricing bei sicherheitskritischen Services.\n• Partnership Facilitation: Sicherheitskontrollen als Enabler für strategische Allianzen und Joint Ventures, indem sie die notwendige Due Diligence-Basis schaffen.\n• Market Expansion Accelerator: Kontrollen als Türöffner für regulierte Märkte und sicherheitssensitive Kundensegmente.\n\n💡 Innovative Implementierungsansätze:\n• Agile Security Sprints: Adoption agiler Methodologien für Kontrollimplementierung, die rapid iteration und kontinuierliche Geschäftswertsteigerung ermöglichen.\n• DevSecOps Integration: Einbettung von Sicherheitskontrollen in Entwicklungs- und Deployment-Prozesse zur Beschleunigung von Time-to-Market.\n• AI-enhanced Control Automation: Nutzung von Künstlicher Intelligenz zur Automatisierung von Kontrollprozessen und Freisetzung von Ressourcen für wertschöpfende Aktivitäten.\n• Business Process Optimization: Redesign von Geschäftsprozessen um Sicherheitskontrollen herum zur simultanen Verbesserung von Sicherheit und operativer Effizienz.\n\n🎯 Value Creation Mechanisms:\n• Risk-adjusted Pricing Models: Entwicklung von Preismodellen, die den Wert implementierter Sicherheitskontrollen in der Kundenakquisition und -bindung monetarisieren.\n• Operational Efficiency Gains: Quantifizierung und Kommunikation der durch Kontrollen erzielten Effizienzsteigerungen und Kostenreduktionen.\n• Innovation Infrastructure: Positionierung von Sicherheitskontrollen als Grundlage für sichere Experimente mit neuen Technologien und Geschäftsmodellen.\n• Brand Value Enhancement: Nutzung von Sicherheitszertifizierungen und -kontrollen zur Stärkung der Markenpositionierung und des Unternehmenswerts.\n\n🌟 ADVISORIs Business-centric Control Strategy:\n• Value Story Development: Entwicklung überzeugender Narrative, die den Geschäftswert jeder Kontrollkategorie für verschiedene Stakeholder-Gruppen kommunizieren.\n• Business Case Quantification: Präzise ROI-Berechnungen und Business Impact-Assessments für jede Kontrollimplementierung.\n• Executive Dashboard Creation: Entwicklung von Management-Dashboards, die den kontinuierlichen Geschäftswert von Sicherheitskontrollen visualisieren.\n• Stakeholder Engagement Programs: Strukturierte Programme zur Einbindung aller Geschäftsbereiche in die Kontrollimplementierung als Partner statt als Compliance-Empfänger."
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 4),
+        question: "Wie können wir die Annex A Kontrollen in unsere digitale Transformationsstrategie integrieren und dabei emerging Technologies optimal nutzen?",
+        answer: "Die Integration von Annex A Kontrollen in die digitale Transformation repräsentiert eine strategic Opportunity zur Schaffung adaptiver, technologie-enabled Sicherheitsarchitekturen, die nicht nur aktuelle Anforderungen erfüllen, sondern auch die Grundlage für zukünftige Innovationen bilden. Für technologie-orientierte C-Level-Führungskräfte ist diese Integration entscheidend für die Entwicklung zukunftsfähiger, resilient Geschäftsmodelle.\n\n🔮 Technology-Enhanced Control Architecture:\n• AI-powered Control Automation: Machine Learning-Algorithmen automatisieren die Überwachung und Durchsetzung von Annex A Kontrollen, reduzieren manuellen Aufwand um bis zu 70% und ermöglichen Real-time Risk Response.\n• Cloud-native Security Controls: Redesign traditioneller Kontrollen für Cloud-first Architekturen, wodurch Skalierbarkeit, Flexibilität und Kosteneffizienz dramatisch verbessert werden.\n• IoT Security Integration: Erweiterung des Kontrollrahmenwerks zur Abdeckung von IoT-Ecosystemen und vernetzten Geräten mit spezialisierten Governance-Mechanismen.\n• Blockchain-based Audit Trails: Implementierung unveränderlicher, transparenter Audit-Mechanismen für kritische Kontrollen zur Schaffung beispielloser Compliance-Nachweisbarkeit.\n\n🚀 Digital Transformation Synergies:\n• API-first Security Design: Entwicklung von Security-as-a-Service Modellen, die Sicherheitskontrollen als programmierbare, integrierbare Services bereitstellen.\n• DevSecOps Control Integration: Einbettung von Annex A Kontrollen in CI/CD-Pipelines zur automatischen Sicherheitsvalidierung bei jedem Deployment.\n• Zero Trust Architecture: Implementation von Zero Trust-Prinzipien als modernisierte Interpretation traditioneller Access Controls und Perimeter Security.\n• Microservices Security Patterns: Adaptation von Kontrollen für microservices-basierte Architekturen mit container-spezifischen Sicherheitsmaßnahmen.\n\n💡 Emerging Technology Integration:\n• Quantum-ready Cryptography: Vorbereitung auf post-quantum Kryptographie durch Integration quantum-resistenter Algorithmen in kritische Kontrollen.\n• Extended Reality (XR) Security: Entwicklung spezialisierter Kontrollen für AR/VR-Anwendungen und immersive Geschäftsumgebungen.\n• Edge Computing Controls: Adaptation von Sicherheitskontrollen für distributed Edge-Computing-Szenarien mit dezentralen Governance-Modellen.\n• 5G Network Security: Integration von 5G-spezifischen Sicherheitsanforderungen in bestehende Netzwerk- und Kommunikationskontrollen.\n\n🎯 Strategic Implementation Framework:\n• Technology Roadmap Synchronization: Alignment der Kontrollentwicklung mit der unternehmensweiten Technologie-Roadmap zur Maximierung von Synergien.\n• Agile Security Sprints: Adoption agiler Entwicklungsmethoden für kontinuierliche Kontrollanpassung an sich entwickelnde Technologielandschaften.\n• Innovation Sandbox Creation: Etablierung sicherer Experimentierumgebungen für die Erprobung neuer Technologien unter kontrollierten Sicherheitsbedingungen.\n• Future-state Architecture Planning: Entwicklung langfristiger Sicherheitsarchitekturen, die emerging Technologies antizipieren und accommodieren.\n\n🌟 ADVISORIs Technology-integrated Control Strategy:\n• Digital-first Control Design: Neukonzeption traditioneller Kontrollen für digital-native Umgebungen mit Fokus auf Automation und Skalierbarkeit.\n• Technology Investment Optimization: Strategische Beratung zur optimalen Allokation von IT-Investitionen zwischen Sicherheitskontrollen und Geschäftsinnovation.\n• Cross-functional Integration: Orchestrierung von IT-, Security- und Business-Teams zur kohärenten Integration von Kontrollen in digitale Transformationsinitiativen.\n• Continuous Technology Assessment: Etablierung systematischer Evaluierungsprozesse für emerging Technologies und deren Security-Implikationen."
+      }
+    ]
+    
+    // Update the document with new FAQs
+    const updatedFaqs = [...(existingDoc.faq || []), ...newFaqs]
+    
+    console.log(`Adding ${newFaqs.length} new C-Level FAQs (German) to the document...`)
+    const transaction = client.transaction()
+    transaction.patch(existingDoc._id, {
+      set: {
+        faq: updatedFaqs
+      }
+    })
+    
+    await transaction.commit()
+    console.log('✅ C-Level FAQs batch 1 (German) added successfully')
+  } catch (error) {
+    console.error('Error:', error)
+    throw error
+  }
+}
+
+run()

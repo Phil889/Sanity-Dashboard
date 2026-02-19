@@ -1,0 +1,77 @@
+import 'dotenv/config'
+import { createClient } from '@sanity/client'
+
+// Create client with direct credentials
+const client = createClient({
+  projectId: 'wwmm9rbb',
+  dataset: 'production',
+  apiVersion: '2024-02-14',
+  token: process.env.SANITY_API_TOKEN,
+  useCdn: false,
+})
+
+// Helper function to generate unique keys
+function generateKey(prefix: string, index: number): string {
+  return `${prefix}_${Date.now()}_${index}`
+}
+
+const run = async () => {
+  try {
+    console.log('Updating EU AI Act Algorithmic Assessment page with C-Level FAQs batch 5 (German)...')
+    
+    // First, get the existing document
+    console.log('Fetching existing document...')
+    const existingDoc = await client.fetch('*[_id == $id][0]', { id: 'eu-ai-act-algorithmic-assessment' })
+    
+    if (!existingDoc) {
+      throw new Error('Document "eu-ai-act-algorithmic-assessment" not found')
+    }
+    
+    // Create new C-Level FAQs in German
+    const newFaqs = [
+      {
+        _type: 'object',
+        _key: generateKey('faq', 17),
+        question: "Wie können wir algorithmische Bewertung als strategisches Instrument für digitale Souveränität und technologische Unabhängigkeit nutzen?",
+        answer: "Algorithmische Bewertung bietet eine einzigartige Gelegenheit zur Stärkung digitaler Souveränität durch den Aufbau eigener Assessment-Kapazitäten und die Reduzierung der Abhängigkeit von externen Technologie-Providern. Strategic Assessment Excellence kann zu einem nationalen Wettbewerbsvorteil und einem Instrument geopolitischer Positionierung werden.\n\n🏛️ Digitale Souveränität durch Assessment-Excellence:\n• Indigenous Assessment Capabilities: Aufbau eigener, unabhängiger Assessment-Methoden und -Tools zur Reduzierung der Abhängigkeit von ausländischen Technologie-Anbietern\n• National Assessment Standards: Entwicklung nationaler oder regionaler Assessment-Standards, die lokale Werte und Prioritäten reflektieren\n• Technology Independence Strategy: Nutzung algorithmischer Bewertung zur Identifikation und Minimierung kritischer Technologie-Abhängigkeiten\n• Geopolitical Assessment Positioning: Strategische Nutzung von Assessment-Excellence für internationale Verhandlungen und Technologie-Diplomatie\n\n🌐 Strategic Technology Autonomy:\n• Supply Chain Assessment: Systematische Bewertung der Abhängigkeiten in KI-Technologie-Lieferketten für strategische Diversifizierung\n• Critical Infrastructure Protection: Assessment-basierte Sicherung kritischer KI-Infrastrukturen gegen externe Manipulation und Kontrolle\n• Innovation Ecosystem Building: Aufbau eigenständiger KI-Assessment-Ökosysteme für nachhaltige technologische Unabhängigkeit\n• Knowledge Transfer Protection: Schutz proprietärer Assessment-Methoden und -Erkenntnisse vor ungewolltem Technologie-Transfer\n\n🔒 Defensive und Offensive Assessment-Strategien:\n• Competitive Intelligence: Nutzung von Assessment-Methoden zur Bewertung der KI-Fähigkeiten von Wettbewerbern und geopolitischen Akteuren\n• Technology Leapfrogging: Strategic Assessment für die Identifikation von Opportunities zum Überspringen technologischer Entwicklungsstufen\n• Alliance Building: Aufbau von Assessment-Allianzen mit strategischen Partnern für kollektive technologische Souveränität\n• Regulatory Export: Export eigener Assessment-Standards als Soft Power-Instrument für internationale Einflussnahme\n\n🎯 ADVISORIs Souveränitäts-Assessment-Framework:\n• National Capability Assessment: Bewertung und Entwicklung nationaler KI-Assessment-Kapazitäten für strategische Autonomie\n• Geopolitical Risk Modeling: Sophisticated Modellierung geopolitischer Risiken in KI-Technologie-Entscheidungen\n• Strategic Independence Roadmap: Entwicklung langfristiger Strategien für technologische Unabhängigkeit durch Assessment-Excellence\n• Diplomatic Assessment Engagement: Unterstützung bei internationalen Verhandlungen und Standard-Setting-Prozessen für strategische Positionierung"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 18),
+        question: "Welche Rolle spielt algorithmische Bewertung bei der Transformation unserer Organisation zu einem datengetriebenen, KI-native Unternehmen?",
+        answer: "Algorithmische Bewertung fungiert als kritischer Enabler für die Transformation zu einem datengetriebenen, KI-nativen Unternehmen, indem sie Qualität, Vertrauen und systematische Optimierung in den Mittelpunkt der digitalen Evolution stellt. Assessment-Excellence wird zum Fundament einer neuen Organisationsform, die Künstliche Intelligenz nicht nur nutzt, sondern als Kern ihrer Identität versteht.\n\n🚀 KI-native Transformation durch Assessment:\n• Data-driven Decision Architecture: Etablierung von Assessment-basierten Entscheidungsprozessen, die menschliche Intuition mit algorithmischer Präzision kombinieren\n• Algorithmic Business Model Innovation: Nutzung systematischer Assessment-Prozesse für die Entwicklung neuer, KI-getriebener Geschäftsmodelle\n• Organizational Learning Systems: Implementation von Assessment-Feedback-Schleifen, die kontinuierliches organisationales Lernen und Anpassung ermöglichen\n• AI-augmented Operations: Integration von Assessment-Tools in alle Geschäftsprozesse für intelligente Automatisierung und Optimierung\n\n🔄 Cultural Transformation zu KI-Excellence:\n• Assessment-driven Culture: Etablierung einer Unternehmenskultur, die datenbasierte Bewertung und kontinuierliche Verbesserung als Kernwerte verankert\n• Algorithmic Literacy: Systematische Entwicklung von KI- und Assessment-Kompetenzen auf allen Organisationsebenen\n• Innovation Mindset: Förderung einer Innovationskultur, die Assessment als Kreativitäts-Enabler statt als Beschränkung versteht\n• Collaborative Intelligence: Schaffung symbiotischer Arbeitsbeziehungen zwischen menschlicher Expertise und algorithmischer Assessment-Intelligenz\n\n📊 Data Ecosystem Excellence:\n• Holistic Data Strategy: Integration von Assessment-Anforderungen in die gesamte Datenstrategie für End-to-End-Qualitätssicherung\n• Real-time Assessment Infrastructure: Aufbau von Technologie-Stacks, die kontinuierliche, automatisierte Assessment-Prozesse ermöglichen\n• Predictive Assessment Analytics: Nutzung von ML-basierten Vorhersagemodellen für proaktive Assessment-Optimierung\n• Data Governance Evolution: Transformation traditioneller Data Governance zu Assessment-zentrierten Governance-Modellen\n\n🌟 Competitive Advantage durch KI-native Operations:\n• Speed-to-Market Excellence: Beschleunigung von Produktentwicklung und Markteinführung durch systematische Assessment-Integration\n• Dynamic Capability Building: Aufbau adaptiver Organisationsfähigkeiten, die sich kontinuierlich an verändernde Assessment-Anforderungen anpassen\n• Ecosystem Orchestration: Positionierung als zentrale Kraft in KI-Assessment-Ökosystemen für nachhaltige Wettbewerbsvorteile\n• Innovation Velocity: Maximierung der Innovationsgeschwindigkeit durch Assessment-optimierte Entwicklungsprozesse\n\n🛠️ ADVISORIs KI-native Transformation-Ansatz:\n• Organizational Readiness Assessment: Bewertung der Bereitschaft für KI-native Transformation und Identifikation kritischer Erfolgsfaktoren\n• Transformation Roadmap Design: Entwicklung strukturierter Transformationspfade, die Assessment-Excellence als zentralen Enabler positionieren\n• Change Management Excellence: Orchestrierung des kulturellen und operativen Wandels zu Assessment-getriebenen Organisationsformen\n• Continuous Evolution Framework: Etablierung von Systemen für kontinuierliche Transformation und Anpassung an evolvierende KI-Landschaften"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 19),
+        question: "Wie können wir algorithmische Bewertung nutzen, um neue Märkte zu erschließen und innovative Kundensegmente zu entwickeln?",
+        answer: "Algorithmische Bewertung eröffnet völlig neue Marktchancen durch die Schaffung vertrauensbasierter KI-Services und die Erschließung von Kundensegmenten, die bisher aufgrund von Vertrauens- und Qualitätsbedenken unzugänglich waren. Assessment-Excellence wird zum Marktöffner für Premium-Segmente und neue Geschäftsfelder.\n\n💎 Premium Market Penetration durch Assessment:\n• Trust-sensitive Market Entry: Erschließung von Märkten mit hohen Vertrauensanforderungen (Healthcare, Finance, Education) durch nachweisbare Assessment-Excellence\n• Quality-differentiated Positioning: Aufbau von Premium-Marktpositionen durch objektiv messbare KI-Qualitäts-Überlegenheit\n• Regulatory-compliant Market Access: Schnellere Markterschließung in regulierten Industrien durch proaktive Assessment-Compliance\n• Enterprise B2B Expansion: Entwicklung neuer B2B-Märkte durch Assessment-as-a-Service-Angebote für KI-Qualitätssicherung\n\n🎯 Customer Segment Innovation:\n• Assessment-conscious Consumers: Identifikation und Entwicklung von Kundensegmenten, die Wert auf KI-Transparenz und -Qualität legen\n• Compliance-driven Organizations: Erschließung von Organisationen mit strengen Compliance-Anforderungen durch Assessment-Excellence\n• Innovation-forward Enterprises: Targeting von Unternehmen, die Assessment als Competitive Advantage verstehen\n• Ethically-motivated Stakeholders: Entwicklung von Märkten bei ethisch motivierten Kunden und Investoren\n\n🌍 Geographic Market Expansion:\n• Regulatory-diverse Markets: Nutzung adaptiver Assessment-Frameworks für die Erschließung von Märkten mit unterschiedlichen regulatorischen Anforderungen\n• Cultural Context Markets: Entwicklung kulturell angepasster Assessment-Ansätze für internationale Marktexpansion\n• Emerging Market Opportunities: Identifikation von Emerging Markets mit wachsender Nachfrage nach vertrauenswürdiger KI\n• Cross-border Partnership Markets: Aufbau internationaler Partnerschaften basierend auf gemeinsamen Assessment-Standards\n\n🚀 Market Creation through Assessment Innovation:\n• New Service Categories: Entwicklung völlig neuer Service-Kategorien wie Assessment-as-a-Platform oder Trust-Certification-Services\n• Ecosystem Market Building: Schaffung neuer Märkte durch den Aufbau von Assessment-zentrierten Ökosystemen\n• Technology Transfer Markets: Erschließung von Märkten für Assessment-Technologie-Transfer und -Lizenzierung\n• Consulting and Advisory Markets: Entwicklung spezialisierter Beratungsmärkte für algorithmische Bewertung und KI-Governance\n\n🎨 ADVISORIs Market Development-Strategie:\n• Market Intelligence Assessment: Systematische Bewertung von Marktpotentialen für Assessment-basierte Services und Lösungen\n• Customer Journey Optimization: Entwicklung Assessment-informierter Customer Journeys für verschiedene Kundensegmente\n• Value Proposition Engineering: Konstruktion überzeugender Value Propositions basierend auf quantifizierbaren Assessment-Vorteilen\n• Market Entry Acceleration: Beschleunigung von Markteintrittsprozessen durch Assessment-basierte Vertrauensbildung und Risikominimierung"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 20),
+        question: "Welche visionären Zukunftsszenarien eröffnet algorithmische Bewertung für die Evolution unseres Unternehmens in den nächsten 10-15 Jahren?",
+        answer: "Algorithmische Bewertung wird in den kommenden Dekaden zu einem fundamentalen Organisationsprinzip evolvieren, das die Art und Weise transformiert, wie Unternehmen denken, handeln und Wert schaffen. Assessment-Excellence wird vom aktuellen Compliance-Tool zu einem strategischen Differenzierungsfaktor und schließlich zu einem integralen Bestandteil intelligenter, adaptiver Organisationen.\n\n🔮 Visionäre Assessment-Evolution 2035-2040:\n• Autonomous Assessment Systems: Entwicklung vollständig autonomer Assessment-Systeme, die KI-Qualität in Echtzeit überwachen, bewerten und optimieren\n• Quantum-enhanced Evaluation: Integration von Quantencomputing in Assessment-Prozesse für exponentiell komplexere und präzisere Bewertungen\n• Biological-AI Assessment Fusion: Entwicklung bio-inspirierter Assessment-Methoden, die natürliche Intelligenz mit künstlicher Assessment-Kapazität kombinieren\n• Planetary-scale Assessment Networks: Aufbau globaler, interconnected Assessment-Netzwerke für kollektive KI-Intelligenz und Qualitätssicherung\n\n🌟 Transformative Organizational Evolution:\n• Self-optimizing Organizations: Evolution zu selbstoptimierenden Organisationen, die Assessment-Feedback für kontinuierliche Transformation nutzen\n• Predictive Business Models: Entwicklung von Geschäftsmodellen, die auf predictive Assessment-Intelligence basieren und Zukunftstrends antizipieren\n• Ecosystem-native Operations: Transformation zu Ökosystem-nativen Organisationen, die Assessment als Koordinationsmechanismus nutzen\n• Consciousness-aware AI: Entwicklung von Assessment-Methoden für potentielle AI-Consciousness und ethische Implikationen fortgeschrittener KI-Systeme\n\n🚀 Societal Impact und Global Leadership:\n• Assessment-driven Society: Beitrag zur Entwicklung einer Gesellschaft, die systematische Assessment-Prinzipien in alle Entscheidungsprozesse integriert\n• Global Standards Leadership: Etablierung als globaler Standard-Setter für KI-Assessment und verantwortliche Technologie-Entwicklung\n• Intergenerational Value Creation: Schaffung von Assessment-Frameworks, die Wertschöpfung über multiple Generationen hinweg optimieren\n• Planetary Intelligence Contribution: Beitrag zur Entwicklung einer planetaren Intelligenz durch koordinierte Assessment-Netzwerke\n\n🌈 Paradigmatic Business Model Innovation:\n• Assessment Economy Pioneer: Führungsrolle in der entstehenden Assessment-Economy mit völlig neuen Wertschöpfungsmodellen\n• Consciousness-as-a-Service: Entwicklung von Services, die KI-Consciousness und ethische Intelligenz als produktive Ressource nutzen\n• Temporal Value Creation: Schaffung von Geschäftsmodellen, die Wert über verschiedene Zeitskalen hinweg optimieren\n• Multi-dimensional Impact Optimization: Integration von Assessment-Prinzipien für gleichzeitige Optimierung von Profit, Planet und People\n\n🎯 ADVISORIs Visionary Strategy Framework:\n• Future Scenario Planning: Systematische Entwicklung und Bewertung verschiedener Zukunftsszenarien für strategische Vorbereitung\n• Exponential Capability Building: Aufbau exponentiell skalierbarer Assessment-Kapazitäten für disruptive Wachstumsmöglichkeiten\n• Paradigm Shift Leadership: Vorbereitung auf fundamental neue Paradigmen in KI-Assessment und organisationaler Evolution\n• Legacy Value Engineering: Konstruktion von Wertschöpfungsmodellen, die über aktuelle Technologie-Zyklen hinaus Bestand haben und zukünftige Generationen bereichern"
+      }
+    ]
+    
+    // Update the document with new FAQs
+    const updatedFaqs = [...(existingDoc.faq || []), ...newFaqs]
+    
+    console.log(`Adding ${newFaqs.length} new C-Level FAQs (German) to the document...`)
+    const transaction = client.transaction()
+    transaction.patch(existingDoc._id, {
+      set: {
+        faq: updatedFaqs
+      }
+    })
+    
+    await transaction.commit()
+    console.log('✅ C-Level FAQs batch 5 (German) added successfully')
+  } catch (error) {
+    console.error('Error:', error)
+    throw error
+  }
+}
+
+run()

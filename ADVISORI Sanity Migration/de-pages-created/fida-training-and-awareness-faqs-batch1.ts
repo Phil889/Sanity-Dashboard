@@ -1,0 +1,77 @@
+import 'dotenv/config'
+import { createClient } from '@sanity/client'
+
+// Create client with direct credentials
+const client = createClient({
+  projectId: 'wwmm9rbb',
+  dataset: 'production',
+  apiVersion: '2024-02-14',
+  token: process.env.SANITY_API_TOKEN,
+  useCdn: false,
+})
+
+// Helper function to generate unique keys
+function generateKey(prefix: string, index: number): string {
+  return `${prefix}_${Date.now()}_${index}`
+}
+
+const run = async () => {
+  try {
+    console.log('Updating FIDA Training and Awareness page with FAQs batch 1...')
+    
+    // First, get the existing document
+    console.log('Fetching existing document...')
+    const existingDoc = await client.fetch('*[_id == $id][0]', { id: 'fida-training-and-awareness' })
+    
+    if (!existingDoc) {
+      throw new Error('Document "fida-training-and-awareness" not found')
+    }
+    
+    // Create new FAQs
+    const newFaqs = [
+      {
+        _type: 'object',
+        _key: generateKey('faq', 1),
+        question: 'Wie entwickelt ADVISORI strategische FIDA-Trainingsprogramme, die verschiedene Organisationsebenen und Rollen effektiv adressieren?',
+        answer: "Erfolgreiche FIDA-Compliance erfordert mehr als technische Implementation – sie benötigt eine umfassende organisatorische Transformation, die bei qualifizierten Mitarbeitern und einer starken Compliance-Kultur beginnt. ADVISORI entwickelt differenzierte Trainingsprogramme, die spezifische Rollen, Verantwortlichkeiten und Kompetenzanforderungen berücksichtigen und nachhaltige Lernkulturen schaffen.\n\n🎯 Strategische Trainingsarchitektur und Rollenspezifizierung:\n• Executive Leadership Training: Entwicklung spezialisierter Programme für Geschäftsführung und Vorstände, die strategische FIDA-Implikationen, Governance-Anforderungen und Geschäftschancen vermitteln.\n• Management-Level Awareness: Aufbau von Führungskräfte-Trainings, die operative Verantwortlichkeiten, Risikomanagement und Change-Leadership für FIDA-Transformation adressieren.\n• Fachbereichsspezifische Schulungen: Entwicklung maßgeschneiderter Programme für Compliance-, IT-, Rechts- und Geschäftsbereiche mit rollenspezifischen Inhalten und Anwendungsszenarien.\n• Operative Mitarbeiterqualifizierung: Aufbau praxisorientierter Trainings für operative Teams, die tägliche FIDA-Prozesse und Arbeitsabläufe implementieren müssen.\n\n📊 Kompetenz-Assessment und Bedarfsanalyse:\n• Organisatorische Readiness-Bewertung: Umfassende Analyse bestehender FIDA-Kenntnisse, Kompetenzlücken und Trainingsbedarfe auf allen Organisationsebenen.\n• Rollenspezifische Kompetenz-Mapping: Detaillierte Identifikation erforderlicher FIDA-Kompetenzen für verschiedene Positionen und Verantwortlichkeitsbereiche.\n• Lernstil- und Präferenzanalyse: Berücksichtigung unterschiedlicher Lernpräferenzen und Trainingsformate für optimale Wissensaufnahme und -retention.\n• Kulturelle und organisatorische Kontextfaktoren: Integration spezifischer Unternehmenskulturen, Arbeitsweisen und organisatorischer Strukturen in Trainingsdesign.\n\n🔄 Adaptive Lernpfade und Curriculum-Entwicklung:\n• Modulare Trainingsarchitekturen: Entwicklung flexibler Lernmodule, die individuell kombiniert und an spezifische Rollen und Kompetenzanforderungen angepasst werden können.\n• Progressive Kompetenzentwicklung: Aufbau aufeinander aufbauender Lernpfade, die von Grundlagenwissen zu spezialisierter FIDA-Expertise führen.\n• Praxisorientierte Anwendungsszenarien: Integration realer FIDA-Implementierungsherausforderungen und Fallstudien in Trainingscurricula.\n• Kontinuierliche Curriculum-Aktualisierung: Regelmäßige Anpassung von Trainingsinhalten an regulatorische Entwicklungen und Best-Practice-Evolution.\n\n🚀 Innovative Trainingsformate und Delivery-Methoden:\n• Blended Learning Approaches: Kombination von Präsenztrainings, Online-Modulen, Webinaren und selbstgesteuerten Lernformaten für optimale Flexibilität und Effektivität.\n• Interaktive Simulationen und Workshops: Entwicklung praxisnaher Trainingsformate, die FIDA-Szenarien simulieren und praktische Problemlösungskompetenzen entwickeln.\n• Peer-Learning und Erfahrungsaustausch: Etablierung von Lerngemeinschaften und Erfahrungsaustausch-Plattformen für kontinuierliches organisatorisches Lernen.\n• Gamification und Engagement-Strategien: Integration spielerischer Elemente und Motivationsmechanismen zur Steigerung von Lernengagement und Wissensretention."
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 2),
+        question: 'Welche innovativen Methoden nutzt ADVISORI zur Messung und Optimierung der Effektivität von FIDA-Trainingsprogrammen?',
+        answer: "Die Effektivität von FIDA-Trainingsprogrammen lässt sich nicht nur durch traditionelle Bewertungsmethoden messen – sie erfordert innovative Ansätze, die Lernfortschritt, Verhaltensänderungen und tatsächliche Compliance-Verbesserungen systematisch erfassen und optimieren. ADVISORI entwickelt datengestützte Messsysteme, die kontinuierliche Verbesserung und ROI-Nachweis ermöglichen.\n\n📈 Multi-Level Evaluation Framework:\n• Kirkpatrick-Model Adaptation: Anwendung und Erweiterung des bewährten Vier-Ebenen-Modells für FIDA-spezifische Trainingseffektivität, von Reaktion über Lernen und Verhalten bis zu Geschäftsergebnissen.\n• Real-Time Learning Analytics: Implementation fortschrittlicher Analytics-Systeme, die Lernfortschritt, Engagement-Level und Kompetenzentwicklung in Echtzeit verfolgen.\n• Behavioral Change Measurement: Entwicklung von Methoden zur Messung tatsächlicher Verhaltensänderungen und Anwendung von FIDA-Wissen in täglichen Arbeitsabläufen.\n• Business Impact Assessment: Quantifizierung der Auswirkungen von Trainingsprogrammen auf Compliance-Performance, Risikoreduktion und operative Effizienz.\n\n🔍 Advanced Assessment Methodologies:\n• Pre- und Post-Training Competency Assessments: Umfassende Bewertung von FIDA-Kompetenzen vor und nach Trainingsmaßnahmen zur Messung von Lernfortschritt und Wissenszuwachs.\n• Longitudinal Performance Tracking: Langfristige Verfolgung von Trainingsauswirkungen über mehrere Monate und Jahre zur Bewertung nachhaltiger Kompetenzentwicklung.\n• 360-Grad Feedback Integration: Einbeziehung von Vorgesetzten, Kollegen und internen Kunden in Bewertungsprozesse zur ganzheitlichen Effektivitätsmessung.\n• Simulation-Based Performance Evaluation: Nutzung realistischer FIDA-Szenarien und Simulationen zur Bewertung praktischer Anwendungskompetenzen.\n\n📊 Data-Driven Optimization Strategies:\n• Learning Path Analytics: Analyse individueller Lernpfade und -geschwindigkeiten zur Identifikation optimaler Trainingssequenzen und -formate.\n• Content Effectiveness Analysis: Detaillierte Bewertung der Effektivität verschiedener Trainingsinhalte, -methoden und -materialien für kontinuierliche Verbesserung.\n• Engagement Pattern Recognition: Identifikation von Mustern in Lernengagement und -motivation zur Optimierung von Trainingsdesign und -delivery.\n• Predictive Learning Analytics: Nutzung von Machine Learning zur Vorhersage von Trainingserfolg und Identifikation von Risikofaktoren für Lernversagen.\n\n🎯 Continuous Improvement Mechanisms:\n• Agile Training Development: Implementation agiler Entwicklungsmethoden für schnelle Iteration und Verbesserung von Trainingsprogrammen basierend auf Feedback und Daten.\n• A/B Testing für Training Content: Systematisches Testen verschiedener Trainingsansätze und -inhalte zur Identifikation optimaler Lernformate.\n• Feedback Loop Integration: Etablierung kontinuierlicher Feedback-Mechanismen von Lernenden, Trainern und Stakeholdern für iterative Programm-Verbesserung.\n• Best Practice Identification und Scaling: Systematische Identifikation und Skalierung erfolgreicher Trainingsansätze und -praktiken across der Organisation."
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 3),
+        question: 'Wie integriert ADVISORI Change Management-Prinzipien in FIDA-Trainingsprogramme für nachhaltige organisatorische Transformation?',
+        answer: "FIDA-Implementation ist fundamentaler organisatorischer Wandel, der weit über technische Anpassungen hinausgeht und tiefgreifende kulturelle und prozessuale Transformationen erfordert. ADVISORI integriert bewährte Change Management-Prinzipien in Trainingsprogramme, um Widerstand zu überwinden, Akzeptanz zu schaffen und nachhaltige Verhaltensänderungen zu ermöglichen.\n\n🔄 Strategic Change Integration Framework:\n• Kotter's Change Model Adaptation: Anwendung und Anpassung des bewährten Acht-Stufen-Modells für FIDA-spezifische organisatorische Transformation, von Dringlichkeitsgefühl bis zur Verankerung neuer Ansätze.\n• ADKAR-Methodology Integration: Systematische Adressierung von Awareness, Desire, Knowledge, Ability und Reinforcement in allen Trainingsphasen für ganzheitliche Verhaltensänderung.\n• Stakeholder Engagement Strategies: Entwicklung differenzierter Engagement-Ansätze für verschiedene Stakeholder-Gruppen mit spezifischen Kommunikations- und Motivationsstrategien.\n• Resistance Management Protocols: Proaktive Identifikation und Adressierung von Widerstandsquellen durch gezielte Interventionen und Unterstützungsmaßnahmen.\n\n🎯 Cultural Transformation Initiatives:\n• Compliance Culture Assessment: Umfassende Bewertung bestehender Compliance-Kulturen und Identifikation kultureller Barrieren für FIDA-Adoption.\n• Values Integration Workshops: Entwicklung von Workshops, die FIDA-Prinzipien in bestehende Unternehmenswerte und -kulturen integrieren.\n• Behavioral Norm Establishment: Aufbau neuer Verhaltensnormen und -standards, die FIDA-konforme Arbeitsweisen fördern und belohnen.\n• Cultural Ambassador Programs: Etablierung von Kultur-Botschaftern und Change Champions, die Transformation auf Peer-Ebene vorantreiben.\n\n📢 Communication und Engagement Strategies:\n• Multi-Channel Communication Campaigns: Entwicklung umfassender Kommunikationsstrategien, die verschiedene Kanäle und Formate nutzen, um FIDA-Botschaften effektiv zu vermitteln.\n• Storytelling und Success Narratives: Nutzung von Geschichten und Erfolgsbeispielen zur emotionalen Verbindung und Motivation für FIDA-Transformation.\n• Interactive Town Halls und Q&A Sessions: Regelmäßige interaktive Formate für offenen Dialog, Fragen und Bedenken bezüglich FIDA-Implementation.\n• Feedback Mechanisms und Two-Way Communication: Etablierung bidirektionaler Kommunikationskanäle für kontinuierliches Feedback und Anpassung von Change-Strategien.\n\n🚀 Sustainable Change Reinforcement:\n• Performance Management Integration: Integration von FIDA-Kompetenzen und -Verhalten in Leistungsbewertungen, Zielvereinbarungen und Karriereentwicklung.\n• Recognition und Reward Systems: Entwicklung von Anerkennungs- und Belohnungssystemen, die FIDA-konformes Verhalten fördern und verstärken.\n• Continuous Learning Ecosystems: Aufbau nachhaltiger Lernökosysteme, die kontinuierliche Kompetenzentwicklung und Anpassung an regulatorische Entwicklungen ermöglichen.\n• Change Sustainability Monitoring: Langfristige Überwachung und Messung von Transformationserfolg mit proaktiven Interventionen bei Rückfällen oder Stagnation."
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 4),
+        question: 'Welche spezialisierten Trainingsansätze entwickelt ADVISORI für verschiedene Finanzdienstleistungssektoren im Kontext der FIDA-Regulation?',
+        answer: "FIDA betrifft verschiedene Finanzdienstleistungssektoren unterschiedlich und erfordert sektorspezifische Trainingsansätze, die branchenspezifische Herausforderungen, Geschäftsmodelle und regulatorische Kontexte berücksichtigen. ADVISORI entwickelt maßgeschneiderte Trainingsprogramme, die sektorale Besonderheiten integrieren und praxisrelevante Lösungen bieten.\n\n🏦 Banking Sector Specialized Training:\n• Traditional Banking FIDA Integration: Entwicklung spezialisierter Programme für traditionelle Banken, die bestehende PSD2-Erfahrungen nutzen und auf erweiterte FIDA-Anforderungen ausbauen.\n• Digital Banking Transformation: Fokussierte Trainings für Digital-First-Banken und Neobanks, die native FIDA-Integration in digitale Geschäftsmodelle adressieren.\n• Corporate Banking Complexities: Spezialisierte Programme für Corporate Banking-Teams, die komplexe B2B-Datenfreigabe-Szenarien und Unternehmenskunden-Anforderungen behandeln.\n• Retail Banking Customer Experience: Trainings für Retail-Teams zu Kundenberatung, Consent-Management und Datenfreigabe-Prozessen im Privatkundengeschäft.\n\n🛡️ Insurance Sector Adaptation:\n• Insurance Data Ecosystem Training: Entwicklung spezialisierter Programme für Versicherungsunternehmen, die Policyholder-Datenrechte, Claims-Datenfreigabe und Risikobewertungs-Datenintegration adressieren.\n• InsurTech Innovation Workshops: Fokussierte Trainings für InsurTech-Unternehmen und innovative Versicherungsmodelle, die FIDA-ermöglichte Geschäftsinnovationen nutzen.\n• Actuarial Data Analytics Training: Spezialisierte Programme für Aktuare und Datenanalysten zu FIDA-konformer Datennutzung und -freigabe in Risikobewertung und Produktentwicklung.\n• Customer Journey Optimization: Trainings zu FIDA-Integration in Versicherungs-Customer-Journeys und Omnichannel-Erfahrungen.\n\n💼 Investment Services Specialization:\n• Asset Management FIDA Compliance: Entwicklung spezialisierter Programme für Asset Manager zu Portfolio-Datenfreigabe, Performance-Transparenz und Investor-Datenrechten.\n• Wealth Management Client Services: Fokussierte Trainings für Wealth Manager zu FIDA-konformer Kundenberatung, Datenintegration und personalisierten Finanzdienstleistungen.\n• Investment Platform Integration: Spezialisierte Programme für Investment-Plattformen und Robo-Advisors zu automatisierter FIDA-Compliance und Datenorchestrierung.\n• Institutional Investment Complexities: Trainings für institutionelle Investment-Services zu komplexen Datenfreigabe-Anforderungen und Compliance-Reporting.\n\n🏛️ Pension und Long-Term Savings Focus:\n• Pension Fund Data Governance: Entwicklung spezialisierter Programme für Pensionsfonds zu Beneficiary-Datenrechten, Long-Term-Investment-Transparenz und Governance-Anforderungen.\n• Retirement Planning Integration: Fokussierte Trainings zu FIDA-Integration in Altersvorsorge-Beratung und -planung mit ganzheitlichen Finanzdienstleistungen.\n• Cross-Border Pension Complexities: Spezialisierte Programme für grenzüberschreitende Pensionsdienstleistungen und internationale FIDA-Compliance-Koordination.\n• Sustainable Investment Reporting: Trainings zu FIDA-konformer ESG-Datenfreigabe und Nachhaltigkeits-Reporting in Langzeit-Investments."
+      }
+    ]
+    
+    // Update the document with new FAQs
+    const updatedFaqs = [...(existingDoc.faq || []), ...newFaqs]
+    
+    console.log(`Adding ${newFaqs.length} new FAQs to the document...`)
+    const transaction = client.transaction()
+    transaction.patch(existingDoc._id, {
+      set: {
+        faq: updatedFaqs
+      }
+    })
+    
+    await transaction.commit()
+    console.log('✅ FAQs batch 1 added successfully')
+  } catch (error) {
+    console.error('Error:', error)
+    throw error
+  }
+}
+
+run()

@@ -1,0 +1,77 @@
+import 'dotenv/config'
+import { createClient } from '@sanity/client'
+
+// Create client with direct credentials
+const client = createClient({
+  projectId: 'wwmm9rbb',
+  dataset: 'production',
+  apiVersion: '2024-02-14',
+  token: process.env.SANITY_API_TOKEN,
+  useCdn: false,
+})
+
+// Helper function to generate unique keys
+function generateKey(prefix: string, index: number): string {
+  return `${prefix}_${Date.now()}_${index}`
+}
+
+const run = async () => {
+  try {
+    console.log('Updating Was ist IAM page with FAQ batch 5...')
+    
+    // First, get the existing document
+    console.log('Fetching existing document...')
+    const existingDoc = await client.fetch('*[_id == $id][0]', { id: 'was-ist-iam' })
+    
+    if (!existingDoc) {
+      throw new Error('Document "was-ist-iam" not found')
+    }
+    
+    // Create new FAQs for IAM trends and future considerations
+    const newFaqs = [
+      {
+        _type: 'object',
+        _key: generateKey('faq', 17),
+        question: 'Welche Zukunftstrends prägen die Evolution von IAM und wie bereitet man sich auf kommende Entwicklungen vor?',
+        answer: "Die Zukunft von IAM wird durch disruptive Technologien, veränderte Arbeitsmodelle und neue Sicherheitsparadigmen geprägt. Unternehmen müssen proaktiv auf diese Trends reagieren, um wettbewerbsfähig zu bleiben und gleichzeitig höchste Sicherheits- und Compliance-Standards zu gewährleisten. Die strategische Vorbereitung auf diese Entwicklungen entscheidet über den langfristigen Erfolg von IAM-Investitionen.\n\n🤖 Künstliche Intelligenz und Machine Learning Integration:\n• AI-powered Identity Analytics für intelligente Anomaly Detection und Risikobewertung\n• Machine Learning-basierte Authentifizierung für adaptive und kontextbewusste Sicherheit\n• Automated Identity Governance für selbstlernende Zugriffskontrolle und Optimierung\n• Predictive Security für proaktive Bedrohungserkennung und Präventionsmaßnahmen\n• Natural Language Processing für intuitive IAM-Interfaces und Self-Service-Funktionen\n\n🔗 Blockchain und Dezentrale Identitäten:\n• Self-Sovereign Identity für benutzergesteuerte Identitätsverwaltung ohne zentrale Autorität\n• Blockchain-basierte Credential Verification für unveränderliche Identitätsnachweise\n• Decentralized Identity Networks für föderierte Identitätsverwaltung ohne Single Point of Failure\n• Smart Contracts für automatisierte Identitäts- und Zugriffsverwaltung\n• Zero-Knowledge Proofs für datenschutzfreundliche Identitätsverifikation\n\n🌐 Edge Computing und IoT Integration:\n• Edge-based Identity Management für lokale Authentifizierung und reduzierte Latenz\n• IoT Device Identity für sichere Verwaltung von Milliarden vernetzter Geräte\n• Distributed IAM Architectures für dezentrale Identitätsverwaltung an Edge-Standorten\n• Real-time Identity Processing für zeitkritische Anwendungen und Systeme\n• Lightweight Authentication für ressourcenbeschränkte IoT-Geräte\n\n🔮 Quantum Computing Auswirkungen:\n• Quantum-resistant Cryptography für Schutz vor zukünftigen Quantum-Angriffen\n• Post-Quantum Authentication Protocols für langfristige Sicherheit\n• Quantum Key Distribution für unknackbare Verschlüsselung\n• Hybrid Cryptographic Systems für Übergangszeit zu Quantum-sicheren Verfahren\n• Quantum-enhanced Security für verbesserte Zufallszahlengenerierung\n\n🎯 Biometrische und Verhaltensbasierte Authentifizierung:\n• Advanced Biometrics mit Venen-Scanning, Herzrhythmus und DNA-Analyse\n• Continuous Behavioral Authentication für laufende Identitätsverifikation\n• Multimodal Biometrics für erhöhte Genauigkeit und Fälschungssicherheit\n• Privacy-preserving Biometrics für datenschutzkonforme biometrische Verfahren\n• Synthetic Biometrics für sichere Template-Generierung ohne Originaldaten\n\n🚀 Immersive Technologies Integration:\n• Virtual Reality Identity für sichere Authentifizierung in VR-Umgebungen\n• Augmented Reality IAM für kontextbewusste Zugriffskontrolle in AR-Anwendungen\n• Metaverse Identity Management für persistente Identitäten in virtuellen Welten\n• Spatial Computing Authentication für 3D-Umgebungen und Mixed Reality\n• Digital Twin Identity für Synchronisation zwischen physischen und digitalen Identitäten"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 18),
+        question: 'Wie entwickelt sich IAM im Kontext von Remote Work und hybriden Arbeitsmodellen?',
+        answer: "Remote Work und hybride Arbeitsmodelle haben IAM fundamental verändert und neue Anforderungen an Flexibilität, Sicherheit und Benutzerfreundlichkeit geschaffen. Moderne IAM-Systeme müssen nahtlose, sichere Zugriffe von überall ermöglichen, während sie gleichzeitig höchste Sicherheitsstandards aufrechterhalten und eine optimale User Experience bieten.\n\n🏠 Remote Work Security Paradigmen:\n• Zero Trust Network Access für sichere Verbindungen unabhängig vom Standort\n• Device Trust Assessment für kontinuierliche Bewertung der Endpoint-Sicherheit\n• Location-independent Authentication für standortunabhängige Identitätsverifikation\n• Secure Remote Access für verschlüsselte Verbindungen zu Unternehmensressourcen\n• Cloud-first Security für native Cloud-Sicherheitsarchitekturen\n\n📱 Mobile und BYOD Integration:\n• Mobile Device Management Integration für sichere Verwaltung privater Geräte\n• Containerization für Trennung von privaten und geschäftlichen Daten\n• Mobile Application Management für granulare Kontrolle über Unternehmens-Apps\n• Adaptive Mobile Security für kontextbasierte Sicherheitsmaßnahmen\n• Cross-platform Identity für einheitliche Identität über alle Gerätetypen\n\n🔄 Flexible Access Models:\n• Just-in-Time Access für temporäre Berechtigungen basierend auf aktuellen Anforderungen\n• Context-aware Authorization für situationsabhängige Zugriffsentscheidungen\n• Dynamic Privilege Adjustment für automatische Anpassung von Berechtigungen\n• Time-based Access Controls für zeitlich begrenzte Zugriffe\n• Project-based Permissions für flexible Teamzusammenstellungen\n\n🌐 Global Workforce Management:\n• Multi-region Identity Services für globale Verfügbarkeit und Performance\n• Timezone-aware Access Controls für zeitzonenbasierte Zugriffsbeschränkungen\n• Cultural Adaptation für lokale Compliance und Datenschutzanforderungen\n• Language Localization für mehrsprachige Benutzeroberflächen\n• Regional Compliance für länderspezifische regulatorische Anforderungen\n\n⚡ Performance und User Experience:\n• Low-latency Authentication für schnelle Anmeldung von Remote-Standorten\n• Offline Capabilities für Funktionalität auch ohne Internetverbindung\n• Bandwidth Optimization für effiziente Nutzung begrenzter Internetverbindungen\n• Progressive Web Apps für native App-Erfahrung im Browser\n• Seamless Roaming für unterbrechungsfreie Verbindungen bei Standortwechseln\n\n🛡️ Enhanced Security für Remote Environments:\n• Advanced Threat Protection für Schutz vor Remote-spezifischen Bedrohungen\n• Home Network Security Assessment für Bewertung der Heimnetzwerk-Sicherheit\n• VPN-less Security für sichere Verbindungen ohne traditionelle VPN-Infrastruktur\n• Endpoint Detection and Response für umfassende Endpoint-Sicherheit\n• Cloud Access Security Broker für sichere Cloud-Service-Nutzung\n\n📊 Remote Work Analytics:\n• Productivity Analytics für Verständnis der Remote-Arbeitseffizienz\n• Security Posture Assessment für kontinuierliche Bewertung der Remote-Sicherheit\n• User Behavior Analytics für Erkennung anomaler Remote-Aktivitäten\n• Collaboration Patterns Analysis für Optimierung der Teamzusammenarbeit\n• Wellness Monitoring für Unterstützung des Mitarbeiterwohlbefindens"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 19),
+        question: 'Welche Rolle spielt Nachhaltigkeit und Green IT in modernen IAM-Strategien?',
+        answer: "Nachhaltigkeit wird zu einem kritischen Faktor in IAM-Strategien, da Unternehmen ihre Umweltauswirkungen reduzieren und gleichzeitig operative Effizienz steigern müssen. Green IAM kombiniert ökologische Verantwortung mit technischer Innovation und schafft nachhaltige Identitätslösungen, die sowohl Umwelt als auch Geschäftsziele unterstützen.\n\n🌱 Sustainable IAM Architecture:\n• Energy-efficient Cloud Deployments für reduzierten Energieverbrauch\n• Carbon-neutral Identity Services durch Nutzung erneuerbarer Energien\n• Optimized Resource Utilization für minimale Hardware-Anforderungen\n• Green Data Centers für umweltfreundliche Infrastruktur\n• Sustainable Software Development für energieeffiziente IAM-Anwendungen\n\n♻️ Circular Economy Prinzipien:\n• Hardware Lifecycle Management für maximale Nutzungsdauer von IT-Equipment\n• Digital-first Processes für Reduzierung physischer Ressourcen\n• Paperless Identity Management für vollständig digitale Prozesse\n• Resource Sharing für optimale Auslastung von IAM-Infrastrukturen\n• Waste Reduction durch effiziente Systemarchitekturen\n\n📊 Carbon Footprint Optimization:\n• Energy Consumption Monitoring für transparente Verbrauchsmessung\n• Carbon Accounting für IAM-Services und -Infrastrukturen\n• Emission Reduction Strategies für systematische CO2-Reduzierung\n• Green Metrics Integration für nachhaltigkeitsorientierte KPIs\n• Environmental Impact Assessment für IAM-Entscheidungen\n\n☁️ Cloud Sustainability:\n• Green Cloud Provider Selection für umweltfreundliche Cloud-Services\n• Multi-region Optimization für energieeffiziente Workload-Verteilung\n• Serverless Computing für bedarfsgerechte Ressourcennutzung\n• Auto-scaling für dynamische Anpassung an tatsächlichen Bedarf\n• Edge Computing für reduzierte Datenübertragung und Latenz\n\n🔋 Energy-efficient Operations:\n• Intelligent Workload Scheduling für optimale Energienutzung\n• Power Management für automatische Abschaltung ungenutzter Systeme\n• Efficient Algorithms für reduzierte Rechenleistungsanforderungen\n• Caching Strategies für minimierte Datenverarbeitung\n• Compression Techniques für reduzierte Speicher- und Übertragungsanforderungen\n\n🎯 Business Value von Green IAM:\n• Cost Reduction durch energieeffiziente Systeme und Prozesse\n• Brand Reputation durch demonstrierte Umweltverantwortung\n• Regulatory Compliance für umweltbezogene Vorschriften\n• Employee Engagement durch nachhaltige Arbeitsplätze\n• Innovation Driver für neue nachhaltige Geschäftsmodelle\n\n📈 Sustainable Innovation:\n• Green Technology Integration für umweltfreundliche IAM-Lösungen\n• Renewable Energy Powered IAM für CO2-neutrale Identitätsdienste\n• Sustainable Development Goals Alignment für UN-konforme Strategien\n• Circular Design Principles für nachhaltige Systemarchitekturen\n• Environmental Impact Measurement für kontinuierliche Verbesserung"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 20),
+        question: 'Wie gestaltet man eine zukunftssichere IAM-Roadmap und welche strategischen Investitionen sind prioritär?',
+        answer: "Eine zukunftssichere IAM-Roadmap erfordert strategische Weitsicht, technologische Flexibilität und kontinuierliche Anpassungsfähigkeit. Erfolgreiche IAM-Strategien balancieren kurzfristige Geschäftsanforderungen mit langfristigen Innovationszielen und schaffen adaptive Architekturen, die sich mit verändernden Technologien und Bedrohungslandschaften weiterentwickeln können.\n\n🎯 Strategic Vision und Roadmap Development:\n• Future State Architecture Design für langfristige technologische Ausrichtung\n• Technology Trend Analysis für proaktive Anpassung an Marktentwicklungen\n• Business Alignment für Synchronisation mit Unternehmensstrategie und -zielen\n• Risk Assessment für Identifikation und Mitigation strategischer Risiken\n• Investment Prioritization für optimale Ressourcenallokation und ROI-Maximierung\n\n🔮 Emerging Technology Integration:\n• AI und Machine Learning Readiness für intelligente Identitätsverwaltung\n• Quantum Computing Preparation für Post-Quantum-Kryptographie\n• Blockchain Evaluation für dezentrale Identitätslösungen\n• IoT Scalability Planning für massive Device-Integration\n• Edge Computing Strategy für verteilte Identitätsdienste\n\n🏗️ Adaptive Architecture Principles:\n• Modular Design für flexible Komponenten-Integration und -Austausch\n• API-first Approach für nahtlose Integration neuer Technologien\n• Cloud-native Architecture für Skalierbarkeit und Agilität\n• Microservices Strategy für unabhängige Service-Entwicklung\n• Container-based Deployment für portable und skalierbare Lösungen\n\n💰 Investment Strategy und Budgeting:\n• Phased Investment Approach für risikominimierte Implementierung\n• Quick Wins Identification für frühe Erfolge und Momentum-Aufbau\n• Long-term Value Creation für nachhaltige Geschäftswirkung\n• Technology Debt Management für kontinuierliche Modernisierung\n• Vendor Relationship Strategy für optimale Partner-Auswahl\n\n📊 Continuous Innovation Framework:\n• Innovation Labs für Experimentierung mit neuen Technologien\n• Proof of Concept Programs für Validierung innovativer Ansätze\n• Technology Scouting für frühzeitige Identifikation relevanter Trends\n• Partnership Ecosystem für Zugang zu externem Know-how\n• Internal Capability Building für strategische Kompetenzentwicklung\n\n🔄 Agile Implementation Methodology:\n• Iterative Development für kontinuierliche Verbesserung und Anpassung\n• DevSecOps Integration für Security-by-Design und schnelle Deployment-Zyklen\n• Continuous Feedback Loops für benutzerorientierte Entwicklung\n• Rapid Prototyping für schnelle Validierung neuer Konzepte\n• Fail-fast Mentality für effizientes Lernen und Risikominimierung\n\n🎓 Organizational Readiness:\n• Skill Development Programs für Aufbau interner IAM-Expertise\n• Change Management für erfolgreiche Adoption neuer Technologien\n• Culture Transformation für Innovation-orientierte Organisationskultur\n• Knowledge Management für Erhaltung und Transfer von IAM-Wissen\n• Leadership Engagement für strategische Unterstützung und Ressourcenbereitstellung\n\n🛡️ Future-proof Security Strategy:\n• Zero Trust Evolution für kontinuierliche Sicherheitsverbesserung\n• Threat Intelligence Integration für proaktive Bedrohungsabwehr\n• Compliance Automation für effiziente regulatorische Konformität\n• Privacy-by-Design für datenschutzkonforme Identitätslösungen\n• Resilience Planning für Ausfallsicherheit und Business Continuity"
+      }
+    ]
+    
+    // Update the document with new FAQs
+    const updatedFaqs = [...(existingDoc.faq || []), ...newFaqs]
+    
+    console.log(`Adding ${newFaqs.length} new FAQs to the document...`)
+    const transaction = client.transaction()
+    transaction.patch(existingDoc._id, {
+      set: {
+        faq: updatedFaqs
+      }
+    })
+    
+    await transaction.commit()
+    console.log('✅ FAQ batch 5 added successfully')
+  } catch (error) {
+    console.error('Error:', error)
+    throw error
+  }
+}
+
+run()

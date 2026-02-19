@@ -1,0 +1,77 @@
+import 'dotenv/config'
+import { createClient } from '@sanity/client'
+
+// Create client with direct credentials
+const client = createClient({
+  projectId: 'wwmm9rbb',
+  dataset: 'production',
+  apiVersion: '2024-02-14',
+  token: process.env.SANITY_API_TOKEN,
+  useCdn: false,
+})
+
+// Helper function to generate unique keys
+function generateKey(prefix: string, index: number): string {
+  return `${prefix}_${Date.now()}_${index}`
+}
+
+const run = async () => {
+  try {
+    console.log('Updating ISO 27001 TISAX page with FAQ batch 1...')
+    
+    // First, get the existing document
+    console.log('Fetching existing document...')
+    const existingDoc = await client.fetch('*[_id == $id][0]', { id: 'iso-27001-tisax' })
+    
+    if (!existingDoc) {
+      throw new Error('Document "iso-27001-tisax" not found')
+    }
+    
+    // Create new FAQs for TISAX fundamentals
+    const newFaqs = [
+      {
+        _type: 'object',
+        _key: generateKey('faq', 1),
+        question: 'Was ist TISAX und warum ist dieser Standard für die Automobilindustrie unverzichtbar?',
+        answer: "TISAX (Trusted Information Security Assessment Exchange) ist der etablierte Branchenstandard der Automobilindustrie für Informationssicherheitsassessments und bildet das Fundament für vertrauensvolle Geschäftsbeziehungen entlang der gesamten Automotive Supply Chain. Basierend auf ISO 27001 und dem VDA ISA Katalog, ermöglicht TISAX den standardisierten und effizienten Austausch von Sicherheitsbewertungen zwischen OEMs und Zulieferern.\n\n🚗 Automotive-spezifische Sicherheitsanforderungen:\n• TISAX adressiert die einzigartigen Herausforderungen der Automobilindustrie, von der Entwicklung autonomer Fahrzeuge bis zur vernetzten Mobilität\n• Der Standard berücksichtigt die komplexen Supply Chain Strukturen mit mehreren Zulieferungsebenen und internationalen Partnerschaften\n• Spezielle Anforderungen für den Schutz von Fahrzeugdaten, Entwicklungsinformationen und Produktionsgeheimnissen\n• Integration von Cybersecurity-Aspekten für Connected Cars und IoT-Anwendungen in der Automobilproduktion\n• Berücksichtigung regulatorischer Anforderungen wie UN-R155 für Cybersecurity Management Systeme\n\n🔄 Effizienter Assessment-Austausch:\n• Einmalige Durchführung des Assessments mit Anerkennung durch alle teilnehmenden OEMs und Partner\n• Standardisierte Bewertungskriterien basierend auf dem VDA ISA Katalog für Vergleichbarkeit und Transparenz\n• Zentrale Plattform für den sicheren Austausch von Assessment-Ergebnissen zwischen autorisierten Partnern\n• Reduzierung von Mehrfachprüfungen und damit verbundenen Kosten und Ressourcenaufwand\n• Beschleunigte Onboarding-Prozesse für neue Geschäftspartner in der Automotive Supply Chain\n\n🌐 Internationale Branchenanerkennung:\n• Akzeptanz durch führende OEMs weltweit als Nachweis für angemessene Informationssicherheit\n• Voraussetzung für die Teilnahme an Ausschreibungen und Projekten in der Automobilindustrie\n• Grundlage für vertrauensvolle Partnerschaften bei der Entwicklung zukunftsweisender Mobilitätslösungen\n• Integration in globale Automotive-Ökosysteme und Plattformen\n• Unterstützung bei der Expansion in internationale Märkte durch anerkannte Sicherheitsstandards\n\n📊 Business Value für Automotive-Unternehmen:\n• Wettbewerbsvorteil durch nachgewiesene Informationssicherheitskompetenz in der Automobilbranche\n• Zugang zu exklusiven Projekten und Partnerschaften mit führenden OEMs\n• Verbesserung der Marktposition als vertrauenswürdiger Automotive-Partner\n• Optimierung von Compliance-Prozessen durch branchenspezifische Standards\n• Aufbau von Reputation als sicherheitsbewusster Akteur in der digitalen Transformation der Mobilität\n\n🔗 Integration mit bestehenden Standards:\n• Nahtlose Ergänzung zu bestehenden ISO 27001 Zertifizierungen ohne Redundanzen\n• Kompatibilität mit anderen Automotive-Standards wie IATF 16949 und ISO 26262\n• Synergieffekte mit Cybersecurity-Frameworks für Connected Vehicles\n• Unterstützung bei der Vorbereitung auf zukünftige regulatorische Anforderungen\n• Grundlage für die Integration weiterer Automotive-spezifischer Sicherheitsstandards"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 2),
+        question: 'Wie unterscheidet sich TISAX von einer herkömmlichen ISO 27001 Zertifizierung?',
+        answer: "TISAX baut auf ISO 27001 auf, erweitert diesen jedoch um automotive-spezifische Anforderungen und Assessment-Verfahren, die den besonderen Bedürfnissen der Automobilindustrie gerecht werden. Während ISO 27001 einen allgemeinen Rahmen für Informationssicherheitsmanagement bietet, fokussiert TISAX auf die spezifischen Herausforderungen und Risiken der Automotive Supply Chain.\n\n📋 VDA ISA Katalog als Bewertungsgrundlage:\n• TISAX basiert auf dem VDA ISA (Verband der Automobilindustrie Information Security Assessment) Katalog, der spezifische Automotive-Anforderungen definiert\n• Detaillierte Bewertungskriterien für automotive-spezifische Szenarien wie Fahrzeugentwicklung, Produktionsdaten und Connected Car Services\n• Strukturierte Assessment-Methodik mit definierten Bewertungsleveln und Reifegrad-Indikatoren\n• Branchenspezifische Kontrollziele, die über die allgemeinen ISO 27001 Anforderungen hinausgehen\n• Kontinuierliche Weiterentwicklung des Katalogs entsprechend neuer Automotive-Technologien und Bedrohungen\n\n🔍 Assessment-Verfahren statt Zertifizierung:\n• TISAX ist ein Assessment-Verfahren, keine formale Zertifizierung wie ISO 27001\n• Durchführung durch akkreditierte und speziell geschulte TISAX Assessment Provider\n• Fokus auf praktische Bewertung der Informationssicherheit in automotive-spezifischen Kontexten\n• Regelmäßige Re-Assessments zur Aufrechterhaltung des TISAX Status\n• Flexiblere Anpassung an sich ändernde Automotive-Anforderungen im Vergleich zu starren Zertifizierungsstandards\n\n🚗 Automotive-spezifische Schutzbedarfe:\n• Besondere Berücksichtigung von Fahrzeugdaten, Entwicklungsinformationen und Produktionsgeheimnissen\n• Bewertung von Cybersecurity-Maßnahmen für Connected Vehicles und autonome Fahrsysteme\n• Schutz von Supply Chain Informationen und Lieferantenbeziehungen\n• Berücksichtigung von Automotive-spezifischen Compliance-Anforderungen und Regulierungen\n• Integration von Safety und Security Aspekten entsprechend der Automotive-Entwicklungszyklen\n\n🔄 Gegenseitige Anerkennung und Effizienz:\n• Einmalige Assessment-Durchführung mit Anerkennung durch alle TISAX-teilnehmenden Unternehmen\n• Zentrale Plattform für den sicheren Austausch von Assessment-Ergebnissen\n• Vermeidung von Mehrfachprüfungen durch verschiedene OEMs und Partner\n• Standardisierte Bewertungsergebnisse für bessere Vergleichbarkeit\n• Effiziente Onboarding-Prozesse für neue Automotive-Partnerschaften\n\n📈 Branchenspezifische Vorteile:\n• Direkter Zugang zu Automotive-Projekten und Ausschreibungen\n• Anerkennung als qualifizierter Automotive-Supplier durch führende OEMs\n• Verbesserung der Wettbewerbsposition in der Automotive Supply Chain\n• Aufbau von Vertrauen bei automotive-spezifischen Geschäftspartnern\n• Unterstützung bei der digitalen Transformation in der Automobilindustrie\n\n🔗 Komplementäre Nutzung mit ISO 27001:\n• TISAX ergänzt bestehende ISO 27001 Zertifizierungen optimal\n• Nutzung der ISO 27001 Grundlagen als Basis für TISAX Assessment\n• Synergieffekte bei der Implementierung und Aufrechterhaltung beider Standards\n• Gemeinsame Dokumentation und Prozesse für effiziente Compliance\n• Aufbau auf bewährten ISMS-Strukturen für automotive-spezifische Erweiterungen"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 3),
+        question: 'Welche Assessment-Level gibt es bei TISAX und welches ist für mein Unternehmen geeignet?',
+        answer: "TISAX definiert verschiedene Assessment-Level, die sich nach dem Schutzbedarf der zu verarbeitenden Informationen und der Rolle des Unternehmens in der Automotive Supply Chain richten. Die Wahl des geeigneten Levels hängt von den spezifischen Geschäftsanforderungen, Kundenanforderungen und der Art der automotive-bezogenen Tätigkeiten ab.\n\n🔒 Assessment-Level Übersicht:\n• AL1 (Assessment Level 1): Grundlegendes Sicherheitsniveau für normale Geschäftsinformationen ohne besonderen Schutzbedarf\n• AL2 (Assessment Level 2): Erhöhtes Sicherheitsniveau für sensible Informationen mit mittlerem Schutzbedarf\n• AL3 (Assessment Level 3): Hohes Sicherheitsniveau für hochsensible Informationen mit sehr hohem Schutzbedarf\n• Zusätzliche Schutzbedarfe: Spezielle Bewertungen für Prototypenschutz, Datenverarbeitung und weitere automotive-spezifische Anforderungen\n• Kombinierte Assessments: Möglichkeit der Bewertung mehrerer Level je nach Informationsarten und Geschäftsbereichen\n\n📊 AL1 - Standard Informationsschutz:\n• Geeignet für Unternehmen, die hauptsächlich mit allgemeinen Geschäftsinformationen arbeiten\n• Basis-Assessment für Lieferanten ohne Zugang zu hochsensiblen Entwicklungsdaten\n• Fokus auf grundlegende Informationssicherheitsmaßnahmen und Prozesse\n• Typische Anwendung bei Standard-Zulieferern für Serienproduktion ohne Entwicklungsbeteiligung\n• Einstiegslevel für Unternehmen, die erstmals in die Automotive Supply Chain eintreten\n\n🔐 AL2 - Erhöhter Informationsschutz:\n• Erforderlich für Unternehmen mit Zugang zu sensiblen Entwicklungsinformationen und Produktionsdaten\n• Geeignet für Entwicklungspartner und Zulieferer mit Beteiligung an Fahrzeugentwicklungsprojekten\n• Erweiterte Sicherheitsmaßnahmen für den Schutz von Konstruktionsdaten und technischen Spezifikationen\n• Typische Anwendung bei Tier-1 Zulieferern und Entwicklungsdienstleistern\n• Berücksichtigung von Supply Chain Security und Lieferantenmanagement\n\n🛡️ AL3 - Höchster Informationsschutz:\n• Notwendig für Unternehmen mit Zugang zu hochkritischen Informationen wie Fahrzeugarchitekturen und Sicherheitssystemen\n• Geeignet für strategische Partner bei der Entwicklung autonomer Fahrzeuge und Connected Car Technologien\n• Umfassende Sicherheitsmaßnahmen einschließlich physischer Sicherheit und Personalüberprüfung\n• Typische Anwendung bei Systemintegratoren und Technologiepartnern für kritische Fahrzeugsysteme\n• Spezielle Anforderungen für den Umgang mit Safety-kritischen Informationen\n\n🎯 Auswahlkriterien für das geeignete Level:\n• Art der verarbeiteten automotive-bezogenen Informationen und deren Klassifizierung\n• Rolle in der Supply Chain und Nähe zu kritischen Entwicklungs- und Produktionsprozessen\n• Kundenanforderungen und vertragliche Verpflichtungen gegenüber OEMs\n• Geschäftsstrategie und geplante Expansion in automotive-spezifische Bereiche\n• Bestehende Sicherheitsmaßnahmen und Bereitschaft für zusätzliche Investitionen\n\n📈 Strategische Überlegungen:\n• Höhere Assessment-Level ermöglichen Zugang zu wertvolleren Projekten und Partnerschaften\n• Schrittweise Entwicklung von niedrigeren zu höheren Levels entsprechend Geschäftswachstum\n• Berücksichtigung zukünftiger Marktentwicklungen und Technologietrends in der Automobilindustrie\n• Balance zwischen Investitionsaufwand und erwarteten Geschäftsmöglichkeiten\n• Aufbau von Wettbewerbsvorteilen durch proaktive Sicherheitspositionierung"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 4),
+        question: 'Wie läuft ein TISAX Assessment ab und wie kann ich mein Unternehmen optimal darauf vorbereiten?',
+        answer: "Ein TISAX Assessment folgt einem strukturierten Prozess, der von der Vorbereitung über die eigentliche Bewertung bis zur Nachbereitung reicht. Eine systematische Vorbereitung ist entscheidend für den Erfolg und umfasst sowohl technische als auch organisatorische Aspekte der Informationssicherheit in automotive-spezifischen Kontexten.\n\n📋 Assessment-Phasen im Überblick:\n• Vorbereitungsphase: Selbstbewertung, Gap-Analyse und Implementierung erforderlicher Maßnahmen\n• Anmeldung und Planung: Auswahl des Assessment Providers und Terminkoordination\n• On-Site Assessment: Vor-Ort-Bewertung durch akkreditierte TISAX Assessoren\n• Nachbereitung: Ergebnisauswertung, Maßnahmenplanung und Zertifikatserstellung\n• Kontinuierliche Überwachung: Aufrechterhaltung des TISAX Status durch regelmäßige Re-Assessments\n\n🔍 Detaillierte Vorbereitungsschritte:\n• Durchführung einer umfassenden Selbstbewertung basierend auf dem VDA ISA Katalog\n• Identifikation von Gaps zwischen aktueller Sicherheitslage und TISAX Anforderungen\n• Entwicklung und Implementierung eines Maßnahmenplans zur Schließung identifizierter Lücken\n• Schulung der Mitarbeiter zu automotive-spezifischen Sicherheitsanforderungen\n• Aufbau oder Anpassung der Dokumentation entsprechend TISAX Vorgaben\n\n🏢 On-Site Assessment Durchführung:\n• Interviews mit Schlüsselpersonal zu Sicherheitsprozessen und -verantwortlichkeiten\n• Überprüfung der Dokumentation und Nachweis der Implementierung von Sicherheitsmaßnahmen\n• Technische Bewertung der IT-Infrastruktur und Sicherheitskontrollen\n• Bewertung der physischen Sicherheit und Zugangskontrollen\n• Stichprobenartige Überprüfung der praktischen Umsetzung definierter Prozesse\n\n📊 Bewertungskriterien und Scoring:\n• Bewertung erfolgt anhand definierter Reifegrade von 0 (nicht implementiert) bis 3 (optimiert)\n• Berücksichtigung automotive-spezifischer Kontrollziele und Schutzbedarfe\n• Gewichtung verschiedener Sicherheitsbereiche entsprechend dem gewählten Assessment-Level\n• Dokumentation von Stärken, Schwächen und Verbesserungspotenzialen\n• Erstellung eines detaillierten Assessment-Berichts mit Handlungsempfehlungen\n\n🎯 Optimale Vorbereitung - Best Practices:\n• Frühzeitige Einbindung aller relevanten Stakeholder und Aufbau eines interdisziplinären Teams\n• Durchführung von Mock-Assessments zur Simulation der realen Bewertungssituation\n• Aufbau einer umfassenden Evidenz-Sammlung für alle implementierten Sicherheitsmaßnahmen\n• Etablierung klarer Kommunikationswege und Verantwortlichkeiten für das Assessment\n• Kontinuierliche Überwachung und Verbesserung der Sicherheitsmaßnahmen vor dem Assessment\n\n🔄 Nach dem Assessment:\n• Analyse der Assessment-Ergebnisse und Identifikation von Verbesserungsmaßnahmen\n• Entwicklung eines kontinuierlichen Verbesserungsplans für die Informationssicherheit\n• Vorbereitung auf Re-Assessments und Aufrechterhaltung des TISAX Status\n• Nutzung der TISAX Anerkennung für Geschäftsentwicklung und Partnerschaften\n• Integration der Lessons Learned in die kontinuierliche Sicherheitsstrategie"
+      }
+    ]
+    
+    // Update the document with new FAQs
+    const updatedFaqs = [...(existingDoc.faq || []), ...newFaqs]
+    
+    console.log(`Adding ${newFaqs.length} new FAQs to the document...`)
+    const transaction = client.transaction()
+    transaction.patch(existingDoc._id, {
+      set: {
+        faq: updatedFaqs
+      }
+    })
+    
+    await transaction.commit()
+    console.log('✅ FAQ batch 1 added successfully')
+  } catch (error) {
+    console.error('Error:', error)
+    throw error
+  }
+}
+
+run()

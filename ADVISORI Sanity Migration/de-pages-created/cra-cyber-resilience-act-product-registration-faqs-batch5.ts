@@ -1,0 +1,77 @@
+import 'dotenv/config'
+import { createClient } from '@sanity/client'
+
+// Create client with direct credentials
+const client = createClient({
+  projectId: 'wwmm9rbb',
+  dataset: 'production',
+  apiVersion: '2024-02-14',
+  token: process.env.SANITY_API_TOKEN,
+  useCdn: false,
+})
+
+// Helper function to generate unique keys
+function generateKey(prefix: string, index: number): string {
+  return `${prefix}_${Date.now()}_${index}`
+}
+
+const run = async () => {
+  try {
+    console.log('Updating CRA Product Registration page with C-Level FAQs batch 5 (German)...')
+    
+    // First, get the existing document
+    console.log('Fetching existing document...')
+    const existingDoc = await client.fetch('*[_id == $id][0]', { id: 'cra-cyber-resilience-act-product-registration' })
+    
+    if (!existingDoc) {
+      throw new Error('Document "cra-cyber-resilience-act-product-registration" not found')
+    }
+    
+    // Create new C-Level FAQs in German
+    const newFaqs = [
+      {
+        _type: 'object',
+        _key: generateKey('faq', 17),
+        question: "Welche langfristigen strategischen Partnerschaften und Allianzen sollten C-Level-Führungskräfte im Kontext der CRA-Produktregistrierung aufbauen, und wie unterstützt ADVISORI bei der Ecosystem-Entwicklung?",
+        answer: "Die erfolgreiche CRA-Produktregistrierung erfordert mehr als interne Capabilities – sie verlangt den Aufbau strategischer Partnerschaften und Allianzen, die langfristige Compliance-Excellence und Marktvorteile sichern. ADVISORI unterstützt C-Level-Teams dabei, ein robustes Ecosystem von Partnerschaften zu entwickeln, das sowohl Compliance-Sicherheit als auch Geschäftswachstum fördert.\n\n🤝 Strategische Partnership-Dimensionen für CRA-Excellence:\n• Technology-Vendor-Alliances: Aufbau privilegierter Beziehungen zu führenden Cybersecurity-Technologieanbietern für frühzeitigen Zugang zu CRA-konformen Lösungen und prioritären Support.\n• Regulatory-Expertise-Networks: Entwicklung von Beziehungen zu spezialisierten Rechtsanwaltskanzleien, Compliance-Beratern und Regulierungsexperten für kontinuierliche Guidance.\n• Industry-Consortium-Participation: Aktive Teilnahme an Branchenverbänden und Standards-Organisationen zur Mitgestaltung aufkommender CRA-Interpretationen und Best-Practices.\n• Academic-Research-Partnerships: Kooperationen mit Universitäten und Forschungseinrichtungen für Zugang zu cutting-edge Cybersecurity-Forschung und Talent-Pipeline.\n\n🔗 ADVISORI's Ecosystem-Orchestration-Services:\n• Strategic-Partner-Identification: Systematische Analyse und Bewertung potentieller Partner basierend auf CRA-Relevanz, Technologie-Leadership und strategischem Fit.\n• Partnership-Negotiation-Support: Unterstützung bei der Strukturierung und Verhandlung von Partnership-Agreements mit CRA-fokussierten Klauseln und Governance-Mechanismen.\n• Cross-Partner-Collaboration-Facilitation: Koordination und Management komplexer Multi-Partner-Initiativen für gemeinsame CRA-Compliance-Projekte.\n• Partnership-Performance-Monitoring: Kontinuierliche Überwachung und Optimierung der Partnership-Performance in Bezug auf CRA-Compliance-Ziele.\n\n🌐 Globale Ecosystem-Strategien:\n• Multi-Region-Partnership-Networks: Aufbau regionaler Partnerships zur Unterstützung internationaler CRA-Compliance-Anforderungen und lokaler Marktexpansion.\n• Supply-Chain-Integration-Alliances: Entwicklung integrierter Partnerschaften entlang der gesamten Supply Chain zur Sicherstellung End-to-End-CRA-Compliance.\n• Innovation-Lab-Consortiums: Beteiligung an oder Gründung von gemeinsamen Innovation-Labs mit Partnern zur Entwicklung next-generation CRA-Compliance-Solutions.\n• Cross-Industry-Knowledge-Exchange: Aufbau von Partnerships mit Unternehmen aus anderen Branchen zur Übertragung von CRA-Best-Practices und Innovation-Acceleration.\n\n💡 Value-Creation durch strategische Partnerships:\n• Shared-Risk-Mitigation: Verteilung von CRA-Compliance-Risiken und -Kosten über strategische Partnerships zur Verbesserung der Overall-Risk-Position.\n• Innovation-Acceleration: Gemeinsame F&E-Initiativen mit Partnern zur Entwicklung proprietärer CRA-Compliance-Capabilities und -IP.\n• Market-Access-Facilitation: Nutzung von Partner-Networks zur Erschließung neuer Märkte und Kundensegmente durch CRA-Compliance-Leadership.\n• Thought-Leadership-Amplification: Koordinierte Thought-Leadership-Aktivitäten mit strategischen Partnern zur Stärkung der Marktposition und Influence."
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 18),
+        question: "Wie können C-Level-Führungskräfte die CRA-Produktregistrierung nutzen, um eine nachhaltige Cybersecurity-Kultur zu etablieren, die über Compliance hinausgeht und echte Business-Transformation bewirkt?",
+        answer: "Die CRA-Produktregistrierung bietet eine einzigartige Gelegenheit, eine tiefgreifende Cybersecurity-Kultur zu etablieren, die weit über reine Compliance hinausgeht und das Unternehmen fundamental transformiert. ADVISORI unterstützt C-Level-Teams dabei, CRA-Compliance als Katalysator für eine umfassende kulturelle Transformation zu nutzen, die nachhaltigen Wettbewerbsvorteil schafft.\n\n🏛️ Kulturelle Transformation durch CRA-Leadership:\n• Security-First-Mindset-Development: Etablierung einer unternehmensweiten Denkweise, die Cybersecurity als integralen Bestandteil aller Geschäftsentscheidungen betrachtet, nicht als nachgelagerte Überlegung.\n• Cross-Functional-Security-Champions: Entwicklung eines Netzwerks von Cybersecurity-Champions in allen Geschäftsbereichen, die CRA-Prinzipien in ihre tägliche Arbeit integrieren.\n• Innovation-through-Security-Excellence: Förderung einer Kultur, die Cybersecurity-Excellence als Enabler für Innovation und Geschäftswachstum versteht, nicht als Hindernis.\n• Continuous-Learning-Culture: Etablierung kontinuierlicher Lern- und Verbesserungsprozesse, die mit der sich entwickelnden CRA-Landscape Schritt halten.\n\n🔄 ADVISORI's Culture-Transformation-Framework:\n• Executive-Leadership-Modeling: Unterstützung der C-Suite dabei, als Vorbilder für Cybersecurity-Excellence zu fungieren und authentische Führung zu demonstrieren.\n• Employee-Engagement-Programs: Entwicklung umfassender Programme zur Einbindung aller Mitarbeiter in die CRA-Compliance-Journey und Cybersecurity-Excellence.\n• Recognition-and-Incentive-Systems: Design von Belohnungs- und Anreizsystemen, die Cybersecurity-bewusstes Verhalten fördern und CRA-Compliance-Erfolge feiern.\n• Communication-Strategy-Excellence: Entwicklung gezielter Kommunikationsstrategien, die CRA-Compliance als strategischen Vorteil und Unternehmenswert vermitteln.\n\n🎯 Business-Value-Integration in Kulturwandel:\n• Customer-Centricity-through-Security: Positionierung von CRA-Compliance als direkter Beitrag zur Customer Experience und Vertrauensbildung.\n• Innovation-Labs-for-Secure-Development: Etablierung von Innovation-Labs, die Cybersecurity-by-Design-Prinzipien zur Grundlage aller Entwicklungsaktivitäten machen.\n• Partnership-Culture-Extension: Ausweitung der internen Cybersecurity-Kultur auf Partner und Supplier durch gemeinsame CRA-Compliance-Initiativen.\n• Market-Leadership-Positioning: Nutzung der etablierten Cybersecurity-Kultur als Differenzierungsmerkmal und Basis für Thought Leadership in der Branche.\n\n🌟 Nachhaltige Cultural-Excellence-Strategien:\n• Generational-Change-Management: Vorbereitung auf den Übergang zu digital-native Generationen, die Cybersecurity-Excellence als Standard erwarten.\n• Crisis-Resilience-Culture: Aufbau einer Kultur, die nicht nur CRA-Compliance aufrechterhält, sondern auch in Krisenzeiten Cybersecurity-Excellence demonstriert.\n• Stakeholder-Engagement-Excellence: Integration von Cybersecurity-Kultur in alle Stakeholder-Relationships, von Investoren bis zu Community-Partnerships.\n• Future-Readiness-Mindset: Entwicklung einer Kultur der kontinuierlichen Anpassung und Vorbereitung auf zukünftige Cybersecurity-Herausforderungen und -Opportunities."
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 19),
+        question: "Welche Rolle spielt die CRA-Produktregistrierung bei der Entwicklung neuer Geschäftsmodelle und Revenue-Streams, und wie können C-Level-Teams diese Opportunities strategisch nutzen?",
+        answer: "Die CRA-Produktregistrierung eröffnet völlig neue Geschäftsmodell-Opportunities, die weit über traditionelle Produktverkäufe hinausgehen. ADVISORI unterstützt C-Level-Teams dabei, diese regulatorische Transformation in innovative Revenue-Streams und nachhaltige Wettbewerbsvorteile zu verwandeln.\n\n💼 Neue Geschäftsmodell-Opportunities durch CRA-Excellence:\n• Compliance-as-a-Service (CaaS): Monetarisierung der entwickelten CRA-Expertise durch Angebot von Compliance-Services an andere Unternehmen, die Unterstützung bei der Produktregistrierung benötigen.\n• Security-by-Design-Consulting: Entwicklung von Beratungsdienstleistungen für Unternehmen, die ihre Produkte von Grund auf CRA-konform entwickeln möchten.\n• Cybersecurity-Excellence-Licensing: Lizenzierung proprietärer CRA-Compliance-Methoden, Tools und Frameworks an Branchenpartner und Wettbewerber.\n• Regulatory-Intelligence-Services: Aufbau von Services zur kontinuierlichen Überwachung und Interpretation von CRA-Entwicklungen für andere Marktteilnehmer.\n\n🚀 ADVISORI's Business-Model-Innovation-Support:\n• Market-Opportunity-Assessment: Systematische Analyse der Marktpotentiale für CRA-basierte neue Geschäftsmodelle in verschiedenen Branchen und Regionen.\n• Revenue-Model-Design: Entwicklung nachhaltiger Pricing-Strategien und Revenue-Modelle für CRA-basierte Services und Produkte.\n• Go-to-Market-Strategy-Development: Aufbau gezielter Markteinführungsstrategien für neue CRA-fokussierte Geschäftsbereiche.\n• Partnership-Ecosystem-Creation: Entwicklung strategischer Allianzen zur Skalierung neuer CRA-basierter Geschäftsmodelle.\n\n💡 Innovative Revenue-Stream-Entwicklung:\n• Subscription-Based-Compliance-Monitoring: Entwicklung kontinuierlicher Monitoring-Services für CRA-Compliance mit recurring Revenue-Modellen.\n• Platform-Business-Models: Aufbau von Plattformen, die CRA-konforme Anbieter und Nachfrager zusammenbringen und Transaktionsgebühren generieren.\n• Data-Monetization-Strategies: Ethische Nutzung anonymisierter CRA-Compliance-Daten für Market Intelligence und Benchmarking-Services.\n• Insurance-and-Risk-Transfer-Products: Entwicklung spezialisierter Versicherungsprodukte und Risikotransfer-Mechanismen für CRA-Compliance-Risiken.\n\n🔮 Future-Ready Business-Model-Evolution:\n• AI-Powered-Compliance-Automation: Entwicklung KI-gestützter Compliance-Automatisierungs-Tools als eigenständige Produktlinien.\n• Blockchain-Based-Compliance-Verification: Innovation in Blockchain-basierten Compliance-Verifikations-Services für vertrauenslose CRA-Nachweise.\n• IoT-and-Edge-Computing-Compliance: Spezialisierung auf CRA-Compliance für aufkommende Technologien wie IoT und Edge Computing.\n• Quantum-Ready-Security-Services: Proaktive Entwicklung von Post-Quantum-Cryptography-Services für zukünftige CRA-Anforderungen."
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 20),
+        question: "Wie können C-Level-Führungskräfte sicherstellen, dass ihre CRA-Produktregistrierung-Strategie auch in 5-10 Jahren noch relevant und wettbewerbsfähig ist, angesichts der sich schnell entwickelnden Technologie- und Regulatory-Landscape?",
+        answer: "Die Entwicklung einer zukunftssicheren CRA-Produktregistrierung-Strategie erfordert strategische Weitsicht und kontinuierliche Anpassungsfähigkeit. ADVISORI unterstützt C-Level-Teams dabei, nicht nur die heutigen CRA-Anforderungen zu erfüllen, sondern eine resiliente, adaptive Compliance-Architektur aufzubauen, die auch zukünftige Herausforderungen meistert.\n\n🔮 Future-Proofing-Strategien für nachhaltige CRA-Excellence:\n• Adaptive-Compliance-Architecture: Aufbau flexibler Compliance-Systeme, die sich schnell an neue regulatorische Anforderungen anpassen können, ohne fundamentale Neugestaltung zu erfordern.\n• Technology-Agnostic-Frameworks: Entwicklung von Compliance-Frameworks, die unabhängig von spezifischen Technologien funktionieren und daher langfristig anwendbar bleiben.\n• Continuous-Innovation-Integration: Etablierung von Prozessen zur systematischen Integration neuer Technologien und Sicherheitsansätze in bestehende CRA-Compliance-Strategien.\n• Regulatory-Anticipation-Capabilities: Aufbau von Fähigkeiten zur Vorhersage und Vorbereitung auf zukünftige regulatorische Entwicklungen in der Cybersecurity-Landscape.\n\n⚡ ADVISORI's Future-Ready Compliance-Excellence:\n• Scenario-Planning-for-Regulatory-Evolution: Entwicklung multipler Zukunftsszenarien für die CRA-Evolution und Vorbereitung entsprechender Adaptations-Strategien.\n• Emerging-Technology-Integration-Roadmaps: Strategische Planung für die Integration aufkommender Technologien (AI, Quantum Computing, 6G) in CRA-Compliance-Frameworks.\n• Global-Regulatory-Convergence-Preparation: Vorbereitung auf die zunehmende Konvergenz internationaler Cybersecurity-Regulierungen und deren Auswirkungen auf CRA-Strategien.\n• Next-Generation-Talent-Development: Aufbau von Fähigkeiten und Teams, die mit der sich entwickelnden Cybersecurity- und Compliance-Landscape Schritt halten können.\n\n🌍 Strategische Long-Term-Positioning:\n• Industry-Leadership-Establishment: Positionierung als Thought Leader in der CRA-Evolution durch proaktive Beiträge zu Standards-Entwicklung und Best-Practice-Definition.\n• Innovation-Ecosystem-Participation: Aktive Teilnahme an Forschungs- und Entwicklungs-Ecosystemen, die die Zukunft der Cybersecurity-Regulierung gestalten.\n• Cross-Industry-Knowledge-Transfer: Aufbau von Capabilities zum Transfer von CRA-Learnings in andere regulatorische Bereiche und Branchen.\n• Sustainable-Competitive-Advantage-Creation: Entwicklung dauerhafter Wettbewerbsvorteile durch überlegene Anpassungsfähigkeit und Innovations-Capabilities.\n\n🎯 Praktische Future-Readiness-Maßnahmen:\n• Investment-in-R&D-Capabilities: Strategische Investitionen in Forschung und Entwicklung für zukünftige Cybersecurity-Herausforderungen und -Opportunities.\n• Agile-Organization-Design: Aufbau organisatorischer Strukturen, die schnelle Anpassung an neue CRA-Anforderungen ermöglichen.\n• Stakeholder-Ecosystem-Evolution: Kontinuierliche Weiterentwicklung von Stakeholder-Relationships zur Unterstützung langfristiger CRA-Excellence.\n• Metrics-and-KPI-Evolution: Entwicklung von Mess- und Bewertungssystemen, die die langfristige Effektivität der CRA-Strategie validieren und optimieren."
+      }
+    ]
+    
+    // Update the document with new FAQs
+    const updatedFaqs = [...(existingDoc.faq || []), ...newFaqs]
+    
+    console.log(`Adding ${newFaqs.length} new C-Level FAQs (German) to the document...`)
+    const transaction = client.transaction()
+    transaction.patch(existingDoc._id, {
+      set: {
+        faq: updatedFaqs
+      }
+    })
+    
+    await transaction.commit()
+    console.log('✅ C-Level FAQs batch 5 (German) added successfully')
+  } catch (error) {
+    console.error('Error:', error)
+    throw error
+  }
+}
+
+run()

@@ -1,0 +1,77 @@
+import 'dotenv/config'
+import { createClient } from '@sanity/client'
+
+// Create client with direct credentials
+const client = createClient({
+  projectId: 'wwmm9rbb',
+  dataset: 'production',
+  apiVersion: '2024-02-14',
+  token: process.env.SANITY_API_TOKEN,
+  useCdn: false,
+})
+
+// Helper function to generate unique keys
+function generateKey(prefix: string, index: number): string {
+  return `${prefix}_${Date.now()}_${index}`
+}
+
+const run = async () => {
+  try {
+    console.log('Updating TISAX VDA ISA Audit Vorbereitung Labeling page with C-Level FAQs batch 2 (German)...')
+    
+    // First, get the existing document
+    console.log('Fetching existing document...')
+    const existingDoc = await client.fetch('*[_id == $id][0]', { id: 'tisax-vda-isa-audit-vorbereitung-labeling' })
+    
+    if (!existingDoc) {
+      throw new Error('Document "tisax-vda-isa-audit-vorbereitung-labeling" not found')
+    }
+    
+    // Create new C-Level FAQs in German
+    const newFaqs = [
+      {
+        _type: 'object',
+        _key: generateKey('faq', 5),
+        question: "Welche spezifischen organisatorischen und technischen Vorbereitungen sind für ein erfolgreiches TISAX-Audit unerlässlich und wie orchestriert ADVISORI diese systematisch?",
+        answer: "Ein erfolgreiches TISAX-Audit erfordert eine durchdachte Orchestrierung von organisatorischen, technischen und prozessualen Elementen, die weit über die reine Dokumentenerstellung hinausgeht. ADVISORI entwickelt für jedes Unternehmen eine maßgeschneiderte Audit-Readiness-Strategie, die alle kritischen Erfolgsfaktoren systematisch adressiert und optimiert.\n\n🏗️ Organisatorische Fundamente für Audit-Excellence:\n• C-Level Governance und Sponsorship: Etablierung einer klaren Führungsstruktur mit definierten Verantwortlichkeiten, Escalation-Pfaden und Executive-Support für schnelle Entscheidungsfindung während des Audit-Prozesses.\n• Cross-funktionale TISAX-Taskforce: Aufbau eines interdisziplinären Teams aus IT-Security, Compliance, Legal, HR und Facility Management mit klaren Rollen und Kommunikationswegen.\n• Stakeholder-Alignment und Change-Management: Systematische Einbindung aller relevanten Abteilungen und Mitarbeiter durch gezielte Kommunikation, Schulungen und Incentivierung der Audit-Unterstützung.\n• Projekt-Management-Excellence: Implementierung professioneller PMO-Strukturen mit detaillierten Projektplänen, Meilenstein-Tracking und Risikomanagement.\n\n🔧 Technische Audit-Readiness und Infrastructure-Optimierung:\n• Comprehensive Technical Assessment: Detaillierte Analyse der IT-Infrastruktur, Netzwerkarchitektur, Systemkonfigurationen und Sicherheitskontrollen zur Identifikation potenzieller Audit-Risiken.\n• Evidence-Collection-Automation: Implementierung automatisierter Tools und Prozesse zur kontinuierlichen Sammlung und Aufbereitung von Audit-Evidences und Compliance-Nachweisen.\n• Security-Control-Optimization: Proaktive Verbesserung und Fine-Tuning existierender Sicherheitsmaßnahmen basierend auf VDA ISA-Anforderungen und Best-Practices.\n• Documentation-Infrastructure: Aufbau einer zentralisierten, audit-konformen Dokumentationsplattform mit Versionskontrolle, Zugriffsverwaltung und Audit-Trails.\n\n🎯 ADVISORI's systematische Orchestrierung:\n• Phased Readiness Approach: Strukturierte Herangehensweise in definierten Phasen (Assessment, Planning, Implementation, Verification) mit klaren Deliverables und Erfolgsmetriken.\n• Continuous Readiness Monitoring: Implementierung von KPIs und Dashboards zur kontinuierlichen Überwachung der Audit-Bereitschaft und frühzeitigen Identifikation von Abweichungen.\n• Simulation und Dry-Runs: Durchführung vollständiger Audit-Simulationen zur Validierung der Vorbereitung und Identifikation letzter Optimierungspotenziale.\n• Crisis-Management-Preparedness: Vorbereitung auf potenzielle Audit-Komplikationen durch definierte Escalation-Prozesse und Notfall-Response-Pläne."
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 6),
+        question: "Wie stellt ADVISORI sicher, dass unsere TISAX-Audit-Vorbereitung nicht nur Compliance erfüllt, sondern auch operative Effizienz und Geschäftswert maximiert?",
+        answer: "ADVISORI verfolgt einen ganzheitlichen Value-Creation-Ansatz bei der TISAX-Audit-Vorbereitung, der über reine Compliance-Erfüllung hinausgeht und nachhaltige Geschäftsverbesserungen generiert. Durch die strategische Integration von Business-Optimierung und Security-Excellence schaffen wir messbaren Mehrwert, der die Investition in die Audit-Vorbereitung rechtfertigt und multipliziert.\n\n💼 Business-Value-Integration in die Audit-Vorbereitung:\n• Process-Excellence durch Security-by-Design: Nutzung der TISAX-Implementierung zur Optimierung bestehender Geschäftsprozesse, wodurch operative Effizienz und Sicherheit simultan verbessert werden.\n• Data-Governance-Modernisierung: Transformation veralteter Datenmanagement-Praktiken in moderne, GDPR-konforme und business-enablende Datenarchitekturen als Nebeneffekt der TISAX-Compliance.\n• Cost-Optimization durch Security-Consolidation: Identifikation und Eliminierung redundanter Sicherheitstools und -prozesse während der Audit-Vorbereitung, was zu nachhaltigen Kosteneinsparungen führt.\n• Automation-Opportunities: Nutzung der Security-Control-Implementierung zur Einführung von Automation-Lösungen, die langfristig manuelle Arbeitsaufwände reduzieren.\n\n📊 Performance-Verbesserung durch strukturierte Audit-Vorbereitung:\n• Operational Risk Reduction: Systematische Identifikation und Mitigation operationeller Risiken über Security-Risiken hinaus, wodurch die Gesamtstabilität des Unternehmens verbessert wird.\n• Quality-Management-Enhancement: Integration von Qualitätsmanagementsystemen in die TISAX-Compliance-Strukturen für verbesserte Produktqualität und Kundenzufriedenheit.\n• Vendor-Management-Optimization: Professionalisierung des Lieferantenmanagements durch TISAX-konforme Due-Diligence-Prozesse, was zu besseren Partnerbeziehungen und Kostenoptimierung führt.\n• Innovation-Enablement: Schaffung sicherer Innovationsräume und Sandbox-Umgebungen durch robuste Security-Frameworks, die schnellere Produktentwicklung ermöglichen.\n\n🚀 ADVISORI's Value-Maximization-Strategie:\n• Dual-Purpose-Implementation: Jede TISAX-Maßnahme wird parallel auf Geschäftsoptimierungspotenziale analysiert und entsprechend gestaltet für maximalen ROI.\n• Future-State-Architecture: Entwicklung einer Ziel-IT-Architektur, die nicht nur TISAX-konform ist, sondern auch zukünftige Geschäftsanforderungen und Technologie-Trends antizipiert.\n• Change-Management-Excellence: Professionelle Begleitung der organisatorischen Transformation mit Fokus auf Mitarbeiter-Empowerment und Kulturwandel hin zu Security-First-Mindset.\n• Continuous-Improvement-Framework: Etablierung nachhaltiger Verbesserungsprozesse, die über die initiale TISAX-Zertifizierung hinaus kontinuierliche Wertschöpfung sicherstellen.\n\n💡 Messbare Business-Outcomes:\n• ROI-Tracking und KPI-Monitoring: Implementierung umfassender Metriken zur Quantifizierung des geschäftlichen Mehrwerts der TISAX-Initiative.\n• Stakeholder-Value-Communication: Professionelle Aufbereitung und Kommunikation der erzielten Geschäftsverbesserungen gegenüber Board, Investoren und Kunden."
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 7),
+        question: "Welche kritischen Zeitpunkte und Meilensteine müssen im TISAX-Labeling-Prozess beachtet werden und wie managt ADVISORI diese proaktiv?",
+        answer: "Der TISAX-Labeling-Prozess folgt strikten zeitlichen Vorgaben und kritischen Pfaden, deren Missachtung zu erheblichen Verzögerungen oder kompletten Neustarts führen kann. ADVISORI's Expertise im Timing-Management und proaktiven Meilenstein-Orchestrierung gewährleistet einen reibungslosen Durchlauf ohne kostspielige Verzögerungen oder Compliance-Verstöße.\n\n⏰ Kritische Zeitfenster und Dependencies im Labeling-Prozess:\n• Assessment-Provider-Koordination: Rechtzeitige Auswahl und Beauftragung qualifizierter Assessment-Provider, da verfügbare Termine oft 3-6 Monate im Voraus ausgebucht sind, insbesondere für höhere Assessment-Level.\n• Scope-Definition-Deadline: Finale Festlegung des Audit-Scope und Assessment-Level muss mindestens 8-12 Wochen vor dem geplanten Audit-Termin erfolgen, um ausreichend Vorbereitungszeit zu gewährleisten.\n• Documentation-Submission-Windows: Strikte Einhaltung der Dokumenten-Einreichungsfristen gegenüber Assessment-Providern, typischerweise 4-6 Wochen vor dem Audit-Beginn.\n• Stakeholder-Availability-Management: Sicherstellung der Verfügbarkeit aller relevanten Mitarbeiter und Führungskräfte während der mehrtägigen Audit-Phase.\n• Post-Audit-Response-Deadlines: Zeitkritische Bearbeitung etwaiger Audit-Findings und Nachbesserungsanforderungen innerhalb definierter Fristen zur Vermeidung von Zertifizierungsverzögerungen.\n\n📅 ADVISORI's Proactive Timeline-Management:\n• Master-Schedule-Development: Erstellung eines umfassenden Projektplans mit allen kritischen Pfaden, Dependencies und Pufferzeiten zur Absorptions potenzieller Verzögerungen.\n• Early-Warning-System: Implementierung automatisierter Monitoring-Tools und Reminder-Systeme zur frühzeitigen Identifikation von Terminrisiken und rechtzeitigen Gegenmaßnahmen.\n• Contingency-Planning: Entwicklung alternativer Szenarien und Backup-Pläne für verschiedene Risikosituationen (z.B. Ausfall von Key-Personen, technische Probleme, unvorhergesehene Compliance-Lücken).\n• Stakeholder-Communication-Cadence: Etablierung regelmäßiger Kommunikationsrhythmen mit allen Beteiligten zur kontinuierlichen Alignment-Sicherstellung und proaktiven Problemlösung.\n\n🎯 Strategische Meilenstein-Orchestrierung:\n• Phase-Gate-Reviews: Strukturierte Bewertungspunkte zwischen den Projekt-Phasen mit klaren Go/No-Go-Kriterien und Qualitäts-Gates zur Sicherstellung der Audit-Readiness.\n• Risk-Mitigation-Checkpoints: Regelmäßige Risikobewertungen und präventive Maßnahmen zur Vermeidung last-minute Überraschungen oder kritischer Audit-Findings.\n• Quality-Assurance-Milestones: Kontinuierliche Qualitätsprüfungen aller Deliverables und Audit-Evidences zur Sicherstellung höchster Standards.\n• Vendor-Coordination-Excellence: Professionelles Management aller externen Dienstleister und Assessment-Provider mit klaren SLAs und Escalation-Prozessen.\n\n⚡ Acceleration-Strategien für zeitkritische Situationen:\n• Fast-Track-Implementation: Bewährte Methoden zur Beschleunigung des Vorbereitungsprozesses bei engen Zeitfenstern ohne Qualitätskompromisse.\n• Parallel-Workstream-Management: Intelligente Parallelisierung verschiedener Vorbereitungsaktivitäten zur Zeitoptimierung bei Wahrung aller Dependencies.\n• Expert-Resource-Mobilization: Flexibler Einsatz spezialisierter ADVISORI-Experten zur punktuellen Verstärkung bei zeitkritischen Aufgaben."
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 8),
+        question: "Wie bereitet ADVISORI unsere Organisation auf die verschiedenen Assessment-Level vor und welche strategischen Überlegungen fließen in die Level-Auswahl ein?",
+        answer: "Die strategische Wahl des richtigen TISAX-Assessment-Levels ist eine business-kritische Entscheidung, die weitreichende Auswirkungen auf Kosten, Aufwand, Marktpositionierung und zukünftige Geschäftschancen hat. ADVISORI entwickelt für jedes Unternehmen eine datengetriebene Assessment-Level-Strategie, die optimal zwischen Compliance-Anforderungen, Geschäftszielen und Ressourceneffizienz balanciert.\n\n🎯 Strategische Assessment-Level-Analyse und Optimierung:\n• Business-Impact-Assessment: Systematische Bewertung der Geschäftsauswirkungen verschiedener Assessment-Level auf aktuelle und geplante Kundenbeziehungen, Marktchancen und Wettbewerbsposition.\n• Cost-Benefit-Modelling: Detaillierte Kosten-Nutzen-Analyse für alle Assessment-Level unter Berücksichtigung direkter Audit-Kosten, Vorbereitungsaufwand und langfristiger Business-Benefits.\n• Future-Proofing-Strategy: Antizipation zukünftiger Marktanforderungen und Kundenerwartungen zur Vermeidung kostenintensiver Re-Assessments bei sich ändernden Business-Requirements.\n• Risk-Tolerance-Calibration: Abgleich der Assessment-Level-Anforderungen mit der individuellen Risikotoleranz und Compliance-Strategie des Unternehmens.\n\n🏭 Level-spezifische Vorbereitungsstrategien:\n• Assessment Level 1 (AL1) - Self-Assessment Excellence: Optimierung interner Assessment-Prozesse mit rigorosen Qualitätskontrollen und unabhängigen Reviews zur Sicherstellung objektiver und audit-fester Bewertungen.\n• Assessment Level 2 (AL2) - Provider-Partnership-Management: Strategische Auswahl und professionelle Koordination mit Assessment-Providern, inklusive Verhandlung optimaler Konditionen und Service-Level-Agreements.\n• Assessment Level 3 (AL3) - Premium-Audit-Readiness: Umfassende Vorbereitung auf die höchsten Audit-Standards mit White-Glove-Service und zero-defect-Anspruch für maximale Zertifizierungswahrscheinlichkeit.\n• Multi-Level-Strategien: Entwicklung intelligenter Scope-Segmentierungen zur kostenoptimalen Kombination verschiedener Assessment-Level für unterschiedliche Geschäftsbereiche oder Kundenanforderungen.\n\n🔍 ADVISORI's Assessment-Level-Optimization-Framework:\n• Customer-Requirement-Mapping: Detaillierte Analyse der TISAX-Anforderungen aller relevanten Kunden und Geschäftspartner zur optimalen Level-Abstimmung auf Marktbedürfnisse.\n• Competitive-Intelligence: Benchmarking der Assessment-Level-Strategien relevanter Wettbewerber zur strategischen Positionierung und Differenzierung.\n• Scenario-Planning: Entwicklung verschiedener Assessment-Szenarien und deren Auswirkungen auf unterschiedliche Business-Entwicklungen und Marktveränderungen.\n• ROI-Optimization: Kontinuierliche Optimierung der Assessment-Level-Strategie basierend auf realisierten Business-Outcomes und sich verändernden Marktbedingungen.\n\n💼 Level-übergreifende Excellence-Standards:\n• Documentation-Quality-Assurance: Implementierung einheitlicher Dokumentationsstandards und Quality-Gates unabhängig vom gewählten Assessment-Level.\n• Stakeholder-Readiness-Training: Level-spezifische Schulung und Vorbereitung aller beteiligten Mitarbeiter auf die jeweiligen Audit-Anforderungen und -Erwartungen.\n• Continuous-Improvement-Integration: Etablierung von Feedback-Loops und Lessons-Learned-Prozessen zur kontinuierlichen Verbesserung der Assessment-Performance.\n• Multi-Standard-Alignment: Koordination der TISAX-Assessment-Strategie mit anderen relevanten Zertifizierungen (ISO 27001, SOC 2) für maximale Synergieeffekte."
+      }
+    ]
+    
+    // Update the document with new FAQs
+    const updatedFaqs = [...(existingDoc.faq || []), ...newFaqs]
+    
+    console.log(`Adding ${newFaqs.length} new C-Level FAQs (German) to the document...`)
+    const transaction = client.transaction()
+    transaction.patch(existingDoc._id, {
+      set: {
+        faq: updatedFaqs
+      }
+    })
+    
+    await transaction.commit()
+    console.log('✅ C-Level FAQs batch 2 (German) added successfully')
+  } catch (error) {
+    console.error('Error:', error)
+    throw error
+  }
+}
+
+run()

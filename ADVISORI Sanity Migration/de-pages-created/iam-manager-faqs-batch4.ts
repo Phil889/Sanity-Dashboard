@@ -1,0 +1,77 @@
+import 'dotenv/config'
+import { createClient } from '@sanity/client'
+
+// Create client with direct credentials
+const client = createClient({
+  projectId: 'wwmm9rbb',
+  dataset: 'production',
+  apiVersion: '2024-02-14',
+  token: process.env.SANITY_API_TOKEN,
+  useCdn: false,
+})
+
+// Helper function to generate unique keys
+function generateKey(prefix: string, index: number): string {
+  return `${prefix}_${Date.now()}_${index}`
+}
+
+const run = async () => {
+  try {
+    console.log('Updating IAM Manager page with FAQ batch 4...')
+    
+    // First, get the existing document
+    console.log('Fetching existing document...')
+    const existingDoc = await client.fetch('*[_id == $id][0]', { id: 'iam-manager' })
+    
+    if (!existingDoc) {
+      throw new Error('Document "iam-manager" not found')
+    }
+    
+    // Create new FAQs for IAM Manager security and optimization topics
+    const newFaqs = [
+      {
+        _type: 'object',
+        _key: generateKey('faq', 13),
+        question: 'Wie implementiert man effektive Sicherheitskontrollen und Threat Protection in einer IAM Manager Plattform für maximalen Schutz vor Cyber-Bedrohungen?',
+        answer: "Effektive Sicherheitskontrollen und Threat Protection sind das Herzstück einer robusten IAM Manager Plattform und bilden die erste Verteidigungslinie gegen moderne Cyber-Bedrohungen. Diese mehrschichtigen Sicherheitsframeworks nutzen fortschrittliche Technologien und bewährte Methoden, um proaktiven Schutz zu gewährleisten und gleichzeitig adaptive Reaktionsfähigkeiten auf neue und sich entwickelnde Bedrohungen zu ermöglichen.\n\n🎯 Multi-layered Security Architecture:\n• Defense in Depth Strategy mit mehreren Sicherheitsebenen für umfassenden Schutz\n• Zero Trust Security Model mit kontinuierlicher Verifikation aller Identitäten und Zugriffe\n• Threat Intelligence Integration für proaktive Abwehr bekannter und neuer Bedrohungsarten\n• Security by Design Principles für inhärente Sicherheit in allen Systemkomponenten\n• Adaptive Security Controls mit dynamischer Anpassung an Bedrohungslandschaften\n\n🛡️ Advanced Threat Detection und Prevention:\n• Behavioral Analytics für Erkennung anomaler Benutzeraktivitäten und Insider-Threats\n• Machine Learning-based Anomaly Detection für Identifikation ungewöhnlicher Zugriffsmuster\n• Real-time Threat Monitoring mit sofortiger Erkennung und Reaktion auf Sicherheitsvorfälle\n• Credential Stuffing Protection mit intelligenter Erkennung von Brute-Force-Angriffen\n• Account Takeover Prevention durch kontinuierliche Überwachung von Identitätsaktivitäten\n\n🔐 Identity-centric Security Controls:\n• Multi-Factor Authentication mit adaptiven Sicherheitsanforderungen basierend auf Risikobewertung\n• Privileged Access Management mit Just-in-Time-Elevation und Session-Monitoring\n• Identity Governance mit automatischer Durchsetzung von Sicherheitsrichtlinien\n• Risk-based Authentication mit kontextabhängigen Sicherheitsmaßnahmen\n• Continuous Identity Verification für laufende Validierung von Benutzeridentitäten\n\n⚡ Automated Response und Incident Management:\n• Security Orchestration für koordinierte Reaktion auf Sicherheitsvorfälle\n• Automated Threat Response mit sofortiger Isolation kompromittierter Accounts\n• Incident Response Workflows mit vordefinierter Eskalation und Kommunikation\n• Forensic Capabilities für detaillierte Analyse von Sicherheitsvorfällen\n• Recovery Procedures für schnelle Wiederherstellung nach Sicherheitsereignissen\n\n📊 Security Intelligence und Analytics:\n• Security Information and Event Management Integration für zentrale Sicherheitsüberwachung\n• Threat Intelligence Feeds für aktuelle Informationen über Bedrohungslandschaften\n• Security Metrics und KPIs für Messung der Sicherheitseffektivität\n• Risk Assessment Dashboards für kontinuierliche Bewertung des Sicherheitsstatus\n• Predictive Security Analytics für proaktive Identifikation potenzieller Bedrohungen\n\n🌐 Enterprise Security Integration:\n• Security Framework Alignment mit branchenüblichen Standards und Best Practices\n• Compliance Integration für automatische Erfüllung regulatorischer Sicherheitsanforderungen\n• Third-party Security Tool Integration für erweiterte Sicherheitsfunktionen\n• Security Awareness Integration für Benutzerbildung und Phishing-Schutz\n• Vendor Security Management für sichere Integration externer Services"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 14),
+        question: 'Welche Rolle spielt Artificial Intelligence und Machine Learning in modernen IAM Manager Plattformen für intelligente Automatisierung und Optimierung?',
+        answer: "Artificial Intelligence und Machine Learning revolutionieren moderne IAM Manager Plattformen und transformieren traditionelle, regelbasierte Systeme in intelligente, selbstlernende Plattformen, die proaktive Entscheidungen treffen, Muster erkennen und kontinuierlich optimieren. Diese KI-gestützten Funktionen ermöglichen es Unternehmen, von reaktiver zu prädiktiver Identitätsverwaltung überzugehen und dabei operative Effizienz und Sicherheit zu maximieren.\n\n🎯 Intelligent Identity Analytics und Pattern Recognition:\n• Behavioral Pattern Analysis für Erkennung normaler und anomaler Benutzerverhaltensmuster\n• Identity Risk Scoring mit Machine Learning für dynamische Risikobewertung\n• Access Pattern Mining für Optimierung von Rollenmodellen und Berechtigungsstrukturen\n• Anomaly Detection für automatische Identifikation ungewöhnlicher Identitätsaktivitäten\n• Predictive Analytics für Vorhersage von Benutzerverhalten und Sicherheitsrisiken\n\n🤖 Automated Decision Making und Smart Workflows:\n• Intelligent Provisioning mit KI-gestützter Rollenzuweisung basierend auf Benutzerattributen\n• Smart Approval Routing mit automatischer Weiterleitung basierend auf Kontext und Risiko\n• Dynamic Policy Enforcement mit adaptiven Sicherheitskontrollen\n• Automated Exception Handling für intelligente Behandlung von Edge-Cases\n• Self-optimizing Workflows mit kontinuierlicher Verbesserung basierend auf Feedback\n\n🔍 Advanced Threat Detection und Security Intelligence:\n• AI-powered Threat Detection für Erkennung sophistizierter Angriffe und Zero-Day-Threats\n• Insider Threat Detection mit Behavioral Analytics und Anomaly Detection\n• Fraud Detection für Identifikation betrügerischer Identitätsaktivitäten\n• Credential Compromise Detection für frühzeitige Erkennung kompromittierter Accounts\n• Adaptive Authentication mit KI-gestützter Risikobewertung in Echtzeit\n\n📊 Predictive Analytics und Capacity Planning:\n• Demand Forecasting für proaktive Kapazitätsplanung und Ressourcenallokation\n• Performance Prediction für Optimierung von Systemleistung und Benutzerfreundlichkeit\n• Compliance Risk Prediction für frühzeitige Identifikation potenzieller Verstöße\n• User Behavior Prediction für personalisierte Benutzererfahrungen\n• Cost Optimization durch intelligente Ressourcennutzung und Lizenzmanagement\n\n⚡ Continuous Learning und Optimization:\n• Self-learning Systems mit kontinuierlicher Verbesserung basierend auf neuen Daten\n• Feedback Loop Integration für adaptive Algorithmus-Optimierung\n• Model Training und Validation für Gewährleistung der KI-Modell-Qualität\n• A/B Testing für datengetriebene Optimierung von KI-Algorithmen\n• Performance Monitoring für kontinuierliche Überwachung der KI-Effektivität\n\n🌐 Enterprise AI Integration und Governance:\n• AI Ethics Framework für verantwortungsvolle KI-Nutzung und Bias-Vermeidung\n• Explainable AI für Transparenz und Nachvollziehbarkeit von KI-Entscheidungen\n• AI Model Governance für Kontrolle und Compliance von KI-Systemen\n• Data Quality Management für optimale KI-Performance\n• Privacy-preserving AI für Schutz sensibler Identitätsdaten"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 15),
+        question: 'Wie gewährleistet eine IAM Manager Plattform optimale Skalierbarkeit und Performance für wachsende Unternehmensanforderungen?',
+        answer: "Optimale Skalierbarkeit und Performance sind kritische Erfolgsfaktoren für IAM Manager Plattformen und ermöglichen es Unternehmen, mit wachsenden Anforderungen Schritt zu halten, ohne Kompromisse bei Leistung oder Benutzerfreundlichkeit einzugehen. Moderne IAM Manager nutzen cloud-native Architekturen, intelligente Optimierungstechniken und proaktive Kapazitätsplanung, um elastische Skalierung und konsistente Performance zu gewährleisten.\n\n🎯 Cloud-native Scalability Architecture:\n• Elastic Infrastructure mit automatischer Skalierung basierend auf Demand und Performance-Metriken\n• Microservices Architecture für unabhängige Skalierung einzelner Komponenten\n• Container-based Deployment für flexible Ressourcenallokation und schnelle Skalierung\n• Load Balancing mit intelligenter Verteilung von Workloads über mehrere Instanzen\n• Auto-scaling Policies mit prädiktiver Skalierung basierend auf historischen Mustern\n\n⚡ Performance Optimization Strategies:\n• Intelligent Caching mit Multi-level Cache-Strategien für optimierte Response-Zeiten\n• Database Optimization mit Indexierung, Partitionierung und Query-Optimierung\n• Content Delivery Networks für globale Performance-Optimierung\n• Asynchronous Processing für nicht-blockierende Operationen und verbesserte Throughput\n• Connection Pooling für effiziente Ressourcennutzung und reduzierte Latenz\n\n📊 Proactive Capacity Planning und Monitoring:\n• Real-time Performance Monitoring mit kontinuierlicher Überwachung aller Systemmetriken\n• Capacity Forecasting mit Machine Learning für prädiktive Kapazitätsplanung\n• Bottleneck Identification für proaktive Erkennung und Behebung von Performance-Engpässen\n• Resource Utilization Analytics für Optimierung der Infrastrukturnutzung\n• Performance Baseline Management für objektive Messung von Verbesserungen\n\n🔄 Intelligent Workload Management:\n• Dynamic Resource Allocation mit intelligenter Verteilung von Rechenressourcen\n• Priority-based Processing für Priorisierung kritischer Identitätsoperationen\n• Queue Management mit intelligenter Warteschlangensteuerung für optimalen Durchsatz\n• Batch Processing Optimization für effiziente Verarbeitung großer Datenmengen\n• Peak Load Handling mit speziellen Strategien für Spitzenlasten\n\n🌐 Global Distribution und Multi-region Deployment:\n• Geographic Distribution für optimale Performance in verschiedenen Regionen\n• Data Locality Optimization für reduzierte Latenz und verbesserte Compliance\n• Cross-region Replication für High Availability und Disaster Recovery\n• Edge Computing Integration für optimierte Performance in verteilten Umgebungen\n• Global Load Balancing für intelligente Weiterleitung an optimale Standorte\n\n🛡️ Scalable Security und Compliance:\n• Security-at-Scale mit Sicherheitskontrollen, die mit dem System mitwachsen\n• Distributed Security Monitoring für skalierbare Überwachung aller Systemkomponenten\n• Compliance Automation für effiziente Erfüllung regulatorischer Anforderungen bei Skalierung\n• Identity Federation für skalierbare Cross-Domain-Authentifizierung\n• Audit Trail Scalability für lückenlose Protokollierung auch bei hohen Volumina"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 16),
+        question: 'Welche strategischen Vorteile bietet die Integration von DevOps und CI/CD-Pipelines in eine IAM Manager Plattform für moderne Entwicklungsworkflows?',
+        answer: "Die Integration von DevOps und CI/CD-Pipelines in IAM Manager Plattformen ist ein strategischer Game-Changer für moderne Entwicklungsworkflows und ermöglicht es Unternehmen, Identitätsverwaltung nahtlos in agile Entwicklungsprozesse zu integrieren. Diese Konvergenz schafft neue Möglichkeiten für automatisierte Bereitstellung, kontinuierliche Sicherheit und operative Exzellenz, während sie gleichzeitig Entwicklungsgeschwindigkeit und Qualität maximiert.\n\n🎯 Infrastructure as Code und Automated Deployment:\n• IAM Configuration as Code für versionierte und reproduzierbare Identitätskonfigurationen\n• Automated Provisioning von IAM-Ressourcen durch CI/CD-Pipelines\n• Environment-specific Deployments mit automatischer Anpassung an verschiedene Umgebungen\n• Blue-Green Deployments für risikofreie IAM-Updates ohne Downtime\n• Rollback Capabilities für schnelle Wiederherstellung bei Deployment-Problemen\n\n🔄 Continuous Integration und Testing:\n• Automated IAM Testing mit Unit Tests, Integration Tests und Security Tests\n• Policy Validation für automatische Überprüfung von IAM-Richtlinien vor Deployment\n• Security Scanning für kontinuierliche Sicherheitsüberprüfung von IAM-Konfigurationen\n• Compliance Testing für automatische Validierung regulatorischer Anforderungen\n• Performance Testing für Gewährleistung optimaler IAM-Performance\n\n🛡️ Security-first DevOps Integration:\n• Shift-left Security mit Integration von Sicherheitskontrollen in frühe Entwicklungsphasen\n• Automated Security Scanning für kontinuierliche Überprüfung von Sicherheitslücken\n• Secret Management Integration für sichere Verwaltung von Credentials in Pipelines\n• Security Policy as Code für automatisierte Durchsetzung von Sicherheitsrichtlinien\n• Vulnerability Management mit automatischer Erkennung und Behebung von Schwachstellen\n\n⚡ Agile Identity Management:\n• Feature Flag Integration für schrittweise Einführung neuer IAM-Funktionen\n• A/B Testing für datengetriebene Optimierung von IAM-Konfigurationen\n• Canary Deployments für risikoarme Einführung von IAM-Änderungen\n• Rapid Prototyping für schnelle Entwicklung und Testing neuer IAM-Features\n• Continuous Feedback Integration für iterative Verbesserung basierend auf Benutzer-Feedback\n\n📊 Monitoring und Observability:\n• Application Performance Monitoring Integration für End-to-End-Visibility\n• Distributed Tracing für detaillierte Analyse von IAM-Transaktionen\n• Metrics Collection für umfassende Überwachung von IAM-Performance\n• Log Aggregation für zentrale Sammlung und Analyse von IAM-Logs\n• Alerting Integration für proaktive Benachrichtigung bei IAM-Problemen\n\n🌐 Cloud-native DevOps Integration:\n• Container-based IAM Deployments für konsistente Umgebungen\n• Kubernetes Integration für orchestrierte IAM-Deployments\n• Microservices Architecture für unabhängige Entwicklung und Deployment\n• API-first Development für nahtlose Integration in moderne Anwendungsarchitekturen\n• Service Mesh Integration für erweiterte Sicherheit und Observability"
+      }
+    ]
+    
+    // Update the document with new FAQs
+    const updatedFaqs = [...(existingDoc.faq || []), ...newFaqs]
+    
+    console.log(`Adding ${newFaqs.length} new FAQs to the document...`)
+    const transaction = client.transaction()
+    transaction.patch(existingDoc._id, {
+      set: {
+        faq: updatedFaqs
+      }
+    })
+    
+    await transaction.commit()
+    console.log('✅ FAQ batch 4 added successfully')
+  } catch (error) {
+    console.error('Error:', error)
+    throw error
+  }
+}
+
+run()

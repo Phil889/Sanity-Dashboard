@@ -1,0 +1,77 @@
+import 'dotenv/config'
+import { createClient } from '@sanity/client'
+
+// Create client with direct credentials
+const client = createClient({
+  projectId: 'wwmm9rbb',
+  dataset: 'production',
+  apiVersion: '2024-02-14',
+  token: process.env.SANITY_API_TOKEN,
+  useCdn: false,
+})
+
+// Helper function to generate unique keys
+function generateKey(prefix: string, index: number): string {
+  return `${prefix}_${Date.now()}_${index}`
+}
+
+const run = async () => {
+  try {
+    console.log('Updating DORA Dokumentationsanforderungen page with FAQ batch 2...')
+    
+    // First, get the existing document
+    console.log('Fetching existing document...')
+    const existingDoc = await client.fetch('*[_id == $id][0]', { id: 'dora-dokumentationsanforderungen' })
+    
+    if (!existingDoc) {
+      throw new Error('Document "dora-dokumentationsanforderungen" not found')
+    }
+    
+    // Create new FAQs for documentation governance and processes
+    const newFaqs = [
+      {
+        _type: 'object',
+        _key: generateKey('faq', 5),
+        question: 'Wie etabliere ich eine effektive Dokumentationsgovernance für DORA-Compliance?',
+        answer: "Eine effektive Dokumentationsgovernance ist das Fundament nachhaltiger DORA-Compliance und erfordert klare Strukturen, Prozesse und Verantwortlichkeiten, die sowohl regulatorische Anforderungen erfüllen als auch operative Effizienz gewährleisten. Erfolgreiche Dokumentationsgovernance geht über reine Verwaltung hinaus und schafft eine Kultur der Qualität und kontinuierlichen Verbesserung.\n\n🏛️ Governance-Struktur und Verantwortlichkeiten:\n• Etablierung eines Dokumentations-Governance-Committees mit Vertretern aus allen relevanten Geschäftsbereichen und klaren Entscheidungsbefugnissen\n• Definition spezifischer Rollen wie Document Owner, Document Custodian und Document User mit eindeutigen Verantwortlichkeiten und Befugnissen\n• Aufbau einer Matrix-Organisation mit funktionalen und fachlichen Verantwortlichkeiten für verschiedene Dokumentenkategorien\n• Integration der Dokumentationsgovernance in bestehende Governance-Strukturen wie Risk Committees und Audit Committees\n• Etablierung klarer Eskalationswege für Dokumentations-bezogene Entscheidungen und Konflikte\n\n📜 Policy- und Standard-Entwicklung:\n• Entwicklung umfassender Dokumentations-Policies, die alle Aspekte von Erstellung bis Archivierung abdecken\n• Etablierung einheitlicher Dokumentationsstandards für Format, Struktur, Sprache und Präsentation\n• Definition klarer Qualitätskriterien und Akzeptanzstandards für verschiedene Dokumententypen\n• Aufbau von Compliance-Standards, die spezifische DORA-Anforderungen in operative Dokumentationspraktiken übersetzen\n• Integration von Datenschutz- und Informationssicherheits-Anforderungen in Dokumentationsstandards\n\n🔄 Prozess-Design und Workflow-Management:\n• Entwicklung standardisierter End-to-End-Prozesse für Dokumentenerstellung, Review, Genehmigung und Veröffentlichung\n• Implementierung von Stage-Gate-Prozessen mit klaren Qualitätsprüfungen und Genehmigungskriterien\n• Etablierung von Change-Management-Prozessen für Dokumentenaktualisierungen mit Impact-Assessment und Stakeholder-Kommunikation\n• Aufbau von Exception-Handling-Prozessen für Notfälle oder außergewöhnliche Umstände\n• Integration von Feedback-Loops und kontinuierlichen Verbesserungsmechanismen in alle Dokumentationsprozesse\n\n📊 Performance-Management und Monitoring:\n• Entwicklung von KPIs für Dokumentationsqualität, Aktualität, Vollständigkeit und Benutzerfreundlichkeit\n• Implementierung regelmäßiger Governance-Reviews mit Bewertung der Effektivität von Dokumentationsprozessen\n• Etablierung von Benchmarking-Programmen zur Bewertung der Dokumentationsreife im Vergleich zu Best Practices\n• Aufbau von Dashboard-Systemen für Echtzeit-Monitoring von Dokumentationsstatus und Compliance-Metriken\n• Integration von Stakeholder-Feedback und Nutzungsstatistiken in kontinuierliche Verbesserungsprozesse\n\n🎓 Training und Capability-Building:\n• Entwicklung umfassender Schulungsprogramme für alle Dokumentationsrollen und -verantwortlichkeiten\n• Etablierung von Zertifizierungsprogrammen für kritische Dokumentationsrollen\n• Aufbau von Communities of Practice für Erfahrungsaustausch und Best-Practice-Sharing\n• Implementation von Mentoring-Programmen für neue Dokumentenverantwortliche\n• Integration von Dokumentationskompetenzen in Performance-Management und Karriereentwicklung"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 6),
+        question: 'Welche Technologien und Tools unterstützen am besten die DORA-Dokumentationsanforderungen?',
+        answer: "Die Auswahl geeigneter Technologien und Tools ist entscheidend für die effiziente Erfüllung der DORA-Dokumentationsanforderungen und sollte sowohl aktuelle Bedürfnisse als auch zukünftige Skalierbarkeit berücksichtigen. Moderne Dokumentationsmanagement-Systeme bieten umfassende Funktionalitäten, die weit über traditionelle Dokumentenverwaltung hinausgehen und integrierte Compliance-Unterstützung bieten.\n\n🗄️ Enterprise Document Management Systeme:\n• Implementierung robuster DMS-Plattformen mit nativer Unterstützung für regulatorische Compliance und Audit-Trails\n• Integration von Workflow-Engines für automatisierte Dokumentenprozesse, Genehmigungsverfahren und Eskalationsmechanismen\n• Aufbau von Metadaten-Management-Systemen für erweiterte Suchfunktionen und automatisierte Kategorisierung\n• Etablierung von Versionskontroll-Systemen mit detaillierter Change-History und Rollback-Funktionalitäten\n• Implementation von Role-based Access Control mit granularen Berechtigungen und Audit-Logging\n\n🤖 Automatisierung und KI-Integration:\n• Einsatz von Natural Language Processing für automatisierte Dokumentenklassifikation und Content-Extraktion\n• Implementation von Machine Learning Algorithmen für Qualitätsprüfungen und Compliance-Validierung\n• Aufbau von Chatbot-Systemen für Benutzerunterstützung und häufige Dokumentationsanfragen\n• Integration von Robotic Process Automation für repetitive Dokumentationsprozesse und Datenübertragung\n• Entwicklung von Predictive Analytics für proaktive Identifikation von Dokumentationslücken und Risiken\n\n📊 Business Intelligence und Reporting-Tools:\n• Implementation von Dashboard-Systemen für Echtzeit-Übersicht über Dokumentationsstatus und Compliance-Metriken\n• Aufbau von Advanced Analytics für Trend-Analysen und Performance-Monitoring\n• Integration von Reporting-Tools für automatisierte Generierung regulatorischer Berichte und Management-Dashboards\n• Entwicklung von Data Visualization Lösungen für intuitive Darstellung komplexer Dokumentationslandschaften\n• Etablierung von Self-Service Analytics für dezentrale Berichterstattung und Ad-hoc-Analysen\n\n🔗 Integration und Interoperabilität:\n• Aufbau von API-basierten Integrationen mit bestehenden Geschäftssystemen und Datenquellen\n• Implementation von Enterprise Service Bus Architekturen für nahtlose Systemkommunikation\n• Integration mit Risk Management Systemen für automatisierte Risiko-Dokumentation und -Monitoring\n• Aufbau von Schnittstellen zu Incident Management Systemen für automatisierte Incident-Dokumentation\n• Etablierung von Data Governance Plattformen für konsistente Datenqualität und -standards\n\n☁️ Cloud-basierte Lösungen und Skalierbarkeit:\n• Evaluation von Cloud-nativen Dokumentationsplattformen für Skalierbarkeit und Kosteneffizienz\n• Implementation von Hybrid-Cloud-Architekturen für Balance zwischen Kontrolle und Flexibilität\n• Aufbau von Disaster Recovery und Business Continuity Lösungen für kritische Dokumentationssysteme\n• Integration von Mobile-First-Ansätzen für ortsunabhängigen Zugriff auf kritische Dokumentation\n• Etablierung von Multi-Tenant-Architekturen für verschiedene Geschäftsbereiche und regulatorische Anforderungen"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 7),
+        question: 'Wie dokumentiere ich komplexe IKT-Drittanbieter-Arrangements DORA-konform?',
+        answer: "Die DORA-konforme Dokumentation komplexer IKT-Drittanbieter-Arrangements erfordert einen systematischen und vielschichtigen Ansatz, der sowohl die direkten Vertragsbeziehungen als auch die komplexen Interdependenzen und Risiken in der gesamten Lieferkette erfasst. Effektive Drittanbieter-Dokumentation geht über traditionelle Vendor-Management-Praktiken hinaus und schafft vollständige Transparenz über alle kritischen Abhängigkeiten.\n\n🏢 Umfassende Vendor-Profile und -Register:\n• Entwicklung detaillierter Vendor-Profile mit vollständigen Unternehmensinformationen, Geschäftsmodell-Analysen und Marktpositionierung\n• Aufbau hierarchischer Vendor-Register, die sowohl direkte als auch Sub-Contractor-Beziehungen abbilden\n• Dokumentation von Vendor-Kategorisierung basierend auf Kritikalität, Risikoprofil und regulatorischer Relevanz\n• Etablierung von Vendor-Lifecycle-Dokumentation von Onboarding bis Exit-Management\n• Integration von Financial Health Monitoring mit regelmäßigen Bonitätsprüfungen und Stabilitätsbewertungen\n\n📋 Vertragsdokumentation und SLA-Management:\n• Vollständige Dokumentation aller Vertragsbestandteile mit spezifischem Fokus auf DORA-relevante Klauseln und Verpflichtungen\n• Aufbau detaillierter SLA-Register mit Performance-Metriken, Verfügbarkeitsanforderungen und Penalty-Strukturen\n• Dokumentation von Sicherheitsanforderungen, Compliance-Verpflichtungen und Audit-Rechten\n• Etablierung von Change-Management-Prozessen für Vertragsmodifikationen mit Impact-Assessment\n• Integration von Exit-Klauseln und Transition-Planungen mit detaillierten Ausstiegsszenarien\n\n🔍 Due-Diligence und Risk-Assessment-Dokumentation:\n• Entwicklung standardisierter Due-Diligence-Frameworks mit spezifischen DORA-Compliance-Prüfungen\n• Aufbau umfassender Risk-Assessment-Dokumentation für alle kritischen Drittanbieter-Services\n• Dokumentation von Security-Assessments, Penetrationstests und Vulnerability-Scans\n• Etablierung von Compliance-Nachweisen und Zertifizierungsmanagement\n• Integration von Business Impact Analysen für verschiedene Ausfallszenarien\n\n📊 Kontinuierliches Monitoring und Performance-Dokumentation:\n• Implementation von Real-time Monitoring Dashboards für kritische Drittanbieter-Services\n• Aufbau von Performance-Trend-Analysen und historischen Vergleichsstudien\n• Dokumentation von Incident-Histories und deren Auswirkungen auf eigene Geschäftstätigkeiten\n• Etablierung von Escalation-Protokollen und deren Dokumentation\n• Integration von Stakeholder-Feedback und Service-Quality-Bewertungen\n\n🌐 Supply Chain Mapping und Interdependenz-Analyse:\n• Entwicklung vollständiger Supply Chain Maps mit allen kritischen Abhängigkeiten und Verbindungen\n• Aufbau von Interdependenz-Matrizen zur Identifikation von Konzentrationsrisiken und Single Points of Failure\n• Dokumentation von Datenflüssen und Informationsaustausch zwischen verschiedenen Drittanbietern\n• Etablierung von Scenario-Planning-Dokumentation für verschiedene Disruption-Szenarien\n• Integration von Geographic Risk Mapping für geopolitische und regulatorische Risikobewertung"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 8),
+        question: 'Welche Dokumentationsanforderungen gelten für DORA-Incident-Management und -Reporting?',
+        answer: "DORA-Incident-Management-Dokumentation erfordert umfassende und strukturierte Erfassung aller IKT-bezogenen Störungen und deren Management, die sowohl interne Governance-Bedürfnisse als auch regulatorische Berichtspflichten erfüllt. Effektive Incident-Dokumentation ermöglicht nicht nur Compliance, sondern auch kontinuierliche Verbesserung der operationellen Resilienz durch systematische Analyse und Lessons Learned.\n\n🚨 Incident-Klassifikation und Kategorisierung:\n• Entwicklung umfassender Incident-Taxonomien mit klaren Definitionen für verschiedene Störungstypen und Schweregrade\n• Etablierung von Kritikalitäts-Matrizen basierend auf Business Impact, Dauer und betroffenen Systemen\n• Aufbau von Eskalations-Triggern mit automatisierten Benachrichtigungssystemen für verschiedene Incident-Level\n• Dokumentation von Incident-Scope-Definitionen zur klaren Abgrenzung von DORA-relevanten Störungen\n• Integration von Regulatory-Reporting-Kriterien in Incident-Klassifikationssysteme\n\n📝 Chronologische Incident-Dokumentation:\n• Implementation von Real-time Incident-Logging mit präzisen Zeitstempeln und automatisierter Datenerfassung\n• Aufbau detaillierter Timeline-Dokumentation von Incident-Detection bis vollständiger Resolution\n• Dokumentation aller Response-Aktivitäten mit Verantwortlichkeitszuweisungen und Entscheidungsbegründungen\n• Etablierung von Communication-Logs für interne und externe Stakeholder-Kommunikation\n• Integration von Evidence-Collection-Prozessen für forensische Analysen und Compliance-Nachweise\n\n🔍 Root-Cause-Analysis und Impact-Assessment:\n• Entwicklung standardisierter RCA-Methodiken mit strukturierten Analyseprozessen und Dokumentationsformaten\n• Aufbau umfassender Impact-Assessment-Frameworks für Business-, Financial- und Reputational-Impact\n• Dokumentation von Contributing-Factors und System-Interdependenzen, die zu Incidents beigetragen haben\n• Etablierung von Lessons-Learned-Prozesse mit systematischer Erfassung und Verbreitung von Erkenntnissen\n• Integration von Trend-Analysen zur Identifikation wiederkehrender Probleme und systemischer Schwächen\n\n📊 Regulatorische Berichterstattung und Compliance:\n• Implementation automatisierter Regulatory-Reporting-Systeme für zeitnahe Meldungen an Aufsichtsbehörden\n• Aufbau von Compliance-Checklisten für verschiedene Reporting-Anforderungen und Jurisdiktionen\n• Dokumentation von Stakeholder-Notifications und deren Timing entsprechend regulatorischer Vorgaben\n• Etablierung von Follow-up-Reporting-Prozesse für Updates und Final-Reports\n• Integration von Legal-Review-Prozesse für kritische Incident-Communications\n\n🔄 Recovery und Business Continuity Dokumentation:\n• Vollständige Dokumentation aller Recovery-Aktivitäten mit Zeitstempeln und Verantwortlichkeitszuweisungen\n• Aufbau von Business Continuity Activation-Logs mit Entscheidungsprozessen und Ressourcenallokation\n• Dokumentation von Workaround-Lösungen und deren Effektivität während Incident-Response\n• Etablierung von Service-Restoration-Tracking mit detaillierten Recovery-Metriken\n• Integration von Post-Incident-Review-Prozesse mit systematischer Bewertung der Response-Effektivität"
+      }
+    ]
+    
+    // Update the document with new FAQs
+    const updatedFaqs = [...(existingDoc.faq || []), ...newFaqs]
+    
+    console.log(`Adding ${newFaqs.length} new FAQs to the document...`)
+    const transaction = client.transaction()
+    transaction.patch(existingDoc._id, {
+      set: {
+        faq: updatedFaqs
+      }
+    })
+    
+    await transaction.commit()
+    console.log('✅ FAQ batch 2 added successfully')
+  } catch (error) {
+    console.error('Error:', error)
+    throw error
+  }
+}
+
+run()
