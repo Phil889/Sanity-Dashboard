@@ -19,7 +19,7 @@ None
 - [x] **Phase 3: Core Infrastructure** - Shared Sanity client, error handling, utilities for all later phases
 - [x] **Phase 4: Untranslated Page Detection** - Automated query to find German servicePages without English counterparts
 - [x] **Phase 5: Content Extraction** - Reliable batch extraction of German page content into structured format
-- [ ] **Phase 6: AI-Assisted Translation Engine** - Translation system following all 11 rules with quality output
+- [x] **Phase 6: AI-Assisted Translation Engine** - Translation system following all 11 rules with quality output
 - [ ] **Phase 7: Translation Validation** - Automated checks against all 11 rules, schema, and quality standards
 - [ ] **Phase 8: Automated Upload** - Programmatic upload of translated content to Sanity with error handling
 - [ ] **Phase 9: i18n Linking** - Automatically link English/German page versions via __i18n_lang and __i18n_base
@@ -93,10 +93,10 @@ Plans:
 **Plans**: 4 plans
 
 Plans:
-- [ ] 06-01: Translation infrastructure and glossary (config, types, slug translations, forbidden terms)
-- [ ] 06-02: Single-page translation engine (Claude API prompt, translate-page.ts CLI tool)
-- [ ] 06-03: Batch translation pipeline (translate-batch.ts with rate limiting, cost tracking, resume)
-- [ ] 06-04: Translation quality validation (11-rule checker, cross-validation with German source)
+- [x] 06-01: Translation infrastructure and glossary (config, types, slug translations, forbidden terms)
+- [x] 06-02: Single-page translation engine (Claude API prompt, translate-page.ts CLI tool)
+- [x] 06-03: Batch translation pipeline (translate-batch.ts with rate limiting, cost tracking, resume)
+- [x] 06-04: Translation quality validation (11-rule checker, cross-validation with German source)
 
 ### Phase 7: Translation Validation
 **Goal**: Automated validation that catches all structural, content, and quality issues before upload
@@ -158,7 +158,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 | 3. Core Infrastructure | 4/4 | Complete | 2026-02-19 |
 | 4. Untranslated Page Detection | 3/3 | Complete | 2026-02-20 |
 | 5. Content Extraction | 3/3 | Complete | 2026-02-20 |
-| 6. AI-Assisted Translation Engine | 0/4 | Planned | - |
+| 6. AI-Assisted Translation Engine | 4/4 | Complete | 2026-02-20 |
 | 7. Translation Validation | 0/3 | Not started | - |
 | 8. Automated Upload | 0/3 | Not started | - |
 | 9. i18n Linking | 0/3 | Not started | - |

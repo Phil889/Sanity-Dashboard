@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-19)
 
 **Core value:** A reliable, automated pipeline that can translate, upload, and link service pages from German to English without breaking existing content.
-**Current focus:** Phase 6 -- AI-Assisted Translation Engine (Phase 5 complete)
+**Current focus:** Phase 7 -- Translation Validation (Phase 6 complete)
 
 ## Current Position
 
-Phase: 5 of 10 **COMPLETE** (Content Extraction)
-Next phase: 6 (AI-Assisted Translation Engine)
-Status: Phase 5 complete, ready to plan Phase 6
-Last activity: 2026-02-20 -- Phase 5 Content Extraction completed (3 plans: single-page extractor, batch pipeline, validation/normalization)
+Phase: 6 of 10 **COMPLETE** (AI-Assisted Translation Engine)
+Next phase: 7 (Translation Validation)
+Status: Phase 6 complete, ready to plan Phase 7
+Last activity: 2026-02-20 -- Phase 6 AI-Assisted Translation Engine completed (4 plans: infrastructure/glossary, single-page engine, batch pipeline, quality validation)
 
-Progress: [==========] 50% (Phase 5 of 10 complete)
+Progress: [============] 60% (Phase 6 of 10 complete)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 18
-- Average duration: ~22 minutes per plan
-- Total execution time: ~8.0 hours (Phase 1-5)
+- Total plans completed: 22
+- Average duration: ~20 minutes per plan
+- Total execution time: ~9.0 hours (Phase 1-6)
 
 **By Phase:**
 
@@ -32,10 +32,11 @@ Progress: [==========] 50% (Phase 5 of 10 complete)
 | 3. Core Infrastructure | 4/4 | ~1.0 hr | ~15 min |
 | 4. Untranslated Page Detection | 3/3 | ~1.0 hr | ~20 min |
 | 5. Content Extraction | 3/3 | ~0.5 hr | ~10 min |
+| 6. AI Translation Engine | 4/4 | ~1.0 hr | ~15 min |
 
 **Recent Trend:**
-- Last 5 plans: 04-02, 04-03, 05-01, 05-02, 05-03 (all complete)
-- Trend: Accelerating -- Phase 5 used parallel execution (Wave 2 ran 05-02 + 05-03 concurrently)
+- Last 5 plans: 05-02, 05-03, 06-01, 06-02, 06-03 (all complete)
+- Trend: Accelerating -- Phase 6 used 3-wave parallel execution (Wave 1: 06-01, Wave 2: 06-02, Wave 3: 06-03 + 06-04 concurrent)
 
 ## Accumulated Context
 
@@ -93,6 +94,12 @@ Recent decisions affecting current work:
 19. Batch extraction: sequential with 200ms delay, skip-existing for resume, abort after 5 consecutive failures (Phase 5)
 20. Slug-to-filename: replace / with -- for flat filesystem-safe naming (Phase 5)
 21. Canonical ExtractedPageSchema defines the Phase 5→6 contract with required vs optional field distinction (Phase 5)
+22. Claude API via @anthropic-ai/sdk with Sonnet 4.5 default model (Phase 6)
+23. ANTHROPIC_API_KEY validation is LAZY -- only when config.anthropic is accessed, so non-translation tools don't fail (Phase 6)
+24. Hybrid AI+code translation: AI translates text, deterministic code handles _id, slug, _key, i18n, asset preservation (Phase 6)
+25. Glossary: 22 slug translations, 26 forbidden terms, 48 domain terms, standardized generateKey() (Phase 6)
+26. Cost estimate: ~$0.054/page ($3/MTok input + $15/MTok output Sonnet 4.5), ~$32 for full 587-page batch (Phase 6)
+27. Translation validation: 11-rule checker with structural cross-validation and quality checks (Phase 6)
 
 ### Deferred Issues
 
@@ -116,6 +123,6 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-02-20
-Stopped at: Phase 5 complete. Extraction, batch, and validation tools built and verified.
-Resume file: .planning/phases/05-content-extraction/05-03-SUMMARY.md
-Next action: Plan Phase 6 (AI-Assisted Translation Engine) -- design translation prompt/pipeline and build engine
+Stopped at: Phase 6 complete. Translation infrastructure, single-page engine, batch pipeline, and quality validation all built and verified.
+Resume file: .planning/phases/06-ai-translation-engine/06-04-SUMMARY.md
+Next action: Plan Phase 7 (Translation Validation) -- comprehensive validation with quality scoring extending 06-04 foundation
