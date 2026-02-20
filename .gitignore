@@ -25,6 +25,9 @@ tmp/
 *.tmp
 nul
 
+# Extracted page data (regenerable via extract-batch)
+src/data/extracted/*.json
+
 # Logs
 *.log
 npm-debug.log*
