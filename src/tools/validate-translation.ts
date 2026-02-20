@@ -54,6 +54,8 @@ export interface QualityChecks {
   emojiPreserved: boolean
   germanWordsFound: string[]
   domainTermsUntranslated: string[]
+  idFormatValid: boolean
+  i18nFieldsConsistent: boolean
 }
 
 /** Full validation result for a translated page. */
@@ -240,6 +242,8 @@ export async function validateTranslation(
         emojiPreserved: false,
         germanWordsFound: [],
         domainTermsUntranslated: [],
+        idFormatValid: false,
+        i18nFieldsConsistent: false,
       },
       score: 0,
       warnings: ['Failed to parse translated JSON'],
@@ -669,6 +673,8 @@ export async function validateTranslation(
     emojiPreserved: true,
     germanWordsFound: [],
     domainTermsUntranslated: [],
+    idFormatValid: true,
+    i18nFieldsConsistent: true,
   }
 
   // Scan for FORBIDDEN_TERMS
@@ -740,6 +746,67 @@ export async function validateTranslation(
   }
   if (remnants.domainTermsUntranslated.length > 0) {
     warnings.push(`Untranslated domain terms found: ${remnants.domainTermsUntranslated.join(', ')}`)
+  }
+
+  // ── i18n field and _id consistency checks ──
+  {
+    const idStr = typeof translated._id === 'string' ? translated._id : ''
+    const i18nLang = translated.__i18n_lang
+    const i18nBase = translated.__i18n_base
+
+    // _id format check: must end with '-en'
+    if (!idStr.endsWith('-en')) {
+      qualityChecks.idFormatValid = false
+      warnings.push(`_id "${idStr}" does not end with "-en"`)
+    }
+
+    // If German source provided, _id must equal ${german._id}-en
+    if (german && typeof german._id === 'string') {
+      const expectedId = `${german._id}-en`
+      if (idStr !== expectedId) {
+        qualityChecks.idFormatValid = false
+        warnings.push(`_id "${idStr}" does not match expected "${expectedId}" (german._id + "-en")`)
+      }
+    }
+
+    // __i18n_lang must be 'en'
+    if (i18nLang !== 'en') {
+      qualityChecks.i18nFieldsConsistent = false
+      warnings.push(`__i18n_lang is "${String(i18nLang)}" instead of "en"`)
+    }
+
+    // __i18n_base must be an object with _ref (string) and _type: 'reference'
+    if (isObject(i18nBase)) {
+      const base = i18nBase as Record<string, unknown>
+      if (typeof base._ref !== 'string' || base._ref.length === 0) {
+        qualityChecks.i18nFieldsConsistent = false
+        warnings.push('__i18n_base._ref is missing or empty')
+      }
+      if (base._type !== 'reference') {
+        qualityChecks.i18nFieldsConsistent = false
+        warnings.push(`__i18n_base._type is "${String(base._type)}" instead of "reference"`)
+      }
+
+      // If German source provided, __i18n_base._ref must equal german._id
+      if (german && typeof german._id === 'string' && typeof base._ref === 'string') {
+        if (base._ref !== german._id) {
+          qualityChecks.i18nFieldsConsistent = false
+          warnings.push(`__i18n_base._ref "${base._ref}" does not match german._id "${german._id}"`)
+        }
+      }
+
+      // Cross-consistency: _id stripped of '-en' must equal __i18n_base._ref
+      if (idStr.endsWith('-en') && typeof base._ref === 'string') {
+        const idWithoutSuffix = idStr.slice(0, -3) // strip '-en'
+        if (idWithoutSuffix !== base._ref) {
+          qualityChecks.i18nFieldsConsistent = false
+          warnings.push(`_id without "-en" suffix ("${idWithoutSuffix}") does not match __i18n_base._ref ("${base._ref}")`)
+        }
+      }
+    } else {
+      qualityChecks.i18nFieldsConsistent = false
+      warnings.push('__i18n_base is missing or not an object')
+    }
   }
 
   // ── Score ──
@@ -894,6 +961,8 @@ function displaySingleResult(file: string, result: TranslationValidationResult):
   } else {
     logger.stats('  Untranslated terms:  none')
   }
+  logger.stats(`  _id format:          ${result.qualityChecks.idFormatValid ? 'ok' : 'INVALID'}`)
+  logger.stats(`  i18n consistency:    ${result.qualityChecks.i18nFieldsConsistent ? 'ok' : 'INCONSISTENT'}`)
   logger.info('')
 
   // Warnings
@@ -970,6 +1039,22 @@ function displayDirectoryReport(report: DirectoryTranslationReport, strict: bool
       if (words.length > 0) parts.push(`stop words: ${words.join(', ')}`)
       if (terms.length > 0) parts.push(`domain terms: ${terms.join(', ')}`)
       logger.warn(`  ${f.file}: ${parts.join('; ')}`)
+    }
+    logger.info('')
+  }
+
+  // i18n consistency warnings across all files
+  const filesWithI18nIssues = report.fileResults.filter(
+    (r) => !r.result.qualityChecks.idFormatValid || !r.result.qualityChecks.i18nFieldsConsistent,
+  )
+  if (filesWithI18nIssues.length > 0) {
+    logger.info('Files with i18n Consistency Issues')
+    logger.info('-'.repeat(50))
+    for (const f of filesWithI18nIssues) {
+      const issues: string[] = []
+      if (!f.result.qualityChecks.idFormatValid) issues.push('_id format')
+      if (!f.result.qualityChecks.i18nFieldsConsistent) issues.push('i18n fields')
+      logger.warn(`  ${f.file}: ${issues.join(', ')}`)
     }
     logger.info('')
   }
