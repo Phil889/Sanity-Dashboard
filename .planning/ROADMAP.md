@@ -89,16 +89,14 @@ Plans:
 ### Phase 6: AI-Assisted Translation Engine
 **Goal**: Automated translation of German service pages to English, following all 11 rules, with professional quality
 **Depends on**: Phase 5
-**Research**: Likely (translation approach — Claude API, DeepL, or other; quality benchmarking)
-**Research topics**: Claude API for translation tasks, prompt engineering for consistent translation quality, preserving formatting/emojis/structure, glossary enforcement, cost per page
-**Plans**: 5 plans
+**Research**: Complete (Claude API via @anthropic-ai/sdk, hybrid AI+code approach)
+**Plans**: 4 plans
 
 Plans:
-- [ ] 06-01: Design translation prompt/pipeline and select AI provider
-- [ ] 06-02: Build translation engine with rule enforcement (11 mandatory rules)
-- [ ] 06-03: Implement glossary/terminology consistency system
-- [ ] 06-04: Translate sample batch and compare quality against manual translations
-- [ ] 06-05: Iterate on prompt/pipeline based on quality review
+- [ ] 06-01: Translation infrastructure and glossary (config, types, slug translations, forbidden terms)
+- [ ] 06-02: Single-page translation engine (Claude API prompt, translate-page.ts CLI tool)
+- [ ] 06-03: Batch translation pipeline (translate-batch.ts with rate limiting, cost tracking, resume)
+- [ ] 06-04: Translation quality validation (11-rule checker, cross-validation with German source)
 
 ### Phase 7: Translation Validation
 **Goal**: Automated validation that catches all structural, content, and quality issues before upload
@@ -160,7 +158,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 | 3. Core Infrastructure | 4/4 | Complete | 2026-02-19 |
 | 4. Untranslated Page Detection | 3/3 | Complete | 2026-02-20 |
 | 5. Content Extraction | 3/3 | Complete | 2026-02-20 |
-| 6. AI-Assisted Translation Engine | 0/5 | Not started | - |
+| 6. AI-Assisted Translation Engine | 0/4 | Planned | - |
 | 7. Translation Validation | 0/3 | Not started | - |
 | 8. Automated Upload | 0/3 | Not started | - |
 | 9. i18n Linking | 0/3 | Not started | - |
