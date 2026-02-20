@@ -28,6 +28,9 @@ nul
 # Extracted page data (regenerable via extract-batch)
 src/data/extracted/*.json
 
+# Translated page data (regenerable via translate)
+src/data/translated/*.json
+
 # Logs
 *.log
 npm-debug.log*
