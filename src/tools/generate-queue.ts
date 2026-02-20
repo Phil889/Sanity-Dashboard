@@ -289,11 +289,15 @@ async function generateQueue(
   }
 
   // Build queue entries with depth and local file info
+  // Local files use leaf slugs (e.g., "kritis-meldepflichten") while Sanity slugs
+  // can be full paths (e.g., "informationssicherheit/kritis-meldepflichten").
+  // Try matching by full slug first, then by leaf segment.
   const entries: QueueEntry[] = []
 
   for (const page of untranslatedPages) {
     const depth = depthMap.get(page._id) ?? 0
-    const localEntry = localFileMap.get(page.slug)
+    const leafSlug = page.slug.includes('/') ? page.slug.split('/').pop()! : page.slug
+    const localEntry = localFileMap.get(page.slug) ?? localFileMap.get(leafSlug)
     const hasLocalFile = !!localEntry
     const localFile = localEntry?.mainFile ?? null
     const localCompleteness = localEntry?.estimatedCompleteness ?? null

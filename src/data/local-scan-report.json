@@ -1,0 +1,1123 @@
+{
+  "timestamp": "2026-02-20T11:03:38.222Z",
+  "scanDirectory": "C:\\Users\\phili\\Documents\\Projects\\ADVISORI Sanity Migration - english\\ADVISORI Sanity Migration",
+  "summary": {
+    "totalMainFiles": 127,
+    "totalFaqBatchFiles": 377,
+    "totalSourceJsonFiles": 38,
+    "uniqueSlugs": 82
+  },
+  "pages": [
+    {
+      "slug": "crisis-management-bcm",
+      "mainFile": "import-crisis-management-bcm-en.ts",
+      "faqBatchFiles": [
+        "crisis-management-bcm-en-faqs-batch1.ts",
+        "crisis-management-bcm-en-faqs-batch2.ts",
+        "crisis-management-bcm-en-faqs-batch3.ts",
+        "crisis-management-bcm-en-faqs-batch4.ts",
+        "crisis-management-bcm-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "eba-employee-training-awareness",
+      "mainFile": "import-eba-employee-training-awareness-en.ts",
+      "faqBatchFiles": [
+        "eba-employee-training-awareness-en-faqs-batch1.ts",
+        "eba-employee-training-awareness-en-faqs-batch2.ts",
+        "eba-employee-training-awareness-en-faqs-batch3.ts",
+        "eba-employee-training-awareness-en-faqs-batch4.ts",
+        "eba-employee-training-awareness-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "employee-training",
+      "mainFile": "import-employee-training-en.ts",
+      "faqBatchFiles": [
+        "employee-training-en-faqs-batch1.ts",
+        "employee-training-en-faqs-batch2.ts",
+        "employee-training-en-faqs-batch3.ts",
+        "employee-training-en-faqs-batch4.ts",
+        "employee-training-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "kpi-framework",
+      "mainFile": "import-kpi-framework-en.ts",
+      "faqBatchFiles": [
+        "kpi-framework-en-faqs-batch1.ts",
+        "kpi-framework-en-faqs-batch2.ts",
+        "kpi-framework-en-faqs-batch3.ts",
+        "kpi-framework-en-faqs-batch4.ts",
+        "kpi-framework-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "kpi-management",
+      "mainFile": "import-kpi-management-en.ts",
+      "faqBatchFiles": [
+        "kpi-management-en-faqs-batch1.ts",
+        "kpi-management-en-faqs-batch2.ts",
+        "kpi-management-en-faqs-batch3.ts",
+        "kpi-management-en-faqs-batch4.ts",
+        "kpi-management-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "kreditrisiko-management",
+      "mainFile": "import-kreditrisiko-management-en.ts",
+      "faqBatchFiles": [
+        "kreditrisiko-management-en-faqs-batch1.ts",
+        "kreditrisiko-management-en-faqs-batch2.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "krisenmanagement",
+      "mainFile": "import-krisenmanagement-en.ts",
+      "faqBatchFiles": [
+        "krisenmanagement-en-faqs-batch1.ts",
+        "krisenmanagement-en-faqs-batch2.ts",
+        "krisenmanagement-en-faqs-batch3.ts",
+        "krisenmanagement-en-faqs-batch4.ts",
+        "krisenmanagement-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "kritis-gap-analyse-organisation-technik",
+      "mainFile": "import-kritis-gap-analyse-organisation-technik-en.ts",
+      "faqBatchFiles": [
+        "kritis-gap-analyse-organisation-technik-en-faqs-batch1.ts",
+        "kritis-gap-analyse-organisation-technik-en-faqs-batch2.ts",
+        "kritis-gap-analyse-organisation-technik-en-faqs-batch3.ts",
+        "kritis-gap-analyse-organisation-technik-en-faqs-batch4.ts",
+        "kritis-gap-analyse-organisation-technik-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "kritis-implementation",
+      "mainFile": "create-kritis-implementation-en.ts",
+      "faqBatchFiles": [],
+      "sourceJsonFile": null,
+      "hasFaqs": false,
+      "estimatedCompleteness": "main-only"
+    },
+    {
+      "slug": "kritis-kontinuierliche-ueberwachung",
+      "mainFile": "import-kritis-kontinuierliche-ueberwachung-en.ts",
+      "faqBatchFiles": [
+        "kritis-kontinuierliche-ueberwachung-en-faqs-batch1.ts",
+        "kritis-kontinuierliche-ueberwachung-en-faqs-batch2.ts",
+        "kritis-kontinuierliche-ueberwachung-en-faqs-batch3.ts",
+        "kritis-kontinuierliche-ueberwachung-en-faqs-batch4.ts",
+        "kritis-kontinuierliche-ueberwachung-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "kritis-meldepflichten",
+      "mainFile": "import-kritis-meldepflichten-en.ts",
+      "faqBatchFiles": [
+        "kritis-meldepflichten-en-faqs-batch1.ts",
+        "kritis-meldepflichten-en-faqs-batch2.ts",
+        "kritis-meldepflichten-en-faqs-batch3.ts",
+        "kritis-meldepflichten-en-faqs-batch4.ts",
+        "kritis-meldepflichten-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "kritis-notfallkonzepte",
+      "mainFile": "import-kritis-notfallkonzepte-en.ts",
+      "faqBatchFiles": [
+        "kritis-notfallkonzepte-en-faqs-batch1.ts",
+        "kritis-notfallkonzepte-en-faqs-batch2.ts",
+        "kritis-notfallkonzepte-en-faqs-batch3.ts",
+        "kritis-notfallkonzepte-en-faqs-batch4.ts",
+        "kritis-notfallkonzepte-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "kritis-notfallkonzepte-ressourcenplanung",
+      "mainFile": "import-kritis-notfallkonzepte-ressourcenplanung-en.ts",
+      "faqBatchFiles": [
+        "kritis-notfallkonzepte-ressourcenplanung-en-faqs-batch1.ts",
+        "kritis-notfallkonzepte-ressourcenplanung-en-faqs-batch2.ts",
+        "kritis-notfallkonzepte-ressourcenplanung-en-faqs-batch3.ts",
+        "kritis-notfallkonzepte-ressourcenplanung-en-faqs-batch4.ts",
+        "kritis-notfallkonzepte-ressourcenplanung-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "kritis-ongoing-compliance",
+      "mainFile": "import-kritis-ongoing-compliance-en.ts",
+      "faqBatchFiles": [
+        "kritis-ongoing-compliance-en-faqs-batch1.ts",
+        "kritis-ongoing-compliance-en-faqs-batch2.ts",
+        "kritis-ongoing-compliance-en-faqs-batch3.ts",
+        "kritis-ongoing-compliance-en-faqs-batch4.ts",
+        "kritis-ongoing-compliance-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "kritis-parent",
+      "mainFile": "import-kritis-parent-en.ts",
+      "faqBatchFiles": [],
+      "sourceJsonFile": null,
+      "hasFaqs": false,
+      "estimatedCompleteness": "main-only"
+    },
+    {
+      "slug": "kritis-prozessanpassungen",
+      "mainFile": "import-kritis-prozessanpassungen-en.ts",
+      "faqBatchFiles": [
+        "kritis-prozessanpassungen-en-faqs-batch1.ts",
+        "kritis-prozessanpassungen-en-faqs-batch2.ts",
+        "kritis-prozessanpassungen-en-faqs-batch3.ts",
+        "kritis-prozessanpassungen-en-faqs-batch4.ts",
+        "kritis-prozessanpassungen-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "kritis-readiness",
+      "mainFile": "create-kritis-readiness-en.ts",
+      "faqBatchFiles": [],
+      "sourceJsonFile": null,
+      "hasFaqs": false,
+      "estimatedCompleteness": "main-only"
+    },
+    {
+      "slug": "kritis-schulungen",
+      "mainFile": "import-kritis-schulungen-en.ts",
+      "faqBatchFiles": [
+        "kritis-schulungen-en-faqs-batch1.ts",
+        "kritis-schulungen-en-faqs-batch2.ts",
+        "kritis-schulungen-en-faqs-batch3.ts",
+        "kritis-schulungen-en-faqs-batch4.ts",
+        "kritis-schulungen-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "kritis-schutzkonzepte",
+      "mainFile": "import-kritis-schutzkonzepte-en.ts",
+      "faqBatchFiles": [
+        "kritis-schutzkonzepte-en-faqs-batch1.ts",
+        "kritis-schutzkonzepte-en-faqs-batch2.ts",
+        "kritis-schutzkonzepte-en-faqs-batch3.ts",
+        "kritis-schutzkonzepte-en-faqs-batch4.ts",
+        "kritis-schutzkonzepte-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "kritis-schwachstellenanalyse",
+      "mainFile": "import-kritis-schwachstellenanalyse-en.ts",
+      "faqBatchFiles": [
+        "kritis-schwachstellenanalyse-en-faqs-batch1.ts",
+        "kritis-schwachstellenanalyse-en-faqs-batch2.ts",
+        "kritis-schwachstellenanalyse-en-faqs-batch3.ts",
+        "kritis-schwachstellenanalyse-en-faqs-batch4.ts",
+        "kritis-schwachstellenanalyse-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "kritis-tests-audits",
+      "mainFile": "import-kritis-tests-audits-en.ts",
+      "faqBatchFiles": [
+        "kritis-tests-audits-en-faqs-batch1.ts",
+        "kritis-tests-audits-en-faqs-batch2.ts",
+        "kritis-tests-audits-en-faqs-batch3.ts",
+        "kritis-tests-audits-en-faqs-batch4.ts",
+        "kritis-tests-audits-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "kyc",
+      "mainFile": "import-kyc-en.ts",
+      "faqBatchFiles": [
+        "kyc-en-faqs-batch1.ts",
+        "kyc-en-faqs-batch2.ts",
+        "kyc-en-faqs-batch3.ts",
+        "kyc-en-faqs-batch4.ts",
+        "kyc-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "laufendes-monitoring",
+      "mainFile": "import-laufendes-monitoring-en.ts",
+      "faqBatchFiles": [
+        "laufendes-monitoring-en-faqs-batch1.ts",
+        "laufendes-monitoring-en-faqs-batch2.ts",
+        "laufendes-monitoring-en-faqs-batch3.ts",
+        "laufendes-monitoring-en-faqs-batch4.ts",
+        "laufendes-monitoring-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "lieferkettenbewertung",
+      "mainFile": "import-lieferkettenbewertung-en.ts",
+      "faqBatchFiles": [
+        "lieferkettenbewertung-en-faqs-batch1.ts",
+        "lieferkettenbewertung-en-faqs-batch2.ts",
+        "lieferkettenbewertung-en-faqs-batch3.ts",
+        "lieferkettenbewertung-en-faqs-batch4.ts",
+        "lieferkettenbewertung-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "lieferkettengesetz",
+      "mainFile": "import-lieferkettengesetz-en.ts",
+      "faqBatchFiles": [
+        "lieferkettengesetz-en-faqs-batch1.ts",
+        "lieferkettengesetz-en-faqs-batch2.ts",
+        "lieferkettengesetz-en-faqs-batch3.ts",
+        "lieferkettengesetz-en-faqs-batch4.ts",
+        "lieferkettengesetz-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": "lieferkettengesetz-source.json",
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "liquiditaetssteuerung",
+      "mainFile": "import-liquiditaetssteuerung-en.ts",
+      "faqBatchFiles": [
+        "liquiditaetssteuerung-en-faqs-batch1.ts",
+        "liquiditaetssteuerung-en-faqs-batch2.ts",
+        "liquiditaetssteuerung-en-faqs-batch3.ts",
+        "liquiditaetssteuerung-en-faqs-batch4.ts",
+        "liquiditaetssteuerung-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": "liquiditaetssteuerung-source.json",
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "log-management",
+      "mainFile": "import-log-management-en.ts",
+      "faqBatchFiles": [
+        "log-management-en-faqs-batch1.ts",
+        "log-management-en-faqs-batch2.ts",
+        "log-management-en-faqs-batch3.ts",
+        "log-management-en-faqs-batch4.ts",
+        "log-management-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": "log-management-source.json",
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "low-cost-intelligent-automation",
+      "mainFile": "import-low-cost-intelligent-automation-en.ts",
+      "faqBatchFiles": [
+        "low-cost-intelligent-automation-en-faqs-batch1.ts",
+        "low-cost-intelligent-automation-en-faqs-batch2.ts",
+        "low-cost-intelligent-automation-en-faqs-batch3.ts",
+        "low-cost-intelligent-automation-en-faqs-batch4.ts",
+        "low-cost-intelligent-automation-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": "low-cost-intelligent-automation-source.json",
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "managed-pki",
+      "mainFile": "import-managed-pki-en.ts",
+      "faqBatchFiles": [
+        "managed-pki-en-faqs-batch1.ts",
+        "managed-pki-en-faqs-batch2.ts",
+        "managed-pki-en-faqs-batch3.ts",
+        "managed-pki-en-faqs-batch4.ts",
+        "managed-pki-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": "managed-pki-source.json",
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "management-reporting-performance",
+      "mainFile": "import-management-reporting-performance-en.ts",
+      "faqBatchFiles": [
+        "management-reporting-performance-en-faqs-batch1.ts",
+        "management-reporting-performance-en-faqs-batch2.ts",
+        "management-reporting-performance-en-faqs-batch3.ts",
+        "management-reporting-performance-en-faqs-batch4.ts",
+        "management-reporting-performance-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": "management-reporting-performance-source.json",
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "management-review",
+      "mainFile": "import-management-review-en.ts",
+      "faqBatchFiles": [
+        "management-review-en-faqs-batch1.ts",
+        "management-review-en-faqs-batch2.ts",
+        "management-review-en-faqs-batch3.ts",
+        "management-review-en-faqs-batch4.ts",
+        "management-review-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": "management-review-source-correct.json",
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "marisk-gap-analyse",
+      "mainFile": "import-marisk-gap-analyse-en.ts",
+      "faqBatchFiles": [
+        "marisk-gap-analyse-en-faqs-batch1.ts",
+        "marisk-gap-analyse-en-faqs-batch2.ts",
+        "marisk-gap-analyse-en-faqs-batch3.ts",
+        "marisk-gap-analyse-en-faqs-batch4.ts",
+        "marisk-gap-analyse-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": "marisk-gap-analyse-source.json",
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "marisk-organisations-steuerungsprozesse",
+      "mainFile": "import-marisk-organisations-steuerungsprozesse-en.ts",
+      "faqBatchFiles": [
+        "marisk-organisations-steuerungsprozesse-en-faqs-batch1.ts",
+        "marisk-organisations-steuerungsprozesse-en-faqs-batch2.ts",
+        "marisk-organisations-steuerungsprozesse-en-faqs-batch3.ts",
+        "marisk-organisations-steuerungsprozesse-en-faqs-batch4.ts",
+        "marisk-organisations-steuerungsprozesse-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": "marisk-organisations-steuerungsprozesse-source.json",
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "marisk-outsourcing-requirements",
+      "mainFile": "import-marisk-outsourcing-requirements-en.ts",
+      "faqBatchFiles": [
+        "marisk-outsourcing-requirements-en-faqs-batch1.ts",
+        "marisk-outsourcing-requirements-en-faqs-batch2.ts",
+        "marisk-outsourcing-requirements-en-faqs-batch3.ts",
+        "marisk-outsourcing-requirements-en-faqs-batch4.ts",
+        "marisk-outsourcing-requirements-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": "marisk-outsourcing-requirements-source.json",
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "marisk-readiness",
+      "mainFile": "import-marisk-readiness-en.ts",
+      "faqBatchFiles": [
+        "marisk-readiness-en-faqs-batch1.ts",
+        "marisk-readiness-en-faqs-batch2.ts",
+        "marisk-readiness-en-faqs-batch3.ts",
+        "marisk-readiness-en-faqs-batch4.ts",
+        "marisk-readiness-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": "marisk-readiness-source.json",
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "marisk-risk-bearing-capacity",
+      "mainFile": "import-marisk-risk-bearing-capacity-en.ts",
+      "faqBatchFiles": [
+        "marisk-risk-bearing-capacity-en-faqs-batch1.ts",
+        "marisk-risk-bearing-capacity-en-faqs-batch2.ts",
+        "marisk-risk-bearing-capacity-en-faqs-batch3.ts",
+        "marisk-risk-bearing-capacity-en-faqs-batch4.ts",
+        "marisk-risk-bearing-capacity-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": "marisk-risk-bearing-capacity-source.json",
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "marisk-risk-control-function",
+      "mainFile": "import-marisk-risk-control-function-en.ts",
+      "faqBatchFiles": [
+        "marisk-risk-control-function-en-faqs-batch1.ts",
+        "marisk-risk-control-function-en-faqs-batch2.ts",
+        "marisk-risk-control-function-en-faqs-batch3.ts",
+        "marisk-risk-control-function-en-faqs-batch4.ts",
+        "marisk-risk-control-function-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": "marisk-risk-control-function-source.json",
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "marisk-risk-strategy",
+      "mainFile": "import-marisk-risk-strategy-en.ts",
+      "faqBatchFiles": [
+        "marisk-risk-strategy-en-faqs-batch1.ts",
+        "marisk-risk-strategy-en-faqs-batch2.ts",
+        "marisk-risk-strategy-en-faqs-batch3.ts",
+        "marisk-risk-strategy-en-faqs-batch4.ts",
+        "marisk-risk-strategy-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": "marisk-risk-strategy-source.json",
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "marisk-stress-testing",
+      "mainFile": "import-marisk-stress-testing-en.ts",
+      "faqBatchFiles": [
+        "marisk-stress-testing-en-faqs-batch1.ts",
+        "marisk-stress-testing-en-faqs-batch2.ts",
+        "marisk-stress-testing-en-faqs-batch3.ts",
+        "marisk-stress-testing-en-faqs-batch4.ts",
+        "marisk-stress-testing-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": "marisk-stress-testing-source.json",
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "marisk-ueberwachung-reporting",
+      "mainFile": null,
+      "faqBatchFiles": [],
+      "sourceJsonFile": "marisk-ueberwachung-reporting-source.json",
+      "hasFaqs": false,
+      "estimatedCompleteness": "source-only"
+    },
+    {
+      "slug": "marktrisiko-bewertung",
+      "mainFile": "import-marktrisiko-bewertung-en.ts",
+      "faqBatchFiles": [
+        "marktrisiko-bewertung-en-faqs-batch1.ts",
+        "marktrisiko-bewertung-en-faqs-batch2.ts",
+        "marktrisiko-bewertung-en-faqs-batch3.ts"
+      ],
+      "sourceJsonFile": "marktrisiko-bewertung-source.json",
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "massnahmenverfolgung",
+      "mainFile": "import-massnahmenverfolgung-en.ts",
+      "faqBatchFiles": [
+        "massnahmenverfolgung-en-faqs-batch1.ts",
+        "massnahmenverfolgung-en-faqs-batch2.ts",
+        "massnahmenverfolgung-en-faqs-batch3.ts",
+        "massnahmenverfolgung-en-faqs-batch4.ts",
+        "massnahmenverfolgung-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "mica-casp",
+      "mainFile": "import-mica-casp-en.ts",
+      "faqBatchFiles": [
+        "mica-casp-en-faqs-batch1.ts",
+        "mica-casp-en-faqs-batch2.ts",
+        "mica-casp-en-faqs-batch3.ts",
+        "mica-casp-en-faqs-batch4.ts",
+        "mica-casp-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "mica-crypto-asset-regulation",
+      "mainFile": "import-mica-crypto-asset-regulation-en.ts",
+      "faqBatchFiles": [
+        "mica-crypto-asset-regulation-en-faqs-batch1.ts",
+        "mica-crypto-asset-regulation-en-faqs-batch2.ts",
+        "mica-crypto-asset-regulation-en-faqs-batch3.ts",
+        "mica-crypto-asset-regulation-en-faqs-batch4.ts",
+        "mica-crypto-asset-regulation-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "mica-stablecoin-requirements",
+      "mainFile": "import-mica-stablecoin-requirements-en.ts",
+      "faqBatchFiles": [
+        "mica-stablecoin-requirements-en-faqs-batch1.ts",
+        "mica-stablecoin-requirements-en-faqs-batch2.ts",
+        "mica-stablecoin-requirements-en-faqs-batch3.ts",
+        "mica-stablecoin-requirements-en-faqs-batch4.ts",
+        "mica-stablecoin-requirements-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "microsoft-cloud-pki",
+      "mainFile": "import-microsoft-cloud-pki-en.ts",
+      "faqBatchFiles": [
+        "microsoft-cloud-pki-en-faqs-batch1.ts",
+        "microsoft-cloud-pki-en-faqs-batch2.ts",
+        "microsoft-cloud-pki-en-faqs-batch3.ts",
+        "microsoft-cloud-pki-en-faqs-batch4.ts",
+        "microsoft-cloud-pki-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "microsoft-pki-parent",
+      "mainFile": "import-microsoft-pki-parent-en.ts",
+      "faqBatchFiles": [
+        "microsoft-pki-parent-en-faqs-batch1.ts",
+        "microsoft-pki-parent-en-faqs-batch2.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "mifid-algorithmic-trading",
+      "mainFile": "import-mifid-algorithmic-trading-en.ts",
+      "faqBatchFiles": [
+        "mifid-algorithmic-trading-en-faqs-batch1.ts",
+        "mifid-algorithmic-trading-en-faqs-batch2.ts",
+        "mifid-algorithmic-trading-en-faqs-batch3.ts",
+        "mifid-algorithmic-trading-en-faqs-batch4.ts",
+        "mifid-algorithmic-trading-en-faqs-batch5.ts",
+        "mifid-algorithmic-trading-en-faqs-batch6.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "mifid-best-execution",
+      "mainFile": "import-mifid-best-execution-en.ts",
+      "faqBatchFiles": [
+        "mifid-best-execution-en-faqs-batch1.ts",
+        "mifid-best-execution-en-faqs-batch2.ts",
+        "mifid-best-execution-en-faqs-batch3.ts",
+        "mifid-best-execution-en-faqs-batch4.ts",
+        "mifid-best-execution-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "mifid-best-execution-transaktionsueberwachung",
+      "mainFile": "import-mifid-best-execution-transaktionsueberwachung-en.ts",
+      "faqBatchFiles": [
+        "mifid-best-execution-transaktionsueberwachung-en-faqs-batch1.ts",
+        "mifid-best-execution-transaktionsueberwachung-en-faqs-batch2.ts",
+        "mifid-best-execution-transaktionsueberwachung-en-faqs-batch3.ts",
+        "mifid-best-execution-transaktionsueberwachung-en-faqs-batch4.ts",
+        "mifid-best-execution-transaktionsueberwachung-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "mifid-conduct-business-rules",
+      "mainFile": "import-mifid-conduct-business-rules-en.ts",
+      "faqBatchFiles": [
+        "mifid-conduct-business-rules-en-faqs-batch1.ts",
+        "mifid-conduct-business-rules-en-faqs-batch2.ts",
+        "mifid-conduct-business-rules-en-faqs-batch3.ts",
+        "mifid-conduct-business-rules-en-faqs-batch4.ts",
+        "mifid-conduct-business-rules-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "mifid-data-reporting-services",
+      "mainFile": "import-mifid-data-reporting-services-en.ts",
+      "faqBatchFiles": [
+        "mifid-data-reporting-services-en-faqs-batch1.ts",
+        "mifid-data-reporting-services-en-faqs-batch2.ts",
+        "mifid-data-reporting-services-en-faqs-batch3.ts",
+        "mifid-data-reporting-services-en-faqs-batch4.ts",
+        "mifid-data-reporting-services-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "mifid-deutsche-implementation",
+      "mainFile": "import-mifid-deutsche-implementation-en.ts",
+      "faqBatchFiles": [
+        "mifid-deutsche-implementation-en-faqs-batch1.ts",
+        "mifid-deutsche-implementation-en-faqs-batch2.ts",
+        "mifid-deutsche-implementation-en-faqs-batch3.ts",
+        "mifid-deutsche-implementation-en-faqs-batch4.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "mifid-dokumentation-it",
+      "mainFile": "import-mifid-dokumentation-it-en.ts",
+      "faqBatchFiles": [
+        "mifid-dokumentation-it-en-faqs-batch1.ts",
+        "mifid-dokumentation-it-en-faqs-batch2.ts",
+        "mifid-dokumentation-it-en-faqs-batch3.ts",
+        "mifid-dokumentation-it-en-faqs-batch4.ts",
+        "mifid-dokumentation-it-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": "mifid-dokumentation-it-source.json",
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "mifid-esg-integration",
+      "mainFile": "import-mifid-esg-integration-en.ts",
+      "faqBatchFiles": [
+        "mifid-esg-integration-en-faqs-batch1.ts",
+        "mifid-esg-integration-en-faqs-batch2.ts",
+        "mifid-esg-integration-en-faqs-batch3.ts"
+      ],
+      "sourceJsonFile": "mifid-esg-integration-source.json",
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "mifid-esma-bafin",
+      "mainFile": "import-mifid-esma-bafin-en.ts",
+      "faqBatchFiles": [
+        "mifid-esma-bafin-en-faqs-batch1.ts",
+        "mifid-esma-bafin-en-faqs-batch2.ts",
+        "mifid-esma-bafin-en-faqs-batch3.ts",
+        "mifid-esma-bafin-en-faqs-batch4.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "mifid-esma-guidelines",
+      "mainFile": "import-mifid-esma-guidelines-en.ts",
+      "faqBatchFiles": [
+        "mifid-esma-guidelines-en-faqs-batch1.ts",
+        "mifid-esma-guidelines-en-faqs-batch2.ts",
+        "mifid-esma-guidelines-en-faqs-batch3.ts",
+        "mifid-esma-guidelines-en-faqs-batch4.ts",
+        "mifid-esma-guidelines-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": "mifid-esma-guidelines-source.json",
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "mifid-gap-analyse",
+      "mainFile": "import-mifid-gap-analyse-en.ts",
+      "faqBatchFiles": [
+        "mifid-gap-analyse-en-faqs-batch1.ts",
+        "mifid-gap-analyse-en-faqs-batch2.ts",
+        "mifid-gap-analyse-en-faqs-batch3.ts",
+        "mifid-gap-analyse-en-faqs-batch4.ts",
+        "mifid-gap-analyse-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "mifid-ii-compliance-framework",
+      "mainFile": "import-mifid-ii-compliance-framework-en.ts",
+      "faqBatchFiles": [
+        "mifid-ii-compliance-framework-en-faqs-batch1.ts",
+        "mifid-ii-compliance-framework-en-faqs-batch2.ts",
+        "mifid-ii-compliance-framework-en-faqs-batch3.ts",
+        "mifid-ii-compliance-framework-en-faqs-batch4.ts",
+        "mifid-ii-compliance-framework-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "mifid-ii-readiness",
+      "mainFile": "import-mifid-ii-readiness-en.ts",
+      "faqBatchFiles": [
+        "mifid-ii-readiness-en-faqs-batch1.ts",
+        "mifid-ii-readiness-en-faqs-batch2.ts",
+        "mifid-ii-readiness-en-faqs-batch3.ts",
+        "mifid-ii-readiness-en-faqs-batch4.ts",
+        "mifid-ii-readiness-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": "mifid-ii-readiness-source.json",
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "mifid-iii-updates",
+      "mainFile": "import-mifid-iii-updates-en.ts",
+      "faqBatchFiles": [
+        "mifid-iii-updates-en-faqs-batch1.ts",
+        "mifid-iii-updates-en-faqs-batch2.ts",
+        "mifid-iii-updates-en-faqs-batch3.ts",
+        "mifid-iii-updates-en-faqs-batch4.ts",
+        "mifid-iii-updates-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": "mifid-iii-updates-source.json",
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "mifid-implementation",
+      "mainFile": "import-mifid-implementation-en.ts",
+      "faqBatchFiles": [
+        "mifid-implementation-en-faqs-batch1.ts",
+        "mifid-implementation-en-faqs-batch2.ts",
+        "mifid-implementation-en-faqs-batch3.ts",
+        "mifid-implementation-en-faqs-batch4.ts",
+        "mifid-implementation-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "mifid-investor-protection",
+      "mainFile": "import-mifid-investor-protection-en.ts",
+      "faqBatchFiles": [
+        "mifid-investor-protection-en-faqs-batch1.ts",
+        "mifid-investor-protection-en-faqs-batch2.ts",
+        "mifid-investor-protection-en-faqs-batch3.ts",
+        "mifid-investor-protection-en-faqs-batch4.ts",
+        "mifid-investor-protection-en-faqs-batch5.ts",
+        "mifid-investor-protection-en-faqs-batch6.ts",
+        "mifid-investor-protection-en-faqs-batch7.ts",
+        "mifid-investor-protection-en-faqs-batch8.ts",
+        "mifid-investor-protection-en-faqs-batch9.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "mifid-market-data-costs",
+      "mainFile": "import-mifid-market-data-costs-en.ts",
+      "faqBatchFiles": [
+        "mifid-market-data-costs-en-faqs-batch1.ts",
+        "mifid-market-data-costs-en-faqs-batch2.ts",
+        "mifid-market-data-costs-en-faqs-batch3.ts",
+        "mifid-market-data-costs-en-faqs-batch4.ts"
+      ],
+      "sourceJsonFile": "mifid-market-data-costs-source.json",
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "mifid-market-structure",
+      "mainFile": "import-mifid-market-structure-en.ts",
+      "faqBatchFiles": [
+        "mifid-market-structure-en-faqs-batch1.ts",
+        "mifid-market-structure-en-faqs-batch2.ts",
+        "mifid-market-structure-en-faqs-batch3.ts",
+        "mifid-market-structure-en-faqs-batch4.ts",
+        "mifid-market-structure-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": "mifid-market-structure-source.json",
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "mifid-ongoing-compliance",
+      "mainFile": "import-mifid-ongoing-compliance-en.ts",
+      "faqBatchFiles": [
+        "mifid-ongoing-compliance-en-faqs-batch1.ts",
+        "mifid-ongoing-compliance-en-faqs-batch2.ts",
+        "mifid-ongoing-compliance-en-faqs-batch3.ts",
+        "mifid-ongoing-compliance-en-faqs-batch4.ts",
+        "mifid-ongoing-compliance-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": "mifid-ongoing-compliance-source.json",
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "mifid-organizational-requirements",
+      "mainFile": "import-mifid-organizational-requirements-en.ts",
+      "faqBatchFiles": [
+        "mifid-organizational-requirements-en-faqs-batch1.ts",
+        "mifid-organizational-requirements-en-faqs-batch2.ts",
+        "mifid-organizational-requirements-en-faqs-batch3.ts",
+        "mifid-organizational-requirements-en-faqs-batch4.ts",
+        "mifid-organizational-requirements-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": "mifid-organizational-requirements-source.json",
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "mifid-parent",
+      "mainFile": "import-mifid-parent-en.ts",
+      "faqBatchFiles": [
+        "mifid-parent-en-faqs-batch1.ts",
+        "mifid-parent-en-faqs-batch2.ts",
+        "mifid-parent-en-faqs-batch3.ts",
+        "mifid-parent-en-faqs-batch4.ts",
+        "mifid-parent-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "mifid-position-limits",
+      "mainFile": "import-mifid-position-limits-en.ts",
+      "faqBatchFiles": [
+        "mifid-position-limits-en-faqs-batch1.ts",
+        "mifid-position-limits-en-faqs-batch2.ts",
+        "mifid-position-limits-en-faqs-batch3.ts",
+        "mifid-position-limits-en-faqs-batch4.ts",
+        "mifid-position-limits-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": "mifid-position-limits-source.json",
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "mifid-product-governance",
+      "mainFile": "import-mifid-product-governance-en.ts",
+      "faqBatchFiles": [
+        "mifid-product-governance-en-faqs-batch1.ts",
+        "mifid-product-governance-en-faqs-batch2.ts",
+        "mifid-product-governance-en-faqs-batch3.ts",
+        "mifid-product-governance-en-faqs-batch4.ts",
+        "mifid-product-governance-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": "mifid-product-governance-source.json",
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "mifid-product-investor-protection",
+      "mainFile": "import-mifid-product-investor-protection-en.ts",
+      "faqBatchFiles": [
+        "mifid-product-investor-protection-en-faqs-batch1.ts",
+        "mifid-product-investor-protection-en-faqs-batch2.ts",
+        "mifid-product-investor-protection-en-faqs-batch3.ts",
+        "mifid-product-investor-protection-en-faqs-batch4.ts",
+        "mifid-product-investor-protection-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": "mifid-product-investor-protection-source.json",
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "mifid-regular-controls-audits",
+      "mainFile": "import-mifid-regular-controls-audits-en.ts",
+      "faqBatchFiles": [
+        "mifid-regular-controls-audits-en-faqs-batch1.ts",
+        "mifid-regular-controls-audits-en-faqs-batch2.ts",
+        "mifid-regular-controls-audits-en-faqs-batch3.ts",
+        "mifid-regular-controls-audits-en-faqs-batch4.ts",
+        "mifid-regular-controls-audits-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": "mifid-regular-controls-audits-source.json",
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "mifid-research-unbundling",
+      "mainFile": "import-mifid-research-unbundling-en.ts",
+      "faqBatchFiles": [
+        "mifid-research-unbundling-en-faqs-batch1.ts",
+        "mifid-research-unbundling-en-faqs-batch2.ts",
+        "mifid-research-unbundling-en-faqs-batch3.ts",
+        "mifid-research-unbundling-en-faqs-batch4.ts",
+        "mifid-research-unbundling-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": "mifid-research-unbundling-source.json",
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "mifid-rts",
+      "mainFile": "import-mifid-rts-en.ts",
+      "faqBatchFiles": [
+        "mifid-rts-en-faqs-batch1.ts",
+        "mifid-rts-en-faqs-batch2.ts",
+        "mifid-rts-en-faqs-batch3.ts",
+        "mifid-rts-en-faqs-batch4.ts",
+        "mifid-rts-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": "mifid-rts-source.json",
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "mifid-schulungen-monitoring",
+      "mainFile": "import-mifid-schulungen-monitoring-en.ts",
+      "faqBatchFiles": [
+        "mifid-schulungen-monitoring-en-faqs-batch1.ts",
+        "mifid-schulungen-monitoring-en-faqs-batch2.ts",
+        "mifid-schulungen-monitoring-en-faqs-batch3.ts",
+        "mifid-schulungen-monitoring-en-faqs-batch4.ts",
+        "mifid-schulungen-monitoring-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": "mifid-schulungen-monitoring-source.json",
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "mifid-systematic-internaliser",
+      "mainFile": "import-mifid-systematic-internaliser-en.ts",
+      "faqBatchFiles": [
+        "mifid-systematic-internaliser-en-faqs-batch1.ts",
+        "mifid-systematic-internaliser-en-faqs-batch2.ts",
+        "mifid-systematic-internaliser-en-faqs-batch3.ts",
+        "mifid-systematic-internaliser-en-faqs-batch4.ts",
+        "mifid-systematic-internaliser-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": "mifid-systematic-internaliser-source.json",
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "mifid-third-country-firms",
+      "mainFile": "import-mifid-third-country-firms-en.ts",
+      "faqBatchFiles": [
+        "mifid-third-country-firms-en-faqs-batch1.ts",
+        "mifid-third-country-firms-en-faqs-batch2.ts",
+        "mifid-third-country-firms-en-faqs-batch3.ts",
+        "mifid-third-country-firms-en-faqs-batch4.ts",
+        "mifid-third-country-firms-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": "mifid-third-country-firms-source.json",
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "mifid-transaction-reporting",
+      "mainFile": "import-mifid-transaction-reporting-en.ts",
+      "faqBatchFiles": [
+        "mifid-transaction-reporting-en-faqs-batch1.ts",
+        "mifid-transaction-reporting-en-faqs-batch2.ts",
+        "mifid-transaction-reporting-en-faqs-batch3.ts",
+        "mifid-transaction-reporting-en-faqs-batch4.ts",
+        "mifid-transaction-reporting-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": "mifid-transaction-reporting-source.json",
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "mifid-vertriebssteuerung",
+      "mainFile": "import-mifid-vertriebssteuerung-en.ts",
+      "faqBatchFiles": [
+        "mifid-vertriebssteuerung-en-faqs-batch1.ts",
+        "mifid-vertriebssteuerung-en-faqs-batch2.ts",
+        "mifid-vertriebssteuerung-en-faqs-batch3.ts",
+        "mifid-vertriebssteuerung-en-faqs-batch4.ts",
+        "mifid-vertriebssteuerung-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "model-governance",
+      "mainFile": "import-model-governance-en.ts",
+      "faqBatchFiles": [
+        "model-governance-en-faqs-batch1.ts",
+        "model-governance-en-faqs-batch2.ts",
+        "model-governance-en-faqs-batch3.ts",
+        "model-governance-en-faqs-batch4.ts",
+        "model-governance-en-faqs-batch5.ts"
+      ],
+      "sourceJsonFile": "model-governance-source.json",
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "modellentwicklung",
+      "mainFile": "import-modellentwicklung-en.ts",
+      "faqBatchFiles": [
+        "modellentwicklung-en-faqs-batch1.ts",
+        "modellentwicklung-en-faqs-batch2.ts",
+        "modellentwicklung-en-faqs-batch3.ts",
+        "modellentwicklung-en-faqs-batch4.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "full"
+    },
+    {
+      "slug": "nis2-compliance-roadmap",
+      "mainFile": null,
+      "faqBatchFiles": [
+        "nis2-compliance-roadmap-en-faqs-batch3.ts"
+      ],
+      "sourceJsonFile": null,
+      "hasFaqs": true,
+      "estimatedCompleteness": "faqs-only"
+    }
+  ]
+}

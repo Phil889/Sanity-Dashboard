@@ -16,6 +16,7 @@
 
 import { readdir, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
+import { pathToFileURL } from 'node:url'
 import { logger } from '../lib/logger.js'
 
 // ─── Types ──────────────────────────────────────────────────────────────────
@@ -314,7 +315,10 @@ async function main(): Promise<void> {
   }
 }
 
-main().catch((err) => {
-  logger.error(`Fatal error: ${err instanceof Error ? err.message : String(err)}`)
-  process.exit(1)
-})
+// Only run CLI entry point when executed directly (not when imported)
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+  main().catch((err) => {
+    logger.error(`Fatal error: ${err instanceof Error ? err.message : String(err)}`)
+    process.exit(1)
+  })
+}
