@@ -17,7 +17,7 @@ None
 - [ ] **Phase 1: Audit & Assessment** - Map existing workflow, test scripts, identify what works/breaks/is redundant
 - [ ] **Phase 2: Security Hardening** - Fix hardcoded API tokens in 6,000+ files, centralize credentials
 - [x] **Phase 3: Core Infrastructure** - Shared Sanity client, error handling, utilities for all later phases
-- [ ] **Phase 4: Untranslated Page Detection** - Automated query to find German servicePages without English counterparts
+- [x] **Phase 4: Untranslated Page Detection** - Automated query to find German servicePages without English counterparts
 - [ ] **Phase 5: Content Extraction** - Reliable batch extraction of German page content into structured format
 - [ ] **Phase 6: AI-Assisted Translation Engine** - Translation system following all 11 rules with quality output
 - [ ] **Phase 7: Translation Validation** - Automated checks against all 11 rules, schema, and quality standards
@@ -71,9 +71,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 04-01: Build GROQ query to find all German servicePages and their i18n status
-- [ ] 04-02: Cross-reference Sanity results with local tracker to reconcile state
-- [ ] 04-03: Generate prioritized queue of pages to translate
+- [x] 04-01: Sanity translation status detection tool (GROQ-based)
+- [x] 04-02: Local translation file scanner (filesystem-based)
+- [x] 04-03: Translation queue generator (merged + prioritized)
 
 ### Phase 5: Content Extraction
 **Goal**: Reliable batch extraction of German page content into clean, structured JSON ready for translation
@@ -158,7 +158,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 | 1. Audit & Assessment | 5/5 | Complete | 2026-02-19 |
 | 2. Security Hardening | 3/3 | Complete | 2026-02-19 |
 | 3. Core Infrastructure | 4/4 | Complete | 2026-02-19 |
-| 4. Untranslated Page Detection | 0/3 | Not started | - |
+| 4. Untranslated Page Detection | 3/3 | Complete | 2026-02-20 |
 | 5. Content Extraction | 0/3 | Not started | - |
 | 6. AI-Assisted Translation Engine | 0/5 | Not started | - |
 | 7. Translation Validation | 0/3 | Not started | - |

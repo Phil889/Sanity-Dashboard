@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-19)
 
 **Core value:** A reliable, automated pipeline that can translate, upload, and link service pages from German to English without breaking existing content.
-**Current focus:** Phase 4 -- Untranslated Page Detection (Phase 3 complete)
+**Current focus:** Phase 5 -- Content Extraction (Phase 4 complete)
 
 ## Current Position
 
-Phase: 3 of 10 **COMPLETE** (Core Infrastructure)
-Next phase: 4 (Untranslated Page Detection)
-Status: Phase 3 complete, ready to plan Phase 4
-Last activity: 2026-02-19 -- Phase 3 Core Infrastructure completed (4 plans: foundation, Sanity client, error/logging, FAQ batch runner)
+Phase: 4 of 10 **COMPLETE** (Untranslated Page Detection)
+Next phase: 5 (Content Extraction)
+Status: Phase 4 complete, ready to plan Phase 5
+Last activity: 2026-02-20 -- Phase 4 Untranslated Page Detection completed (3 plans: detection, local scan, queue generator)
 
-Progress: [======----] 30% (Phase 3 of 10 complete)
+Progress: [========--] 40% (Phase 4 of 10 complete)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 12
-- Average duration: ~30 minutes per plan
-- Total execution time: ~6.25 hours (Phase 1 + Phase 2 + Phase 3)
+- Total plans completed: 15
+- Average duration: ~25 minutes per plan
+- Total execution time: ~7.5 hours (Phase 1 + Phase 2 + Phase 3 + Phase 4)
 
 **By Phase:**
 
@@ -30,10 +30,11 @@ Progress: [======----] 30% (Phase 3 of 10 complete)
 | 1. Audit & Assessment | 5/5 | ~3.75 hrs | ~45 min |
 | 2. Security Hardening | 3/3 | ~1.5 hrs | ~30 min |
 | 3. Core Infrastructure | 4/4 | ~1.0 hr | ~15 min |
+| 4. Untranslated Page Detection | 3/3 | ~1.0 hr | ~20 min |
 
 **Recent Trend:**
-- Last 5 plans: 02-03, 03-01, 03-02, 03-03, 03-04 (all complete)
-- Trend: Accelerating -- Phase 3 used parallel execution (Wave 2 ran 03-02 + 03-03 concurrently)
+- Last 5 plans: 03-03, 03-04, 04-01, 04-02, 04-03 (all complete)
+- Trend: Accelerating -- Phase 4 used parallel execution (Wave 1 ran 04-01 + 04-02 concurrently)
 
 ## Accumulated Context
 
@@ -43,10 +44,10 @@ Progress: [======----] 30% (Phase 3 of 10 complete)
 |--------|-------|
 | German servicePages in Sanity | 996 |
 | English servicePages in Sanity | 422 |
-| German pages needing translation | 584 |
+| German pages needing translation | 586 (updated Phase 4) |
 | English pages properly linked | 409 |
-| English pages floating (unlinked) | 15 |
-| Broken refs in translation.metadata | 5 |
+| English pages floating (unlinked) | 12 (updated Phase 4) |
+| Broken refs in translation.metadata | 1 (updated Phase 4) |
 | Draft-only English pages | 4 |
 | Total .ts files in ADVISORI Sanity Migration/ | 637 |
 | Files with hardcoded API token | 0 (was ~569, fixed in Phase 2) |
@@ -83,6 +84,9 @@ Recent decisions affecting current work:
 11. Typed errors: SanityApiError (retryable 429/5xx), ValidationError, ConfigError (Phase 3)
 12. withRetry exponential backoff for all retryable operations (Phase 3)
 13. EN FAQ batch runner: 377 files across 78 slugs, dry-run default, --execute for mutations (Phase 3)
+14. Detection via translation.metadata cross-reference, not __i18n_base (Phase 4)
+15. Local file scan: 82 unique slugs with local files, all correspond to already-translated pages (Phase 4)
+16. Translation queue: 587 entries ordered by hierarchy depth → local file status → alphabetical slug (Phase 4)
 
 ### Deferred Issues
 
@@ -105,7 +109,7 @@ Recent decisions affecting current work:
 
 ## Session Continuity
 
-Last session: 2026-02-19
-Stopped at: Phase 2 complete. All credentials secured, project IDs fixed, codebase verified clean.
-Resume file: .planning/phases/02-security-hardening/02-03-SUMMARY.md
-Next action: Plan Phase 3 (Core Infrastructure) -- shared Sanity client, config module, EN FAQ batch runner
+Last session: 2026-02-20
+Stopped at: Phase 4 complete. Detection, scanning, and queue generation tools built and verified.
+Resume file: .planning/phases/04-untranslated-page-detection/04-03-SUMMARY.md
+Next action: Plan Phase 5 (Content Extraction) -- rebuild extraction scripts using shared infrastructure
