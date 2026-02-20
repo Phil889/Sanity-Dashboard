@@ -104,8 +104,8 @@ function extractSourceJsonSlug(filename: string): string | null {
 
 const SCAN_DIR = resolve('ADVISORI Sanity Migration')
 
-async function scanLocalTranslations(): Promise<LocalScanReport> {
-  logger.search(`Scanning ${SCAN_DIR} for translation files...`)
+async function scanLocalTranslations(quiet = false): Promise<LocalScanReport> {
+  if (!quiet) logger.search(`Scanning ${SCAN_DIR} for translation files...`)
 
   const entries = await readdir(SCAN_DIR)
 
@@ -128,7 +128,7 @@ async function scanLocalTranslations(): Promise<LocalScanReport> {
         mainFiles.set(mainSlug, filename)
       }
       totalMainFiles++
-      logger.file(`Main: ${filename} -> slug: ${mainSlug}`)
+      if (!quiet) logger.file(`Main: ${filename} -> slug: ${mainSlug}`)
       continue
     }
 
@@ -294,7 +294,9 @@ function displayHumanReadable(report: LocalScanReport): void {
 async function main(): Promise<void> {
   const { json, output } = parseArgs()
 
-  const report = await scanLocalTranslations()
+  // In JSON-to-stdout mode, suppress verbose logging to keep stdout clean
+  const quiet = json && !output
+  const report = await scanLocalTranslations(quiet)
 
   if (json) {
     const jsonStr = JSON.stringify(report, null, 2)
