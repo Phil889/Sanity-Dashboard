@@ -365,12 +365,12 @@ export async function translatePage(
       logger.info('='.repeat(60))
     }
 
-    // Return a stub result for dry-run
+    // Return a stub result for dry-run (avoid accessing config.anthropic if no model override)
     return {
       translatedPage: {} as TranslatedPage,
       germanId: germanSource._id,
       slug: translateSlug(germanSource.slug.current),
-      model: model ?? config.anthropic.model,
+      model: model ?? 'dry-run',
       inputTokens: 0,
       outputTokens: 0,
       durationMs: 0,
