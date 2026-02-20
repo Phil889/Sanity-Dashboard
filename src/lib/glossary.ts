@@ -193,6 +193,35 @@ export const DOMAIN_TERMS: Record<string, string> = {
   'Prüfungswesen': 'audit',
 }
 
+// ─── German Stop Words ──────────────────────────────────────────────────────
+
+/**
+ * Common German function words that reliably indicate untranslated text.
+ *
+ * These are short, high-frequency words (articles, conjunctions, prepositions)
+ * that appear in virtually all German text. Their presence in an English
+ * translation strongly suggests untranslated passages.
+ *
+ * IMPORTANT: Detection must use word boundary matching (\b regex) to avoid
+ * false positives — e.g. "under" should NOT match "und", "diesel" should
+ * NOT match "die".
+ *
+ * Words that are also valid English (e.g. "in", "an", "on") are excluded
+ * at the detection stage via a separate ENGLISH_OVERLAP list.
+ */
+export const GERMAN_STOP_WORDS: readonly string[] = [
+  'der', 'die', 'das',
+  'ein', 'eine',
+  'und', 'oder', 'aber',
+  'für', 'mit', 'von', 'zu',
+  'auf', 'in', 'an', 'aus',
+  'bei', 'nach', 'vor',
+  'über', 'unter', 'zwischen',
+  'durch', 'ohne', 'gegen',
+  'bis', 'seit', 'während',
+  'weil', 'dass',
+] as const
+
 // ─── Key Generation ─────────────────────────────────────────────────────────
 
 /**

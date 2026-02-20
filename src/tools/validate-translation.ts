@@ -25,7 +25,7 @@ import { readFile, readdir } from 'node:fs/promises'
 import { resolve, basename, extname, join } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { logger } from '../lib/logger.js'
-import { FORBIDDEN_TERMS } from '../lib/glossary.js'
+import { FORBIDDEN_TERMS, DOMAIN_TERMS, GERMAN_STOP_WORDS } from '../lib/glossary.js'
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -52,6 +52,8 @@ export interface QualityChecks {
   testimonialCompanyMatch: boolean
   seoTitleSuffix: boolean
   emojiPreserved: boolean
+  germanWordsFound: string[]
+  domainTermsUntranslated: string[]
 }
 
 /** Full validation result for a translated page. */
@@ -119,6 +121,78 @@ const SECTION_KEYS = [
   'testimonial',
 ] as const
 
+// ─── German Remnant Detection ────────────────────────────────────────────────
+
+/**
+ * Words that appear in GERMAN_STOP_WORDS but are also valid English words.
+ * These are excluded from German remnant detection to avoid false positives.
+ */
+const ENGLISH_OVERLAP = new Set(['in', 'an', 'on', 'die', 'von', 'aus'])
+
+/**
+ * Proper nouns and acronyms that appear identically in German and English.
+ * These should not be flagged as untranslated German text.
+ */
+const PROPER_NOUNS = new Set([
+  'BaFin', 'BSI', 'MaRisk', 'BAIT', 'DORA', 'KWG', 'GwG', 'LkSG',
+  'KRITIS', 'ISO', 'ISMS', 'BCM', 'MiFID', 'ESMA', 'EBA',
+])
+
+/** Result of German remnant detection scan. */
+interface GermanRemnantResult {
+  germanWordsFound: string[]
+  domainTermsUntranslated: string[]
+}
+
+/**
+ * Detects untranslated German text remnants in translated content.
+ *
+ * Scans all text content for:
+ * 1. German stop words (function words like "der", "und", "für") using word
+ *    boundary regex to avoid false positives (e.g. "under" != "und")
+ * 2. Untranslated DOMAIN_TERMS keys — German domain terms that should appear
+ *    in their English form in the translation
+ *
+ * @param allText - All text content from the translated page (concatenated)
+ * @returns Lists of German stop words and untranslated domain terms found
+ */
+function detectGermanRemnants(allText: string): GermanRemnantResult {
+  const germanWordsFound: string[] = []
+  const domainTermsUntranslated: string[] = []
+
+  // Check German stop words with word boundary matching
+  for (const word of GERMAN_STOP_WORDS) {
+    // Skip words that overlap with English
+    if (ENGLISH_OVERLAP.has(word)) continue
+
+    // Use word boundary regex for case-insensitive match
+    // \b ensures "und" matches as a standalone word but not inside "under"
+    const regex = new RegExp(`\\b${word}\\b`, 'i')
+    if (regex.test(allText)) {
+      germanWordsFound.push(word)
+    }
+  }
+
+  // Check DOMAIN_TERMS keys (German terms that should be translated)
+  for (const germanTerm of Object.keys(DOMAIN_TERMS)) {
+    // Skip proper nouns / acronyms that are identical in both languages
+    if (PROPER_NOUNS.has(germanTerm)) continue
+
+    // Skip short terms (<=3 chars) that could be acronyms or abbreviations
+    if (germanTerm.length <= 3) continue
+
+    // Case-insensitive word boundary check for the German domain term
+    // Escape special regex chars in the term
+    const escaped = germanTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    const regex = new RegExp(`\\b${escaped}\\b`, 'i')
+    if (regex.test(allText)) {
+      domainTermsUntranslated.push(germanTerm)
+    }
+  }
+
+  return { germanWordsFound, domainTermsUntranslated }
+}
+
 // ─── Core Validation ────────────────────────────────────────────────────────
 
 /**
@@ -164,6 +238,8 @@ export async function validateTranslation(
         testimonialCompanyMatch: false,
         seoTitleSuffix: false,
         emojiPreserved: false,
+        germanWordsFound: [],
+        domainTermsUntranslated: [],
       },
       score: 0,
       warnings: ['Failed to parse translated JSON'],
@@ -591,6 +667,8 @@ export async function validateTranslation(
     testimonialCompanyMatch: true,
     seoTitleSuffix: false,
     emojiPreserved: true,
+    germanWordsFound: [],
+    domainTermsUntranslated: [],
   }
 
   // Scan for FORBIDDEN_TERMS
@@ -650,6 +728,18 @@ export async function validateTranslation(
   }
   if (!qualityChecks.emojiPreserved) {
     warnings.push('Emoji count in translation is less than German source')
+  }
+
+  // ── German remnant detection ──
+  const remnants = detectGermanRemnants(allText)
+  qualityChecks.germanWordsFound = remnants.germanWordsFound
+  qualityChecks.domainTermsUntranslated = remnants.domainTermsUntranslated
+
+  if (remnants.germanWordsFound.length > 0) {
+    warnings.push(`German stop words found: ${remnants.germanWordsFound.join(', ')}`)
+  }
+  if (remnants.domainTermsUntranslated.length > 0) {
+    warnings.push(`Untranslated domain terms found: ${remnants.domainTermsUntranslated.join(', ')}`)
   }
 
   // ── Score ──
@@ -794,6 +884,16 @@ function displaySingleResult(file: string, result: TranslationValidationResult):
   logger.stats(`  Testimonial company: ${result.qualityChecks.testimonialCompanyMatch ? 'match' : 'MISMATCH'}`)
   logger.stats(`  SEO title suffix:    ${result.qualityChecks.seoTitleSuffix ? 'ok' : 'MISSING'}`)
   logger.stats(`  Emoji preserved:     ${result.qualityChecks.emojiPreserved ? 'yes' : 'NO'}`)
+  if (result.qualityChecks.germanWordsFound.length > 0) {
+    logger.warn(`  German remnants:     ${result.qualityChecks.germanWordsFound.join(', ')}`)
+  } else {
+    logger.stats('  German remnants:     none')
+  }
+  if (result.qualityChecks.domainTermsUntranslated.length > 0) {
+    logger.warn(`  Untranslated terms:  ${result.qualityChecks.domainTermsUntranslated.join(', ')}`)
+  } else {
+    logger.stats('  Untranslated terms:  none')
+  }
   logger.info('')
 
   // Warnings
@@ -852,6 +952,24 @@ function displayDirectoryReport(report: DirectoryTranslationReport, strict: bool
     logger.info('-'.repeat(50))
     for (const f of filesWithForbidden) {
       logger.warn(`  ${f.file}: ${f.result.qualityChecks.forbiddenTermsFound.join(', ')}`)
+    }
+    logger.info('')
+  }
+
+  // German remnant warnings across all files
+  const filesWithGermanRemnants = report.fileResults.filter(
+    (r) => r.result.qualityChecks.germanWordsFound.length > 0 || r.result.qualityChecks.domainTermsUntranslated.length > 0,
+  )
+  if (filesWithGermanRemnants.length > 0) {
+    logger.info('Files with German Remnants')
+    logger.info('-'.repeat(50))
+    for (const f of filesWithGermanRemnants) {
+      const words = f.result.qualityChecks.germanWordsFound
+      const terms = f.result.qualityChecks.domainTermsUntranslated
+      const parts: string[] = []
+      if (words.length > 0) parts.push(`stop words: ${words.join(', ')}`)
+      if (terms.length > 0) parts.push(`domain terms: ${terms.join(', ')}`)
+      logger.warn(`  ${f.file}: ${parts.join('; ')}`)
     }
     logger.info('')
   }
