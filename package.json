@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "typecheck": "tsc --noEmit",
-    "faq-batch": "tsx src/tools/faq-batch-runner.ts"
+    "faq-batch": "tsx src/tools/faq-batch-runner.ts",
+    "detect": "tsx src/tools/detect-untranslated.ts"
   },
   "dependencies": {
     "@sanity/client": "^7.2.1",
