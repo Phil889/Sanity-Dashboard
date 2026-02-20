@@ -11,7 +11,8 @@
     "scan-local": "tsx src/tools/scan-local-translations.ts",
     "generate-queue": "tsx src/tools/generate-queue.ts",
     "extract": "tsx src/tools/extract-page.ts",
-    "extract-batch": "tsx src/tools/extract-batch.ts"
+    "extract-batch": "tsx src/tools/extract-batch.ts",
+    "validate-extractions": "tsx src/tools/validate-extractions.ts"
   },
   "dependencies": {
     "@sanity/client": "^7.2.1",
