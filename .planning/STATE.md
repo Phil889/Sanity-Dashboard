@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-19)
 
 **Core value:** A reliable, automated pipeline that can translate, upload, and link service pages from German to English without breaking existing content.
-**Current focus:** Phase 5 -- Content Extraction (Phase 4 complete)
+**Current focus:** Phase 6 -- AI-Assisted Translation Engine (Phase 5 complete)
 
 ## Current Position
 
-Phase: 4 of 10 **COMPLETE** (Untranslated Page Detection)
-Next phase: 5 (Content Extraction)
-Status: Phase 4 complete, ready to plan Phase 5
-Last activity: 2026-02-20 -- Phase 4 Untranslated Page Detection completed (3 plans: detection, local scan, queue generator)
+Phase: 5 of 10 **COMPLETE** (Content Extraction)
+Next phase: 6 (AI-Assisted Translation Engine)
+Status: Phase 5 complete, ready to plan Phase 6
+Last activity: 2026-02-20 -- Phase 5 Content Extraction completed (3 plans: single-page extractor, batch pipeline, validation/normalization)
 
-Progress: [========--] 40% (Phase 4 of 10 complete)
+Progress: [==========] 50% (Phase 5 of 10 complete)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 15
-- Average duration: ~25 minutes per plan
-- Total execution time: ~7.5 hours (Phase 1 + Phase 2 + Phase 3 + Phase 4)
+- Total plans completed: 18
+- Average duration: ~22 minutes per plan
+- Total execution time: ~8.0 hours (Phase 1-5)
 
 **By Phase:**
 
@@ -31,10 +31,11 @@ Progress: [========--] 40% (Phase 4 of 10 complete)
 | 2. Security Hardening | 3/3 | ~1.5 hrs | ~30 min |
 | 3. Core Infrastructure | 4/4 | ~1.0 hr | ~15 min |
 | 4. Untranslated Page Detection | 3/3 | ~1.0 hr | ~20 min |
+| 5. Content Extraction | 3/3 | ~0.5 hr | ~10 min |
 
 **Recent Trend:**
-- Last 5 plans: 03-03, 03-04, 04-01, 04-02, 04-03 (all complete)
-- Trend: Accelerating -- Phase 4 used parallel execution (Wave 1 ran 04-01 + 04-02 concurrently)
+- Last 5 plans: 04-02, 04-03, 05-01, 05-02, 05-03 (all complete)
+- Trend: Accelerating -- Phase 5 used parallel execution (Wave 2 ran 05-02 + 05-03 concurrently)
 
 ## Accumulated Context
 
@@ -87,6 +88,11 @@ Recent decisions affecting current work:
 14. Detection via translation.metadata cross-reference, not __i18n_base (Phase 4)
 15. Local file scan: 82 unique slugs with local files, all correspond to already-translated pages (Phase 4)
 16. Translation queue: 587 entries ordered by hierarchy depth → local file status → alphabetical slug (Phase 4)
+17. Fetch full document via GROQ then strip system fields in TypeScript (simpler than GROQ projection) (Phase 5)
+18. Strip 7 system fields: _createdAt, _updatedAt, _rev, __i18n_lang, __i18n_refs, __i18n_base, _system (Phase 5)
+19. Batch extraction: sequential with 200ms delay, skip-existing for resume, abort after 5 consecutive failures (Phase 5)
+20. Slug-to-filename: replace / with -- for flat filesystem-safe naming (Phase 5)
+21. Canonical ExtractedPageSchema defines the Phase 5→6 contract with required vs optional field distinction (Phase 5)
 
 ### Deferred Issues
 
@@ -101,7 +107,7 @@ Recent decisions affecting current work:
 ### Blockers/Concerns
 
 - ~~**CRITICAL:** Sanity API token hardcoded in ~569 files~~ **RESOLVED in Phase 2**
-- **HIGH:** No extraction scripts exist -- Phase 5 must build from scratch
+- ~~**HIGH:** No extraction scripts exist -- Phase 5 must build from scratch~~ **RESOLVED in Phase 5**
 - **HIGH:** EN FAQ batch files are dead code (377 files) -- pages may have 0 FAQs in production
 - **MEDIUM:** Two coexisting i18n systems add complexity to detection and linking
 - **MEDIUM:** `__i18n_base` has inconsistent types (string, reference, `[object Object]`)
@@ -110,6 +116,6 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-02-20
-Stopped at: Phase 4 complete. Detection, scanning, and queue generation tools built and verified.
-Resume file: .planning/phases/04-untranslated-page-detection/04-03-SUMMARY.md
-Next action: Plan Phase 5 (Content Extraction) -- rebuild extraction scripts using shared infrastructure
+Stopped at: Phase 5 complete. Extraction, batch, and validation tools built and verified.
+Resume file: .planning/phases/05-content-extraction/05-03-SUMMARY.md
+Next action: Plan Phase 6 (AI-Assisted Translation Engine) -- design translation prompt/pipeline and build engine

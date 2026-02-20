@@ -18,7 +18,7 @@ None
 - [ ] **Phase 2: Security Hardening** - Fix hardcoded API tokens in 6,000+ files, centralize credentials
 - [x] **Phase 3: Core Infrastructure** - Shared Sanity client, error handling, utilities for all later phases
 - [x] **Phase 4: Untranslated Page Detection** - Automated query to find German servicePages without English counterparts
-- [ ] **Phase 5: Content Extraction** - Reliable batch extraction of German page content into structured format
+- [x] **Phase 5: Content Extraction** - Reliable batch extraction of German page content into structured format
 - [ ] **Phase 6: AI-Assisted Translation Engine** - Translation system following all 11 rules with quality output
 - [ ] **Phase 7: Translation Validation** - Automated checks against all 11 rules, schema, and quality standards
 - [ ] **Phase 8: Automated Upload** - Programmatic upload of translated content to Sanity with error handling
@@ -82,9 +82,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 05-01: Rebuild extraction script using shared infrastructure
-- [ ] 05-02: Add batch extraction capability (process multiple pages)
-- [ ] 05-03: Normalize extracted content into consistent structure for translation engine
+- [x] 05-01: Single-page extraction tool (GROQ fetch + system field stripping)
+- [x] 05-02: Batch extraction pipeline (queue consumption + rate limiting + resume)
+- [x] 05-03: Extraction validation and normalization (canonical types + CLI validator)
 
 ### Phase 6: AI-Assisted Translation Engine
 **Goal**: Automated translation of German service pages to English, following all 11 rules, with professional quality
@@ -159,7 +159,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 | 2. Security Hardening | 3/3 | Complete | 2026-02-19 |
 | 3. Core Infrastructure | 4/4 | Complete | 2026-02-19 |
 | 4. Untranslated Page Detection | 3/3 | Complete | 2026-02-20 |
-| 5. Content Extraction | 0/3 | Not started | - |
+| 5. Content Extraction | 3/3 | Complete | 2026-02-20 |
 | 6. AI-Assisted Translation Engine | 0/5 | Not started | - |
 | 7. Translation Validation | 0/3 | Not started | - |
 | 8. Automated Upload | 0/3 | Not started | - |
