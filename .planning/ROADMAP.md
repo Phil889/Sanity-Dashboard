@@ -20,7 +20,7 @@ None
 - [x] **Phase 4: Untranslated Page Detection** - Automated query to find German servicePages without English counterparts
 - [x] **Phase 5: Content Extraction** - Reliable batch extraction of German page content into structured format
 - [x] **Phase 6: AI-Assisted Translation Engine** - Translation system following all 11 rules with quality output
-- [ ] **Phase 7: Translation Validation** - Automated checks against all 11 rules, schema, and quality standards
+- [x] **Phase 7: Translation Validation** - Automated checks against all 11 rules, schema, and quality standards
 - [ ] **Phase 8: Automated Upload** - Programmatic upload of translated content to Sanity with error handling
 - [ ] **Phase 9: i18n Linking** - Automatically link English/German page versions via __i18n_lang and __i18n_base
 - [ ] **Phase 10: End-to-End Pipeline** - Wire everything together: detect → extract → translate → validate → upload → link → verify at scale
@@ -105,8 +105,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 07-01: German remnant detection and extended validation (German word detection, i18n consistency checks)
-- [ ] 07-02: Auto-fix pipeline and batch validation report (deterministic fixes, markdown report)
+- [x] 07-01: German remnant detection and extended validation (German word detection, i18n consistency checks)
+- [x] 07-02: Auto-fix pipeline and batch validation report (deterministic fixes, markdown report)
 
 ### Phase 8: Automated Upload
 **Goal**: Programmatic upload of validated translations to Sanity with error handling and rollback capability
@@ -158,7 +158,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 | 4. Untranslated Page Detection | 3/3 | Complete | 2026-02-20 |
 | 5. Content Extraction | 3/3 | Complete | 2026-02-20 |
 | 6. AI-Assisted Translation Engine | 4/4 | Complete | 2026-02-20 |
-| 7. Translation Validation | 0/2 | Planned | - |
+| 7. Translation Validation | 2/2 | Complete | 2026-02-20 |
 | 8. Automated Upload | 0/3 | Not started | - |
 | 9. i18n Linking | 0/3 | Not started | - |
 | 10. End-to-End Pipeline | 0/5 | Not started | - |

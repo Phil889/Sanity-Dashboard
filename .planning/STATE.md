@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-19)
 
 **Core value:** A reliable, automated pipeline that can translate, upload, and link service pages from German to English without breaking existing content.
-**Current focus:** Phase 7 -- Translation Validation (Phase 6 complete)
+**Current focus:** Phase 8 -- Automated Upload (Phase 7 complete)
 
 ## Current Position
 
-Phase: 6 of 10 **COMPLETE** (AI-Assisted Translation Engine)
-Next phase: 7 (Translation Validation)
-Status: Phase 6 complete, ready to plan Phase 7
-Last activity: 2026-02-20 -- Phase 6 AI-Assisted Translation Engine completed (4 plans: infrastructure/glossary, single-page engine, batch pipeline, quality validation)
+Phase: 7 of 10 **COMPLETE** (Translation Validation)
+Next phase: 8 (Automated Upload)
+Status: Phase 7 complete, ready to plan Phase 8
+Last activity: 2026-02-20 -- Phase 7 Translation Validation completed (2 plans: German remnant detection + extended validation, auto-fix pipeline + batch report)
 
-Progress: [============] 60% (Phase 6 of 10 complete)
+Progress: [================] 70% (Phase 7 of 10 complete)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 22
-- Average duration: ~20 minutes per plan
-- Total execution time: ~9.0 hours (Phase 1-6)
+- Total plans completed: 24
+- Average duration: ~19 minutes per plan
+- Total execution time: ~9.5 hours (Phase 1-7)
 
 **By Phase:**
 
@@ -33,10 +33,11 @@ Progress: [============] 60% (Phase 6 of 10 complete)
 | 4. Untranslated Page Detection | 3/3 | ~1.0 hr | ~20 min |
 | 5. Content Extraction | 3/3 | ~0.5 hr | ~10 min |
 | 6. AI Translation Engine | 4/4 | ~1.0 hr | ~15 min |
+| 7. Translation Validation | 2/2 | ~0.5 hr | ~13 min |
 
 **Recent Trend:**
-- Last 5 plans: 05-02, 05-03, 06-01, 06-02, 06-03 (all complete)
-- Trend: Accelerating -- Phase 6 used 3-wave parallel execution (Wave 1: 06-01, Wave 2: 06-02, Wave 3: 06-03 + 06-04 concurrent)
+- Last 5 plans: 06-02, 06-03, 06-04, 07-01, 07-02 (all complete)
+- Trend: Accelerating -- Phase 7 used 2-wave sequential execution (Wave 1: 07-01, Wave 2: 07-02)
 
 ## Accumulated Context
 
@@ -100,6 +101,10 @@ Recent decisions affecting current work:
 25. Glossary: 22 slug translations, 26 forbidden terms, 48 domain terms, standardized generateKey() (Phase 6)
 26. Cost estimate: ~$0.054/page ($3/MTok input + $15/MTok output Sonnet 4.5), ~$32 for full 587-page batch (Phase 6)
 27. Translation validation: 11-rule checker with structural cross-validation and quality checks (Phase 6)
+28. German remnant detection uses word boundary regex with English-overlap exclusion (in, an, on, die, von, aus) and proper noun exclusion (BaFin, BSI, MaRisk) (Phase 7)
+29. New quality checks (German remnants, i18n consistency) are warnings, NOT rule failures -- 11-rule score preserved (Phase 7)
+30. Auto-fix pipeline: 7 deterministic fixes (language, _id, i18n_lang, i18n_base, SEO title, array _type, _key) applied in order (Phase 7)
+31. Upload-ready = valid (11/11 score) for batch report purposes (Phase 7)
 
 ### Deferred Issues
 
@@ -123,6 +128,6 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-02-20
-Stopped at: Phase 6 complete. Translation infrastructure, single-page engine, batch pipeline, and quality validation all built and verified.
-Resume file: .planning/phases/06-ai-translation-engine/06-04-SUMMARY.md
-Next action: Plan Phase 7 (Translation Validation) -- comprehensive validation with quality scoring extending 06-04 foundation
+Stopped at: Phase 7 complete. German remnant detection, i18n consistency checks, auto-fix pipeline, and batch validation report all built and verified.
+Resume file: .planning/phases/07-translation-validation/07-02-SUMMARY.md
+Next action: Plan Phase 8 (Automated Upload) -- programmatic upload of validated translations to Sanity with error handling
