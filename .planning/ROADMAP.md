@@ -99,15 +99,14 @@ Plans:
 - [x] 06-04: Translation quality validation (11-rule checker, cross-validation with German source)
 
 ### Phase 7: Translation Validation
-**Goal**: Automated validation that catches all structural, content, and quality issues before upload
+**Goal**: Extended validation (German remnant detection, i18n consistency), auto-fix pipeline, and batch validation report for upload readiness
 **Depends on**: Phase 6
-**Research**: Unlikely (11 rules already defined, implement checks)
-**Plans**: 3 plans
+**Research**: Unlikely (extending existing validate-translation.ts from 06-04)
+**Plans**: 2 plans
 
 Plans:
-- [ ] 07-01: Implement structural validators (language field, slug format, _type, _key)
-- [ ] 07-02: Implement content validators (FAQ count match, section completeness, no duplicates)
-- [ ] 07-03: Build validation report with pass/fail per page and actionable error messages
+- [ ] 07-01: German remnant detection and extended validation (German word detection, i18n consistency checks)
+- [ ] 07-02: Auto-fix pipeline and batch validation report (deterministic fixes, markdown report)
 
 ### Phase 8: Automated Upload
 **Goal**: Programmatic upload of validated translations to Sanity with error handling and rollback capability
@@ -159,7 +158,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 | 4. Untranslated Page Detection | 3/3 | Complete | 2026-02-20 |
 | 5. Content Extraction | 3/3 | Complete | 2026-02-20 |
 | 6. AI-Assisted Translation Engine | 4/4 | Complete | 2026-02-20 |
-| 7. Translation Validation | 0/3 | Not started | - |
+| 7. Translation Validation | 0/2 | Planned | - |
 | 8. Automated Upload | 0/3 | Not started | - |
 | 9. i18n Linking | 0/3 | Not started | - |
 | 10. End-to-End Pipeline | 0/5 | Not started | - |
