@@ -15,6 +15,7 @@
     "validate-extractions": "tsx src/tools/validate-extractions.ts"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.78.0",
     "@sanity/client": "^7.2.1",
     "dotenv": "^16.5.0"
   },
