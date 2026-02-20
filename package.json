@@ -13,7 +13,8 @@
     "extract": "tsx src/tools/extract-page.ts",
     "extract-batch": "tsx src/tools/extract-batch.ts",
     "validate-extractions": "tsx src/tools/validate-extractions.ts",
-    "translate": "tsx src/tools/translate-page.ts"
+    "translate": "tsx src/tools/translate-page.ts",
+    "translate-batch": "tsx src/tools/translate-batch.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.78.0",
