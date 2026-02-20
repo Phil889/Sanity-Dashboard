@@ -20,7 +20,7 @@ import { logger } from '../lib/logger.js'
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
-interface PageEntry {
+export interface PageEntry {
   slug: string
   mainFile: string | null
   faqBatchFiles: string[]
@@ -29,7 +29,7 @@ interface PageEntry {
   estimatedCompleteness: 'full' | 'main-only' | 'faqs-only' | 'source-only'
 }
 
-interface LocalScanReport {
+export interface LocalScanReport {
   timestamp: string
   scanDirectory: string
   summary: {
@@ -104,7 +104,7 @@ function extractSourceJsonSlug(filename: string): string | null {
 
 const SCAN_DIR = resolve('ADVISORI Sanity Migration')
 
-async function scanLocalTranslations(quiet = false): Promise<LocalScanReport> {
+export async function scanLocalTranslations(quiet = false): Promise<LocalScanReport> {
   if (!quiet) logger.search(`Scanning ${SCAN_DIR} for translation files...`)
 
   const entries = await readdir(SCAN_DIR)

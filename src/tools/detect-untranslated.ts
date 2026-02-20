@@ -20,7 +20,7 @@ import { logger } from '../lib/logger.js'
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
-interface GermanPage {
+export interface GermanPage {
   _id: string
   title: string
   slug: string
@@ -40,7 +40,7 @@ interface MetadataEntry {
   enRef: string | null
 }
 
-interface DetectionReport {
+export interface DetectionReport {
   timestamp: string
   summary: {
     totalGerman: number
@@ -96,7 +96,7 @@ const QUERY_ENGLISH_PAGES = `*[_type == "servicePage" && language == "en"]{
 
 // ─── Detection Logic ────────────────────────────────────────────────────────
 
-async function detectTranslationStatus(): Promise<DetectionReport> {
+export async function detectTranslationStatus(): Promise<DetectionReport> {
   // Query 1: Fetch all German servicePages
   logger.search('Fetching all German servicePages...')
   const germanPages = await withRetry<GermanPage[]>(
