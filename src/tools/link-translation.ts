@@ -211,7 +211,7 @@ export async function linkTranslation(options: LinkOptions): Promise<LinkResult>
 
     // Check if "en" entry already exists and points to the right doc
     const enEntry = existingMetadata.translations.find((t) => t._key === 'en')
-    if (enEntry && enEntry.value._ref === englishId) {
+    if (enEntry && enEntry.value?._ref === englishId) {
       // Already correctly linked
       if (!options.execute) {
         return {
