@@ -1,0 +1,77 @@
+import 'dotenv/config'
+import { createClient } from '@sanity/client'
+
+// Create client with direct credentials
+const client = createClient({
+  projectId: 'wwmm9rbb',
+  dataset: 'production',
+  apiVersion: '2024-02-14',
+  token: process.env.SANITY_API_TOKEN,
+  useCdn: false,
+})
+
+// Helper function to generate unique keys
+function generateKey(prefix: string, index: number): string {
+  return `${prefix}_${Date.now()}_${index}`
+}
+
+const run = async () => {
+  try {
+    console.log('Updating IAM Plattform Erstellen page with FAQ batch 2...')
+    
+    // First, get the existing document
+    console.log('Fetching existing document...')
+    const existingDoc = await client.fetch('*[_id == $id][0]', { id: 'iam-plattform-erstellen' })
+    
+    if (!existingDoc) {
+      throw new Error('Document "iam-plattform-erstellen" not found')
+    }
+    
+    // Create new FAQs for API Gateway and Ecosystem Integration
+    const newFaqs = [
+      {
+        _type: 'object',
+        _key: generateKey('faq', 5),
+        question: 'Wie entwickelt man hochperformante API-Gateways für IAM Plattformen und welche Rolle spielen sie für moderne Ecosystem-Integration und Third-Party-Connectivity?',
+        answer: "API-Gateways sind das strategische Herzstück moderner IAM Plattformen und fungieren als intelligente Vermittlungsschicht zwischen internen Identity-Services und externen Anwendungen, Partnersystemen und Cloud-Services. Sie ermöglichen nicht nur technische Integration, sondern schaffen die Grundlage für digitale Ecosysteme, API-Economy-Teilnahme und innovative Geschäftsmodelle. Hochperformante API-Gateway-Entwicklung erfordert eine durchdachte Architektur, die Skalierbarkeit, Sicherheit und Developer Experience optimal vereint.\n\n🚪 Enterprise API-Gateway-Architektur für IAM-Integration:\n• Centralized Authentication und Authorization mit OAuth, OpenID Connect und SAML-Integration\n• Rate-Limiting und Throttling für Schutz vor Missbrauch und Ressourcen-Optimierung\n• Request/Response-Transformation für Protocol-Translation und Data-Mapping\n• Service-Discovery und Load-Balancing für dynamische Backend-Service-Integration\n• Circuit-Breaker-Pattern für Resilience und Graceful-Degradation bei Service-Ausfällen\n\n⚡ Performance-Engineering für High-Throughput-Scenarios:\n• Asynchronous Processing mit Non-Blocking-I/O für maximale Concurrent-Request-Handling\n• Intelligent-Caching mit Redis und CDN-Integration für Latency-Reduction\n• Connection-Pooling und Keep-Alive-Optimization für Resource-Efficiency\n• Horizontal-Scaling mit Container-Orchestrierung und Auto-Scaling-Policies\n• Edge-Deployment für Geographic-Distribution und Reduced-Latency\n\n🔐 Advanced Security-Features für Enterprise-Grade-Protection:\n• Multi-Layer-Security mit API-Key-Management, JWT-Validation und Certificate-Pinning\n• Threat-Protection mit DDoS-Mitigation, SQL-Injection-Prevention und XSS-Filtering\n• Data-Loss-Prevention mit Content-Inspection und Sensitive-Data-Masking\n• Audit-Logging mit Comprehensive-Request-Tracking und Compliance-Reporting\n• Zero-Trust-Integration mit Continuous-Verification und Risk-based-Access-Control\n\n🌐 Ecosystem-Integration und Partner-Connectivity:\n• Multi-Protocol-Support für REST, GraphQL, gRPC und Legacy-SOAP-Services\n• Webhook-Management für Event-driven-Integration und Real-time-Notifications\n• API-Versioning mit Backward-Compatibility und Smooth-Migration-Paths\n• Developer-Portal-Integration mit Self-Service-Onboarding und Documentation\n• Marketplace-Integration für API-Monetization und Partner-Ecosystem-Enablement\n\n📊 Observability und API-Analytics für Continuous-Optimization:\n• Real-time-Monitoring mit Metrics-Collection und Performance-Dashboards\n• Distributed-Tracing für End-to-End-Visibility in Complex-Service-Chains\n• Business-Analytics mit API-Usage-Patterns und Revenue-Attribution\n• Error-Analysis mit Root-Cause-Detection und Automated-Alerting\n• Capacity-Planning mit Predictive-Analytics und Resource-Forecasting"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 6),
+        question: 'Welche Strategien gibt es für die nahtlose Integration von Legacy-Systemen in moderne IAM Plattformen und wie minimiert man Disruption während der Migration?',
+        answer: "Legacy-System-Integration ist eine der kritischsten Herausforderungen bei der IAM Plattform-Entwicklung und erfordert eine strategische Herangehensweise, die technische Innovation mit operativer Kontinuität verbindet. Moderne IAM Plattformen müssen in der Lage sein, mit jahrzehntealten Systemen zu kommunizieren, ohne deren Funktionalität zu beeinträchtigen oder Geschäftsprozesse zu unterbrechen. Erfolgreiche Legacy-Integration erfordert Adapter-Patterns, Gradual-Migration-Strategien und umfassende Testing-Frameworks.\n\n🔗 Adapter-Pattern und Protocol-Translation für Legacy-Integration:\n• Protocol-Bridges für LDAP, Kerberos, NTLM und proprietäre Authentication-Mechanisms\n• Data-Format-Transformation zwischen modernen JSON/REST und Legacy-XML/SOAP-Interfaces\n• Character-Encoding-Handling für verschiedene Legacy-Systeme und Internationalization\n• Session-Management-Bridging zwischen Token-based und Session-based-Authentication\n• Error-Handling-Translation für konsistente Error-Responses über alle System-Boundaries\n\n📈 Gradual-Migration-Strategies für Risk-Mitigation:\n• Strangler-Fig-Pattern für schrittweise Ablösung von Legacy-Components\n• Parallel-Run-Scenarios mit Dual-Write-Strategies für Data-Consistency-Validation\n• Feature-Flag-driven-Migration für granulare Control über Migration-Scope\n• Rollback-Capabilities mit Automated-Fallback-Mechanisms bei Migration-Issues\n• Phased-User-Migration mit Pilot-Groups und Gradual-Rollout-Strategies\n\n🛠️ Integration-Middleware und Service-Abstraction:\n• Enterprise-Service-Bus-Integration für Message-Routing und Transformation\n• API-Facade-Pattern für Legacy-System-Abstraction und Modern-Interface-Exposure\n• Event-Sourcing für Audit-Trail-Preservation während System-Transitions\n• Data-Synchronization-Services für Real-time-Consistency zwischen Old-and-New-Systems\n• Workflow-Orchestration für Complex-Business-Process-Integration\n\n🔍 Comprehensive-Testing-Frameworks für Migration-Validation:\n• Integration-Testing mit Mock-Services und Legacy-System-Simulation\n• Performance-Testing für Load-Validation unter Real-World-Conditions\n• Security-Testing mit Penetration-Testing und Vulnerability-Assessment\n• User-Acceptance-Testing mit Business-Process-Validation und End-User-Feedback\n• Disaster-Recovery-Testing für Business-Continuity-Assurance\n\n📊 Monitoring und Continuous-Validation während Migration:\n• Real-time-Health-Checks für Legacy-System-Availability und Performance\n• Data-Integrity-Monitoring mit Automated-Consistency-Checks\n• User-Experience-Monitoring für Impact-Assessment auf Business-Operations\n• Error-Rate-Tracking mit Automated-Alerting bei Anomaly-Detection\n• Business-Metrics-Monitoring für ROI-Validation und Success-Measurement\n\n🚀 Future-Proofing und Technical-Debt-Reduction:\n• Microservices-Extraction für Gradual-Modernization von Monolithic-Legacy-Systems\n• Cloud-Migration-Preparation mit Containerization und Infrastructure-Modernization\n• API-first-Redesign für Legacy-Functionality-Exposure durch Modern-Interfaces\n• Documentation-Generation für Knowledge-Transfer und Maintenance-Simplification\n• Skills-Transfer-Programs für Team-Enablement auf Modern-Technology-Stacks"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 7),
+        question: 'Wie implementiert man Event-driven Architecture in IAM Plattformen für Real-time Synchronisation und welche Vorteile bietet Message-Queuing für Skalierbarkeit?',
+        answer: "Event-driven Architecture revolutioniert IAM Plattform-Design durch die Entkopplung von Services und ermöglicht Real-time-Reaktionen auf Identity-Events, asynchrone Verarbeitung und horizontale Skalierung. Diese Architektur ist besonders kritisch für moderne IAM-Systeme, die mit Millionen von Identitäten, komplexen Workflows und globalen Deployment-Szenarien umgehen müssen. Message-Queuing-Systeme bilden das Rückgrat dieser Architektur und ermöglichen Resilience, Performance und Maintainability.\n\n⚡ Event-driven IAM-Architecture-Patterns:\n• Domain-Events für Identity-Lifecycle-Management mit Create, Update, Delete und Suspend-Events\n• Command-Query-Responsibility-Segregation für optimierte Read/Write-Performance\n• Event-Sourcing für Complete-Audit-Trails und Point-in-Time-Recovery-Capabilities\n• Saga-Pattern für Distributed-Transaction-Management über Service-Boundaries\n• Event-Streaming für Real-time-Analytics und Behavioral-Pattern-Detection\n\n🔄 Message-Queuing-Systems für Enterprise-Scale-Processing:\n• Apache-Kafka für High-Throughput-Event-Streaming und Persistent-Message-Storage\n• RabbitMQ für Complex-Routing-Scenarios und Guaranteed-Message-Delivery\n• Amazon-SQS/Azure-Service-Bus für Cloud-native-Messaging und Managed-Infrastructure\n• Redis-Streams für Low-Latency-Messaging und In-Memory-Performance\n• Apache-Pulsar für Multi-Tenant-Messaging und Geographic-Replication\n\n🌐 Real-time Synchronisation-Strategies für Global-Deployment:\n• Change-Data-Capture für Database-Level-Event-Generation und Consistency-Maintenance\n• Conflict-Resolution-Algorithms für Multi-Master-Replication-Scenarios\n• Eventually-Consistent-Models mit Convergence-Guarantees für Distributed-Systems\n• Vector-Clocks und Lamport-Timestamps für Causal-Ordering in Distributed-Events\n• CRDT-Integration für Conflict-free-Replicated-Data-Types in Identity-Management\n\n📊 Scalability-Benefits durch Asynchronous-Processing:\n• Load-Leveling für Peak-Traffic-Absorption und Resource-Optimization\n• Backpressure-Handling für System-Protection bei Overload-Scenarios\n• Horizontal-Scaling mit Consumer-Groups und Partition-based-Processing\n• Auto-Scaling-Integration mit Queue-Depth-Monitoring und Dynamic-Resource-Allocation\n• Circuit-Breaker-Integration für Cascading-Failure-Prevention\n\n🛡️ Reliability und Fault-Tolerance in Event-driven-Systems:\n• Dead-Letter-Queues für Failed-Message-Handling und Manual-Intervention\n• Retry-Mechanisms mit Exponential-Backoff und Jitter für Resilient-Processing\n• Idempotency-Guarantees für Safe-Message-Reprocessing und Consistency-Maintenance\n• Poison-Message-Detection für Automated-Problem-Isolation\n• Health-Check-Integration für Proactive-System-Monitoring\n\n🔍 Observability und Event-Analytics für Operational-Excellence:\n• Event-Tracing für End-to-End-Visibility in Complex-Event-Flows\n• Message-Flow-Visualization für System-Understanding und Debugging\n• Performance-Metrics mit Latency-Tracking und Throughput-Analysis\n• Business-Event-Analytics für Process-Optimization und User-Behavior-Insights\n• Alerting-Integration für Proactive-Issue-Detection und Response-Automation"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 8),
+        question: 'Welche spezifischen Herausforderungen entstehen bei Multi-Cloud und Hybrid-IAM-Deployment und wie gewährleistet man konsistente Identity-Governance über verschiedene Cloud-Provider?',
+        answer: "Multi-Cloud und Hybrid-IAM-Deployment stellen komplexe Herausforderungen dar, die weit über technische Integration hinausgehen und strategische Entscheidungen zu Vendor-Lock-in, Data-Sovereignty, Compliance und Operational-Complexity erfordern. Konsistente Identity-Governance über verschiedene Cloud-Provider erfordert eine durchdachte Architektur, die Portabilität, Interoperability und einheitliche Security-Policies gewährleistet, während sie gleichzeitig die spezifischen Vorteile jeder Cloud-Plattform nutzt.\n\n☁️ Multi-Cloud-Architecture-Patterns für IAM-Consistency:\n• Federated-Identity-Management mit Cross-Cloud-Trust-Relationships und SAML/OIDC-Integration\n• Identity-Broker-Services für Centralized-Authentication und Cloud-agnostic-Access-Control\n• Policy-Abstraction-Layer für Unified-Authorization-Rules über verschiedene Cloud-APIs\n• Cross-Cloud-Replication für Identity-Data-Synchronization und Disaster-Recovery\n• Cloud-agnostic-APIs für Vendor-Independent-Identity-Operations\n\n🔐 Unified-Security-Governance über Cloud-Boundaries:\n• Zero-Trust-Network-Architecture mit Consistent-Security-Policies über alle Cloud-Environments\n• Centralized-Key-Management mit Hardware-Security-Modules und Cross-Cloud-Encryption\n• Unified-Audit-Logging mit Centralized-SIEM-Integration für Compliance-Reporting\n• Risk-based-Access-Control mit Cloud-agnostic-Risk-Assessment und Policy-Enforcement\n• Incident-Response-Coordination für Cross-Cloud-Security-Event-Management\n\n🌐 Data-Sovereignty und Compliance-Challenges:\n• Geographic-Data-Residency mit Region-specific-Identity-Storage und Processing\n• Regulatory-Compliance-Mapping für GDPR, CCPA und lokale Datenschutzgesetze\n• Cross-Border-Data-Transfer mit Adequate-Protection-Mechanisms und Legal-Frameworks\n• Jurisdiction-specific-Audit-Requirements mit Localized-Reporting und Documentation\n• Privacy-by-Design-Implementation mit Data-Minimization und Purpose-Limitation\n\n⚖️ Vendor-Lock-in-Mitigation und Portability-Strategies:\n• Open-Standards-Adoption mit SCIM, LDAP und OAuth für Interoperability\n• Container-based-Deployment für Cloud-agnostic-Application-Portability\n• Infrastructure-as-Code mit Multi-Cloud-Terraform-Modules für Consistent-Deployment\n• API-Abstraction-Layers für Cloud-Provider-Independence und Easy-Migration\n• Backup-and-Recovery-Strategies mit Cross-Cloud-Data-Protection\n\n📊 Operational-Complexity-Management:\n• Unified-Monitoring-Dashboards mit Multi-Cloud-Observability und Centralized-Alerting\n• Cost-Optimization mit Cross-Cloud-Resource-Management und Usage-Analytics\n• Performance-Optimization mit Latency-Monitoring und Geographic-Load-Distribution\n• Capacity-Planning mit Multi-Cloud-Resource-Forecasting und Auto-Scaling-Coordination\n• Skills-Management mit Multi-Cloud-Expertise-Development und Team-Training\n\n🚀 Innovation-Enablement durch Multi-Cloud-Flexibility:\n• Best-of-Breed-Service-Selection mit Cloud-specific-Advantage-Utilization\n• Disaster-Recovery-Enhancement mit Geographic-Distribution und Redundancy\n• Performance-Optimization mit Edge-Computing und Regional-Service-Deployment\n• Innovation-Acceleration mit Cloud-native-Service-Integration und Rapid-Prototyping\n• Competitive-Advantage durch Vendor-Negotiation-Power und Risk-Distribution"
+      }
+    ]
+    
+    // Update the document with new FAQs
+    const updatedFaqs = [...(existingDoc.faq || []), ...newFaqs]
+    
+    console.log(`Adding ${newFaqs.length} new FAQs to the document...`)
+    const transaction = client.transaction()
+    transaction.patch(existingDoc._id, {
+      set: {
+        faq: updatedFaqs
+      }
+    })
+    
+    await transaction.commit()
+    console.log('✅ FAQ batch 2 added successfully')
+  } catch (error) {
+    console.error('Error:', error)
+    throw error
+  }
+}
+
+run()

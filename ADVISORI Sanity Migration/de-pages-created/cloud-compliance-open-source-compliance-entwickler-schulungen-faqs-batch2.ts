@@ -1,0 +1,77 @@
+import 'dotenv/config'
+import { createClient } from '@sanity/client'
+
+// Create client with direct credentials
+const client = createClient({
+  projectId: 'wwmm9rbb',
+  dataset: 'production',
+  apiVersion: '2024-02-14',
+  token: process.env.SANITY_API_TOKEN,
+  useCdn: false,
+})
+
+// Helper function to generate unique keys
+function generateKey(prefix: string, index: number): string {
+  return `${prefix}_${Date.now()}_${index}`
+}
+
+const run = async () => {
+  try {
+    console.log('Updating Cloud Compliance Open Source Compliance Entwickler Schulungen page with FAQs batch 2...')
+    
+    // First, get the existing document
+    console.log('Fetching existing document...')
+    const existingDoc = await client.fetch('*[_id == $id][0]', { id: 'cloud-compliance-open-source-compliance-entwickler-schulungen' })
+    
+    if (!existingDoc) {
+      throw new Error('Document "cloud-compliance-open-source-compliance-entwickler-schulungen" not found')
+    }
+    
+    // Create new FAQs
+    const newFaqs = [
+      {
+        _type: 'object',
+        _key: generateKey('faq', 5),
+        question: "Wie kann ADVISORI unsere Entwicklerteams dabei unterstützen, Container-Security und Kubernetes-Compliance in Multi-Cloud-Umgebungen effektiv zu implementieren?",
+        answer: "Container-Security und Kubernetes-Compliance in Multi-Cloud-Umgebungen erfordern spezialisierte Expertise und durchdachte Governance-Frameworks. ADVISORI entwickelt umfassende Container-Security-Strategien, die sowohl die Komplexität moderner Orchestrierungs-Plattformen als auch die regulatorischen Anforderungen verschiedener Cloud-Provider berücksichtigen.\n\n🔐 Container-Security Excellence Framework:\n• Image Security Automation: Implementation von automatisierten Container-Image-Scanning-Prozessen, die Vulnerabilities, Malware und Compliance-Violations bereits in der Build-Phase identifizieren und remediation guidance bereitstellen.\n• Runtime Security Monitoring: Aufbau kontinuierlicher Runtime-Protection-Systeme, die anomales Verhalten, Privilege-Escalation und unauthorized network communications in Containerized Applications erkennen.\n• Supply Chain Security: Etablierung vertrauenswürdiger Software-Supply-Chains durch digitale Signaturen, Software Bill of Materials (SBOM) und provenance tracking für alle Container-Images.\n• Secrets Management Integration: Design sicherer Secrets-Management-Architekturen, die sensible Daten wie API-Keys, Certificates und Passwords niemals in Container-Images speichern.\n\n🎛️ Kubernetes-Native Compliance Architecture:\n• Policy-as-Code Implementation: Entwicklung von Kubernetes-nativen Policy-Frameworks mit Open Policy Agent (OPA) und Gatekeeper für automatisierte Compliance-Durchsetzung across clusters.\n• Network Security Orchestration: Implementation von Network Policies, Service Meshes und Zero-Trust-Networking für microsegmented, secure communication zwischen Services.\n• RBAC Excellence: Design granularer Role-Based Access Control-Systeme, die principle of least privilege durchsetzen und regulatory separation of duties requirements erfüllen.\n• Audit Trail Automation: Aufbau umfassender Logging- und Auditing-Infrastrukturen, die alle Cluster-Activities für Compliance-Reporting und forensic analysis dokumentieren.\n\n☁️ Multi-Cloud Governance Mastery:\n• Cloud-Agnostic Security Standards: Entwicklung einheitlicher Security-Standards, die konsistent über AWS EKS, Azure AKS, Google GKE und On-Premises Kubernetes implementiert werden können.\n• Federated Identity Management: Implementation von Cross-Cloud-Identity-Solutions, die Single-Sign-On und consistent authorization policies über alle Cloud-Umgebungen hinweg ermöglichen.\n• Compliance Orchestration: Aufbau zentralisierter Compliance-Dashboards, die Multi-Cloud Kubernetes-Deployments unified monitoring und reporting bieten.\n• Disaster Recovery Coordination: Design von Cross-Cloud Backup- und Recovery-Strategien für containerized workloads mit automated failover capabilities."
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 6),
+        question: "Welche spezifischen Herausforderungen entstehen bei der Implementierung von GDPR-konformer Datenverarbeitung in Cloud-nativen Entwicklungsumgebungen und wie adressiert ADVISORI diese?",
+        answer: "GDPR-konforme Datenverarbeitung in Cloud-nativen Umgebungen bringt komplexe technische und rechtliche Herausforderungen mit sich, die spezialisierte Lösungsansätze erfordern. ADVISORI entwickelt Privacy-by-Design-Architekturen, die GDPR-Compliance nahtlos in moderne Cloud-Entwicklungsprozesse integrieren, ohne Innovation zu behindern.\n\n🛡️ Privacy-by-Design Cloud Architecture:\n• Data Minimization Automation: Implementation automatisierter Systeme, die Datensammlung auf das absolut notwendige Minimum beschränken und unused data automatisch identifizieren und purgen.\n• Consent Management Integration: Aufbau Cloud-nativer Consent-Management-Plattformen, die granulare Einwilligungen verwalten und deren Durchsetzung in allen Microservices automatisieren.\n• Purpose Limitation Controls: Design von Service-Architekturen, die automatisch sicherstellen, dass personenbezogene Daten nur für die ursprünglich definierten Zwecke verwendet werden.\n• Data Subject Rights Automation: Implementation von Self-Service-Portalen und APIs, die Betroffenenrechte wie Auskunft, Berichtigung und Löschung automatisiert und auditierbar abwickeln.\n\n🌍 Cross-Border Data Governance:\n• Data Residency Orchestration: Entwicklung intelligenter Data-Placement-Strategien, die automatisch sicherstellen, dass personenbezogene Daten in jurisdiktionally-appropriate Regionen verarbeitet und gespeichert werden.\n• Transfer Impact Assessment Automation: Implementation von Tools, die automatisch bewerten, ob geplante Datentransfers GDPR-konform sind und alternative Processing-Locations vorschlagen.\n• Adequacy Decision Monitoring: Aufbau von Monitoring-Systemen, die Änderungen in Adequacy Decisions der EU-Kommission verfolgen und automatische Remediation-Actions auslösen.\n• Standard Contractual Clauses Management: Automatisierte Verwaltung und Durchsetzung von SCCs in Cloud-Service-Agreements mit dynamic updating capabilities.\n\n🔧 ADVISORI's Technical Implementation Excellence:\n• Pseudonymization-as-a-Service: Entwicklung von Cloud-Services, die automatische Pseudonymisierung und Anonymisierung von Personendaten in Processing-Pipelines ermöglichen.\n• Privacy Impact Assessment Integration: Aufbau von CI/CD-integrierten PIA-Tools, die automatisch Privacy-Risiken neuer Features bewerten und Mitigation-Strategien vorschlagen.\n• Encryption Key Management: Design hierarchischer Key-Management-Systeme, die Ende-zu-Ende-Verschlüsselung für personenbezogene Daten in Cloud-nativen Architekturen ermöglichen.\n• Breach Detection and Response: Implementation real-time Breach-Detection-Systeme mit automatisierten Notification-Workflows für 72-Stunden-Meldepflichten.\n\n⚡ Developer Experience Optimization:\n• Privacy-Aware Development Tools: Bereitstellung von IDE-Plugins und Linting-Tools, die Entwickler in real-time über Privacy-Implications ihres Codes informieren.\n• Privacy Testing Frameworks: Entwicklung automatisierter Testing-Suites, die GDPR-Compliance in CI/CD-Pipelines validieren und Privacy-Regressions verhindern.\n• Data Flow Visualization: Implementation von Tools, die Datenflüsse in komplexen Microservice-Architekturen visualisieren und Privacy-Compliance transparent machen."
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 7),
+        question: "Wie unterstützt ADVISORI Unternehmen bei der Etablierung von Software Bill of Materials (SBOM) und Supply Chain Security in agilen Entwicklungsumgebungen?",
+        answer: "Software Bill of Materials (SBOM) und Supply Chain Security sind kritische Komponenten moderner Cybersecurity-Strategien, besonders in agilen Umgebungen mit hoher Entwicklungsgeschwindigkeit. ADVISORI implementiert umfassende SBOM-Management-Frameworks, die Transparenz, Sicherheit und Compliance in Software-Supply-Chains gewährleisten, ohne die Agilität zu beeinträchtigen.\n\n📋 SBOM Generation and Management Excellence:\n• Automated SBOM Creation: Implementation von CI/CD-integrierten Tools, die automatisch detaillierte SBOMs für alle Software-Artifacts generieren, einschließlich Dependencies, Lizenzen und Vulnerability-Status.\n• Multi-Format SBOM Support: Unterstützung aller relevanten SBOM-Standards (SPDX, CycloneDX, SWID) mit automatischer Format-Konvertierung für verschiedene Stakeholder-Anforderungen.\n• Real-time Dependency Tracking: Aufbau kontinuierlicher Monitoring-Systeme, die Changes in Dependencies verfolgen und automatisch aktualisierte SBOMs generieren.\n• Hierarchical SBOM Architecture: Design von SBOM-Strukturen, die sowohl granulare Component-Level-Details als auch aggregierte Application-Level-Überblicke bereitstellen.\n\n🔒 Supply Chain Security Integration:\n• Provenance Verification: Implementation von Code-Signing und Attestation-Frameworks, die die Authentizität und Integrität aller Software-Components über die gesamte Supply Chain hinweg verifizieren.\n• Vulnerability Impact Analysis: Entwicklung intelligenter Systeme, die SBOM-Daten mit Vulnerability-Databases korrelieren und präzise Impact-Assessments für identifizierte Schwachstellen liefern.\n• Malicious Component Detection: Aufbau von ML-basierten Anomaly-Detection-Systemen, die suspicious patterns in Dependencies identifizieren und potenzielle Supply Chain Attacks erkennen.\n• License Compliance Automation: Integration von SBOM-Daten mit License-Compliance-Tools für automatisierte Conflict-Detection und Remediation-Guidance.\n\n🚀 Agile-Native Implementation:\n• Developer-Friendly Integration: Design von SBOM-Prozessen, die transparent in bestehende Entwicklungsworkflows integrieren, ohne zusätzliche manuelle Schritte zu erfordern.\n• Performance-Optimized Scanning: Implementation hochperformanter Scanning-Engines, die SBOM-Generation auch für große, komplexe Codebases in akzeptablen Timeframes ermöglichen.\n• Incremental SBOM Updates: Entwicklung von Delta-SBOM-Mechanismen, die nur Changes seit der letzten Version berücksichtigen und Build-Performance optimieren.\n• Quality Gates Integration: Aufbau von Quality-Gates, die SBOM-Completeness und Supply Chain Security als Deployment-Kriterien durchsetzen.\n\n💡 ADVISORI's Strategic Value Creation:\n• Risk-based Prioritization: Entwicklung von Scoring-Algorithmen, die Supply Chain Risks nach Business-Impact priorisieren und Remediation-Efforts optimal fokussieren.\n• Supplier Risk Assessment: Implementation von Vendor-Assessment-Frameworks, die Third-Party-Components nach Security-Maturity und Compliance-Standards bewerten.\n• Regulatory Readiness: Aufbau SBOM-Frameworks, die proaktiv emerging regulatory requirements (EU Cyber Resilience Act, US Executive Orders) addressieren.\n• Continuous Improvement Analytics: Entwicklung von Metriken und Dashboards, die Supply Chain Security-Maturity messen und Improvement-Opportunities identifizieren."
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 8),
+        question: "Welche Best Practices empfiehlt ADVISORI für die Integration von Infrastructure-as-Code (IaC) Security und Compliance-Validierung in DevOps-Pipelines?",
+        answer: "Infrastructure-as-Code (IaC) Security und Compliance-Validierung sind fundamentale Komponenten moderner DevOps-Praktiken. ADVISORI entwickelt umfassende IaC-Security-Frameworks, die Policy-Enforcement, Vulnerability-Management und Compliance-Validation nahtlos in Entwicklungs- und Deployment-Pipelines integrieren und dabei Security-by-Design gewährleisten.\n\n🏗️ IaC Security-by-Design Framework:\n• Policy-as-Code Implementation: Entwicklung umfassender Policy-Frameworks mit Tools wie Open Policy Agent, Sentinel oder AWS Config Rules, die Sicherheits- und Compliance-Anforderungen als ausführbaren Code definieren.\n• Shift-Left Security Integration: Implementation von Pre-Commit-Hooks und IDE-Plugins, die IaC-Security-Issues bereits während der Entwicklung identifizieren und Remediation-Guidance bereitstellen.\n• Multi-Cloud Security Standards: Aufbau Cloud-agnostischer Security-Policies, die konsistent über AWS CloudFormation, Azure ARM Templates, Google Cloud Deployment Manager und Terraform implementiert werden.\n• Automated Remediation: Design von Self-Healing-Mechanismen, die automatisch Non-Compliant-Infrastructure-Configurations erkennen und korrigieren.\n\n🔧 Pipeline-Integrated Validation Excellence:\n• Continuous Security Scanning: Integration von IaC-Security-Tools (Checkov, Terrascan, KICS) in CI/CD-Pipelines mit automated fail-fast-Mechanismen bei kritischen Vulnerabilities.\n• Drift Detection and Correction: Implementation von Monitoring-Systemen, die Configuration-Drift zwischen declared state und actual infrastructure erkennen und automatische Reconciliation auslösen.\n• Compliance-as-Code Testing: Entwicklung automatisierter Test-Suites, die Infrastructure-Configurations gegen regulatorische Standards (SOC2, ISO27001, PCI DSS) validieren.\n• Multi-Environment Consistency: Aufbau von Promotion-Pipelines, die identische Security-Configurations über Development-, Testing- und Production-Environments hinweg sicherstellen.\n\n🛡️ Advanced Security Orchestration:\n• Secret Management Integration: Design sicherer Secret-Injection-Mechanismen für IaC-Deployments, die Credentials niemals in Code oder State-Files speichern.\n• Network Security Automation: Implementation automatisierter Network-Segmentation und Firewall-Rule-Management basierend auf Application-Requirements und Security-Policies.\n• Identity and Access Management: Aufbau von IaC-Templates für consistent RBAC-Implementation mit automated privilege reviews und access certification processes.\n• Encryption-by-Default: Entwicklung von Infrastructure-Templates, die automatisch Data-at-Rest und Data-in-Transit Encryption für alle relevanten Services konfigurieren.\n\n⚡ ADVISORI's Operational Excellence:\n• GitOps Security Integration: Implementation von GitOps-Workflows mit signed commits, branch protection und automated security reviews für Infrastructure-Changes.\n• Audit Trail Automation: Aufbau umfassender Logging- und Monitoring-Infrastrukturen, die alle Infrastructure-Changes für Compliance-Reporting und forensic analysis dokumentieren.\n• Cost Security Optimization: Entwicklung von Cost-aware Security-Policies, die optimal balance zwischen Security-Requirements und Infrastructure-Costs gewährleisten.\n• Disaster Recovery Automation: Design von IaC-basierten Disaster-Recovery-Strategien mit automated failover und Cross-Region replication capabilities."
+      }
+    ]
+    
+    // Update the document with new FAQs
+    const updatedFaqs = [...(existingDoc.faq || []), ...newFaqs]
+    
+    console.log(`Adding ${newFaqs.length} new FAQs to the document...`)
+    const transaction = client.transaction()
+    transaction.patch(existingDoc._id, {
+      set: {
+        faq: updatedFaqs
+      }
+    })
+    
+    await transaction.commit()
+    console.log('✅ FAQs batch 2 added successfully')
+  } catch (error) {
+    console.error('Error:', error)
+    throw error
+  }
+}
+
+run()

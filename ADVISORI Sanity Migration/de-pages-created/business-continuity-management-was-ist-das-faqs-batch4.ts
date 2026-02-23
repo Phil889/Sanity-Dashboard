@@ -1,0 +1,77 @@
+import 'dotenv/config'
+import { createClient } from '@sanity/client'
+
+// Create client with direct credentials
+const client = createClient({
+  projectId: 'wwmm9rbb',
+  dataset: 'production',
+  apiVersion: '2024-02-14',
+  token: process.env.SANITY_API_TOKEN,
+  useCdn: false,
+})
+
+// Helper function to generate unique keys
+function generateKey(prefix: string, index: number): string {
+  return `${prefix}_${Date.now()}_${index}`
+}
+
+const run = async () => {
+  try {
+    console.log('Updating Business Continuity Management Was ist das page with FAQ batch 4...')
+    
+    // First, get the existing document
+    console.log('Fetching existing document...')
+    const existingDoc = await client.fetch('*[_id == $id][0]', { id: 'business-continuity-management-was-ist-das' })
+    
+    if (!existingDoc) {
+      throw new Error('Document "business-continuity-management-was-ist-das" not found')
+    }
+    
+    // Create new FAQs for BCM Was ist das advanced topics
+    const newFaqs = [
+      {
+        _type: 'object',
+        _key: generateKey('faq', 13),
+        question: 'Wie integriert sich Business Continuity Management in andere Managementsysteme und Frameworks?',
+        answer: "Business Continuity Management funktioniert am effektivsten, wenn es nahtlos in bestehende Managementsysteme und organisationale Frameworks integriert wird. Diese Integration schafft Synergien, reduziert Redundanzen und stärkt die gesamte organisationale Governance-Struktur.\n\n🔗 Integration mit Risikomanagement:\n• BCM ergänzt Enterprise Risk Management durch operative Kontinuitäts-Perspektiven\n• Gemeinsame Risikobewertungen und koordinierte Mitigation-Strategien\n• Integrierte Berichterstattung und Monitoring von Risiken und Kontinuitäts-Kapazitäten\n• Alignment von Risikotoleranz und Recovery-Zielen\n• Koordinierte Incident Response und Krisenmanagement-Prozesse\n\n🛡️ Verbindung mit Informationssicherheit:\n• BCM und ISMS arbeiten zusammen für umfassende Cyber-Resilienz\n• Gemeinsame Bedrohungsanalysen und Vulnerability Assessments\n• Koordinierte Backup- und Recovery-Strategien für IT-Systeme\n• Integrierte Security Incident Response und Business Continuity Aktivierung\n• Alignment von Informationssicherheits-Controls mit BCM-Anforderungen\n\n⚙️ Einbindung in Qualitätsmanagement:\n• BCM unterstützt kontinuierliche Servicequalität während Störungen\n• Integration von BCM-Anforderungen in Qualitätsmanagementsysteme\n• Gemeinsame Audit- und Review-Prozesse für Qualität und Kontinuität\n• Koordinierte Korrektur- und Verbesserungsmaßnahmen\n• Alignment von Qualitätszielen mit Kontinuitäts-Objectives\n\n🏢 Corporate Governance Integration:\n• BCM als integraler Bestandteil von Board-Level Governance\n• Regelmäßige Berichterstattung an Aufsichtsrat und Geschäftsführung\n• Integration in strategische Planungs- und Entscheidungsprozesse\n• Berücksichtigung von BCM in Investitions- und Geschäftsentscheidungen\n• Alignment mit ESG-Zielen und Nachhaltigkeitsstrategien\n\n📊 Verbindung mit Performance Management:\n• BCM-Metriken als Teil von organisationalen Dashboards\n• Integration von Kontinuitäts-KPIs in Balanced Scorecards\n• Berücksichtigung von BCM-Performance in Management-Incentives\n• Koordinierte Berichterstattung und Stakeholder-Kommunikation\n• Alignment von BCM-Zielen mit strategischen Unternehmenszielen\n\n🔄 Integration in Change Management:\n• BCM-Überlegungen in allen organisationalen Veränderungsprozessen\n• Bewertung von Kontinuitäts-Auswirkungen bei Geschäftsveränderungen\n• Koordinierte Kommunikation und Training für Veränderungen\n• Integration von BCM in Projekt- und Programmmanagement\n• Berücksichtigung von Resilienz-Aspekten in Transformationsinitiativen\n\n💼 Alignment mit Compliance Management:\n• Koordinierte Erfüllung regulatorischer Anforderungen\n• Integrierte Audit- und Compliance-Berichterstattung\n• Gemeinsame Dokumentations- und Nachweisführung\n• Koordinierte Stakeholder-Kommunikation zu Compliance-Themen\n• Alignment von BCM-Standards mit branchenspezifischen Anforderungen\n\n🌐 Integration in Supply Chain Management:\n• BCM-Anforderungen in Lieferantenauswahl und -bewertung\n• Koordinierte Supply Chain Risk Assessments\n• Gemeinsame Kontinuitätsplanung mit kritischen Lieferanten\n• Integrierte Monitoring- und Frühwarnsysteme\n• Alignment von Supply Chain Resilience mit BCM-Strategien"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 14),
+        question: 'Welche Rolle spielt Kommunikation und Stakeholder-Management im Business Continuity Management?',
+        answer: "Kommunikation und Stakeholder-Management sind fundamentale Erfolgsfaktoren für Business Continuity Management. Effektive Kommunikation während normaler Zeiten und Krisen sowie proaktives Stakeholder-Engagement sind entscheidend für die Wirksamkeit von BCM-Programmen.\n\n📢 Strategische Kommunikationsplanung:\n• Entwicklung umfassender Kommunikationsstrategien für verschiedene Stakeholder-Gruppen\n• Definition klarer Botschaften und Kommunikationskanäle für normale Zeiten und Krisen\n• Berücksichtigung kultureller und sprachlicher Vielfalt in der Kommunikation\n• Integration von digitalen und traditionellen Kommunikationsmedien\n• Vorbereitung von Kommunikations-Templates und vorgefertigten Nachrichten\n\n👥 Interne Stakeholder-Kommunikation:\n• Regelmäßige BCM-Updates für Management und Mitarbeiter\n• Zielgruppenspezifische Schulungen und Awareness-Programme\n• Klare Kommunikation von Rollen und Verantwortlichkeiten\n• Feedback-Mechanismen für kontinuierliche Verbesserung\n• Integration von BCM-Kommunikation in bestehende interne Kanäle\n\n🤝 Externe Stakeholder-Engagement:\n• Proaktive Kommunikation mit Kunden über BCM-Kapazitäten\n• Koordination mit Lieferanten und Partnern für gemeinsame Kontinuitätsplanung\n• Engagement mit Aufsichtsbehörden und regulatorischen Stakeholdern\n• Kommunikation mit Investoren und Finanzpartnern über Resilienz-Strategien\n• Aufbau von Beziehungen zu Medien und Community-Vertretern\n\n🚨 Krisenkommunikation:\n• Schnelle und transparente Kommunikation während Störungen\n• Koordinierte Botschaften zwischen verschiedenen Kommunikationskanälen\n• Regelmäßige Updates über Wiederherstellungsfortschritte\n• Proaktive Adressierung von Stakeholder-Sorgen und -Fragen\n• Nachbereitung und Lessons Learned-Kommunikation nach Krisen\n\n📱 Multi-Channel-Kommunikation:\n• Nutzung verschiedener Kommunikationskanäle für maximale Reichweite\n• Integration von sozialen Medien in Kommunikationsstrategien\n• Mobile Kommunikationslösungen für Echtzeit-Updates\n• Backup-Kommunikationskanäle für den Fall von Infrastrukturausfällen\n• Barrierefreie Kommunikation für alle Stakeholder-Gruppen\n\n🎯 Zielgruppenspezifische Kommunikation:\n• Anpassung von Botschaften an verschiedene Stakeholder-Bedürfnisse\n• Berücksichtigung von Informationsbedürfnissen und -präferenzen\n• Kulturell sensible Kommunikation in internationalen Organisationen\n• Technische vs. nicht-technische Kommunikation je nach Zielgruppe\n• Timing und Frequenz der Kommunikation basierend auf Stakeholder-Erwartungen\n\n📊 Kommunikations-Monitoring und -Bewertung:\n• Messung der Effektivität von Kommunikationsmaßnahmen\n• Feedback-Sammlung von verschiedenen Stakeholder-Gruppen\n• Analyse von Kommunikations-Reichweite und -Wirkung\n• Kontinuierliche Verbesserung von Kommunikationsstrategien\n• Benchmarking gegen Best Practices in der Branche\n\n🔄 Kontinuierliches Stakeholder-Engagement:\n• Regelmäßige Stakeholder-Mappings und -Analysen\n• Aufbau langfristiger Beziehungen zu kritischen Stakeholdern\n• Proaktive Einbindung von Stakeholdern in BCM-Planungsprozesse\n• Gemeinsame Übungen und Tests mit externen Partnern\n• Entwicklung von Stakeholder-Netzwerken für gegenseitige Unterstützung"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 15),
+        question: 'Wie entwickelt man eine effektive BCM-Kultur und fördert organisationale Resilienz?',
+        answer: "Die Entwicklung einer starken BCM-Kultur ist entscheidend für nachhaltige organisationale Resilienz. Eine Resilienz-Kultur geht über Pläne und Prozesse hinaus und schafft eine Denkweise, die Kontinuität und Anpassungsfähigkeit in allen organisationalen Aktivitäten verankert.\n\n🌱 Kulturelle Grundlagen schaffen:\n• Entwicklung einer gemeinsamen Vision und Mission für organisationale Resilienz\n• Integration von Resilienz-Werten in Unternehmensleitbilder und -prinzipien\n• Demonstration von Leadership-Commitment für BCM auf allen Ebenen\n• Schaffung einer Lernkultur, die aus Störungen und Fehlern lernt\n• Förderung von Offenheit und Transparenz bei Resilienz-Themen\n\n👨‍💼 Leadership und Vorbildfunktion:\n• Sichtbares Engagement der Führungsebene für BCM-Initiativen\n• Integration von BCM-Verantwortlichkeiten in Führungsrollen\n• Regelmäßige Kommunikation der strategischen Bedeutung von BCM\n• Investition in BCM-Ressourcen und -Kapazitäten\n• Anerkennung und Belohnung von resilienz-orientiertem Verhalten\n\n🎓 Bildung und Kompetenzentwicklung:\n• Umfassende BCM-Schulungsprogramme für alle Organisationsebenen\n• Entwicklung von BCM-Kompetenzen als Kernfähigkeiten\n• Integration von Resilienz-Themen in Onboarding-Programme\n• Kontinuierliche Weiterbildung und Zertifizierungsmöglichkeiten\n• Wissensaustausch und Best Practice-Sharing zwischen Teams\n\n🤝 Partizipation und Engagement:\n• Einbindung aller Mitarbeiter in BCM-Planungs- und Verbesserungsprozesse\n• Schaffung von BCM-Champions und Botschaftern in verschiedenen Bereichen\n• Regelmäßige Feedback-Sammlung und Ideengenerierung\n• Cross-funktionale Teams für BCM-Initiativen\n• Empowerment von Mitarbeitern für eigenverantwortliche Resilienz-Maßnahmen\n\n🔄 Kontinuierliches Lernen und Anpassung:\n• Etablierung von Lessons Learned-Prozessen nach Störungen und Übungen\n• Regelmäßige Reflexion und Bewertung von BCM-Praktiken\n• Experimentieren mit neuen Ansätzen und Technologien\n• Benchmarking gegen externe Best Practices\n• Anpassung von BCM-Strategien basierend auf Erfahrungen und Erkenntnissen\n\n📊 Messung und Verstärkung:\n• Entwicklung von Metriken für Resilienz-Kultur und -Verhalten\n• Integration von BCM-Performance in Mitarbeiter-Bewertungen\n• Anerkennung und Belohnung von resilienz-orientiertem Verhalten\n• Regelmäßige Kultur-Assessments und Mitarbeiter-Umfragen\n• Kommunikation von Erfolgen und Verbesserungen\n\n🌐 Netzwerke und Gemeinschaften:\n• Aufbau interner BCM-Communities of Practice\n• Teilnahme an externen BCM-Netzwerken und Fachverbänden\n• Wissensaustausch mit anderen Organisationen\n• Mentoring und Coaching-Programme für BCM-Entwicklung\n• Schaffung von Plattformen für Erfahrungsaustausch\n\n🎯 Integration in tägliche Arbeitsabläufe:\n• Berücksichtigung von Resilienz-Aspekten in allen Geschäftsprozessen\n• Integration von BCM-Überlegungen in Entscheidungsfindung\n• Entwicklung von Resilienz-Checklisten für verschiedene Aktivitäten\n• Automatisierung von BCM-Prozessen wo möglich\n• Schaffung von Anreizen für proaktives Resilienz-Verhalten"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 16),
+        question: 'Welche rechtlichen und regulatorischen Aspekte müssen bei Business Continuity Management beachtet werden?',
+        answer: "Business Continuity Management ist zunehmend von rechtlichen und regulatorischen Anforderungen geprägt, die je nach Branche, Standort und Organisationstyp variieren. Das Verständnis und die Einhaltung dieser Anforderungen sind entscheidend für effektives BCM und organisationale Compliance.\n\n⚖️ Regulatorische Frameworks und Standards:\n• Branchenspezifische Regulierungen wie Basel III für Banken, DORA für Finanzdienstleister\n• Nationale Gesetze und Verordnungen zu kritischen Infrastrukturen\n• Internationale Standards wie ISO 22301 als Compliance-Referenz\n• Sektorale Richtlinien für Gesundheitswesen, Energie, Telekommunikation\n• Emerging regulations zu Cyber-Resilienz und digitaler Sicherheit\n\n🏛️ Governance und Aufsicht:\n• Board-Level Verantwortlichkeiten für BCM-Oversight\n• Regulatorische Berichtspflichten und Transparenzanforderungen\n• Aufsichtsbehördliche Prüfungen und Assessments\n• Dokumentations- und Nachweispflichten für BCM-Aktivitäten\n• Sanktionen und Strafen bei Nicht-Compliance\n\n📋 Dokumentations- und Berichtspflichten:\n• Umfassende Dokumentation von BCM-Strategien und -Plänen\n• Regelmäßige Berichterstattung an Aufsichtsbehörden\n• Nachweis von Tests, Übungen und Validierungsaktivitäten\n• Dokumentation von Incident Response und Recovery-Maßnahmen\n• Aufbewahrung von BCM-Dokumenten gemäß regulatorischen Anforderungen\n\n🔒 Datenschutz und Informationssicherheit:\n• DSGVO-Compliance bei BCM-Datenverarbeitung und -speicherung\n• Schutz personenbezogener Daten während Kontinuitäts-Maßnahmen\n• Informationssicherheits-Anforderungen für BCM-Systeme\n• Cross-border data transfer-Regelungen bei internationalen Recovery-Strategien\n• Cyber-Security-Anforderungen für BCM-Infrastrukturen\n\n🌍 Internationale und grenzüberschreitende Aspekte:\n• Compliance mit verschiedenen nationalen Regulierungen\n• Koordination zwischen verschiedenen Rechtssystemen\n• Berücksichtigung von Handels- und Exportkontrollbestimmungen\n• Internationale Kooperationsabkommen für Krisenmanagement\n• Harmonisierung von BCM-Standards zwischen Ländern\n\n⚡ Kritische Infrastrukturen:\n• Spezielle Anforderungen für Betreiber kritischer Infrastrukturen\n• Meldepflichten bei Störungen und Sicherheitsvorfällen\n• Koordination mit nationalen Sicherheitsbehörden\n• Schutz vor Cyber-Angriffen und physischen Bedrohungen\n• Business Continuity-Anforderungen für systemrelevante Funktionen\n\n💼 Haftung und Versicherung:\n• Haftungsrisiken bei unzureichender BCM-Vorbereitung\n• Versicherungsanforderungen und -bedingungen für BCM\n• Contractual obligations gegenüber Kunden und Partnern\n• Directors and Officers-Haftung für BCM-Entscheidungen\n• Schadenersatzansprüche bei Geschäftsunterbrechungen\n\n🔍 Audit und Compliance-Monitoring:\n• Interne Audit-Anforderungen für BCM-Programme\n• Externe Prüfungen durch Aufsichtsbehörden und Zertifizierungsstellen\n• Kontinuierliches Compliance-Monitoring und -Berichterstattung\n• Korrekturmaßnahmen bei identifizierten Compliance-Lücken\n• Integration von BCM-Compliance in Enterprise Risk Management"
+      }
+    ]
+    
+    // Update the document with new FAQs
+    const updatedFaqs = [...(existingDoc.faq || []), ...newFaqs]
+    
+    console.log(`Adding ${newFaqs.length} new FAQs to the document...`)
+    const transaction = client.transaction()
+    transaction.patch(existingDoc._id, {
+      set: {
+        faq: updatedFaqs
+      }
+    })
+    
+    await transaction.commit()
+    console.log('✅ FAQ batch 4 added successfully')
+  } catch (error) {
+    console.error('Error:', error)
+    throw error
+  }
+}
+
+run()

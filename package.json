@@ -1,0 +1,39 @@
+{
+  "name": "advisori-sanity-pipeline",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "faq-batch": "tsx src/tools/faq-batch-runner.ts",
+    "detect": "tsx src/tools/detect-untranslated.ts",
+    "scan-local": "tsx src/tools/scan-local-translations.ts",
+    "generate-queue": "tsx src/tools/generate-queue.ts",
+    "extract": "tsx src/tools/extract-page.ts",
+    "extract-batch": "tsx src/tools/extract-batch.ts",
+    "validate-extractions": "tsx src/tools/validate-extractions.ts",
+    "translate": "tsx src/tools/translate-page.ts",
+    "translate-batch": "tsx src/tools/translate-batch.ts",
+    "validate-translation": "tsx src/tools/validate-translation.ts",
+    "fix-translation": "tsx src/tools/fix-translation.ts",
+    "validate-report": "tsx src/tools/validate-batch-report.ts",
+    "upload": "tsx src/tools/upload-page.ts",
+    "upload-batch": "tsx src/tools/upload-batch.ts",
+    "rollback-upload": "tsx src/tools/rollback-upload.ts",
+    "link": "tsx src/tools/link-translation.ts",
+    "link-batch": "tsx src/tools/link-batch.ts",
+    "verify-i18n": "tsx src/tools/verify-i18n.ts",
+    "pipeline": "tsx src/tools/run-pipeline.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.78.0",
+    "@sanity/client": "^7.2.1",
+    "dotenv": "^16.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0"
+  }
+}

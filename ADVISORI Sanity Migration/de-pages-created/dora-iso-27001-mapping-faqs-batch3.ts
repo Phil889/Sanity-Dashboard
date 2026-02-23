@@ -1,0 +1,77 @@
+import 'dotenv/config'
+import { createClient } from '@sanity/client'
+
+// Create client with direct credentials
+const client = createClient({
+  projectId: 'wwmm9rbb',
+  dataset: 'production',
+  apiVersion: '2024-02-14',
+  token: process.env.SANITY_API_TOKEN,
+  useCdn: false,
+})
+
+// Helper function to generate unique keys
+function generateKey(prefix: string, index: number): string {
+  return `${prefix}_${Date.now()}_${index}`
+}
+
+const run = async () => {
+  try {
+    console.log('Updating DORA ISO 27001 Mapping page with FAQ batch 3...')
+    
+    // First, get the existing document
+    console.log('Fetching existing document...')
+    const existingDoc = await client.fetch('*[_id == $id][0]', { id: 'dora-iso-27001-mapping' })
+    
+    if (!existingDoc) {
+      throw new Error('Document "dora-iso-27001-mapping" not found')
+    }
+    
+    // Create new FAQs for risk management integration and incident response alignment
+    const newFaqs = [
+      {
+        _type: 'object',
+        _key: generateKey('faq', 9),
+        question: 'Wie integriere ich ISO 27001 Risikomanagement-Prozesse mit DORA-spezifischen Risikoanforderungen?',
+        answer: "Die Integration von ISO 27001 Risikomanagement-Prozessen mit DORA-spezifischen Anforderungen erfordert eine strategische Erweiterung bestehender Frameworks, um sowohl traditionelle Informationssicherheitsrisiken als auch spezifische operative Resilienz-Risiken des Finanzsektors abzudecken. Eine effektive Integration schafft Synergien und gewährleistet eine umfassende Risikoabdeckung.\n\n🎯 Erweiterte Risikokategorisierung und -bewertung:\n• Ergänzen Sie bestehende ISO 27001 Risikokategorien um DORA-spezifische operative Resilienz-Risiken und IKT-Abhängigkeiten\n• Entwickeln Sie erweiterte Risikobewertungskriterien, die sowohl traditionelle Sicherheitsrisiken als auch finanzspezifische operative Risiken berücksichtigen\n• Implementieren Sie spezifische Bewertungsverfahren für kritische IKT-Services und deren potenzielle Auswirkungen auf die Geschäftskontinuität\n• Schaffen Sie integrierte Risiko-Scoring-Systeme, die beide Frameworks in einheitlichen Metriken abbilden\n• Etablieren Sie erweiterte Szenario-Analysen, die komplexe Interdependenzen zwischen verschiedenen Risikokategorien berücksichtigen\n\n🔄 Integrierte Risikomanagement-Prozesse:\n• Erweitern Sie bestehende Risikoidentifikations-Prozesse um kontinuierliche Überwachung von DORA-relevanten Bedrohungen und Vulnerabilitäten\n• Entwickeln Sie integrierte Risikobewertungs-Workflows, die sowohl ISO 27001 als auch DORA-Kriterien in einheitlichen Prozessen anwenden\n• Implementieren Sie erweiterte Risiko-Monitoring-Systeme, die Real-Time-Überwachung kritischer IKT-Services und -Abhängigkeiten ermöglichen\n• Schaffen Sie integrierte Risiko-Reporting-Strukturen, die beide Compliance-Bereiche in kohärenten Management-Reports abbilden\n• Etablieren Sie erweiterte Risiko-Treatment-Strategien, die spezifische DORA-Anforderungen für operative Resilienz berücksichtigen\n\n📊 Drittanbieter-Risikomanagement-Integration:\n• Erweitern Sie bestehende Vendor-Risk-Assessments um DORA-spezifische Kriterien für kritische IKT-Drittanbieter\n• Entwickeln Sie integrierte Due-Diligence-Prozesse, die sowohl ISO 27001 als auch DORA-Anforderungen für Drittanbieter-Bewertungen abdecken\n• Implementieren Sie kontinuierliche Monitoring-Systeme für kritische Drittanbieter-Services und deren Risikoprofile\n• Schaffen Sie erweiterte Konzentrations-Risiko-Analysen, die Abhängigkeiten von kritischen Service-Providern bewerten\n• Etablieren Sie integrierte Exit-Strategy-Planungen, die sowohl Sicherheits- als auch operative Resilienz-Aspekte berücksichtigen\n\n🎪 Governance-Integration und Oversight:\n• Erweitern Sie bestehende Risk-Committees um DORA-spezifische Expertise und Verantwortlichkeiten\n• Entwickeln Sie integrierte Risk-Appetite-Statements, die sowohl ISO 27001 als auch DORA-Risikotoleranz definieren\n• Implementieren Sie erweiterte Eskalations-Prozesse, die kritische operative Risiken angemessen an Management und Aufsichtsbehörden kommunizieren\n• Schaffen Sie integrierte Risk-Dashboard-Lösungen, die Real-Time-Visibility in beide Risikobereiche bieten\n• Etablieren Sie regelmäßige Risk-Reviews, die strategische Entwicklungen in beiden Compliance-Bereichen berücksichtigen"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 10),
+        question: 'Wie harmonisiere ich ISO 27001 Incident-Response mit DORA-spezifischen Incident-Management-Anforderungen?',
+        answer: "Die Harmonisierung von ISO 27001 Incident-Response mit DORA-spezifischen Anforderungen erfordert eine strategische Erweiterung bestehender Prozesse, um sowohl traditionelle Sicherheitsvorfälle als auch spezifische operative Resilienz-Incidents des Finanzsektors effektiv zu bewältigen. Eine integrierte Herangehensweise maximiert Effizienz und gewährleistet regulatorische Compliance.\n\n🚨 Erweiterte Incident-Klassifizierung und -Kategorisierung:\n• Ergänzen Sie bestehende ISO 27001 Incident-Kategorien um DORA-spezifische Klassifizierungen für operative Resilienz-Vorfälle\n• Entwickeln Sie integrierte Severity-Rating-Systeme, die sowohl Sicherheits- als auch operative Auswirkungen berücksichtigen\n• Implementieren Sie spezifische Kategorisierungen für IKT-Service-Ausfälle, Drittanbieter-Incidents und systemische Risiko-Events\n• Schaffen Sie erweiterte Impact-Assessment-Kriterien, die finanzspezifische Geschäftsauswirkungen und regulatorische Implikationen bewerten\n• Etablieren Sie automatisierte Klassifizierungs-Algorithmen, die Incidents basierend auf beiden Framework-Anforderungen einordnen\n\n⏱️ Integrierte Response-Timelines und Eskalation:\n• Harmonisieren Sie ISO 27001 Response-Timelines mit DORA-spezifischen Berichtspflichten und regulatorischen Fristen\n• Entwickeln Sie erweiterte Eskalations-Matrizen, die sowohl interne Stakeholder als auch externe Aufsichtsbehörden berücksichtigen\n• Implementieren Sie automatisierte Alerting-Systeme, die kritische Incidents basierend auf beiden Framework-Kriterien eskalieren\n• Schaffen Sie integrierte Communication-Workflows, die sowohl interne Teams als auch regulatorische Berichtspflichten bedienen\n• Etablieren Sie erweiterte Tracking-Systeme, die Compliance mit beiden Standard-Anforderungen kontinuierlich überwachen\n\n📋 Erweiterte Dokumentation und Berichtswesen:\n• Ergänzen Sie bestehende Incident-Documentation um DORA-spezifische Berichtselemente und regulatorische Anforderungen\n• Entwickeln Sie integrierte Incident-Reports, die sowohl ISO 27001 als auch DORA-Compliance-Nachweise liefern\n• Implementieren Sie automatisierte Report-Generation für regulatorische Berichtspflichten bei kritischen Incidents\n• Schaffen Sie erweiterte Evidence-Collection-Prozesse, die beide Framework-Anforderungen für Forensik und Analyse erfüllen\n• Etablieren Sie integrierte Lessons-Learned-Dokumentation, die Verbesserungen in beiden Compliance-Bereichen fördert\n\n🔧 Technische Integration und Automation:\n• Erweitern Sie bestehende Incident-Response-Tools um DORA-spezifische Workflows und Automation-Capabilities\n• Implementieren Sie integrierte SOAR-Plattformen, die beide Framework-Anforderungen in automatisierten Playbooks abbilden\n• Schaffen Sie erweiterte Integration mit Monitoring-Systemen für Real-Time-Detection kritischer operative Incidents\n• Etablieren Sie automatisierte Compliance-Checks, die sicherstellen, dass Response-Aktivitäten beide Standards erfüllen\n• Entwickeln Sie integrierte Metrics-Collection für kontinuierliche Verbesserung der Response-Capabilities in beiden Bereichen"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 11),
+        question: 'Welche Governance-Strukturen benötige ich für eine effektive Integration von ISO 27001 und DORA?',
+        answer: "Die Entwicklung effektiver Governance-Strukturen für die Integration von ISO 27001 und DORA erfordert eine strategische Neugestaltung bestehender Organisationsstrukturen, um sowohl traditionelle Informationssicherheit als auch spezifische operative Resilienz-Anforderungen des Finanzsektors zu koordinieren. Eine integrierte Governance schafft Klarheit, Effizienz und strategische Ausrichtung.\n\n🏛️ Integrierte Governance-Architektur und Organisationsdesign:\n• Erweitern Sie bestehende Information Security Governance um dedizierte DORA-Compliance-Funktionen und operative Resilienz-Verantwortlichkeiten\n• Schaffen Sie Cross-funktionale Steering-Committees, die strategische Entscheidungen für beide Compliance-Bereiche koordinieren\n• Etablieren Sie integrierte Reporting-Lines, die sowohl Sicherheits- als auch operative Resilienz-Aspekte an das Senior Management kommunizieren\n• Entwickeln Sie Matrix-Organisationsstrukturen, die Expertise aus verschiedenen Bereichen für beide Framework-Anforderungen bündeln\n• Implementieren Sie klare Accountability-Strukturen, die Verantwortlichkeiten für beide Standards eindeutig zuweisen\n\n📊 Strategische Planung und Oversight-Funktionen:\n• Entwickeln Sie integrierte Strategic-Planning-Prozesse, die sowohl ISO 27001 als auch DORA-Roadmaps in kohärenten Strategien vereinen\n• Schaffen Sie erweiterte Board-Oversight-Strukturen, die beide Compliance-Bereiche in regelmäßigen Governance-Reviews abdecken\n• Implementieren Sie integrierte Budget-Planning und Resource-Allocation-Prozesse für beide Framework-Anforderungen\n• Etablieren Sie erweiterte Performance-Management-Systeme, die KPIs für beide Standards in einheitlichen Scorecards verfolgen\n• Entwickeln Sie integrierte Risk-Appetite-Frameworks, die Risikotoleranz für beide Bereiche strategisch definieren\n\n🔄 Operative Governance und Entscheidungsprozesse:\n• Schaffen Sie integrierte Decision-Making-Frameworks, die beide Compliance-Bereiche in operativen Entscheidungen berücksichtigen\n• Entwickeln Sie erweiterte Change-Governance-Prozesse, die sowohl Sicherheits- als auch operative Resilienz-Impacts bewerten\n• Implementieren Sie integrierte Vendor-Governance-Strukturen für kritische IKT-Drittanbieter und Service-Provider\n• Etablieren Sie erweiterte Incident-Governance-Prozesse, die beide Framework-Anforderungen in Response-Entscheidungen einbeziehen\n• Schaffen Sie integrierte Compliance-Monitoring-Strukturen, die kontinuierliche Oversight für beide Standards gewährleisten\n\n⚖️ Compliance-Integration und regulatorische Koordination:\n• Entwickeln Sie integrierte Compliance-Functions, die sowohl ISO 27001 als auch DORA-Anforderungen in einheitlichen Programmen verwalten\n• Schaffen Sie erweiterte Legal-und-Regulatory-Affairs-Strukturen, die beide Compliance-Bereiche strategisch koordinieren\n• Implementieren Sie integrierte Audit-Coordination-Prozesse, die interne und externe Audits für beide Standards optimieren\n• Etablieren Sie erweiterte Stakeholder-Management-Strukturen für Kommunikation mit Aufsichtsbehörden und anderen externen Parteien\n• Entwickeln Sie integrierte Training-und-Awareness-Governance, die Kompetenzentwicklung in beiden Bereichen strategisch steuert"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 12),
+        question: 'Wie entwickle ich integrierte KPIs und Metriken für ISO 27001 und DORA-Compliance?',
+        answer: "Die Entwicklung integrierter KPIs und Metriken für ISO 27001 und DORA-Compliance erfordert eine strategische Herangehensweise, die sowohl traditionelle Informationssicherheits-Metriken als auch spezifische operative Resilienz-Indikatoren des Finanzsektors in einem kohärenten Measurement-Framework vereint. Effektive Metriken schaffen Transparenz, ermöglichen datengetriebene Entscheidungen und demonstrieren Compliance-Erfolg.\n\n📊 Integrierte Metric-Framework-Entwicklung:\n• Entwickeln Sie ein hierarchisches KPI-System, das strategische, taktische und operative Metriken für beide Compliance-Bereiche strukturiert\n• Schaffen Sie Balanced-Scorecard-Ansätze, die sowohl ISO 27001 als auch DORA-Performance in ausgewogenen Perspektiven darstellen\n• Implementieren Sie Leading-und-Lagging-Indicator-Kombinationen, die sowohl präventive als auch reaktive Aspekte beider Standards messen\n• Etablieren Sie Benchmark-Frameworks, die Performance gegen Industry-Standards und Best Practices in beiden Bereichen bewerten\n• Entwickeln Sie integrierte Maturity-Assessment-Metriken, die Fortschritt in beiden Compliance-Bereichen kontinuierlich verfolgen\n\n🎯 Spezifische Performance-Indikatoren und Measurement-Bereiche:\n• Schaffen Sie integrierte Availability-und-Resilience-Metriken, die sowohl ISO 27001 als auch DORA-Anforderungen für Systemverfügbarkeit abdecken\n• Entwickeln Sie erweiterte Incident-Response-KPIs, die Response-Times, Resolution-Rates und Compliance-Adherence für beide Standards messen\n• Implementieren Sie integrierte Risk-Management-Metriken, die Risiko-Identification, -Assessment und -Mitigation-Effectiveness in beiden Bereichen verfolgen\n• Etablieren Sie erweiterte Vendor-Management-KPIs, die Performance kritischer Drittanbieter und Compliance mit beiden Framework-Anforderungen bewerten\n• Schaffen Sie integrierte Training-und-Awareness-Metriken, die Kompetenzentwicklung und Compliance-Kultur in beiden Bereichen messen\n\n📈 Datensammlung und Analytics-Integration:\n• Implementieren Sie automatisierte Data-Collection-Systeme, die Metriken für beide Standards aus verschiedenen Quellen aggregieren\n• Entwickeln Sie integrierte Dashboard-Lösungen, die Real-Time-Visibility in beide Compliance-Bereiche durch einheitliche Visualisierungen bieten\n• Schaffen Sie erweiterte Analytics-Capabilities, die Trend-Analysis, Predictive-Modeling und Correlation-Analysis für beide Bereiche ermöglichen\n• Etablieren Sie Data-Quality-Management-Prozesse, die Accuracy, Completeness und Timeliness der Metriken für beide Standards gewährleisten\n• Implementieren Sie integrierte Reporting-Automation, die regelmäßige Performance-Reports für beide Compliance-Bereiche generiert\n\n🔄 Kontinuierliche Verbesserung und Optimization:\n• Entwickeln Sie Feedback-Loops, die Metric-Effectiveness kontinuierlich bewerten und Verbesserungen in beiden Bereichen identifizieren\n• Schaffen Sie integrierte Benchmarking-Prozesse, die Performance gegen externe Standards und Peer-Organizations in beiden Bereichen vergleichen\n• Implementieren Sie regelmäßige Metric-Reviews, die Relevanz, Accuracy und Actionability der KPIs für beide Standards bewerten\n• Etablieren Sie Action-Planning-Prozesse, die Performance-Gaps in beiden Bereichen systematisch adressieren\n• Entwickeln Sie integrierte Communication-Strategien, die Metric-Results effektiv an verschiedene Stakeholder-Gruppen für beide Compliance-Bereiche vermitteln"
+      }
+    ]
+    
+    // Update the document with new FAQs
+    const updatedFaqs = [...(existingDoc.faq || []), ...newFaqs]
+    
+    console.log(`Adding ${newFaqs.length} new FAQs to the document...`)
+    const transaction = client.transaction()
+    transaction.patch(existingDoc._id, {
+      set: {
+        faq: updatedFaqs
+      }
+    })
+    
+    await transaction.commit()
+    console.log('✅ FAQ batch 3 added successfully')
+  } catch (error) {
+    console.error('Error:', error)
+    throw error
+  }
+}
+
+run()

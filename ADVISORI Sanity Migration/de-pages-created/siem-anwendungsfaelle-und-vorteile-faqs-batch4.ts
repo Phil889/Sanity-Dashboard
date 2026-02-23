@@ -1,0 +1,77 @@
+import 'dotenv/config'
+import { createClient } from '@sanity/client'
+
+// Create client with direct credentials
+const client = createClient({
+  projectId: 'wwmm9rbb',
+  dataset: 'production',
+  apiVersion: '2024-02-14',
+  token: process.env.SANITY_API_TOKEN,
+  useCdn: false,
+})
+
+// Helper function to generate unique keys
+function generateKey(prefix: string, index: number): string {
+  return `${prefix}_${Date.now()}_${index}`
+}
+
+const run = async () => {
+  try {
+    console.log('Updating SIEM Anwendungsfälle und Vorteile page with FAQ batch 4...')
+    
+    // First, get the existing document
+    console.log('Fetching existing document...')
+    const existingDoc = await client.fetch('*[_id == $id][0]', { id: 'siem-anwendungsfaelle-und-vorteile' })
+    
+    if (!existingDoc) {
+      throw new Error('Document "siem-anwendungsfaelle-und-vorteile" not found')
+    }
+    
+    // Create new FAQs for SIEM cost optimization and future trends
+    const newFaqs = [
+      {
+        _type: 'object',
+        _key: generateKey('faq', 13),
+        question: 'Wie optimiert man SIEM-Kosten und welche Strategien maximieren die Kosteneffizienz bei gleichzeitiger Leistungssteigerung?',
+        answer: "SIEM-Kostenoptimierung erfordert einen strategischen Ansatz, der technische Effizienz mit Business-Value-Maximierung verbindet. Moderne Cost-Optimization-Strategien nutzen Cloud-native Technologien, intelligente Datenmanagement-Techniken und automatisierte Prozesse für nachhaltige Kostenreduktion ohne Kompromisse bei der Sicherheitseffektivität.\n\n💰 Total Cost of Ownership Optimization:\n• Infrastructure Cost Reduction durch Cloud-native Architekturen und elastische Skalierung\n• Licensing Cost Optimization durch strategische Vendor-Verhandlungen und Alternative-Evaluierung\n• Operational Cost Minimization durch Automatisierung manueller Prozesse und Self-Service-Capabilities\n• Training Cost Efficiency durch standardisierte Prozesse und Knowledge Management-Systeme\n• Maintenance Cost Reduction durch Predictive Maintenance und Proactive System Management\n\n📊 Data Management Cost Strategies:\n• Intelligent Data Tiering für kostenoptimierte Speicherung mit Hot, Warm und Cold Storage-Strategien\n• Data Retention Optimization durch regelbasierte Archivierung und automatisierte Lifecycle-Management\n• Compression und Deduplication für Speicherplatz-Reduktion ohne Performance-Impact\n• Sampling Techniques für kosteneffiziente Analyse großer Datenmengen\n• Data Source Prioritization für Focus auf High-Value Security-Daten\n\n⚡ Processing Efficiency Optimization:\n• Resource Right-sizing für optimale Hardware-Utilization ohne Over-provisioning\n• Auto-scaling Implementation für elastische Ressourcennutzung basierend auf tatsächlichem Bedarf\n• Query Optimization für reduzierte Computing-Kosten und verbesserte Response-Zeiten\n• Batch Processing für kosteneffiziente Verarbeitung nicht-zeitkritischer Workloads\n• Edge Computing Integration für dezentrale Verarbeitung und Bandwidth-Reduktion\n\n🔧 Technology Stack Cost Optimization:\n• Open Source Integration für Reduktion von Licensing-Kosten bei gleichzeitiger Funktionalität\n• Hybrid Cloud Strategies für optimale Balance zwischen On-Premises und Cloud-Kosten\n• Container Orchestration für effiziente Ressourcennutzung und Deployment-Flexibilität\n• Serverless Computing für Pay-per-Use-Modelle bei variablen Workloads\n• Multi-vendor Strategies für Competitive Pricing und Vendor Lock-in Avoidance\n\n📈 ROI Maximization Strategies:\n• Value-based Metrics für Demonstration des Business-Impact und Investment-Rechtfertigung\n• Quick Wins Implementation für schnelle ROI-Realization und Stakeholder-Buy-in\n• Phased Rollout Approach für Risk Mitigation und Continuous Value Delivery\n• Performance Benchmarking für Continuous Improvement und Cost-Benefit-Optimization\n• Business Case Development für Strategic Investment-Planning und Budget-Allocation\n\n🚀 Future-proofing Cost Strategies:\n• Scalable Architecture Design für Cost-effective Growth und Technology Evolution\n• Vendor Roadmap Alignment für Long-term Cost Predictability und Technology Compatibility\n• Skills Development Investment für Internal Capability Building und Reduced Dependency\n• Innovation Investment für Competitive Advantage und Future Cost Avoidance\n• Continuous Optimization Culture für Ongoing Cost Management und Efficiency Improvement"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 14),
+        question: 'Welche zukünftigen Trends prägen SIEM Use Cases und wie bereitet man sich auf die nächste Generation von Cybersecurity-Herausforderungen vor?',
+        answer: "Die Zukunft von SIEM Use Cases wird durch emerging Technologies, evolvierende Bedrohungslandschaften und neue Business-Modelle geprägt. Proaktive Vorbereitung auf diese Trends ermöglicht es Organisationen, Competitive Advantages zu entwickeln und zukünftige Cybersecurity-Herausforderungen erfolgreich zu bewältigen.\n\n🤖 Artificial Intelligence Evolution:\n• Autonomous Security Operations durch Self-healing Systems und Adaptive Defense Mechanisms\n• Explainable AI für Transparent und Auditable Security Decision-Making\n• Federated Learning für Privacy-preserving Threat Intelligence Sharing\n• Quantum-resistant Cryptography Integration für Post-quantum Security Preparedness\n• AI Ethics Implementation für Responsible und Fair Security Analytics\n\n🌐 Extended Reality Integration:\n• Immersive Security Operations Centers für Enhanced Situational Awareness\n• Virtual Reality Training für Realistic Incident Response Simulation\n• Augmented Reality Incident Investigation für Contextual Information Overlay\n• Digital Twin Security für Cyber-Physical System Protection\n• Metaverse Security Monitoring für Virtual World Threat Detection\n\n☁️ Cloud-native Evolution:\n• Serverless Security Architectures für Event-driven Security Processing\n• Edge-to-Cloud Security Continuum für Distributed Threat Detection\n• Multi-cloud Security Orchestration für Unified Security Across Platforms\n• Container Security Evolution für Kubernetes-native Security Integration\n• Infrastructure-as-Code Security für Automated Security Policy Enforcement\n\n🔗 Zero Trust Architecture:\n• Identity-centric Security Monitoring für Continuous Authentication und Authorization\n• Micro-segmentation Analytics für Granular Network Security Visibility\n• Behavioral Biometrics Integration für Advanced User Authentication\n• Device Trust Scoring für IoT und Mobile Device Security Assessment\n• Continuous Compliance Validation für Dynamic Policy Enforcement\n\n🌍 Quantum Computing Impact:\n• Quantum Threat Modeling für Post-quantum Cryptography Transition Planning\n• Quantum-enhanced Analytics für Exponential Security Data Processing\n• Quantum Key Distribution Monitoring für Ultra-secure Communication Channels\n• Quantum Random Number Generation für Enhanced Cryptographic Security\n• Quantum-safe Algorithm Implementation für Future-proof Security Architectures\n\n🔮 Predictive Security Evolution:\n• Threat Forecasting durch Advanced Predictive Modeling und Scenario Planning\n• Preemptive Security Measures für Proactive Threat Mitigation\n• Risk Prediction Algorithms für Dynamic Security Investment Allocation\n• Behavioral Prediction Models für Advanced Insider Threat Detection\n• Attack Path Prediction für Preventive Security Hardening\n\n🚀 Preparation Strategies:\n• Technology Scouting für Early Identification emerging Security Technologies\n• Skills Development Programs für Future-ready Security Expertise\n• Innovation Labs für Experimental Security Technology Evaluation\n• Partnership Ecosystems für Collaborative Security Innovation\n• Continuous Learning Culture für Adaptive Security Capability Development"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 15),
+        question: 'Wie implementiert man SIEM Use Cases für IoT und OT-Sicherheit und welche besonderen Herausforderungen entstehen in Industrial Environments?',
+        answer: "IoT und OT-Sicherheit stellen einzigartige Herausforderungen für SIEM-Implementierungen dar, da sie Legacy-Systeme, Resource-Constraints und Safety-kritische Anforderungen mit modernen Cybersecurity-Bedrohungen verbinden. Erfolgreiche Use Cases erfordern spezialisierte Ansätze für Industrial Protocols, Real-time Requirements und Operational Continuity.\n\n🏭 Industrial Control System Monitoring:\n• SCADA System Security für Critical Infrastructure Protection und Process Safety\n• PLC Communication Monitoring für Unauthorized Command Detection und Integrity Verification\n• HMI Security Analytics für Operator Interface Threat Detection\n• Industrial Protocol Analysis für Modbus, DNP3 und IEC 61850 Security Monitoring\n• Safety System Integrity Monitoring für SIL-rated System Protection\n\n📡 IoT Device Security Management:\n• Device Identity Management für Large-scale IoT Deployment Security\n• Firmware Integrity Monitoring für Unauthorized Modification Detection\n• Communication Pattern Analysis für Anomalous IoT Behavior Identification\n• Resource-constrained Security für Low-power Device Protection\n• Edge Gateway Security für IoT Network Segmentation und Protection\n\n⚡ Real-time Operational Requirements:\n• Deterministic Response Times für Safety-critical System Protection\n• Low-latency Threat Detection für Time-sensitive Industrial Processes\n• Continuous Availability für Always-on Industrial Operations\n• Graceful Degradation für Partial System Functionality während Security Incidents\n• Emergency Response Integration für Coordinated Safety und Security Measures\n\n🔒 Network Segmentation und Isolation:\n• Air-gap Monitoring für Isolated Network Security Validation\n• DMZ Security für Secure Communication zwischen IT und OT Networks\n• VLAN Security Monitoring für Network Segmentation Effectiveness\n• Firewall Rule Validation für Industrial Network Protection\n• Remote Access Security für Secure Maintenance und Support Operations\n\n📊 Asset Discovery und Inventory:\n• Passive Network Scanning für Non-intrusive Device Discovery\n• Asset Classification für Criticality-based Security Prioritization\n• Vulnerability Assessment für Legacy System Security Evaluation\n• Configuration Management für Baseline Security Configuration Monitoring\n• Lifecycle Management für End-of-life Device Security Planning\n\n🛡️ Threat Detection Specialization:\n• Industrial Malware Detection für Stuxnet-like Advanced Persistent Threats\n• Process Anomaly Detection für Unauthorized Process Modifications\n• Physical Security Integration für Convergence von Cyber und Physical Security\n• Supply Chain Security für Third-party Component und Vendor Risk Management\n• Insider Threat Detection für Privileged Industrial System Access\n\n🚀 Implementation Best Practices:\n• Phased Deployment für Minimal Operational Disruption\n• Vendor Collaboration für Industrial System Integration Support\n• Regulatory Compliance für Industry-specific Security Standards\n• Training Programs für OT Security Awareness und Incident Response\n• Business Continuity Planning für Security Incident Impact Minimization"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 16),
+        question: 'Welche Rolle spielen SIEM-Systeme bei der Umsetzung von Zero Trust Architectures und wie entwickelt man entsprechende Use Cases?',
+        answer: "SIEM-Systeme sind zentrale Enabler für Zero Trust Architectures, da sie die kontinuierliche Überwachung und Validierung von Trust-Entscheidungen ermöglichen. Zero Trust Use Cases erfordern fundamentale Paradigmenwechsel von perimeter-basierter zu identity-zentrierter Sicherheit mit kontinuierlicher Verification und Risk-based Access Control.\n\n🔐 Identity-centric Monitoring:\n• Continuous Authentication Monitoring für Dynamic Trust Score Calculation\n• Privileged Access Analytics für Administrative Activity Oversight\n• Identity Lifecycle Management für Account Creation, Modification und Deactivation Tracking\n• Cross-domain Identity Correlation für Federated Identity Security\n• Behavioral Biometrics Integration für Advanced User Verification\n\n🌐 Network Micro-segmentation Analytics:\n• East-West Traffic Monitoring für Lateral Movement Detection\n• Application-level Communication Analysis für Micro-service Security\n• Dynamic Policy Enforcement Monitoring für Adaptive Access Control\n• Network Anomaly Detection für Unauthorized Communication Patterns\n• Software-defined Perimeter Monitoring für Dynamic Network Boundary Management\n\n📱 Device Trust Assessment:\n• Device Fingerprinting für Unique Device Identification und Tracking\n• Endpoint Compliance Monitoring für Security Policy Adherence Validation\n• Mobile Device Management Integration für BYOD Security Oversight\n• IoT Device Security für Connected Device Trust Evaluation\n• Certificate Management Monitoring für PKI-based Device Authentication\n\n🔍 Continuous Risk Assessment:\n• Real-time Risk Scoring für Dynamic Access Decision Support\n• Contextual Access Analysis für Location, Time und Behavior-based Risk Evaluation\n• Threat Intelligence Integration für External Risk Factor Incorporation\n• Business Context Awareness für Risk-adjusted Security Policies\n• Adaptive Authentication für Risk-based Multi-factor Authentication\n\n⚡ Policy Enforcement Monitoring:\n• Access Decision Logging für Comprehensive Audit Trail Maintenance\n• Policy Violation Detection für Unauthorized Access Attempt Identification\n• Compliance Validation für Regulatory Requirement Adherence\n• Exception Monitoring für Temporary Access Grant Oversight\n• Escalation Tracking für High-risk Access Request Management\n\n📊 Zero Trust Metrics und KPIs:\n• Trust Score Trending für Identity Risk Evolution Tracking\n• Access Pattern Analysis für Normal Behavior Baseline Establishment\n• Policy Effectiveness Measurement für Continuous Security Improvement\n• Incident Correlation für Zero Trust Architecture Validation\n• User Experience Impact Assessment für Security-Usability Balance\n\n🚀 Implementation Roadmap:\n• Pilot Program Design für Low-risk Zero Trust Use Case Validation\n• Phased Rollout Strategy für Gradual Zero Trust Architecture Adoption\n• Legacy System Integration für Hybrid Security Architecture Support\n• Change Management für Cultural Shift zu Zero Trust Mindset\n• Continuous Optimization für Evolving Zero Trust Maturity"
+      }
+    ]
+    
+    // Update the document with new FAQs
+    const updatedFaqs = [...(existingDoc.faq || []), ...newFaqs]
+    
+    console.log(`Adding ${newFaqs.length} new FAQs to the document...`)
+    const transaction = client.transaction()
+    transaction.patch(existingDoc._id, {
+      set: {
+        faq: updatedFaqs
+      }
+    })
+    
+    await transaction.commit()
+    console.log('✅ FAQ batch 4 added successfully')
+  } catch (error) {
+    console.error('Error:', error)
+    throw error
+  }
+}
+
+run()

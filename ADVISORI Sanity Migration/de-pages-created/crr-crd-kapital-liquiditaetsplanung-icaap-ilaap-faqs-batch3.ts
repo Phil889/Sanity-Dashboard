@@ -1,0 +1,77 @@
+import 'dotenv/config'
+import { createClient } from '@sanity/client'
+
+// Create client with direct credentials
+const client = createClient({
+  projectId: 'wwmm9rbb',
+  dataset: 'production',
+  apiVersion: '2024-02-14',
+  token: process.env.SANITY_API_TOKEN,
+  useCdn: false,
+})
+
+// Helper function to generate unique keys
+function generateKey(prefix: string, index: number): string {
+  return `${prefix}_${Date.now()}_${index}`
+}
+
+const run = async () => {
+  try {
+    console.log('Updating CRR/CRD Kapital- und Liquiditätsplanung (ICAAP/ILAAP) page with FAQs batch 3...')
+    
+    // First, get the existing document
+    console.log('Fetching existing document...')
+    const existingDoc = await client.fetch('*[_id == $id][0]', { id: 'crr-crd-kapital-liquiditaetsplanung-icaap-ilaap' })
+    
+    if (!existingDoc) {
+      throw new Error('Document "crr-crd-kapital-liquiditaetsplanung-icaap-ilaap" not found')
+    }
+    
+    // Create new FAQs
+    const newFaqs = [
+      {
+        _type: 'object',
+        _key: generateKey('faq', 1),
+        question: "Welche Rolle spielt die Datenaggregation und -qualität im ICAAP/ILAAP und wie können Finanzinstitute diese systematisch verbessern?",
+        answer: "Die Datenqualität und -aggregation stellt das Fundament eines jeden ICAAP/ILAAP-Frameworks dar. Selbst die fortschrittlichsten Methoden und Prozesse können keine zuverlässigen Ergebnisse liefern, wenn die zugrundeliegenden Daten lückenhaft, inkonsistent oder unzureichend granular sind. Eine systematische Verbesserung der Datenbasis erfordert sowohl technologische als auch organisatorische Maßnahmen und schafft einen signifikanten strategischen Mehrwert über die regulatorische Compliance hinaus.\n\n🔍 Zentrale Datenchallenges im ICAAP/ILAAP-Kontext:\n• Datenintegration und -harmonisierung: Zusammenführung heterogener Datenquellen aus unterschiedlichen Systemen und Geschäftsbereichen zu einer konsistenten, qualitätsgesicherten Gesamtsicht auf Risiko- und Kapitaldaten.\n• Granularitätsanforderungen: Sicherstellung der erforderlichen Detailtiefe für verschiedene Analyse- und Reportingzwecke, von aggregierten Management-Dashboards bis hin zu granularen Stress-Szenarien auf Einzelpositionsebene.\n• Zeitliche Konsistenz: Harmonisierung unterschiedlicher zeitlicher Bezüge (Point-in-Time vs. Through-the-Cycle Betrachtungen) und konsistente historische Zeitreihen als Basis für zukunftsgerichtete Projektionen.\n• Datenlineage und Governance: Nachvollziehbare Dokumentation von Datenherkunft, -transformationen und -verantwortlichkeiten über den gesamten ICAAP/ILAAP-Prozess hinweg.\n\n🛠️ Strategische Hebel zur Datenqualitätsverbesserung:\n• Datenqualitätsmanagementsystem: Implementierung eines systematischen DQMS mit klaren Metriken, Verantwortlichkeiten und Eskalationswegen speziell für ICAAP/ILAAP-relevante Daten.\n• Data Ownership Matrix: Etablierung eindeutiger Verantwortlichkeiten für Datenqualität mit definierten Data Owners, Data Stewards und Data Custodians entlang der gesamten Datenlieferkette.\n• Automatisierte Datenqualitätskontrollen: Integration von Plausibilitätsprüfungen, Konsistenzkontrollen und Business Rules direkt in die Datenverarbeitungsprozesse mit automatisierten Alerting-Mechanismen.\n• Data Lineage Framework: Aufbau eines umfassenden Lineage-Systems, das den vollständigen Datenlebenszyklus von der Quelle bis zum Report transparent dokumentiert und auditierbar macht.\n\n💾 Technologische Enabler für exzellente Datenaggregation:\n• Integrierte Datenplattform: Etablierung einer einheitlichen Datenplattform für alle ICAAP/ILAAP-relevanten Daten, die als Single Point of Truth für Risikomessung, Stresstesting und Reporting dient.\n• Metadata Management: Implementierung eines umfassenden Metadatenmanagements, das technische und fachliche Metadaten verknüpft und die Interpretierbarkeit der Daten sicherstellt.\n• Self-Service Analytics für Risk & Finance: Bereitstellung flexibler Analyseumgebungen, die es Fachexperten ermöglichen, Daten eigenständig zu analysieren und ad-hoc Fragestellungen zu beantworten.\n• Reconciliation Engine: Aufbau automatisierter Abstimmungsmechanismen zwischen unterschiedlichen Datensichten und Aggregationsebenen zur Sicherstellung konsistenter Zahlenwerke."
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 2),
+        question: "Wie kann die Geschäftsleitung die Ergebnisse des ICAAP/ILAAP effektiv für strategische Entscheidungen nutzen und welche Governance-Strukturen sind dafür erforderlich?",
+        answer: "Die strategische Nutzung von ICAAP/ILAAP-Erkenntnissen durch die Geschäftsleitung transformiert diese regulatorischen Prozesse von reinen Compliance-Übungen zu wertvollen Steuerungsinstrumenten. Eine effektive Integration in die Unternehmensführung erfordert sowohl geeignete Governance-Strukturen als auch eine zielgruppengerechte Aufbereitung der komplexen Risiko- und Kapitalinformationen, um fundierte strategische Entscheidungen zu ermöglichen.\n\n🧠 Strategische Anwendungsbereiche für ICAAP/ILAAP-Erkenntnisse:\n• Geschäftsmodelloptimierung: Nutzung von Risiko-Rendite-Analysen zur Identifikation von Geschäftsfeldern mit suboptimalem Kapitalertrag und Entwicklung gezielter Optimierungsmaßnahmen.\n• Capital Planning & Allocation: Entwicklung einer zukunftsorientierten Kapitalplanung und risikoadjustierten Ressourcenallokation auf Basis granularer ICAAP-Ergebnisse und Szenarioanalysen.\n• Produktentwicklung und Pricing: Integration von Kapital- und Liquiditätskosten in die Produkt- und Preisgestaltung zur Sicherstellung nachhaltiger Profitabilität unter Berücksichtigung regulatorischer Anforderungen.\n• M&A Due Diligence: Bewertung potenzieller Akquisitions- oder Desinvestitionsentscheidungen hinsichtlich ihrer Auswirkungen auf das Risikoprofil und die Kapital-/Liquiditätsposition des Gesamtinstituts.\n\n🏛️ Governance-Strukturen für effektive Entscheidungsprozesse:\n• Integriertes Komitee-System: Etablierung einer abgestimmten Komitee-Struktur, die Kapital-, Liquiditäts- und Risikothemen in einem kohärenten Rahmen behandelt und klare Entscheidungswege definiert.\n• Risk Appetite Framework: Entwicklung eines umfassenden RAF, das strategische Ziele mit konkreten Risikolimits verknüpft und als Leitplanke für Geschäftsentscheidungen dient.\n• Management Action Framework: Definition klar definierter Eskalations- und Handlungsstufen bei Annäherung an oder Überschreitung von Risikotoleranzen, mit vordefinierten Handlungsoptionen für verschiedene Szenarien.\n• Three Lines of Defense: Klare Verankerung von ICAAP/ILAAP in allen drei Verteidigungslinien mit entsprechenden Rollen und Verantwortlichkeiten von der Geschäftsebene bis zur internen Revision.\n\n📊 Decision-Enabling für die Geschäftsleitung:\n• Executive Dashboard: Entwicklung eines prägnanten Management-Cockpits, das die wichtigsten ICAAP/ILAAP-Erkenntnisse visualisiert und strategische Implikationen hervorhebt.\n• Impact Analysis: Bereitstellung intuitiver What-if-Analysetools, die der Geschäftsleitung ermöglichen, die Auswirkungen strategischer Optionen auf Kapital und Liquidität eigenständig zu simulieren.\n• Strategic Link-up: Explizite Verknüpfung von ICAAP/ILAAP-Ergebnissen mit strategischen Initiativen und KPIs in der regulären Strategieplanung und -überprüfung.\n• Capability Building: Gezielte Schulung und Sensibilisierung der Geschäftsleitung für Kapital- und Liquiditätsthemen, um ein tieferes Verständnis für die strategischen Implikationen zu schaffen."
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 3),
+        question: "Welche Ansätze empfiehlt ADVISORI zur Integration von Recovery Planning in ICAAP/ILAAP-Frameworks und wie können Synergien zwischen diesen regulatorischen Anforderungen genutzt werden?",
+        answer: "Die Integration von Recovery Planning und ICAAP/ILAAP repräsentiert eine fortschrittliche Evolutionsstufe im regulatorischen Risikomanagement. Anstatt diese Anforderungen isoliert zu betrachten, schaffen integrierte Ansätze signifikante Synergien, reduzieren Redundanzen und etablieren ein konsistentes Rahmenwerk vom Business-as-usual-Betrieb bis hin zum Krisenmanagement. ADVISORI empfiehlt eine systematische Verzahnung dieser komplementären Prozesse, um sowohl regulatorische Effizienz als auch strategischen Mehrwert zu maximieren.\n\n🔄 Konzeptionelle Brücken zwischen Recovery Planning und ICAAP/ILAAP:\n• Kontinuum der Kapital- und Liquiditätssteuerung: Konzeptualisierung eines nahtlosen Übergangs von der präventiven Steuerung (ICAAP/ILAAP) zum Krisenmanagement (Recovery Plan) mit konsistenten Metriken, Schwellenwerten und Governance-Strukturen.\n• Harmonisierte Stresstest-Architektur: Entwicklung eines übergreifenden Stresstesting-Frameworks, das sowohl die moderaten bis schweren Stressszenarien im ICAAP/ILAAP als auch die existenzbedrohenden Szenarien im Recovery Planning abdeckt.\n• Integriertes Schwellenwert- und Eskalationssystem: Etablierung eines kohärenten Systems von Frühwarnindikatoren, Schwellenwerten und Eskalationsstufen, das von normalen Geschäftslimits über Vorwarnlimits bis zu Recovery-Triggern reicht.\n• Konsistente Management Actions: Harmonisierung der Managementmaßnahmen in ICAAP/ILAAP und Recovery Plan, mit einem graduellen Spektrum von präventiven Maßnahmen bis hin zu tiefgreifenden Wiederherstellungsoptionen.\n\n📋 Praktische Implementierungsansätze:\n• Integrierte Governance-Strukturen: Etablierung gemeinsamer oder eng verzahnter Komiteestrukturen und Verantwortlichkeiten für ICAAP/ILAAP und Recovery Planning, um Konsistenz und Effizienz zu gewährleisten.\n• Gemeinsame Daten- und Methodenbasis: Nutzung einheitlicher Datenquellen, Modelle und Berechnungslogiken für beide Prozesse, um methodische Konsistenz sicherzustellen und Doppelarbeiten zu vermeiden.\n• Harmonisiertes Szenariodesign: Entwicklung eines konsistenten Szenario-Frameworks, das von milden ICAAP-Szenarien über schwere ICAAP-Szenarien bis hin zu Recovery-Szenarien reicht und auf gemeinsamen makroökonomischen Parametern basiert.\n• Integrierte Dokumentation und Reporting: Aufbau einer kohärenten Dokumentations- und Berichtsstruktur, die die Verbindungen zwischen ICAAP/ILAAP und Recovery Planning transparent macht und regulatorische Anforderungen effizient erfüllt.\n\n🔍 Spezifische Synergiefelder:\n• Reverse Stress Testing als Brücke: Nutzung von Reverse Stress Tests als methodisches Bindeglied zwischen ICAAP/ILAAP und Recovery Planning, um kritische Vulnerabilitäten zu identifizieren und die Kalibrierung von Schwellenwerten zu unterstützen.\n• Erweiterte Kapital- und Liquiditätsprojektionen: Entwicklung integrierter Projektionsmodelle, die sowohl das normale Geschäft als auch Stresssituationen und Recovery-Maßnahmen abbilden können.\n• Unified Risk Appetite Framework: Erweiterung des Risk Appetite Frameworks um Recovery-Dimensionen, mit einer klaren Abgrenzung zwischen Risk Appetite, Risk Tolerance und Recovery-Schwellen.\n• Gemeinsame Validierung und Backtesting: Etablierung eines übergreifenden Validierungsprozesses für Modelle, Annahmen und Schwellenwerte, der sowohl ICAAP/ILAAP als auch Recovery Planning abdeckt."
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 4),
+        question: "Wie können mittelgroße Institute ihre ICAAP/ILAAP-Prozesse proportional gestalten, um regulatorische Anforderungen effizient zu erfüllen und gleichzeitig geschäftlichen Mehrwert zu schaffen?",
+        answer: "Die Herausforderung für mittelgroße Institute besteht darin, einen proportionalen ICAAP/ILAAP-Ansatz zu entwickeln, der die regulatorischen Anforderungen adäquat erfüllt, ohne unverhältnismäßige Ressourcen zu binden. Ein gut konzipierter proportionaler Ansatz fokussiert auf die institutsspezifischen Risiken, nutzt schlanke Methodologien und Prozesse und schafft dennoch einen substanziellen Mehrwert für die Unternehmenssteuerung. ADVISORI unterstützt Institute bei der Entwicklung maßgeschneiderter Lösungen, die Compliance und Effizienz in Einklang bringen.\n\n⚖️ Proportionalitätsprinzipien für mittelgroße Institute:\n• Risikoorientierte Ressourcenallokation: Fokussierung der analytischen Tiefe und methodischen Komplexität auf die für das Institut wesentlichen Risikoarten, basierend auf einer systematischen Materialitätsanalyse.\n• Skalierbare Methodologie: Implementierung skalierbarer Ansätze, die je nach Risikomaterialität und Datenverfügbarkeit unterschiedliche Komplexitätsstufen ermöglichen – von einfachen Standardansätzen bis hin zu selektiv eingesetzten fortgeschrittenen Methoden.\n• Pragmatische Governance: Etablierung einer effizienten Governance-Struktur, die regulatorische Anforderungen erfüllt, aber gleichzeitig dem Geschäftsmodell und der Organisationsstruktur des Instituts angemessen ist.\n• Technologische Verhältnismäßigkeit: Selektiver Einsatz technologischer Lösungen mit Fokus auf Bereiche mit dem höchsten Automatisierungspotenzial und Return-on-Investment.\n\n🔄 Effiziente Prozessgestaltung:\n• Integrierte Planung und Limitierung: Entwicklung eines integrierten Prozesses für strategische Planung, Kapital-/Liquiditätsplanung und Risikolimitierung, der Redundanzen minimiert und Konsistenz maximiert.\n• Gestaffelte Berichterstattung: Implementierung eines abgestuften Berichtswesens mit unterschiedlichen Detaillierungsgraden für verschiedene Adressaten – von prägnanten Management-Dashboards bis hin zu regulatorisch erforderlichen Detailberichten.\n• Zyklische Prozessoptimierung: Etablierung eines kontinuierlichen Verbesserungsprozesses mit regelmäßiger Überprüfung der ICAAP/ILAAP-Prozesse hinsichtlich ihrer Effizienz und ihres Mehrwerts.\n• Toolgestützte Workflows: Einführung schlanker, toolgestützter Workflows für wiederkehrende ICAAP/ILAAP-Aktivitäten wie Datensammlung, Validierung und Dokumentation.\n\n📊 Pragmatische Methodenansätze mit Mehrwert:\n• Vereinfachte Risikoquantifizierung: Entwicklung proportionaler Quantifizierungsansätze für wesentliche Risiken, die komplexe Modelle auf die erforderlichen Kernelemente reduzieren, ohne deren Aussagekraft zu kompromittieren.\n• Fokussierte Stresstest-Methodik: Implementierung einer schlanken, aber aussagekräftigen Stresstesting-Architektur mit selektiven Sensitivitätsanalysen und gezielten Szenarioanalysen für die Hauptrisikotreiber.\n• Hybride Kapital- und Liquiditätsplanung: Kombination von Top-down- und selektiven Bottom-up-Elementen in der Planung, mit Fokus auf wesentliche Geschäftsbereiche und Risikotreiber.\n• Modular erweiterbares Framework: Gestaltung eines modularen ICAAP/ILAAP-Frameworks, das mit dem Institut mitwachsen kann und bei Bedarf um zusätzliche Komponenten ergänzt werden kann."
+      }
+    ]
+    
+    // Update the document with new FAQs
+    const updatedFaqs = [...(existingDoc.faq || []), ...newFaqs]
+    
+    console.log(`Adding ${newFaqs.length} new FAQs to the document...`)
+    const transaction = client.transaction()
+    transaction.patch(existingDoc._id, {
+      set: {
+        faq: updatedFaqs
+      }
+    })
+    
+    await transaction.commit()
+    console.log('✅ FAQs batch 3 added successfully')
+  } catch (error) {
+    console.error('Error:', error)
+    throw error
+  }
+}
+
+run()

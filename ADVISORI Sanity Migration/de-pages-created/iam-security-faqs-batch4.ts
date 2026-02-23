@@ -1,0 +1,77 @@
+import 'dotenv/config'
+import { createClient } from '@sanity/client'
+
+// Create client with direct credentials
+const client = createClient({
+  projectId: 'wwmm9rbb',
+  dataset: 'production',
+  apiVersion: '2024-02-14',
+  token: process.env.SANITY_API_TOKEN,
+  useCdn: false,
+})
+
+// Helper function to generate unique keys
+function generateKey(prefix: string, index: number): string {
+  return `${prefix}_${Date.now()}_${index}`
+}
+
+const run = async () => {
+  try {
+    console.log('Updating IAM Security page with FAQ batch 4...')
+    
+    // First, get the existing document
+    console.log('Fetching existing document...')
+    const existingDoc = await client.fetch('*[_id == $id][0]', { id: 'iam-security' })
+    
+    if (!existingDoc) {
+      throw new Error('Document "iam-security" not found')
+    }
+    
+    // Create new FAQs for advanced security technologies and zero trust
+    const newFaqs = [
+      {
+        _type: 'object',
+        _key: generateKey('faq', 13),
+        question: 'Wie implementiert man Passwordless Authentication in IAM Security Systemen und welche Technologien sind dabei zukunftsweisend?',
+        answer: "Passwordless Authentication revolutioniert die IAM Security durch die Eliminierung des schwächsten Glieds in der Authentifizierungskette - dem Passwort. Diese Technologie bietet nicht nur erhöhte Sicherheit, sondern auch verbesserte User Experience und reduzierte operative Kosten für Passwort-Management.\n\n🔐 Passwordless Authentication Technologies:\n• FIDO2 und WebAuthn Standards für sichere, standardbasierte Authentifizierung\n• Biometric Authentication mit Fingerabdruck, Gesichtserkennung und Iris-Scanning\n• Hardware Security Keys für physische Zwei-Faktor-Authentifizierung\n• Mobile Push Notifications mit kryptographischen Challenges\n• Certificate-based Authentication für Enterprise-Umgebungen\n\n📱 Implementation Strategies und User Experience:\n• Progressive Rollout mit Fallback-Mechanismen für Übergangszeiten\n• Multi-Modal Authentication für verschiedene Geräte und Szenarien\n• Seamless User Onboarding mit einfacher Registrierung neuer Authentifikatoren\n• Cross-Platform Compatibility für konsistente Erfahrung über alle Geräte\n• Accessibility Considerations für Benutzer mit besonderen Bedürfnissen\n\n🛡️ Security Architecture und Cryptographic Foundations:\n• Public Key Cryptography für sichere Authentifizierung ohne geteilte Geheimnisse\n• Hardware-backed Key Storage für Schutz vor Credential Extraction\n• Attestation Mechanisms für Verifikation der Authentifikator-Integrität\n• Anti-Phishing Protection durch Origin-Binding und Challenge-Response\n• Replay Attack Prevention durch Nonce-basierte Challenges\n\n⚙️ Enterprise Integration und Management:\n• Centralized Policy Management für Passwordless-Richtlinien\n• Device Lifecycle Management für Registrierung, Rotation und Revocation\n• Integration mit bestehenden IAM-Systemen und Directory Services\n• Backup und Recovery Procedures für verlorene oder beschädigte Authentifikatoren\n• Compliance Mapping für regulatorische Anforderungen\n\n📊 Operational Benefits und ROI:\n• Reduced Help Desk Costs durch Eliminierung von Passwort-Reset-Anfragen\n• Improved Security Posture durch Eliminierung von Passwort-basierten Angriffen\n• Enhanced User Productivity durch schnellere und einfachere Authentifizierung\n• Lower Infrastructure Costs für Passwort-Management-Systeme\n• Reduced Compliance Risk durch stärkere Authentifizierungsmechanismen\n\n🔄 Migration Planning und Change Management:\n• Phased Migration Strategy mit schrittweiser Einführung\n• User Training und Awareness Programme für neue Authentifizierungsmethoden\n• Risk Assessment für verschiedene Passwordless-Technologien\n• Vendor Evaluation für Authentifikator-Hardware und Software\n• Continuous Monitoring für Adoption-Raten und Security Effectiveness\n\n🚀 Future Technologies und Innovation:\n• Behavioral Biometrics für kontinuierliche Authentifizierung\n• Quantum-Resistant Cryptography für langfristige Sicherheit\n• AI-Enhanced Authentication für adaptive Sicherheitsentscheidungen\n• Decentralized Identity für Self-Sovereign Identity Management\n• Blockchain-based Credential Verification für vertrauenslose Systeme"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 14),
+        question: 'Welche Rolle spielt Blockchain-Technologie in modernen IAM Security Systemen und wie kann sie für Decentralized Identity Management genutzt werden?',
+        answer: "Blockchain-Technologie bietet revolutionäre Möglichkeiten für IAM Security durch die Schaffung vertrauensloser, dezentraler Identitätssysteme. Diese Technologie ermöglicht es Benutzern, die vollständige Kontrolle über ihre digitalen Identitäten zu behalten, während gleichzeitig höchste Sicherheits- und Datenschutzstandards gewährleistet werden.\n\n🔗 Blockchain-based Identity Foundations:\n• Self-Sovereign Identity (SSI) für Benutzer-kontrollierte Identitätsverwaltung\n• Decentralized Identifiers (DIDs) für eindeutige, überprüfbare Identitätsreferenzen\n• Verifiable Credentials für kryptographisch sichere Identitätsnachweise\n• Distributed Ledger Technology für unveränderliche Identitätsaufzeichnungen\n• Smart Contracts für automatisierte Identitätsverifikation und Zugriffskontrolle\n\n🛡️ Security Benefits und Trust Models:\n• Elimination of Central Points of Failure durch verteilte Architektur\n• Cryptographic Proof of Identity ohne Preisgabe sensibler Daten\n• Immutable Audit Trails für vollständige Nachverfolgbarkeit\n• Zero-Knowledge Proofs für Verifikation ohne Datenpreisgabe\n• Consensus Mechanisms für vertrauenslose Identitätsvalidierung\n\n🔐 Technical Implementation Approaches:\n• Permissioned vs Permissionless Blockchain Selection basierend auf Anforderungen\n• Interoperability Protocols für Cross-Chain Identity Management\n• Off-Chain Storage für sensible Identitätsdaten mit On-Chain Referenzen\n• Layer 2 Solutions für skalierbare und kosteneffiziente Transaktionen\n• Hybrid Architectures für Integration mit bestehenden IAM-Systemen\n\n📱 User Experience und Wallet Management:\n• Digital Identity Wallets für sichere Speicherung von Credentials\n• QR Code und NFC Integration für nahtlose Identitätsverifikation\n• Biometric Protection für Wallet-Zugriff und Transaktionssignierung\n• Backup und Recovery Mechanisms für Wallet-Wiederherstellung\n• Multi-Device Synchronization für konsistente Identitätsverwaltung\n\n⚖️ Regulatory Compliance und Legal Frameworks:\n• GDPR Compliance durch Privacy-by-Design und Data Minimization\n• Right to be Forgotten Implementation in unveränderlichen Systemen\n• Cross-Border Identity Recognition und Jurisdictional Challenges\n• Regulatory Sandbox Participation für innovative Identity Solutions\n• Legal Identity Binding für rechtlich anerkannte digitale Identitäten\n\n🌐 Enterprise Integration Strategies:\n• API Gateways für Integration mit Legacy-IAM-Systemen\n• Federation Protocols für Interoperabilität mit traditionellen Identity Providern\n• Gradual Migration Paths von zentralisierten zu dezentralisierten Systemen\n• Vendor Ecosystem Development für Blockchain-Identity-Lösungen\n• Cost-Benefit Analysis für Blockchain-IAM-Implementierungen\n\n🔄 Operational Considerations:\n• Network Governance für Blockchain-Identity-Netzwerke\n• Performance Optimization für Skalierbarkeit und Latenz\n• Energy Efficiency Considerations für nachhaltige Blockchain-Lösungen\n• Disaster Recovery für dezentrale Identitätssysteme\n• Continuous Innovation für Blockchain-Identity-Technologien"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 15),
+        question: 'Wie kann Quantum Computing die IAM Security beeinflussen und welche Vorbereitungen sind für Quantum-Resistant Authentication erforderlich?',
+        answer: "Quantum Computing stellt eine fundamentale Bedrohung für aktuelle kryptographische Grundlagen der IAM Security dar, erfordert aber gleichzeitig innovative Ansätze für zukunftssichere Authentifizierung. Die Vorbereitung auf die Post-Quantum-Ära ist entscheidend für die langfristige Sicherheit von Identitätssystemen.\n\n⚛️ Quantum Threat Landscape für IAM:\n• RSA und ECC Vulnerability durch Shor's Algorithm für Public Key Cryptography\n• Symmetric Key Reduction durch Grover's Algorithm mit halbierten Schlüssellängen\n• Digital Signature Compromise für Authentifizierung und Integrität\n• Certificate Authority Infrastructure Risks für PKI-basierte Systeme\n• Timeline Considerations für praktische Quantum Computer Verfügbarkeit\n\n🔐 Post-Quantum Cryptography Standards:\n• NIST Post-Quantum Cryptography Standardization für sichere Algorithmen\n• Lattice-based Cryptography für Verschlüsselung und digitale Signaturen\n• Hash-based Signatures für Quantum-resistente Authentifizierung\n• Code-based und Multivariate Cryptography als alternative Ansätze\n• Hybrid Approaches für Übergangszeiten mit klassischen und Post-Quantum-Algorithmen\n\n🛡️ Quantum-Safe IAM Architecture:\n• Crypto-Agility Design für flexible Algorithmus-Updates\n• Key Management Evolution für Post-Quantum-Schlüsselgrößen\n• Certificate Lifecycle Management für Quantum-resistente Zertifikate\n• Protocol Adaptation für TLS, IPSec und andere Sicherheitsprotokolle\n• Performance Optimization für größere Schlüssel und Signaturen\n\n📊 Risk Assessment und Migration Planning:\n• Cryptographic Inventory für Identifikation aller verwendeten Algorithmen\n• Risk Prioritization basierend auf Datenklassifikation und Bedrohungsmodellen\n• Migration Timeline Development für schrittweise Algorithmus-Updates\n• Backward Compatibility Considerations für Legacy-Systeme\n• Testing und Validation für Post-Quantum-Implementierungen\n\n⚙️ Implementation Strategies:\n• Hybrid Cryptographic Systems für Übergangsperioden\n• Hardware Security Module Updates für Post-Quantum-Unterstützung\n• Software Development Lifecycle Integration für Quantum-Safe-Entwicklung\n• Vendor Roadmap Alignment für Post-Quantum-Produkt-Updates\n• Standards Compliance für emerging Post-Quantum-Regulierungen\n\n🔄 Operational Transformation:\n• Performance Impact Assessment für größere kryptographische Operationen\n• Storage Requirements Planning für erweiterte Schlüssel- und Signaturgrößen\n• Network Bandwidth Considerations für Post-Quantum-Protokolle\n• User Experience Optimization trotz erhöhter kryptographischer Komplexität\n• Monitoring und Alerting für Quantum-Threat-Intelligence\n\n🚀 Quantum Opportunities für IAM:\n• Quantum Key Distribution für theoretisch perfekte Schlüsselverteilung\n• Quantum Random Number Generation für verbesserte Entropie\n• Quantum-Enhanced Authentication durch Quantum Properties\n• Quantum Cryptographic Protocols für neue Sicherheitsparadigmen\n• Research und Development für Quantum-Native IAM-Lösungen"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 16),
+        question: 'Welche fortschrittlichen Monitoring und Analytics Techniken sind für IAM Security Operations entscheidend und wie implementiert man sie effektiv?',
+        answer: "Fortschrittliche Monitoring und Analytics sind das Nervensystem moderner IAM Security Operations und ermöglichen proaktive Bedrohungserkennung, kontinuierliche Risikobewertung und datengestützte Sicherheitsentscheidungen. Diese Techniken transformieren reaktive Sicherheitsansätze in präventive, intelligente Verteidigungsstrategien.\n\n📊 Advanced Analytics Frameworks:\n• Real-time Stream Processing für sofortige Analyse von Identitätsereignissen\n• Machine Learning Pipelines für automatisierte Musterkennung und Anomalieerkennung\n• Graph Analytics für Visualisierung und Analyse von Identitätsbeziehungen\n• Time Series Analysis für Trend-Erkennung und Vorhersagemodelle\n• Statistical Modeling für Baseline-Erstellung und Abweichungserkennung\n\n🔍 Behavioral Analytics und User Profiling:\n• Dynamic User Behavior Baselines für individuelle Aktivitätsmuster\n• Peer Group Analysis für Vergleich mit ähnlichen Benutzerprofilen\n• Contextual Risk Scoring basierend auf Zeit, Ort und Zugriffsmuster\n• Anomaly Detection für Identifikation ungewöhnlicher Verhaltensweisen\n• Predictive Risk Assessment für proaktive Sicherheitsmaßnahmen\n\n🚨 Threat Intelligence Integration:\n• External Threat Feeds für Anreicherung interner Sicherheitsdaten\n• Indicator of Compromise (IoC) Matching für bekannte Bedrohungen\n• Threat Actor Profiling für Verständnis von Angriffsmethoden\n• Attack Pattern Recognition für Identifikation koordinierter Angriffe\n• Threat Hunting Automation für proaktive Bedrohungssuche\n\n⚡ Real-time Monitoring und Alerting:\n• Complex Event Processing für Korrelation mehrerer Sicherheitsereignisse\n• Dynamic Threshold Adjustment für adaptive Alerting-Mechanismen\n• Priority-based Alert Management für effiziente Incident Response\n• False Positive Reduction durch Machine Learning und Feedback-Loops\n• Escalation Automation für kritische Sicherheitsereignisse\n\n🔧 Technical Implementation Architecture:\n• Data Lake Architecture für skalierbare Speicherung und Analyse\n• Microservices Design für modulare und skalierbare Analytics-Services\n• API-first Approach für Integration verschiedener Datenquellen\n• Cloud-native Deployment für Elastizität und Performance\n• Edge Computing für lokale Analyse und reduzierte Latenz\n\n📈 Performance Metrics und KPIs:\n• Mean Time to Detection (MTTD) für Effizienz der Bedrohungserkennung\n• Mean Time to Response (MTTR) für Incident Response Geschwindigkeit\n• False Positive Rate für Qualität der Analytics-Algorithmen\n• Coverage Metrics für Vollständigkeit der Überwachung\n• Risk Reduction Metrics für Wirksamkeit der Sicherheitsmaßnahmen\n\n🎯 Operational Excellence:\n• Continuous Model Training für Verbesserung der Analytics-Genauigkeit\n• A/B Testing für Optimierung von Detection-Algorithmen\n• Feedback Integration für kontinuierliche Verbesserung\n• Automated Reporting für regelmäßige Sicherheits-Dashboards\n• Compliance Monitoring für regulatorische Anforderungen\n\n🔄 Integration und Orchestration:\n• SIEM Integration für zentrale Sicherheitsereignis-Verwaltung\n• SOAR Platform Connectivity für automatisierte Response-Workflows\n• Threat Intelligence Platform Integration für erweiterte Kontext-Informationen\n• Business Intelligence Tools für Executive-Level Reporting\n• DevSecOps Pipeline Integration für Security-by-Design"
+      }
+    ]
+    
+    // Update the document with new FAQs
+    const updatedFaqs = [...(existingDoc.faq || []), ...newFaqs]
+    
+    console.log(`Adding ${newFaqs.length} new FAQs to the document...`)
+    const transaction = client.transaction()
+    transaction.patch(existingDoc._id, {
+      set: {
+        faq: updatedFaqs
+      }
+    })
+    
+    await transaction.commit()
+    console.log('✅ FAQ batch 4 added successfully')
+  } catch (error) {
+    console.error('Error:', error)
+    throw error
+  }
+}
+
+run()

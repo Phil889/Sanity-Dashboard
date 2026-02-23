@@ -1,0 +1,77 @@
+import 'dotenv/config'
+import { createClient } from '@sanity/client'
+
+// Create client with direct credentials
+const client = createClient({
+  projectId: 'wwmm9rbb',
+  dataset: 'production',
+  apiVersion: '2024-02-14',
+  token: process.env.SANITY_API_TOKEN,
+  useCdn: false,
+})
+
+// Helper function to generate unique keys
+function generateKey(prefix: string, index: number): string {
+  return `${prefix}_${Date.now()}_${index}`
+}
+
+const run = async () => {
+  try {
+    console.log('Updating ISO 27001 Risikomanagement page with FAQ batch 3...')
+    
+    // First, get the existing document
+    console.log('Fetching existing document...')
+    const existingDoc = await client.fetch('*[_id == $id][0]', { id: 'iso-27001-risikomanagement' })
+    
+    if (!existingDoc) {
+      throw new Error('Document "iso-27001-risikomanagement" not found')
+    }
+    
+    // Create new FAQs for ISO 27001 Risikomanagement technology and compliance integration
+    const newFaqs = [
+      {
+        _type: 'object',
+        _key: generateKey('faq', 9),
+        question: 'Wie werden moderne GRC-Technologien und AI-gestützte Tools in das ISO 27001 Risikomanagement integriert?',
+        answer: "Die Integration moderner GRC-Technologien und AI-gestützter Tools revolutioniert das traditionelle Risikomanagement und ermöglicht intelligente, automatisierte und prädiktive Ansätze für nachhaltige Informationssicherheit. Diese Technologien schaffen die Grundlage für datengetriebene Entscheidungen und kontinuierliche Optimierung.\n\n🤖 AI-gestützte Risikoanalyse und Vorhersage:\n• Implementierung von Machine Learning Algorithmen für automatisierte Risikobewertung und Mustererkennung\n• Nutzung von Natural Language Processing für intelligente Analyse von Bedrohungsinformationen und Vulnerability-Datenbanken\n• Entwicklung prädiktiver Modelle zur Früherkennung potenzieller Sicherheitsvorfälle und Risikoveränderungen\n• Aufbau von Anomalie-Erkennungssystemen, die ungewöhnliche Aktivitäten und Risikoindikatoren automatisch identifizieren\n• Integration von Threat Intelligence Feeds für kontinuierliche Aktualisierung der Risikolandschaft\n\n🏗️ Integrierte GRC-Plattformen und Orchestrierung:\n• Implementierung umfassender GRC-Plattformen, die Governance, Risk und Compliance in einer einheitlichen Lösung vereinen\n• Aufbau von Workflow-Orchestrierung für automatisierte Risikomanagement-Prozesse und Eskalationsmechanismen\n• Entwicklung von API-basierten Integrationen zwischen verschiedenen Sicherheitstools und Risikomanagement-Systemen\n• Etablierung von Single-Pane-of-Glass Dashboards für konsolidierte Risikosicht und Management-Reporting\n• Implementation von Low-Code/No-Code Plattformen für agile Anpassung von Risikomanagement-Workflows\n\n📊 Real-Time Analytics und Intelligent Dashboards:\n• Aufbau von Real-Time-Risiko-Dashboards mit interaktiven Visualisierungen und Drill-Down-Funktionalitäten\n• Implementierung von Augmented Analytics, die automatisch Insights und Handlungsempfehlungen generieren\n• Entwicklung von Mobile-First Dashboards für ortsunabhängigen Zugriff auf kritische Risikoinformationen\n• Integration von Voice-Interfaces und Chatbots für intuitive Interaktion mit Risikodaten\n• Nutzung von Virtual und Augmented Reality für immersive Risiko-Visualisierung und Szenario-Simulation\n\n🔗 Cloud-native Architektur und Skalierbarkeit:\n• Migration zu Cloud-nativen Risikomanagement-Architekturen für Skalierbarkeit und Flexibilität\n• Implementierung von Microservices-Architekturen für modulare und agile Risikomanagement-Funktionen\n• Aufbau von Container-basierten Deployment-Strategien für schnelle Skalierung und Updates\n• Nutzung von Serverless Computing für kosteneffiziente und ereignisgesteuerte Risikomanagement-Prozesse\n• Integration von Edge Computing für dezentrale Risikobewertung und lokale Datenverarbeitung\n\n🛡️ Automatisierte Compliance und Continuous Monitoring:\n• Entwicklung von Compliance-as-Code Ansätzen für automatisierte Regelkonformität und Policy-Enforcement\n• Implementierung kontinuierlicher Compliance-Überwachung mit automatischen Abweichungserkennungen\n• Aufbau von Self-Healing-Systemen, die automatisch auf Risikoveränderungen reagieren und Gegenmaßnahmen einleiten\n• Integration von Robotic Process Automation für repetitive Risikomanagement-Aufgaben\n• Etablierung von DevSecOps-Pipelines für integrierte Sicherheits- und Risikobewertung in Entwicklungsprozessen"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 10),
+        question: 'Welche Rolle spielt die Integration mit anderen Compliance-Frameworks und wie wird Multi-Framework-Compliance effizient verwaltet?',
+        answer: "Die Integration mit anderen Compliance-Frameworks ist essentiell für moderne Organisationen, die multiple regulatorische Anforderungen erfüllen müssen. Ein strategischer Multi-Framework-Ansatz reduziert Redundanzen, optimiert Ressourcen und schafft Synergien zwischen verschiedenen Compliance-Initiativen.\n\n🔄 Framework-Mapping und Harmonisierung:\n• Entwicklung detaillierter Mapping-Matrizen zwischen ISO 27001 und anderen Frameworks wie NIST, SOC 2, GDPR, NIS2 und branchenspezifischen Standards\n• Identifikation von Überschneidungen und Synergien zwischen verschiedenen Kontrollkatalogen und Anforderungen\n• Aufbau einer einheitlichen Kontroll-Bibliothek, die multiple Framework-Anforderungen gleichzeitig adressiert\n• Entwicklung von Master-Kontrollsets, die als Basis für verschiedene Compliance-Zertifizierungen dienen\n• Etablierung von Framework-agnostischen Risikobewertungsmethoden für konsistente Ergebnisse\n\n📋 Integrierte Governance und Steuerung:\n• Aufbau einer übergeordneten Compliance-Governance, die alle relevanten Frameworks koordiniert und steuert\n• Entwicklung einheitlicher Rollen und Verantwortlichkeiten für Multi-Framework-Compliance\n• Implementierung konsolidierter Reporting-Strukturen, die verschiedene Stakeholder und Aufsichtsbehörden bedienen\n• Etablierung von Cross-Framework-Komitees für strategische Entscheidungen und Ressourcenallokation\n• Aufbau von Eskalationsmechanismen, die Framework-übergreifende Risiken und Konflikte adressieren\n\n🛠️ Technologie-Integration und Automatisierung:\n• Implementierung von GRC-Plattformen, die multiple Frameworks nativ unterstützen und verwalten können\n• Entwicklung von API-Integrationen zwischen verschiedenen Compliance-Tools und Assessment-Plattformen\n• Aufbau automatisierter Evidence-Collection-Systeme, die Nachweise für multiple Frameworks gleichzeitig sammeln\n• Implementierung von Workflow-Engines, die Framework-spezifische Prozesse orchestrieren und koordinieren\n• Nutzung von AI für intelligente Framework-Zuordnung und automatische Compliance-Gap-Analyse\n\n📊 Konsolidiertes Monitoring und Reporting:\n• Entwicklung einheitlicher KPIs und Metriken, die Framework-übergreifende Compliance-Performance messen\n• Aufbau konsolidierter Dashboards, die den Status verschiedener Compliance-Initiativen in einer Sicht darstellen\n• Implementierung von Cross-Framework-Alerting für kritische Compliance-Abweichungen\n• Etablierung von Trend-Analysen, die Framework-übergreifende Compliance-Entwicklungen aufzeigen\n• Entwicklung von Executive-Reporting, das strategische Compliance-Entscheidungen unterstützt\n\n🎯 Strategische Optimierung und Effizienz:\n• Durchführung regelmäßiger Framework-Assessments zur Identifikation von Optimierungspotenzialen\n• Entwicklung von Compliance-Roadmaps, die Framework-Implementierungen strategisch sequenzieren\n• Aufbau von Shared-Service-Modellen für gemeinsame Compliance-Funktionen und Ressourcen\n• Implementierung von Continuous Improvement Prozessen für Multi-Framework-Effizienz\n• Etablierung von Benchmarking-Programmen für Best-Practice-Identifikation und Wissenstransfer"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 11),
+        question: 'Wie wird Incident Response und Business Continuity Planning in das strategische Risikomanagement integriert?',
+        answer: "Die Integration von Incident Response und Business Continuity Planning in das strategische Risikomanagement schafft eine ganzheitliche Resilienz-Architektur, die proaktive Risikoprävention mit reaktiver Krisenbeherrschung verbindet. Diese Integration ermöglicht nahtlose Übergänge zwischen normalen Betriebszuständen und Krisensituationen.\n\n🚨 Integrierte Incident Response Architektur:\n• Entwicklung einer einheitlichen Incident Response Strategie, die sich nahtlos in das Risikomanagement-Framework integriert\n• Aufbau von Incident-Klassifizierungssystemen, die direkt mit Risikobewertungen und Eskalationsprozessen verknüpft sind\n• Implementierung automatisierter Incident-Detection-Systeme, die auf Risikoindikatoren und Schwellenwerten basieren\n• Etablierung von Cross-funktionalen Incident Response Teams mit klaren Rollen und Verantwortlichkeiten\n• Integration von Threat Intelligence und Risikodaten für kontextuelle Incident-Bewertung und Priorisierung\n\n🔄 Business Continuity und Resilience Planning:\n• Entwicklung risikobasierter Business Impact Analysen, die kritische Geschäftsprozesse und Assets identifizieren\n• Aufbau von Continuity-Strategien, die verschiedene Risikoszenarien und deren Auswirkungen berücksichtigen\n• Implementierung von Recovery-Zielen, die sich an Risikotoleranz und Geschäftsanforderungen orientieren\n• Etablierung von Backup-Systemen und Redundanzen basierend auf Risikobewertungen und Kritikalitätsanalysen\n• Integration von Supply Chain Resilience in die Gesamtstrategie für umfassende Geschäftskontinuität\n\n📋 Prozess-Integration und Workflow-Orchestrierung:\n• Aufbau nahtloser Übergänge zwischen Risikomanagement, Incident Response und Business Continuity Prozessen\n• Entwicklung einheitlicher Eskalationsmechanismen, die automatisch zwischen verschiedenen Response-Modi wechseln\n• Implementierung von Workflow-Engines, die situationsabhängig die optimalen Response-Strategien aktivieren\n• Etablierung von Communication-Protokollen, die alle Stakeholder koordiniert und zeitnah informieren\n• Integration von Decision-Support-Systemen für schnelle und fundierte Krisenentscheidungen\n\n🎯 Kontinuierliches Testing und Verbesserung:\n• Durchführung regelmäßiger Tabletop-Übungen und Simulation von Risikoszenarien\n• Implementierung von Red Team Exercises zur Validierung der integrierten Response-Fähigkeiten\n• Aufbau von Lessons Learned Prozessen, die Erkenntnisse aus Incidents in das Risikomanagement zurückführen\n• Etablierung von Maturity-Assessments für kontinuierliche Verbesserung der Resilienz-Fähigkeiten\n• Integration von Performance-Metriken für Response-Zeiten, Recovery-Effektivität und Stakeholder-Zufriedenheit\n\n🔗 Stakeholder-Integration und Kommunikation:\n• Entwicklung einheitlicher Kommunikationsstrategien für verschiedene Stakeholder-Gruppen und Krisensituationen\n• Aufbau von Stakeholder-Dashboards, die Real-Time-Status und Response-Aktivitäten transparent darstellen\n• Implementierung von Crisis Communication Protocols für Medien, Kunden, Partner und Aufsichtsbehörden\n• Etablierung von Feedback-Mechanismen zur kontinuierlichen Verbesserung der Stakeholder-Erfahrung\n• Integration von Reputation Management in die Gesamtstrategie für nachhaltigen Vertrauenserhalt"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 12),
+        question: 'Welche Metriken und KPIs sind entscheidend für die Bewertung der Risikomanagement-Reife und wie wird kontinuierliche Verbesserung sichergestellt?',
+        answer: "Die Bewertung der Risikomanagement-Reife erfordert ein ausgewogenes Set von quantitativen und qualitativen Metriken, die sowohl operative Effizienz als auch strategische Wirksamkeit messen. Ein strukturiertes Maturity-Assessment-Framework ermöglicht kontinuierliche Verbesserung und Benchmarking gegen Branchenstandards.\n\n📊 Strategische Reife-Indikatoren:\n• Governance-Metriken wie Risiko-Komitee-Effektivität, Management-Engagement und strategische Integration\n• Kultur-Indikatoren wie Risikobewusstsein, Mitarbeiter-Engagement und organisationales Lernen\n• Innovation-Metriken für Adoption neuer Technologien, Prozessverbesserungen und Best-Practice-Integration\n• Stakeholder-Zufriedenheit mit Risikomanagement-Services und Transparenz\n• Business-Value-Metriken wie ROI von Risikoinvestitionen und Wertschöpfung durch Risikomanagement\n\n🎯 Operative Leistungsindikatoren:\n• Prozess-Effizienz-Metriken wie Risikobewertungszeiten, Response-Zeiten und Automatisierungsgrad\n• Qualitäts-Indikatoren für Risikobewertungsgenauigkeit, Vorhersagequalität und Entscheidungsunterstützung\n• Compliance-Metriken wie Audit-Ergebnisse, Regulatory-Readiness und Framework-Abdeckung\n• Incident-Response-Leistung einschließlich Detection-Zeiten, Containment-Effektivität und Recovery-Performance\n• Kosten-Effizienz-Indikatoren für Risikomanagement-Investitionen und Ressourcenoptimierung\n\n🔄 Kontinuierliche Verbesserungs-Frameworks:\n• Implementierung von PDCA-Zyklen für systematische Risikomanagement-Optimierung\n• Aufbau von Benchmarking-Programmen gegen Branchenstandards und Best Practices\n• Etablierung von Innovation-Labs für Pilotierung neuer Risikomanagement-Ansätze und Technologien\n• Entwicklung von Feedback-Schleifen zwischen operativen Teams und strategischem Management\n• Integration von Agile-Methoden für schnelle Iteration und Anpassung von Risikomanagement-Prozessen\n\n📈 Maturity-Assessment und Roadmap-Entwicklung:\n• Durchführung regelmäßiger Maturity-Assessments basierend auf etablierten Frameworks wie CMMI oder COBIT\n• Entwicklung organisationsspezifischer Reife-Modelle, die Branchenbesonderheiten und strategische Ziele berücksichtigen\n• Aufbau von Gap-Analysen zur Identifikation von Verbesserungspotenzialen und Prioritäten\n• Erstellung strategischer Roadmaps für schrittweise Reife-Steigerung und Capability-Aufbau\n• Implementation von Change Management Programmen für nachhaltige Transformation\n\n🚀 Innovation und Zukunftsorientierung:\n• Monitoring von Emerging Technologies und deren Potenzial für Risikomanagement-Innovation\n• Aufbau von Partnerships mit Technologie-Anbietern, Forschungseinrichtungen und Branchenverbänden\n• Entwicklung von Future-State-Visionen und strategischen Zielen für Risikomanagement-Excellence\n• Implementierung von Experimentation-Frameworks für sichere Pilotierung innovativer Ansätze\n• Etablierung von Knowledge Management Systemen für organisationales Lernen und Wissenstransfer"
+      }
+    ]
+    
+    // Update the document with new FAQs
+    const updatedFaqs = [...(existingDoc.faq || []), ...newFaqs]
+    
+    console.log(`Adding ${newFaqs.length} new FAQs to the document...`)
+    const transaction = client.transaction()
+    transaction.patch(existingDoc._id, {
+      set: {
+        faq: updatedFaqs
+      }
+    })
+    
+    await transaction.commit()
+    console.log('✅ FAQ batch 3 added successfully')
+  } catch (error) {
+    console.error('Error:', error)
+    throw error
+  }
+}
+
+run()

@@ -1,0 +1,77 @@
+import 'dotenv/config'
+import { createClient } from '@sanity/client'
+
+// Create client with direct credentials
+const client = createClient({
+  projectId: 'wwmm9rbb',
+  dataset: 'production',
+  apiVersion: '2024-02-14',
+  token: process.env.SANITY_API_TOKEN,
+  useCdn: false,
+})
+
+// Helper function to generate unique keys
+function generateKey(prefix: string, index: number): string {
+  return `${prefix}_${Date.now()}_${index}`
+}
+
+const run = async () => {
+  try {
+    console.log('Updating VS-NfD page with FAQ batch 2...')
+    
+    // First, get the existing document
+    console.log('Fetching existing document...')
+    const existingDoc = await client.fetch('*[_id == $id][0]', { id: 'vs-nfd' })
+    
+    if (!existingDoc) {
+      throw new Error('Document "vs-nfd" not found')
+    }
+    
+    // Create new FAQs for technical security requirements
+    const newFaqs = [
+      {
+        _type: 'object',
+        _key: generateKey('faq', 5),
+        question: 'Welche spezifischen Verschlüsselungsanforderungen müssen bei der Implementierung von VS-NfD Compliance beachtet werden?',
+        answer: "Die Verschlüsselungsanforderungen für VS-NfD Informationen sind präzise definiert und erfordern die Verwendung zugelassener Kryptografie-Produkte und -Verfahren. Diese Anforderungen gehen über Standard-Verschlüsselungsmaßnahmen hinaus und orientieren sich an den Vorgaben des Bundesamts für Sicherheit in der Informationstechnik. Eine ordnungsgemäße Implementierung ist essentiell für die Compliance und den Schutz klassifizierter Informationen.\n\n🔐 Zugelassene Verschlüsselungsprodukte:\n• Verwendung von Verschlüsselungsprodukten, die eine Zulassung oder Freigabe des BSI für VS-NfD besitzen\n• Implementierung von Algorithmen, die den aktuellen kryptografischen Standards und Empfehlungen entsprechen\n• Berücksichtigung der BSI-Technischen Richtlinien für kryptografische Verfahren und Schlüssellängen\n• Regelmäßige Überprüfung der Zulassungsstatus verwendeter Verschlüsselungsprodukte\n• Dokumentation aller eingesetzten Kryptografie-Lösungen und deren Zertifizierungsstatus\n\n💾 Verschlüsselung ruhender Daten:\n• Vollständige Verschlüsselung aller Speichermedien, die VS-NfD Informationen enthalten\n• Implementierung von Hardware-basierter Verschlüsselung für kritische Speichersysteme\n• Sichere Verschlüsselung von Backup-Medien und Archivierungssystemen\n• Verwendung separater Verschlüsselungsschlüssel für verschiedene Datenklassifikationen\n• Implementierung von Verschlüsselung auf Datei oder Datenbankebene für granulare Kontrolle\n\n🌐 Verschlüsselung von Daten in Übertragung:\n• End-to-End-Verschlüsselung für alle Kommunikationskanäle, die VS-NfD Informationen übertragen\n• Verwendung starker TLS-Konfigurationen mit aktuellen Cipher-Suites für Webanwendungen\n• Implementierung von VPN-Lösungen mit zugelassenen Verschlüsselungsalgorithmen\n• Sichere E-Mail-Verschlüsselung für den Austausch klassifizierter Informationen\n• Verschlüsselung von API-Kommunikation und Datenbank-Verbindungen\n\n🔑 Schlüsselmanagement und -verwaltung:\n• Implementierung robuster Schlüsselgenerierungs-, -verteilungs- und -speicherungsverfahren\n• Verwendung von Hardware-Security-Modulen für die sichere Schlüsselverwahrung\n• Etablierung von Schlüsselrotations-Richtlinien und automatisierten Erneuerungsprozessen\n• Sichere Schlüsselarchivierung und -wiederherstellung für langfristige Datenzugriffe\n• Implementierung von Schlüsseltrennung und Vier-Augen-Prinzip für kritische Schlüsseloperationen\n\n📱 Mobile und Endpoint-Verschlüsselung:\n• Vollständige Geräteverschlüsselung für alle mobilen Endgeräte mit VS-NfD Zugriff\n• Implementierung von Container-basierten Verschlüsselungslösungen für BYOD-Szenarien\n• Sichere Verschlüsselung von Wechselmedien und externen Speichergeräten\n• Remote-Wipe-Funktionalitäten mit sicherer Schlüssellöschung bei Geräteverlust\n• Monitoring und Compliance-Überprüfung der Verschlüsselungsstatus aller Endgeräte\n\n🔍 Monitoring und Compliance-Überwachung:\n• Kontinuierliche Überwachung der Verschlüsselungsimplementierung und -effektivität\n• Regelmäßige Audits und Penetrationstests der kryptografischen Implementierungen\n• Automatisierte Compliance-Checks für Verschlüsselungsrichtlinien und -konfigurationen\n• Incident-Response-Verfahren für kryptografische Sicherheitsvorfälle\n• Dokumentation und Reporting von Verschlüsselungsmetriken für Compliance-Nachweise"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 6),
+        question: 'Wie sollten Netzwerkarchitekturen gestaltet werden, um VS-NfD Informationen sicher zu verarbeiten und zu übertragen?',
+        answer: "Die Netzwerkarchitektur für VS-NfD Informationsverarbeitung erfordert spezielle Sicherheitsmaßnahmen und Designprinzipien, die über Standard-Netzwerksicherheit hinausgehen. Eine durchdachte Netzwerksegmentierung, robuste Zugangskontrollen und umfassende Überwachungsmaßnahmen sind essentiell für den Schutz klassifizierter Informationen. Die Architektur muss sowohl Sicherheitsanforderungen als auch operative Effizienz berücksichtigen.\n\n🏗️ Netzwerksegmentierung und Isolation:\n• Implementierung dedizierter Netzwerksegmente für VS-NfD Informationsverarbeitung\n• Physische oder logische Trennung von Netzwerkbereichen mit unterschiedlichen Klassifizierungsstufen\n• Verwendung von VLANs und Mikrosegmentierung für granulare Netzwerkkontrolle\n• Implementierung von Air-Gap-Architekturen für hochsensible VS-NfD Verarbeitungsumgebungen\n• Etablierung von DMZ-Bereichen für kontrollierte externe Kommunikation\n\n🔥 Firewall und Perimeter-Sicherheit:\n• Deployment von Next-Generation-Firewalls mit Deep-Packet-Inspection-Capabilities\n• Implementierung von Application-Layer-Firewalls für granulare Anwendungskontrolle\n• Konfiguration restriktiver Firewall-Regeln basierend auf dem Prinzip der minimalen Berechtigung\n• Verwendung von Intrusion-Prevention-Systemen für proaktive Bedrohungsabwehr\n• Regelmäßige Überprüfung und Optimierung von Firewall-Konfigurationen\n\n🌐 Sichere Kommunikationskanäle:\n• Implementierung von Site-to-Site-VPNs für sichere Standortverbindungen\n• Verwendung von Client-VPNs mit starker Authentifizierung für Remote-Zugriffe\n• Etablierung sicherer API-Gateways für Anwendungsintegration\n• Implementierung von Message-Queuing-Systemen mit Ende-zu-Ende-Verschlüsselung\n• Sichere Konfiguration von Netzwerkprotokollen und Eliminierung unsicherer Protokolle\n\n🔍 Netzwerk-Monitoring und Anomalieerkennung:\n• Deployment von Network-Detection-and-Response-Lösungen für kontinuierliche Überwachung\n• Implementierung von SIEM-Systemen für korrelierte Sicherheitsereignisanalyse\n• Verwendung von Network-Traffic-Analysis-Tools für Verhaltensanomalien\n• Etablierung von Honeypots und Deception-Technologien für Angriffserkennung\n• Regelmäßige Netzwerk-Penetrationstests und Vulnerability-Assessments\n\n🔐 Zugangskontrollen und Authentifizierung:\n• Implementierung von Network-Access-Control-Systemen für Gerätezulassung\n• Verwendung von Multi-Faktor-Authentifizierung für alle Netzwerkzugriffe\n• Etablierung von Role-Based-Access-Control für netzwerkbasierte Ressourcen\n• Implementierung von Privileged-Access-Management für administrative Netzwerkzugriffe\n• Kontinuierliche Überwachung und Validierung von Netzwerkzugriffsberechtigungen\n\n☁️ Cloud und Hybrid-Netzwerk-Sicherheit:\n• Sichere Konfiguration von Cloud-Netzwerkkomponenten und Virtual-Private-Clouds\n• Implementierung von Cloud-Access-Security-Brokern für Cloud-Service-Kontrolle\n• Verwendung von Software-Defined-Perimeter-Technologien für dynamische Netzwerksicherheit\n• Etablierung sicherer Hybrid-Cloud-Konnektivität mit On-Premises-Infrastrukturen\n• Compliance-konforme Konfiguration von Cloud-Netzwerkdiensten für VS-NfD Verarbeitung"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 7),
+        question: 'Welche Backup und Disaster-Recovery-Strategien sind für VS-NfD Informationen erforderlich?',
+        answer: "Backup und Disaster-Recovery-Strategien für VS-NfD Informationen müssen die gleichen Sicherheitsanforderungen erfüllen wie die Primärdaten und gleichzeitig eine zuverlässige Wiederherstellung im Notfall gewährleisten. Diese Strategien erfordern spezielle Überlegungen zu Verschlüsselung, Zugangskontrollen und geografischer Verteilung. Ein umfassendes Konzept muss sowohl technische als auch organisatorische Aspekte berücksichtigen.\n\n💾 Backup-Sicherheitsanforderungen:\n• Vollständige Verschlüsselung aller Backup-Medien mit zugelassenen Verschlüsselungsprodukten\n• Implementierung separater Verschlüsselungsschlüssel für Backup-Systeme\n• Sichere Aufbewahrung von Backup-Medien in physisch geschützten Bereichen\n• Regelmäßige Überprüfung der Integrität und Wiederherstellbarkeit von Backup-Daten\n• Dokumentation und Nachverfolgung aller Backup-Aktivitäten und Medienstandorte\n\n🔄 Backup-Strategien und -Verfahren:\n• Implementierung von mehrstufigen Backup-Strategien mit verschiedenen Aufbewahrungszeiten\n• Verwendung von Incremental und Differential-Backup-Verfahren für Effizienz\n• Etablierung von Offline-Backup-Kopien für Schutz vor Ransomware und Cyberangriffen\n• Implementierung von Cross-Site-Backup-Replikation für geografische Redundanz\n• Regelmäßige Backup-Tests und Wiederherstellungsübungen zur Validierung der Verfahren\n\n🏢 Disaster-Recovery-Planung:\n• Entwicklung umfassender Disaster-Recovery-Pläne für VS-NfD Verarbeitungsumgebungen\n• Etablierung von Recovery-Time-Objectives und Recovery-Point-Objectives für kritische Systeme\n• Implementierung von Hot-Standby-Systemen für geschäftskritische VS-NfD Anwendungen\n• Planung alternativer Arbeitsplätze und Kommunikationswege für Notfallsituationen\n• Regelmäßige Disaster-Recovery-Tests und Aktualisierung der Notfallpläne\n\n🔐 Zugangskontrollen und Berechtigungen:\n• Implementierung strenger Zugangskontrollen für Backup und Recovery-Systeme\n• Verwendung des Vier-Augen-Prinzips für kritische Wiederherstellungsoperationen\n• Etablierung von Emergency-Access-Verfahren für Notfallsituationen\n• Regelmäßige Überprüfung und Aktualisierung von Backup-Zugriffsberechtigungen\n• Dokumentation aller Zugriffe auf Backup und Recovery-Systeme\n\n📍 Geografische Verteilung und Standortsicherheit:\n• Implementierung geografisch verteilter Backup-Standorte für Redundanz\n• Berücksichtigung von Compliance-Anforderungen bei der Standortwahl\n• Sichere Transportverfahren für Backup-Medien zwischen Standorten\n• Etablierung von Partnerschaften mit spezialisierten Disaster-Recovery-Dienstleistern\n• Regelmäßige Bewertung der physischen Sicherheit aller Backup-Standorte\n\n🔍 Monitoring und Compliance:\n• Kontinuierliche Überwachung der Backup-Systeme und -Prozesse\n• Automatisierte Alerting bei Backup-Fehlern oder Anomalien\n• Regelmäßige Compliance-Audits der Backup und Recovery-Verfahren\n• Integration von Backup-Monitoring in das übergeordnete Security-Operations-Center\n• Dokumentation und Reporting von Backup-Metriken für Compliance-Nachweise"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 8),
+        question: 'Wie können Cloud-Services sicher für die Verarbeitung von VS-NfD Informationen genutzt werden?',
+        answer: "Die Nutzung von Cloud-Services für VS-NfD Informationen erfordert besondere Sorgfalt und spezielle Sicherheitsmaßnahmen, die über Standard-Cloud-Security hinausgehen. Nicht alle Cloud-Services sind für die Verarbeitung klassifizierter Informationen geeignet, und die Auswahl muss sorgfältig auf Basis von Compliance-Anforderungen und Sicherheitsbewertungen erfolgen. Eine umfassende Due-Diligence und kontinuierliche Überwachung sind essentiell.\n\n☁️ Cloud-Service-Auswahl und -Bewertung:\n• Auswahl von Cloud-Providern mit nachgewiesener Expertise in Government und Compliance-Bereichen\n• Bewertung der Zertifizierungen und Akkreditierungen des Cloud-Providers für klassifizierte Informationen\n• Durchführung umfassender Security-Assessments und Due-Diligence-Prüfungen\n• Berücksichtigung der geografischen Standorte der Cloud-Infrastruktur und Datenresidenz-Anforderungen\n• Evaluierung der Transparenz und Auditierbarkeit der Cloud-Service-Architektur\n\n🔐 Verschlüsselung und Schlüsselmanagement:\n• Implementierung von Customer-Managed-Encryption-Keys für vollständige Schlüsselkontrolle\n• Verwendung von Hardware-Security-Modules in der Cloud für sichere Schlüsselverwahrung\n• End-to-End-Verschlüsselung für alle Datenübertragungen zur und von der Cloud\n• Sichere Schlüsselrotation und -archivierung in Cloud-Umgebungen\n• Implementierung von Bring-Your-Own-Key-Strategien für maximale Kontrolle\n\n🏗️ Cloud-Architektur und -Konfiguration:\n• Implementierung von Private-Cloud oder Dedicated-Cloud-Umgebungen für VS-NfD Verarbeitung\n• Verwendung von Virtual-Private-Clouds mit strikter Netzwerksegmentierung\n• Konfiguration von Cloud-Security-Groups und Network-Access-Control-Lists\n• Implementierung von Cloud-basierter Mikrosegmentierung für granulare Kontrolle\n• Verwendung von Infrastructure-as-Code für konsistente und sichere Cloud-Deployments\n\n📋 Vertragsgestaltung und Compliance:\n• Entwicklung spezifischer Vertragsklauseln für VS-NfD Compliance-Anforderungen\n• Etablierung von Service-Level-Agreements mit Sicherheits und Compliance-Metriken\n• Vereinbarung von Audit-Rechten und regelmäßigen Compliance-Überprüfungen\n• Klare Definition von Verantwortlichkeiten zwischen Cloud-Provider und Kunde\n• Implementierung von Incident-Response und Breach-Notification-Verfahren\n\n🔍 Monitoring und Governance:\n• Implementierung von Cloud-Security-Posture-Management für kontinuierliche Überwachung\n• Verwendung von Cloud-Access-Security-Brokern für Aktivitätsmonitoring\n• Etablierung von Cloud-Governance-Frameworks für Richtlinien und Verfahren\n• Regelmäßige Security-Assessments und Penetrationstests der Cloud-Umgebung\n• Integration von Cloud-Monitoring in das übergeordnete Security-Operations-Center\n\n🚪 Zugangskontrollen und Identitätsmanagement:\n• Implementierung von Cloud-basiertem Identity-and-Access-Management\n• Verwendung von Single-Sign-On mit Multi-Faktor-Authentifizierung\n• Etablierung von Privileged-Access-Management für Cloud-Administratoren\n• Implementierung von Just-in-Time-Access für temporäre Berechtigungen\n• Regelmäßige Überprüfung und Zertifizierung von Cloud-Zugriffsberechtigungen"
+      }
+    ]
+    
+    // Update the document with new FAQs
+    const updatedFaqs = [...(existingDoc.faq || []), ...newFaqs]
+    
+    console.log(`Adding ${newFaqs.length} new FAQs to the document...`)
+    const transaction = client.transaction()
+    transaction.patch(existingDoc._id, {
+      set: {
+        faq: updatedFaqs
+      }
+    })
+    
+    await transaction.commit()
+    console.log('✅ FAQ batch 2 added successfully')
+  } catch (error) {
+    console.error('Error:', error)
+    throw error
+  }
+}
+
+run()

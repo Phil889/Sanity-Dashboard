@@ -1,0 +1,77 @@
+import 'dotenv/config'
+import { createClient } from '@sanity/client'
+
+// Create client with direct credentials
+const client = createClient({
+  projectId: 'wwmm9rbb',
+  dataset: 'production',
+  apiVersion: '2024-02-14',
+  token: process.env.SANITY_API_TOKEN,
+  useCdn: false,
+})
+
+// Helper function to generate unique keys
+function generateKey(prefix: string, index: number): string {
+  return `${prefix}_${Date.now()}_${index}`
+}
+
+const run = async () => {
+  try {
+    console.log('Updating CRA Cyber Resilience Act Deutsch page with FAQs batch 5...')
+    
+    // First, get the existing document
+    console.log('Fetching existing document...')
+    const existingDoc = await client.fetch('*[_id == $id][0]', { id: 'cra-cyber-resilience-act-deutsch' })
+    
+    if (!existingDoc) {
+      throw new Error('Document "cra-cyber-resilience-act-deutsch" not found')
+    }
+    
+    // Create new FAQs
+    const newFaqs = [
+      {
+        _type: 'object',
+        _key: generateKey('faq', 17),
+        question: 'Wie entwickeln wir eine deutsche CRA-Performance-Messung und KPI-Strategie für kontinuierliche Verbesserung?',
+        answer: "Die Entwicklung einer deutschen CRA-Performance-Messung und KPI-Strategie erfordert eine systematische Herangehensweise, die sowohl quantitative Metriken als auch qualitative Bewertungen umfasst und kontinuierliche Verbesserung der CRA-Compliance-Effektivität ermöglicht. Eine erfolgreiche deutsche Strategie schafft Transparenz, Accountability und datengetriebene Entscheidungsfindung für optimale CRA-Performance.\n\n📊 Deutsche KPI-Framework-Entwicklung und Metriken-Design:\n• Entwicklung deutscher Balanced Scorecard Ansätze für ganzheitliche Bewertung der CRA-Performance aus verschiedenen Perspektiven.\n• Aufbau deutscher Leading und Lagging Indicators für sowohl proaktive als auch reaktive Performance-Messung.\n• Integration deutscher Branchenspezifischer KPIs, die relevante Besonderheiten des deutschen Markts und der jeweiligen Industrie berücksichtigen.\n• Entwicklung deutscher Compliance-Maturity-Modelle für strukturierte Bewertung des CRA-Reifegrads und Identifikation von Verbesserungspotenzialen.\n• Etablierung deutscher Benchmarking-Frameworks für Vergleich der Performance mit Branchenstandards und Best Practices.\n\n🎯 Deutsche Zielvereinbarung und Performance-Management:\n• Aufbau deutscher SMART-Ziele-Frameworks für spezifische, messbare und erreichbare CRA-Performance-Ziele.\n• Integration deutscher OKR-Systeme für strategische Ausrichtung der CRA-Performance auf Unternehmensziele.\n• Entwicklung deutscher Incentive-Strukturen, die CRA-Performance-Verbesserungen belohnen und fördern.\n• Etablierung deutscher Performance-Review-Zyklen für regelmäßige Bewertung und Anpassung der CRA-Ziele.\n• Aufbau deutscher Accountability-Mechanismen mit klaren Verantwortlichkeiten für CRA-Performance-Ergebnisse.\n\n📈 Deutsche Datensammlung und Analytics-Infrastruktur:\n• Implementation deutscher Automated Data Collection Systeme für effiziente und genaue Erfassung von CRA-Performance-Daten.\n• Aufbau deutscher Real-Time Dashboards für kontinuierliche Überwachung kritischer CRA-Performance-Indikatoren.\n• Entwicklung deutscher Predictive Analytics Capabilities für frühzeitige Identifikation von Performance-Trends und Risiken.\n• Integration deutscher Business Intelligence Tools für tiefgreifende Analyse und Insights aus CRA-Performance-Daten.\n• Etablierung deutscher Data Quality Management für Sicherstellung der Genauigkeit und Zuverlässigkeit der Performance-Metriken.\n\n🔄 Deutsche Kontinuierliche Verbesserung und Optimierung:\n• Aufbau deutscher Continuous Improvement Prozesse basierend auf Performance-Daten und Erkenntnissen.\n• Entwicklung deutscher Root Cause Analysis Methoden für systematische Identifikation von Performance-Problemen.\n• Integration deutscher Kaizen-Prinzipien für kontinuierliche, inkrementelle Verbesserungen der CRA-Performance.\n• Etablierung deutscher Innovation-Pipelines für Entwicklung neuer Ansätze zur Performance-Steigerung.\n• Aufbau deutscher Learning Organization Capabilities für organisationsweites Lernen aus Performance-Erfahrungen."
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 18),
+        question: 'Welche deutschen Krisenmanagement-Strategien sind für CRA-bezogene Notfälle und Compliance-Verstöße erforderlich?',
+        answer: "Deutsche Krisenmanagement-Strategien für CRA-bezogene Notfälle erfordern eine umfassende Vorbereitung auf verschiedene Krisenszenarien, die sowohl technische Sicherheitsvorfälle als auch regulatorische Compliance-Verstöße abdeckt. Eine erfolgreiche deutsche Strategie kombiniert bewährte deutsche Krisenmanagement-Prinzipien mit CRA-spezifischen Anforderungen für effektive Krisenbewältigung und schnelle Wiederherstellung.\n\n🚨 Deutsche Krisenvorbereitung und Szenario-Planung:\n• Entwicklung deutscher Krisenszenario-Kataloge, die verschiedene CRA-bezogene Notfallsituationen und deren potenzielle Auswirkungen systematisch erfassen.\n• Aufbau deutscher Business Impact Analysen für Bewertung der Auswirkungen verschiedener CRA-Krisen auf Geschäftsprozesse und Stakeholder.\n• Etablierung deutscher Crisis Response Teams mit klaren Rollen, Verantwortlichkeiten und Entscheidungsbefugnissen für verschiedene Krisentypen.\n• Entwicklung deutscher Eskalationsmatrizen für strukturierte und zeitnahe Entscheidungsfindung während CRA-Krisen.\n• Integration deutscher Stakeholder-Mapping für effektive Kommunikation mit allen relevanten internen und externen Parteien.\n\n📞 Deutsche Krisenkommunikation und Stakeholder-Management:\n• Aufbau deutscher Krisenkommunikations-Frameworks mit vorgefertigten Botschaften und Kommunikationskanälen für verschiedene Zielgruppen.\n• Entwicklung deutscher Media Relations Strategien für professionelle Behandlung von Medienanfragen während CRA-Krisen.\n• Integration deutscher Behördenkommunikation für koordinierte Zusammenarbeit mit BSI, Regulierungsbehörden und anderen relevanten Institutionen.\n• Etablierung deutscher Customer Communication Prozesse für transparente und vertrauensbildende Kommunikation mit betroffenen Kunden.\n• Aufbau deutscher Internal Communication Systeme für effektive Information und Koordination der internen Teams während Krisen.\n\n🔧 Deutsche Krisenreaktion und Schadensbegrenzung:\n• Implementation deutscher Incident Response Prozesse für schnelle und effektive Reaktion auf CRA-Sicherheitsvorfälle.\n• Aufbau deutscher Damage Control Mechanismen für Minimierung der Auswirkungen von CRA-Compliance-Verstößen.\n• Entwicklung deutscher Forensik-Capabilities für detaillierte Analyse von Krisenereignissen und Beweissicherung.\n• Integration deutscher Legal Response Koordination für rechtliche Beratung und Unterstützung während CRA-Krisen.\n• Etablierung deutscher Vendor Management Prozesse für Koordination mit externen Dienstleistern und Partnern während Notfällen.\n\n🔄 Deutsche Krisenauswertung und Organisationales Lernen:\n• Aufbau deutscher Post-Crisis Review Prozesse für systematische Analyse der Krisenreaktion und Identifikation von Verbesserungspotenzialen.\n• Entwicklung deutscher Lessons Learned Dokumentation für Erfassung und Weitergabe von Krisenerfahrungen.\n• Integration deutscher Crisis Simulation Übungen für regelmäßige Validierung und Verbesserung der Krisenmanagement-Fähigkeiten.\n• Etablierung deutscher Recovery Planning für strukturierte Wiederherstellung normaler Geschäftsoperationen nach CRA-Krisen.\n• Aufbau deutscher Resilience Building Initiativen für kontinuierliche Stärkung der organisatorischen Widerstandsfähigkeit gegen zukünftige Krisen."
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 19),
+        question: 'Wie entwickeln wir eine deutsche CRA-Talentmanagement-Strategie für Aufbau und Erhalt von Cybersicherheits-Expertise?',
+        answer: "Die Entwicklung einer deutschen CRA-Talentmanagement-Strategie erfordert eine ganzheitliche Herangehensweise, die sowohl die Akquisition neuer Talente als auch die Entwicklung und Bindung bestehender Mitarbeiter umfasst. Eine erfolgreiche deutsche Strategie berücksichtigt die Besonderheiten des deutschen Arbeitsmarkts und schafft attraktive Karrierewege im CRA-Compliance-Bereich.\n\n🎯 Deutsche Talent-Akquisition und Recruiting-Strategien:\n• Entwicklung deutscher Employer Branding Strategien, die das Unternehmen als attraktiven Arbeitgeber für CRA-Cybersicherheits-Experten positionieren.\n• Aufbau deutscher University Relations Programme für frühzeitige Identifikation und Entwicklung von Nachwuchstalenten in relevanten Studiengängen.\n• Integration deutscher Diversity und Inclusion Initiativen für Erschließung des vollen Talentpools und Förderung verschiedener Perspektiven.\n• Etablierung deutscher Referral-Programme für Nutzung der Netzwerke bestehender Mitarbeiter zur Talentakquisition.\n• Entwicklung deutscher Competitive Intelligence für Verständnis der Marktbedingungen und Wettbewerbsstrategien im Talent-Bereich.\n\n📚 Deutsche Kompetenzentwicklung und Weiterbildungsstrategien:\n• Aufbau deutscher Competency Frameworks, die spezifische CRA-Fähigkeiten und Karrierepfade strukturiert definieren.\n• Integration deutscher Mentoring und Coaching Programme für personalisierte Entwicklung von CRA-Expertise.\n• Entwicklung deutscher Cross-Training Initiativen für Aufbau breiter CRA-Kompetenzen und organisatorischer Flexibilität.\n• Etablierung deutscher Certification Support Programme für Unterstützung bei relevanten CRA-Zertifizierungen und Qualifikationen.\n• Aufbau deutscher Innovation Time Konzepte für Förderung kreativer CRA-Lösungsansätze und kontinuierliches Lernen.\n\n💼 Deutsche Karriereentwicklung und Retention-Strategien:\n• Entwicklung deutscher Career Pathway Modelle mit klaren Aufstiegsmöglichkeiten und Spezialisierungsoptionen im CRA-Bereich.\n• Integration deutscher Work-Life-Balance Initiativen, die den Anforderungen von CRA-Experten und deutschen Arbeitskultur-Erwartungen entsprechen.\n• Aufbau deutscher Recognition und Reward Systeme für Anerkennung herausragender CRA-Performance und Innovationen.\n• Etablierung deutscher Flexible Working Arrangements für Anpassung an die Bedürfnisse hochqualifizierter CRA-Professionals.\n• Entwicklung deutscher Internal Mobility Programme für vielfältige Karriereerfahrungen innerhalb der CRA-Organisation.\n\n🌐 Deutsche Wissensmanagement und Knowledge Sharing:\n• Implementation deutscher Knowledge Management Systeme für effiziente Erfassung, Speicherung und Weitergabe von CRA-Expertise.\n• Aufbau deutscher Communities of Practice für fachlichen Austausch und kollaboratives Lernen zwischen CRA-Experten.\n• Entwicklung deutscher Documentation Standards für systematische Erfassung und Transfer von CRA-Wissen.\n• Integration deutscher Succession Planning für Sicherstellung der Kontinuität kritischer CRA-Expertise.\n• Etablierung deutscher External Networking Support für Förderung der professionellen Entwicklung und Marktpräsenz der CRA-Talente."
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 20),
+        question: 'Welche deutschen Nachhaltigkeits- und ESG-Integration-Strategien verbinden CRA-Compliance mit Umweltverantwortung?',
+        answer: "Deutsche Nachhaltigkeits- und ESG-Integration-Strategien für CRA-Compliance erfordern eine innovative Herangehensweise, die Cybersicherheit mit Umweltverantwortung und sozialer Nachhaltigkeit verbindet. Eine erfolgreiche deutsche Strategie nutzt CRA-Compliance als Katalysator für nachhaltige Geschäftspraktiken und schafft Synergien zwischen Sicherheit, Umweltschutz und gesellschaftlicher Verantwortung.\n\n🌱 Deutsche Environmental Integration und Green IT Strategien:\n• Entwicklung deutscher Green CRA Frameworks, die Energieeffizienz und Umweltauswirkungen von CRA-Compliance-Systemen systematisch optimieren.\n• Integration deutscher Renewable Energy Strategien für nachhaltige Stromversorgung von CRA-Infrastrukturen und Rechenzentren.\n• Aufbau deutscher Carbon Footprint Monitoring für kontinuierliche Überwachung und Reduzierung der Umweltauswirkungen von CRA-Aktivitäten.\n• Entwicklung deutscher Circular Economy Ansätze für nachhaltige Nutzung und Wiederverwertung von CRA-Hardware und Technologie-Ressourcen.\n• Etablierung deutscher Sustainable Procurement Policies für umweltfreundliche Beschaffung von CRA-relevanten Produkten und Services.\n\n👥 Deutsche Social Responsibility und Stakeholder-Engagement:\n• Aufbau deutscher Digital Inclusion Initiativen, die CRA-Sicherheit für alle Gesellschaftsschichten zugänglich und verständlich machen.\n• Integration deutscher Community Engagement Programme für Aufklärung und Bildung zu CRA-Cybersicherheit in lokalen Gemeinschaften.\n• Entwicklung deutscher Ethical AI Frameworks für verantwortungsvolle Nutzung von KI-Technologien in CRA-Compliance-Systemen.\n• Etablierung deutscher Diversity und Inclusion Strategien für gleichberechtigte Teilhabe an CRA-Sicherheitsvorteilen.\n• Aufbau deutscher Transparency Initiativen für offene Kommunikation über CRA-Praktiken und deren gesellschaftliche Auswirkungen.\n\n🏛️ Deutsche Governance und Compliance-Integration:\n• Entwicklung deutscher ESG-CRA Governance Strukturen, die Nachhaltigkeitsziele mit Cybersicherheitszielen strategisch verknüpfen.\n• Integration deutscher Stakeholder Capitalism Ansätze für Berücksichtigung aller Interessengruppen in CRA-Entscheidungsprozessen.\n• Aufbau deutscher Impact Measurement Systeme für quantitative Bewertung der gesellschaftlichen und umweltbezogenen Auswirkungen von CRA-Initiativen.\n• Etablierung deutscher Sustainable Finance Integration für Verknüpfung von CRA-Investitionen mit nachhaltigen Finanzierungsmodellen.\n• Entwicklung deutscher Regulatory Alignment Strategien für Harmonisierung von CRA-Compliance mit EU-Nachhaltigkeitsregulierungen.\n\n📊 Deutsche Reporting und Kommunikationsstrategien:\n• Implementation deutscher Integrated Reporting Frameworks, die CRA-Performance mit ESG-Metriken in ganzheitlichen Berichten kombinieren.\n• Aufbau deutscher Sustainability Communication Strategien für effektive Kommunikation der CRA-Nachhaltigkeits-Erfolge an verschiedene Zielgruppen.\n• Entwicklung deutscher Third-Party Verification Prozesse für unabhängige Validierung der nachhaltigen CRA-Praktiken.\n• Integration deutscher Digital Sustainability Dashboards für Real-Time Monitoring der ESG-CRA Performance.\n• Etablierung deutscher Thought Leadership Initiativen für Positionierung als Vorreiter für nachhaltige CRA-Compliance im deutschen und internationalen Markt."
+      }
+    ]
+    
+    // Update the document with new FAQs
+    const updatedFaqs = [...(existingDoc.faq || []), ...newFaqs]
+    
+    console.log(`Adding ${newFaqs.length} new FAQs to the document...`)
+    const transaction = client.transaction()
+    transaction.patch(existingDoc._id, {
+      set: {
+        faq: updatedFaqs
+      }
+    })
+    
+    await transaction.commit()
+    console.log('✅ FAQs batch 5 added successfully')
+  } catch (error) {
+    console.error('Error:', error)
+    throw error
+  }
+}
+
+run()

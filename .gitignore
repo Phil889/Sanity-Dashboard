@@ -1,0 +1,36 @@
+# Environment and credentials
+.env
+.env.local
+.env.*.local
+
+# Dependencies
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Build artifacts
+dist/
+*.js.map
+
+# Temporary files
+tmp/
+*.tmp
+nul
+
+# Extracted page data (regenerable via extract-batch)
+src/data/extracted/*.json
+
+# Translated page data (regenerable via translate)
+src/data/translated/*.json
+
+# Logs
+*.log
+npm-debug.log*

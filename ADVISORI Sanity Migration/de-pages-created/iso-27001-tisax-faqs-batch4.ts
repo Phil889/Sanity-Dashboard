@@ -1,0 +1,77 @@
+import 'dotenv/config'
+import { createClient } from '@sanity/client'
+
+// Create client with direct credentials
+const client = createClient({
+  projectId: 'wwmm9rbb',
+  dataset: 'production',
+  apiVersion: '2024-02-14',
+  token: process.env.SANITY_API_TOKEN,
+  useCdn: false,
+})
+
+// Helper function to generate unique keys
+function generateKey(prefix: string, index: number): string {
+  return `${prefix}_${Date.now()}_${index}`
+}
+
+const run = async () => {
+  try {
+    console.log('Updating ISO 27001 TISAX page with FAQ batch 4...')
+    
+    // First, get the existing document
+    console.log('Fetching existing document...')
+    const existingDoc = await client.fetch('*[_id == $id][0]', { id: 'iso-27001-tisax' })
+    
+    if (!existingDoc) {
+      throw new Error('Document "iso-27001-tisax" not found')
+    }
+    
+    // Create new FAQs for TISAX future trends and strategic aspects
+    const newFaqs = [
+      {
+        _type: 'object',
+        _key: generateKey('faq', 13),
+        question: 'Welche Zukunftstrends beeinflussen TISAX und die Automotive Information Security?',
+        answer: "Die Automotive-Branche durchläuft eine beispiellose digitale Transformation, die neue Herausforderungen und Anforderungen für TISAX und die Informationssicherheit mit sich bringt. Diese Entwicklungen erfordern eine kontinuierliche Anpassung und Weiterentwicklung der TISAX-Standards und -praktiken.\n\n🚗 Autonomes Fahren und AI Integration:\n• Entwicklung spezifischer Sicherheitsanforderungen für AI-basierte Fahrzeugsysteme und Machine Learning Algorithmen\n• Neue Assessment-Kriterien für die Sicherheit von Autonomous Driving Daten und Entscheidungsprozessen\n• Integration von AI Security Best Practices in TISAX-Bewertungen\n• Berücksichtigung von Adversarial AI Attacks und deren Abwehr in automotive-spezifischen Kontexten\n• Entwicklung von Standards für sichere AI-Modell-Updates und -validierung\n\n🔋 Elektromobilität und Energiemanagement:\n• Neue Sicherheitsanforderungen für Batteriemanagement-Systeme und Ladeinfrastrukturen\n• Integration von Smart Grid Security in automotive-spezifische Sicherheitskonzepte\n• Schutz von Energieverbrauchsdaten und Ladeverhalten vor unbefugtem Zugriff\n• Sicherheitsstandards für Vehicle-to-Grid Kommunikation und Energiehandel\n• Berücksichtigung von Cybersecurity-Risiken in der Elektromobilitäts-Supply Chain\n\n🌐 5G und Edge Computing:\n• Anpassung von TISAX an ultra-niedrige Latenz-Anforderungen und Edge Computing Architekturen\n• Neue Sicherheitsmodelle für 5G-basierte Vehicle-to-Everything Kommunikation\n• Integration von Network Slicing Security in automotive-spezifische Bewertungen\n• Berücksichtigung von Multi-Access Edge Computing Risiken in TISAX-Assessments\n• Entwicklung von Standards für sichere Real-Time Data Processing in Fahrzeugen\n\n🔗 Blockchain und Distributed Ledger:\n• Integration von Blockchain Security Standards in TISAX für Supply Chain Transparency\n• Neue Bewertungskriterien für dezentrale Identitätsmanagement-Systeme in der Automobilindustrie\n• Sicherheitsanforderungen für Smart Contracts in automotive-spezifischen Anwendungen\n• Berücksichtigung von Cryptocurrency-basierten Zahlungssystemen in Connected Cars\n• Standards für sichere Provenance Tracking von Automotive-Komponenten\n\n🏭 Industrie 4.0 und Digital Twins:\n• Erweiterte Sicherheitsanforderungen für Digital Twin Technologien in der Fahrzeugentwicklung\n• Integration von IoT Security Standards für vernetzte Produktionsanlagen\n• Neue Assessment-Kriterien für Augmented und Virtual Reality in der Automotive-Entwicklung\n• Sicherheitsstandards für Collaborative Robotics und Human-Machine Interfaces\n• Berücksichtigung von Quantum Computing Risiken und Post-Quantum Cryptography\n\n📊 Regulatorische Entwicklungen:\n• Anpassung an neue EU-Regulierungen wie den AI Act und deren Auswirkungen auf Automotive AI\n• Integration von UN-R155 und UN-R156 Anforderungen in TISAX-Bewertungen\n• Berücksichtigung nationaler Cybersecurity-Gesetze und deren Harmonisierung\n• Entwicklung von Standards für grenzüberschreitende Datenübertragung in globalen Automotive-Netzwerken\n• Anpassung an sich entwickelnde Datenschutzbestimmungen für Connected Car Services"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 14),
+        question: 'Wie bereitet sich ein Unternehmen strategisch auf zukünftige TISAX-Entwicklungen vor?',
+        answer: "Eine strategische Vorbereitung auf zukünftige TISAX-Entwicklungen erfordert eine proaktive Herangehensweise, die sowohl technologische Trends als auch regulatorische Veränderungen berücksichtigt. Unternehmen müssen ihre Sicherheitsarchitektur flexibel gestalten und kontinuierlich an neue Anforderungen anpassen.\n\n🎯 Strategische Roadmap-Entwicklung:\n• Aufbau einer langfristigen TISAX-Roadmap, die technologische Trends und Marktentwicklungen berücksichtigt\n• Integration von Emerging Technologies in die Sicherheitsstrategie mit Fokus auf automotive-spezifische Anwendungen\n• Entwicklung von Szenarien für verschiedene Zukunftsentwicklungen und deren Auswirkungen auf TISAX-Compliance\n• Regelmäßige Bewertung und Anpassung der Strategie basierend auf neuen Erkenntnissen und Marktveränderungen\n• Aufbau von Partnerschaften mit Technologieanbietern und Forschungseinrichtungen für frühzeitige Einblicke\n\n🔬 Innovation und Forschung:\n• Investition in Forschung und Entwicklung für automotive-spezifische Cybersecurity-Technologien\n• Aufbau von Innovation Labs für die Erprobung neuer Sicherheitstechnologien in automotive-spezifischen Kontexten\n• Teilnahme an Brancheninitiativen und Standardisierungsgremien für TISAX-Weiterentwicklung\n• Collaboration mit Universitäten und Forschungseinrichtungen für automotive-spezifische Sicherheitsforschung\n• Entwicklung von Proof-of-Concepts für zukünftige automotive-spezifische Sicherheitsanforderungen\n\n🏗️ Flexible Architektur-Entwicklung:\n• Aufbau modularer und skalierbarer Sicherheitsarchitekturen, die sich an neue TISAX-Anforderungen anpassen lassen\n• Implementation von API-first Ansätzen für einfache Integration neuer automotive-spezifischer Sicherheitsservices\n• Entwicklung von Cloud-native Sicherheitslösungen für automotive-spezifische Anwendungen\n• Aufbau von Zero Trust Architekturen, die sich an verschiedene automotive-spezifische Szenarien anpassen lassen\n• Investment in Software-defined Security für flexible Anpassung an neue Bedrohungslandschaften\n\n👥 Kompetenzaufbau und Talent Management:\n• Aufbau interner Expertise für Emerging Technologies in automotive-spezifischen Sicherheitskontexten\n• Entwicklung von Schulungsprogrammen für zukünftige automotive-spezifische Sicherheitsanforderungen\n• Rekrutierung von Spezialisten für neue Technologiebereiche wie AI Security und Quantum Cryptography\n• Aufbau von Cross-functional Teams für interdisziplinäre automotive-spezifische Sicherheitsprojekte\n• Etablierung von Mentoring-Programmen für kontinuierliche Kompetenzentwicklung\n\n📊 Monitoring und Intelligence:\n• Aufbau von Threat Intelligence Capabilities für automotive-spezifische Bedrohungslandschaften\n• Implementation von Advanced Analytics für die Früherkennung neuer Sicherheitsrisiken\n• Entwicklung von KPIs und Metriken für die Bewertung zukünftiger Sicherheitsanforderungen\n• Aufbau von Competitive Intelligence für die Beobachtung von Marktentwicklungen und Best Practices\n• Etablierung von Feedback-Loops für kontinuierliche Verbesserung der Sicherheitsstrategie\n\n🤝 Ecosystem-Entwicklung:\n• Aufbau strategischer Partnerschaften mit anderen Automotive-Unternehmen für gemeinsame Sicherheitsinitiativen\n• Entwicklung von Supplier Security Programs, die zukünftige TISAX-Anforderungen berücksichtigen\n• Participation in Industry Consortiums für die Entwicklung neuer automotive-spezifischer Sicherheitsstandards\n• Aufbau von Customer Advisory Boards für die Identifikation zukünftiger Sicherheitsanforderungen\n• Entwicklung von Open Source Initiativen für automotive-spezifische Sicherheitstechnologien"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 15),
+        question: 'Welche Rolle spielt TISAX bei der Entwicklung von Software-Defined Vehicles?',
+        answer: "Software-Defined Vehicles repräsentieren einen fundamentalen Wandel in der Automobilindustrie, bei dem Software zur zentralen Differenzierung wird. TISAX muss sich an diese neue Realität anpassen und spezifische Sicherheitsanforderungen für software-zentrierte Fahrzeugarchitekturen entwickeln.\n\n💻 Software-zentrische Sicherheitsarchitektur:\n• Entwicklung neuer TISAX-Kriterien für die Bewertung von Software-Defined Vehicle Architekturen\n• Integration von DevSecOps-Praktiken in automotive-spezifische Entwicklungsprozesse\n• Sicherheitsanforderungen für Containerisierung und Microservices in Fahrzeugsystemen\n• Bewertung von Software Supply Chain Security für automotive-spezifische Komponenten\n• Standards für sichere Software-Updates und Patch-Management in vernetzten Fahrzeugen\n\n🔄 Continuous Integration und Deployment:\n• TISAX-Anforderungen für CI/CD-Pipelines in der automotive-spezifischen Softwareentwicklung\n• Sicherheitsstandards für automatisierte Testing und Validation von Fahrzeugsoftware\n• Integration von Security Testing in automotive-spezifische Entwicklungszyklen\n• Bewertung von Infrastructure as Code für automotive-spezifische Cloud-Services\n• Standards für sichere Artifact Management und Software Distribution\n\n🏗️ Platform und Ecosystem Security:\n• Sicherheitsanforderungen für automotive-spezifische Software-Plattformen und App Stores\n• Bewertung von Third-Party Software Integration in Software-Defined Vehicles\n• Standards für API Security und Service Mesh Architekturen in Fahrzeugsystemen\n• Sicherheitsmodelle für Multi-Tenant Automotive-Plattformen\n• Integration von Identity und Access Management für software-basierte Fahrzeugfunktionen\n\n📱 Over-the-Air Updates und Remote Management:\n• TISAX-Kriterien für sichere OTA-Update-Mechanismen und Rollback-Strategien\n• Sicherheitsanforderungen für Remote Diagnostics und Predictive Maintenance\n• Standards für sichere Feature Activation und Software Licensing in Fahrzeugen\n• Bewertung von Edge Computing Security für lokale Fahrzeugdatenverarbeitung\n• Integration von Blockchain-basierter Software Provenance und Integrity Verification\n\n🔍 Runtime Security und Monitoring:\n• Entwicklung von TISAX-Standards für Runtime Application Self-Protection in Fahrzeugen\n• Sicherheitsanforderungen für Behavioral Analytics und Anomaly Detection\n• Integration von Security Orchestration und Automated Response für Fahrzeugsysteme\n• Standards für sichere Logging und Forensics in Software-Defined Vehicles\n• Bewertung von AI-basierter Threat Detection für automotive-spezifische Anwendungen\n\n🌐 Cloud-Native und Hybrid Architectures:\n• TISAX-Anforderungen für Cloud-Native Automotive Applications und Services\n• Sicherheitsstandards für Hybrid Cloud Deployments in der Automobilindustrie\n• Integration von Service Mesh Security für automotive-spezifische Microservices\n• Bewertung von Serverless Computing Security für automotive-spezifische Workloads\n• Standards für Multi-Cloud Security und Vendor Lock-in Vermeidung"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 16),
+        question: 'Wie unterstützt TISAX die Entwicklung nachhaltiger und sicherer Mobilitätslösungen?',
+        answer: "TISAX spielt eine entscheidende Rolle bei der Entwicklung nachhaltiger Mobilitätslösungen, indem es Sicherheitsstandards für neue Mobilitätskonzepte etabliert und gleichzeitig Umwelt- und Nachhaltigkeitsaspekte in die Informationssicherheit integriert. Diese ganzheitliche Herangehensweise ist essentiell für die Zukunft der Mobilität.\n\n🌱 Green IT und Sustainable Security:\n• Integration von Energieeffizienz-Kriterien in TISAX-Bewertungen für automotive-spezifische IT-Infrastrukturen\n• Entwicklung von Standards für nachhaltige Cybersecurity-Praktiken in der Automobilindustrie\n• Bewertung von Carbon Footprint Aspekten bei der Implementierung von Sicherheitsmaßnahmen\n• Förderung von Green Coding Practices für automotive-spezifische Softwareentwicklung\n• Integration von Circular Economy Prinzipien in automotive-spezifische Sicherheitsarchitekturen\n\n🚌 Mobility-as-a-Service Security:\n• TISAX-Standards für sichere Shared Mobility Plattformen und Car-Sharing Services\n• Sicherheitsanforderungen für Multi-Modal Transportation Apps und Integrationsplattformen\n• Bewertung von Privacy und Data Protection in Mobility-as-a-Service Ökosystemen\n• Standards für sichere Payment und Billing Systeme in geteilten Mobilitätsdiensten\n• Integration von User Consent Management für personalisierte Mobilitätsservices\n\n🏙️ Smart City Integration:\n• Entwicklung von TISAX-Kriterien für Vehicle-to-Infrastructure Kommunikation\n• Sicherheitsstandards für Integration von Fahrzeugen in Smart City Ökosysteme\n• Bewertung von Traffic Management System Security und Verkehrsoptimierung\n• Standards für sichere Integration von Public Transportation und Private Mobility\n• Integration von Environmental Monitoring und Air Quality Data Security\n\n⚡ Elektromobilität und Energiemanagement:\n• TISAX-Anforderungen für sichere Ladeinfrastrukturen und Smart Charging Systeme\n• Sicherheitsstandards für Vehicle-to-Grid Integration und Energiehandel\n• Bewertung von Battery Management System Security und Predictive Maintenance\n• Standards für sichere Integration erneuerbarer Energien in Mobilitätssysteme\n• Integration von Energy Data Privacy und Grid Security Aspekten\n\n🤖 Autonomous und Connected Mobility:\n• Entwicklung von TISAX-Standards für sichere Autonomous Vehicle Fleets\n• Sicherheitsanforderungen für Platooning und Cooperative Driving Systeme\n• Bewertung von AI Ethics und Algorithmic Transparency in autonomen Fahrzeugen\n• Standards für sichere Human-Machine Interaction in autonomen Mobilitätssystemen\n• Integration von Safety und Security Aspekte für Level 4 und 5 Autonomous Vehicles\n\n📊 Data-Driven Sustainability:\n• TISAX-Kriterien für sichere Sammlung und Analyse von Nachhaltigkeitsdaten\n• Sicherheitsstandards für Environmental Impact Monitoring und Reporting\n• Bewertung von Predictive Analytics für Optimierung von Mobilitätsmustern\n• Standards für sichere Integration von IoT-Sensoren für Umweltmonitoring\n• Integration von Blockchain-basierter Carbon Credit Tracking und Verification"
+      }
+    ]
+    
+    // Update the document with new FAQs
+    const updatedFaqs = [...(existingDoc.faq || []), ...newFaqs]
+    
+    console.log(`Adding ${newFaqs.length} new FAQs to the document...`)
+    const transaction = client.transaction()
+    transaction.patch(existingDoc._id, {
+      set: {
+        faq: updatedFaqs
+      }
+    })
+    
+    await transaction.commit()
+    console.log('✅ FAQ batch 4 added successfully')
+  } catch (error) {
+    console.error('Error:', error)
+    throw error
+  }
+}
+
+run()

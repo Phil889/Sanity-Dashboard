@@ -1,0 +1,77 @@
+import 'dotenv/config'
+import { createClient } from '@sanity/client'
+
+// Create client with direct credentials
+const client = createClient({
+  projectId: 'wwmm9rbb',
+  dataset: 'production',
+  apiVersion: '2024-02-14',
+  token: process.env.SANITY_API_TOKEN,
+  useCdn: false,
+})
+
+// Helper function to generate unique keys
+function generateKey(prefix: string, index: number): string {
+  return `${prefix}_${Date.now()}_${index}`
+}
+
+const run = async () => {
+  try {
+    console.log('Updating Was ist IAM page with FAQ batch 2...')
+    
+    // First, get the existing document
+    console.log('Fetching existing document...')
+    const existingDoc = await client.fetch('*[_id == $id][0]', { id: 'was-ist-iam' })
+    
+    if (!existingDoc) {
+      throw new Error('Document "was-ist-iam" not found')
+    }
+    
+    // Create new FAQs for IAM components and architecture
+    const newFaqs = [
+      {
+        _type: 'object',
+        _key: generateKey('faq', 5),
+        question: 'Welche Authentifizierungsmethoden und Single Sign-On Strategien sind für moderne IAM-Systeme entscheidend?',
+        answer: "Moderne Authentifizierung geht weit über traditionelle Benutzername-Passwort-Kombinationen hinaus und umfasst ein vielschichtiges Ökosystem intelligenter, kontextbasierter Sicherheitsmechanismen. Diese Methoden müssen sowohl höchste Sicherheitsstandards erfüllen als auch eine nahtlose, benutzerfreundliche Erfahrung bieten.\n\n🔐 Multi-Faktor-Authentifizierung Strategien:\n• Biometrische Authentifizierung mit Fingerabdruck, Gesichtserkennung und Iris-Scanning für höchste Sicherheit\n• Hardware-basierte Tokens und FIDO2-kompatible Sicherheitsschlüssel für phishing-resistente Authentifizierung\n• Mobile Push-Benachrichtigungen mit kontextbasierten Informationen für benutzerfreundliche Verifikation\n• Time-based One-Time Passwords mit dynamischen Codes für zusätzliche Sicherheitsebenen\n• Risk-based Authentication mit maschinellem Lernen für adaptive Sicherheitsanforderungen\n\n🚀 Passwordless Authentication Revolution:\n• FIDO2 und WebAuthn Standards für sichere, passwortlose Anmeldung über alle Geräte\n• Biometrische Authentifizierung als primäre Authentifizierungsmethode ohne Passwort-Fallback\n• Certificate-based Authentication für Geräte und Anwendungen mit PKI-Integration\n• Magic Links und Email-basierte Authentifizierung für nahtlose Benutzerführung\n• Behavioral Biometrics für kontinuierliche Authentifizierung basierend auf Nutzungsmustern\n\n🌐 Single Sign-On Architektur und Protokolle:\n• SAML Federation für Enterprise-Integration und Cross-Domain-Authentifizierung\n• OAuth und OpenID Connect für moderne API-basierte Anwendungen und Cloud-Services\n• Kerberos Integration für nahtlose Windows-Umgebung und Legacy-System-Anbindung\n• Social Login Integration für Consumer-Anwendungen mit Privacy-by-Design\n• Cross-Platform SSO für nahtlose Erfahrung über Desktop, Mobile und Web\n\n🧠 Adaptive und Kontextbasierte Authentifizierung:\n• Geolocation-basierte Risikobewertung für standortabhängige Sicherheitsanforderungen\n• Device Fingerprinting für Erkennung bekannter und vertrauenswürdiger Geräte\n• Behavioral Analytics für Erkennung anomaler Anmeldeversuche und Benutzerverhalten\n• Time-based Access Controls für zeitabhängige Zugriffsbeschränkungen\n• Network-based Authentication für vertrauenswürdige Netzwerkumgebungen\n\n🔄 Session Management und Kontinuierliche Verifikation:\n• Dynamic Session Timeout basierend auf Risikobewertung und Benutzeraktivität\n• Step-up Authentication für erhöhte Sicherheitsanforderungen bei kritischen Aktionen\n• Continuous Authentication für laufende Verifikation während der gesamten Sitzung\n• Session Sharing und Cross-Application SSO für nahtlose Arbeitsabläufe\n• Graceful Degradation für Ausfallsicherheit bei Authentifizierungsfehlern"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 6),
+        question: 'Wie funktioniert Role-Based Access Control und welche modernen Autorisierungsmodelle ergänzen RBAC in komplexen Unternehmensumgebungen?',
+        answer: "Role-Based Access Control bildet das Fundament moderner Autorisierungsarchitekturen, wird jedoch in komplexen Unternehmensumgebungen durch fortschrittliche Modelle ergänzt, die dynamische, kontextbasierte und attributbasierte Entscheidungen ermöglichen. Diese Evolution ermöglicht granulare Kontrolle bei gleichzeitiger Skalierbarkeit und Verwaltbarkeit.\n\n🏗️ RBAC Grundlagen und Best Practices:\n• Hierarchische Rollenmodelle mit Vererbung und Delegation für effiziente Rechteverwaltung\n• Separation of Duties für automatische Erkennung und Verhinderung von Interessenkonflikten\n• Role Mining und Analytics für datengetriebene Rollenoptimierung und -bereinigung\n• Dynamic Role Assignment basierend auf Organisationsstrukturen und Geschäftsprozessen\n• Role Lifecycle Management für automatisierte Erstellung, Änderung und Archivierung von Rollen\n\n🎯 Attribute-Based Access Control Evolution:\n• Fine-grained Permissions basierend auf Benutzer-, Ressourcen- und Umgebungsattributen\n• Policy-based Authorization mit deklarativen Regeln und Business-Logic-Integration\n• Dynamic Attribute Evaluation für Real-time Entscheidungen basierend auf aktuellen Kontextdaten\n• Attribute Aggregation aus verschiedenen Datenquellen für umfassende Entscheidungsgrundlagen\n• XACML und ALFA Standards für interoperable und standardisierte Policy-Definition\n\n🔄 Hybrid Authorization Models:\n• RBAC-ABAC Integration für optimale Balance zwischen Einfachheit und Flexibilität\n• Relationship-Based Access Control für komplexe organisatorische Beziehungen\n• Task-Based Access Control für prozessorientierte Zugriffskontrolle\n• Context-Aware Authorization für situationsabhängige Berechtigungen\n• Risk-Based Authorization für dynamische Anpassung basierend auf Bedrohungslandschaft\n\n⚡ Zero Trust und Least Privilege Prinzipien:\n• Just-in-Time Access für temporäre Berechtigungserhöhung bei Bedarf\n• Continuous Authorization für laufende Neubewertung von Zugriffsrechten\n• Micro-Segmentation für granulare Netzwerk- und Anwendungszugriffe\n• Privileged Access Management für kritische und administrative Berechtigungen\n• Automated Privilege Escalation und De-escalation basierend auf Geschäftsanforderungen\n\n📊 Policy Management und Governance:\n• Centralized Policy Administration für konsistente Regelanwendung über alle Systeme\n• Policy Simulation und Testing für Validierung vor Produktionseinführung\n• Automated Policy Conflict Detection für Identifikation widersprüchlicher Regeln\n• Policy Versioning und Rollback für sichere Änderungsverwaltung\n• Compliance Mapping für automatische Zuordnung zu regulatorischen Anforderungen\n\n🔍 Advanced Authorization Capabilities:\n• Machine Learning-basierte Anomaly Detection für ungewöhnliche Zugriffsmuster\n• Predictive Authorization für proaktive Berechtigungsanpassungen\n• Graph-based Access Control für komplexe Beziehungsmodelle\n• API-level Authorization für Microservices und moderne Anwendungsarchitekturen\n• Cross-Domain Authorization für föderierte Umgebungen und Partner-Integration"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 7),
+        question: 'Welche Rolle spielt Privileged Access Management in der IAM-Architektur und wie schützt es kritische Unternehmensressourcen?',
+        answer: "Privileged Access Management ist das Hochsicherheitszentrum jeder IAM-Architektur und schützt die wertvollsten und kritischsten Unternehmensressourcen vor internen und externen Bedrohungen. PAM geht weit über traditionelle Passwort-Safes hinaus und umfasst eine umfassende Sicherheitsstrategie für alle privilegierten Identitäten und Zugriffe.\n\n🛡️ Privileged Account Discovery und Inventory:\n• Automated Discovery für Identifikation aller privilegierten Accounts über alle Systeme\n• Service Account Management für nicht-menschliche Identitäten und Anwendungskonten\n• Shared Account Control für gemeinsam genutzte administrative Konten\n• Orphaned Account Detection für verwaiste und vergessene privilegierte Konten\n• Privileged Entitlement Analytics für Risikobewertung und Optimierung\n\n🔐 Credential Management und Vaulting:\n• Centralized Password Vaulting mit Enterprise-grade Verschlüsselung und HSM-Integration\n• Automated Password Rotation für regelmäßige Änderung ohne Serviceunterbrechung\n• SSH Key Management für sichere Server-zu-Server-Kommunikation\n• API Key und Certificate Management für moderne Anwendungslandschaften\n• Emergency Access Procedures für Break-Glass-Szenarien und Notfallzugriffe\n\n⚡ Just-in-Time und Just-Enough Access:\n• Temporary Privilege Elevation für zeitlich begrenzte Berechtigungserhöhung\n• Workflow-based Approval für kontrollierte Genehmigungsprozesse\n• Risk-based Access Decisions für dynamische Zugriffsentscheidungen\n• Automated Privilege Revocation nach Ablauf oder Aufgabenerfüllung\n• Contextual Access Controls basierend auf Geschäftsanforderungen und Risikobewertung\n\n📹 Session Monitoring und Recording:\n• Comprehensive Session Recording für vollständige Nachverfolgung privilegierter Aktivitäten\n• Real-time Session Monitoring mit Anomaly Detection und Alerting\n• Keystroke Logging und Screen Recording für forensische Analyse\n• Command Filtering und Blocking für Verhinderung gefährlicher Aktionen\n• Live Session Intervention für sofortige Reaktion auf verdächtige Aktivitäten\n\n🔍 Privileged Analytics und Threat Detection:\n• Behavioral Analytics für Erkennung anomaler privilegierter Aktivitäten\n• Machine Learning-basierte Risk Scoring für kontinuierliche Risikobewertung\n• Threat Intelligence Integration für proaktive Bedrohungserkennung\n• Insider Threat Detection für Identifikation böswilliger interner Akteure\n• Automated Incident Response für schnelle Reaktion auf Sicherheitsvorfälle\n\n🌐 Cloud und DevOps Integration:\n• Cloud Privileged Access für AWS, Azure, GCP und Multi-Cloud-Umgebungen\n• DevOps Secrets Management für CI/CD-Pipelines und Container-Umgebungen\n• Infrastructure as Code Integration für automatisierte Berechtigungsverwaltung\n• Kubernetes RBAC Integration für Container-Orchestrierung\n• API-driven PAM für moderne Anwendungsarchitekturen und Microservices\n\n📊 Compliance und Audit Support:\n• Comprehensive Audit Trails für regulatorische Compliance und forensische Analyse\n• Automated Compliance Reporting für SOX, PCI-DSS, HIPAA und andere Standards\n• Segregation of Duties Enforcement für automatische Konfliktverhinderung\n• Privileged User Certification für regelmäßige Überprüfung und Validierung\n• Risk Assessment und Remediation für kontinuierliche Sicherheitsverbesserung"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 8),
+        question: 'Wie gewährleistet Identity Governance kontinuierliche Compliance und optimiert Zugriffsrechte in dynamischen Geschäftsumgebungen?',
+        answer: "Identity Governance transformiert IAM von einer reaktiven zu einer proaktiven, intelligenten Disziplin, die kontinuierlich Zugriffsrechte optimiert, Compliance sicherstellt und Geschäftsrisiken minimiert. Es verbindet technische Identitätsverwaltung mit strategischen Geschäftszielen und regulatorischen Anforderungen.\n\n🎯 Continuous Access Certification und Review:\n• Automated Certification Campaigns für regelmäßige Überprüfung aller Zugriffsrechte\n• Risk-based Certification mit Priorisierung kritischer und risikoreicher Berechtigungen\n• Manager-driven Reviews für geschäftsorientierte Entscheidungsfindung\n• Peer-based Certification für fachspezifische Validierung von Zugriffsrechten\n• Exception Handling und Remediation für systematische Behandlung von Abweichungen\n\n📊 Access Analytics und Intelligence:\n• Usage Analytics für datengetriebene Entscheidungen über Berechtigungsoptimierung\n• Entitlement Mining für Identifikation von Zugriffsmustern und Rollenoptimierung\n• Toxic Combinations Detection für automatische Erkennung gefährlicher Berechtigungskombinationen\n• Dormant Account Analysis für Identifikation ungenutzter und verwaister Konten\n• Access Trend Analysis für proaktive Kapazitätsplanung und Risikomanagement\n\n🔄 Automated Provisioning und Lifecycle Management:\n• Birthright Provisioning für automatische Grundberechtigungen neuer Mitarbeiter\n• Role-based Provisioning mit intelligenter Rollenzuweisung basierend auf Geschäftskontext\n• Joiner-Mover-Leaver Processes für vollständige Lifecycle-Automatisierung\n• Temporary Access Management für zeitlich begrenzte Projektberechtigungen\n• Automated Deprovisioning für sichere Entfernung von Zugriffsrechten bei Ausscheiden\n\n🛡️ Risk-based Governance und Compliance:\n• Continuous Risk Assessment für laufende Bewertung von Identitäts- und Zugriffsrisiken\n• Regulatory Compliance Mapping für automatische Zuordnung zu Compliance-Anforderungen\n• Policy Violation Detection für Real-time Erkennung von Richtlinienverstößen\n• Segregation of Duties Monitoring für kontinuierliche Überwachung kritischer Trennungen\n• Audit Trail Management für umfassende Nachverfolgung aller Governance-Aktivitäten\n\n⚙️ Business-driven Identity Governance:\n• Business Role Modeling für Ausrichtung technischer Rollen an Geschäftsfunktionen\n• Application Owner Integration für dezentrale Verantwortung und Entscheidungsfindung\n• Data Owner Governance für datenzentrierte Zugriffskontrolle und Klassifizierung\n• Business Process Integration für nahtlose Einbindung in Geschäftsabläufe\n• Cost Center Allocation für transparente Kostenzuordnung und Budgetierung\n\n🔍 Advanced Governance Capabilities:\n• Machine Learning-basierte Anomaly Detection für intelligente Risikobewertung\n• Predictive Analytics für proaktive Identifikation potenzieller Compliance-Probleme\n• Natural Language Processing für automatische Policy-Interpretation und -Anwendung\n• Graph Analytics für komplexe Beziehungsanalyse und Risikobewertung\n• Blockchain Integration für unveränderliche Audit-Trails und Compliance-Nachweise\n\n📈 Continuous Improvement und Optimization:\n• Governance Metrics und KPIs für messbare Verbesserung der Governance-Effektivität\n• Benchmarking und Best Practice Integration für kontinuierliche Optimierung\n• Feedback Loops für iterative Verbesserung von Governance-Prozessen\n• Automation Opportunities Identification für weitere Effizienzsteigerungen\n• Strategic Governance Roadmap für langfristige Entwicklung und Innovation"
+      }
+    ]
+    
+    // Update the document with new FAQs
+    const updatedFaqs = [...(existingDoc.faq || []), ...newFaqs]
+    
+    console.log(`Adding ${newFaqs.length} new FAQs to the document...`)
+    const transaction = client.transaction()
+    transaction.patch(existingDoc._id, {
+      set: {
+        faq: updatedFaqs
+      }
+    })
+    
+    await transaction.commit()
+    console.log('✅ FAQ batch 2 added successfully')
+  } catch (error) {
+    console.error('Error:', error)
+    throw error
+  }
+}
+
+run()

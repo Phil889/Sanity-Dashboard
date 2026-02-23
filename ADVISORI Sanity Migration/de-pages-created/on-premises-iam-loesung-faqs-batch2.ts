@@ -1,0 +1,77 @@
+import 'dotenv/config'
+import { createClient } from '@sanity/client'
+
+// Create client with direct credentials
+const client = createClient({
+  projectId: 'wwmm9rbb',
+  dataset: 'production',
+  apiVersion: '2024-02-14',
+  token: process.env.SANITY_API_TOKEN,
+  useCdn: false,
+})
+
+// Helper function to generate unique keys
+function generateKey(prefix: string, index: number): string {
+  return `${prefix}_${Date.now()}_${index}`
+}
+
+const run = async () => {
+  try {
+    console.log('Updating On-Premises IAM-Lösung page with FAQ batch 2...')
+    
+    // First, get the existing document
+    console.log('Fetching existing document...')
+    const existingDoc = await client.fetch('*[_id == $id][0]', { id: 'on-premises-iam-loesung' })
+    
+    if (!existingDoc) {
+      throw new Error('Document "on-premises-iam-loesung" not found')
+    }
+    
+    // Create new FAQs for On-Premises IAM implementation and operations
+    const newFaqs = [
+      {
+        _type: 'object',
+        _key: generateKey('faq', 5),
+        question: 'Wie gewährleistet man Hochverfügbarkeit und Disaster Recovery für kritische On-Premises IAM-Systeme ohne Kompromittierung der Sicherheit oder Performance?',
+        answer: "Hochverfügbarkeit und Disaster Recovery für On-Premises IAM-Systeme erfordern eine durchdachte Architektur, die Redundanz, geografische Verteilung und automatisierte Failover-Mechanismen intelligent kombiniert. Diese kritischen Systeme müssen kontinuierliche Verfügbarkeit gewährleisten, da Ausfälle sofortige Auswirkungen auf alle Geschäftsprozesse haben können.\n\n🏗️ Redundante Architektur-Design:\n• Multi-Site-Deployment mit geografisch verteilten Rechenzentren für maximale Ausfallsicherheit\n• Active-Active-Konfigurationen mit Load Balancing und automatischem Failover zwischen Standorten\n• Database Clustering mit synchroner Replikation für konsistente Datenintegrität\n• Network-Level Redundancy mit mehreren Internet-Providern und Backup-Verbindungen\n• Hardware-Redundanz auf allen kritischen Komponenten einschließlich Storage, Compute und Netzwerk\n\n⚡ Automated Failover und Recovery:\n• Intelligent Health Monitoring mit Real-time System-Status-Überwachung und Anomaly Detection\n• Automated Failover Procedures mit definierten Recovery Time Objectives und Recovery Point Objectives\n• Graceful Degradation Strategies für partielle Service-Verfügbarkeit während Wartungsarbeiten\n• Automated Rollback Capabilities für schnelle Wiederherstellung bei fehlgeschlagenen Updates\n• Continuous Data Synchronization zwischen primären und sekundären Standorten\n\n🔄 Comprehensive Backup und Recovery:\n• Multi-Tier Backup Strategy mit lokalen, regionalen und geografisch verteilten Backup-Standorten\n• Point-in-Time Recovery Capabilities für granulare Wiederherstellung spezifischer Zeitpunkte\n• Encrypted Backup Storage mit sicherer Schlüsselverwaltung und Access Controls\n• Regular Recovery Testing mit dokumentierten Procedures und Performance-Validierung\n• Incremental und Differential Backup-Strategien für optimierte Storage-Nutzung\n\n🔍 Proactive Monitoring und Alerting:\n• Comprehensive System Monitoring mit Performance-Metriken, Capacity-Tracking und Trend-Analyse\n• Intelligent Alerting Systems mit Escalation-Procedures und Automated Response-Capabilities\n• Predictive Analytics für frühzeitige Erkennung potenzieller Systemprobleme\n• Real-time Dashboard mit Executive-Level Visibility in System-Status und Performance\n• Integration mit Enterprise Monitoring Tools für zentrale Überwachung aller kritischen Systeme\n\n📋 Business Continuity Planning:\n• Comprehensive Disaster Recovery Plans mit definierten Rollen, Verantwortlichkeiten und Procedures\n• Regular DR Testing und Simulation mit dokumentierten Ergebnissen und Improvement-Maßnahmen\n• Communication Plans für Stakeholder-Benachrichtigung und Status-Updates während Incidents\n• Vendor Management für kritische Hardware- und Software-Support während Notfällen\n• Documentation Management mit aktuellen System-Konfigurationen und Recovery-Procedures\n\n🛡️ Security-First Recovery Approach:\n• Secure Recovery Procedures mit Authentifizierung und Autorisierung aller Recovery-Aktivitäten\n• Integrity Verification für alle wiederhergestellten Daten und Systemkonfigurationen\n• Forensic Capabilities für Incident Analysis und Root Cause Determination\n• Secure Communication Channels für alle Disaster Recovery Koordination\n• Compliance Validation für alle Recovery-Prozesse und Dokumentations-Anforderungen"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 6),
+        question: 'Welche Performance-Optimierungsstrategien sind für große On-Premises IAM-Deployments mit Millionen von Benutzern und komplexen Autorisierungsanforderungen erforderlich?',
+        answer: "Performance-Optimierung für große On-Premises IAM-Deployments erfordert einen vielschichtigen Ansatz, der Architektur-Design, Datenbank-Optimierung, Caching-Strategien und intelligente Load-Distribution kombiniert. Diese Systeme müssen Sub-Sekunden-Response-Zeiten für Authentifizierung und Autorisierung gewährleisten, während sie gleichzeitig komplexe Policy-Evaluationen und umfangreiche Audit-Logging bewältigen.\n\n🚀 Scalable Architecture Patterns:\n• Microservices-basierte Architektur mit unabhängig skalierbaren Service-Komponenten\n• Horizontal Scaling mit Auto-Scaling-Capabilities basierend auf Load-Metriken\n• Distributed Caching mit Redis oder Hazelcast für häufig abgerufene Identitätsdaten\n• API Gateway mit Rate Limiting und Request Routing für optimale Resource-Utilization\n• Event-driven Architecture für asynchrone Verarbeitung nicht-kritischer Operationen\n\n💾 Database Performance Optimization:\n• Database Partitioning und Sharding für optimale Query-Performance bei großen Datenmengen\n• Index Optimization mit regelmäßiger Analyse und Tuning für häufige Query-Patterns\n• Connection Pooling mit optimierten Pool-Größen für maximale Durchsatz-Effizienz\n• Read Replicas für Load-Distribution zwischen Read- und Write-Operationen\n• Query Optimization mit Execution Plan Analysis und Performance-Tuning\n\n⚡ Intelligent Caching Strategies:\n• Multi-Level Caching mit Application-Level, Database-Level und Network-Level Caching\n• Smart Cache Invalidation mit Event-based Updates für Daten-Konsistenz\n• Session Caching für häufige Benutzer-Authentifizierungen und Token-Validierung\n• Policy Caching für komplexe Autorisierungsregeln mit Lazy Loading\n• Distributed Cache Synchronization für Multi-Site-Deployments\n\n🔄 Load Balancing und Traffic Management:\n• Intelligent Load Balancing mit Session Affinity und Health-based Routing\n• Geographic Load Distribution für optimale Latenz basierend auf Benutzer-Standorten\n• Circuit Breaker Patterns für Resilience gegen Service-Degradation\n• Request Queuing und Throttling für Schutz vor Traffic-Spitzen\n• Adaptive Routing basierend auf Real-time Performance-Metriken\n\n📊 Performance Monitoring und Analytics:\n• Real-time Performance Monitoring mit Sub-Second Granularität für kritische Metriken\n• Application Performance Management mit End-to-End Transaction Tracing\n• Capacity Planning mit Predictive Analytics für zukünftige Skalierungsanforderungen\n• User Experience Monitoring mit Response-Time-Tracking für verschiedene Benutzergruppen\n• Bottleneck Identification mit automatisierten Performance-Analysen\n\n🔧 Advanced Optimization Techniques:\n• Lazy Loading für nicht-kritische Datenelemente mit On-Demand-Retrieval\n• Batch Processing für Bulk-Operationen mit optimierten Verarbeitungszeiten\n• Asynchronous Processing für zeitaufwändige Operationen ohne User-Impact\n• Memory Optimization mit Garbage Collection Tuning und Memory Pool Management\n• Network Optimization mit Compression und Protocol-Tuning für minimale Latenz"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 7),
+        question: 'Wie implementiert man sichere Hybrid-Architekturen für On-Premises IAM-Systeme mit selektiver Cloud-Integration ohne Kompromittierung der Sicherheitsstandards?',
+        answer: "Sichere Hybrid-Architekturen für On-Premises IAM-Systeme ermöglichen es Unternehmen, die Vorteile cloud-basierter Services zu nutzen, während kritische Identitätsdaten und Kernfunktionen lokal verbleiben. Diese Architekturen erfordern sophisticated Security-Controls, intelligente Data Classification und robuste Integration-Patterns für nahtlose Interoperabilität.\n\n🔐 Security-First Hybrid Design:\n• Data Classification Framework mit klarer Trennung zwischen kritischen und nicht-kritischen Identitätsdaten\n• Zero-Trust Network Architecture mit kontinuierlicher Verifikation aller Hybrid-Verbindungen\n• End-to-End Encryption für alle Cloud-Kommunikation mit Hardware-Security-Module-Integration\n• Secure Tunneling mit VPN oder Private Connectivity für alle Hybrid-Datenflüsse\n• Multi-Factor Authentication für alle Cloud-Service-Zugriffe mit Hardware-Token-Unterstützung\n\n🌐 Intelligent Service Distribution:\n• Core Identity Services bleiben On-Premises für maximale Kontrolle und Compliance\n• Non-Critical Services wie Analytics oder Reporting können selektiv in die Cloud migriert werden\n• Hybrid Identity Federation mit SAML oder OAuth für sichere Cross-Domain-Authentication\n• API Gateway als Secure Proxy für alle Cloud-Service-Integrationen\n• Service Mesh Architecture für sichere Service-to-Service-Kommunikation\n\n🔄 Secure Data Synchronization:\n• Selective Data Replication mit Encryption-at-Rest und Encryption-in-Transit\n• Real-time Synchronization für kritische Identitätsänderungen mit Conflict Resolution\n• Batch Synchronization für nicht-kritische Daten mit optimierten Transfer-Windows\n• Data Residency Controls mit geografischen Beschränkungen für sensitive Daten\n• Audit Trail Synchronization für umfassende Compliance-Nachverfolgung\n\n🛡️ Advanced Security Controls:\n• Network Segmentation mit Micro-Perimeters für jede Hybrid-Integration\n• Intrusion Detection Systems mit spezieller Überwachung für Hybrid-Traffic\n• Data Loss Prevention mit Content Inspection für alle Cloud-bound Datenflüsse\n• Behavioral Analytics für Anomaly Detection in Hybrid-Umgebungen\n• Continuous Security Assessment mit automatisierten Vulnerability Scans\n\n📋 Governance und Compliance:\n• Unified Policy Management für konsistente Sicherheitsrichtlinien über alle Umgebungen\n• Compliance Mapping mit klarer Zuordnung regulatorischer Anforderungen zu Deployment-Modellen\n• Risk Assessment Framework für kontinuierliche Bewertung von Hybrid-Risiken\n• Vendor Management mit Due Diligence für alle Cloud-Service-Provider\n• Incident Response Procedures mit koordinierten Prozessen für Hybrid-Incidents\n\n⚙️ Operational Excellence:\n• Unified Monitoring mit Single-Pane-of-Glass für alle Hybrid-Komponenten\n• Automated Deployment mit Infrastructure-as-Code für konsistente Konfigurationen\n• Disaster Recovery Coordination zwischen On-Premises und Cloud-Komponenten\n• Performance Optimization mit Load Balancing zwischen lokalen und Cloud-Services\n• Cost Optimization mit intelligenter Workload-Placement basierend auf Kosten-Nutzen-Analysen"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 8),
+        question: 'Welche spezifischen Herausforderungen entstehen bei der Migration von Legacy-IAM-Systemen zu modernen On-Premises-Lösungen und wie bewältigt man diese erfolgreich?',
+        answer: "Die Migration von Legacy-IAM-Systemen zu modernen On-Premises-Lösungen ist eine der komplexesten IT-Transformationen, da sie kritische Geschäftsprozesse, Sicherheitskontrollen und Benutzerworkflows gleichzeitig betrifft. Diese Projekte erfordern sorgfältige Planung, Risikomanagement und phasenweise Implementierung für erfolgreiche Transformation ohne Geschäftsunterbrechung.\n\n🔍 Comprehensive Legacy Assessment:\n• Detailed System Inventory mit vollständiger Dokumentation aller Legacy-Komponenten und Abhängigkeiten\n• Data Quality Assessment für Identitätsdaten mit Bereinigung und Standardisierung\n• Security Gap Analysis zur Identifikation von Schwachstellen und Compliance-Defiziten\n• Performance Baseline Establishment für Vergleich mit neuen Systemen\n• Business Process Mapping für Verständnis aktueller Workflows und Benutzerinteraktionen\n\n⚡ Risk Mitigation Strategies:\n• Parallel System Operation mit schrittweiser Benutzer-Migration für minimales Risiko\n• Comprehensive Backup und Rollback Procedures für jeden Migrationschritt\n• Pilot Group Testing mit ausgewählten Benutzern vor Full-Scale-Rollout\n• Automated Testing Frameworks für kontinuierliche Validierung der Migrationsergebnisse\n• Emergency Procedures für schnelle Wiederherstellung bei kritischen Problemen\n\n🔄 Phased Migration Approach:\n• Infrastructure Migration mit Aufbau der neuen Plattform parallel zu Legacy-Systemen\n• Data Migration mit ETL-Prozessen für sichere und vollständige Datenübertragung\n• Application Integration mit schrittweiser Anbindung von Anwendungen an neue IAM-Services\n• User Migration mit Gruppen-basiertem Rollout und kontinuierlichem Support\n• Legacy System Decommissioning mit sicherer Datenarchivierung und Asset-Disposal\n\n🛠️ Technical Implementation Challenges:\n• Protocol Translation für Kompatibilität zwischen Legacy- und modernen Authentifizierungsprotokollen\n• Data Format Conversion mit Mapping zwischen verschiedenen Identitätsdatenstrukturen\n• Custom Integration Development für spezielle Legacy-Anwendungen ohne Standard-Protokolle\n• Performance Optimization für neue Systeme basierend auf Legacy-Workload-Patterns\n• Security Enhancement mit Implementation moderner Sicherheitskontrollen\n\n👥 Change Management und User Adoption:\n• Comprehensive Training Programs für IT-Teams und End-Users\n• Communication Strategy mit transparenter Information über Änderungen und Vorteile\n• Support Structure mit Help Desk und Escalation-Procedures während der Migration\n• User Experience Optimization für minimale Disruption bestehender Workflows\n• Feedback Collection und Continuous Improvement basierend auf User-Input\n\n📊 Success Measurement und Optimization:\n• Migration Progress Tracking mit detaillierten Metriken und Milestone-Monitoring\n• Performance Comparison zwischen Legacy- und neuen Systemen\n• User Satisfaction Surveys für Bewertung der Migration-Erfahrung\n• Security Posture Assessment für Validierung verbesserter Sicherheitskontrollen\n• ROI Analysis für Bewertung der Business-Benefits der Migration"
+      }
+    ]
+    
+    // Update the document with new FAQs
+    const updatedFaqs = [...(existingDoc.faq || []), ...newFaqs]
+    
+    console.log(`Adding ${newFaqs.length} new FAQs to the document...`)
+    const transaction = client.transaction()
+    transaction.patch(existingDoc._id, {
+      set: {
+        faq: updatedFaqs
+      }
+    })
+    
+    await transaction.commit()
+    console.log('✅ FAQ batch 2 added successfully')
+  } catch (error) {
+    console.error('Error:', error)
+    throw error
+  }
+}
+
+run()

@@ -1,0 +1,77 @@
+import 'dotenv/config'
+import { createClient } from '@sanity/client'
+
+// Create client with direct credentials
+const client = createClient({
+  projectId: 'wwmm9rbb',
+  dataset: 'production',
+  apiVersion: '2024-02-14',
+  token: process.env.SANITY_API_TOKEN,
+  useCdn: false,
+})
+
+// Helper function to generate unique keys
+function generateKey(prefix: string, index: number): string {
+  return `${prefix}_${Date.now()}_${index}`
+}
+
+const run = async () => {
+  try {
+    console.log('Updating VS-NfD page with FAQ batch 3...')
+    
+    // First, get the existing document
+    console.log('Fetching existing document...')
+    const existingDoc = await client.fetch('*[_id == $id][0]', { id: 'vs-nfd' })
+    
+    if (!existingDoc) {
+      throw new Error('Document "vs-nfd" not found')
+    }
+    
+    // Create new FAQs for organizational controls and processes
+    const newFaqs = [
+      {
+        _type: 'object',
+        _key: generateKey('faq', 9),
+        question: 'Welche organisatorischen Kontrollen und Governance-Strukturen sind für VS-NfD Compliance erforderlich?',
+        answer: "Die Implementierung effektiver organisatorischer Kontrollen und Governance-Strukturen ist fundamental für eine erfolgreiche VS-NfD Compliance. Diese Strukturen schaffen das notwendige Framework für die systematische Verwaltung klassifizierter Informationen und gewährleisten, dass alle Mitarbeiter und Prozesse den erforderlichen Sicherheitsstandards entsprechen. Eine durchdachte Governance-Architektur ist essentiell für nachhaltige Compliance.\n\n🏛️ Governance-Framework und Verantwortlichkeiten:\n• Etablierung eines dedizierten Geheimschutzbeauftragten oder Information-Security-Officers für VS-NfD Angelegenheiten\n• Definition klarer Rollen und Verantwortlichkeiten für alle Ebenen der Organisation\n• Implementierung von Governance-Gremien mit regelmäßigen Review-Zyklen für VS-NfD Compliance\n• Entwicklung von Eskalationspfaden und Entscheidungsstrukturen für sicherheitsrelevante Angelegenheiten\n• Integration von VS-NfD Governance in bestehende Unternehmensführungsstrukturen\n\n📋 Richtlinien und Verfahrensdokumentation:\n• Entwicklung umfassender Sicherheitsrichtlinien speziell für VS-NfD Informationsverarbeitung\n• Erstellung detaillierter Arbeitsanweisungen für den täglichen Umgang mit klassifizierten Informationen\n• Implementierung von Dokumentenmanagement-Systemen für Richtlinien und Verfahren\n• Regelmäßige Überprüfung und Aktualisierung aller Compliance-Dokumentationen\n• Sicherstellung der Verfügbarkeit und Zugänglichkeit relevanter Richtlinien für alle Mitarbeiter\n\n🔐 Zugangsmanagement und Berechtigungskontrollen:\n• Implementierung des Need-to-Know-Prinzips für alle VS-NfD Informationszugriffe\n• Etablierung formaler Verfahren für Berechtigungserteilung, -überprüfung und -entzug\n• Regelmäßige Access-Reviews und Rezertifizierungsprozesse für alle Benutzerkonten\n• Implementierung von Segregation-of-Duties-Prinzipien für kritische Geschäftsprozesse\n• Dokumentation und Audit-Trail für alle Zugangsänderungen und -entscheidungen\n\n👥 Personalmanagement und Sicherheitsüberprüfungen:\n• Entwicklung spezifischer Einstellungsverfahren für Positionen mit VS-NfD Zugang\n• Implementierung von Background-Checks und Referenzprüfungen für relevante Mitarbeiter\n• Etablierung von Vertraulichkeitsverpflichtungen und Sicherheitsvereinbarungen\n• Regelmäßige Sicherheitsschulungen und Awareness-Programme für alle Mitarbeiter\n• Entwicklung von Verfahren für Mitarbeiterausscheiden und Berechtigungsentzug\n\n📊 Monitoring und Compliance-Überwachung:\n• Implementierung kontinuierlicher Monitoring-Systeme für VS-NfD Compliance-Status\n• Etablierung von Key-Performance-Indicators und Compliance-Metriken\n• Regelmäßige interne Audits und Selbstbewertungen der Compliance-Posture\n• Entwicklung von Reporting-Mechanismen für Management und Aufsichtsbehörden\n• Implementierung von Corrective-Action-Prozessen für identifizierte Compliance-Lücken\n\n🔄 Change-Management und Kontinuierliche Verbesserung:\n• Etablierung formaler Change-Management-Prozesse für sicherheitsrelevante Änderungen\n• Implementierung von Risk-Assessment-Verfahren für alle organisatorischen Änderungen\n• Entwicklung von Lessons-Learned-Prozessen aus Sicherheitsvorfällen und Audits\n• Regelmäßige Bewertung und Optimierung der Governance-Strukturen\n• Integration von Best-Practices und regulatorischen Entwicklungen in die Organisationsstrukturen"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 10),
+        question: 'Wie sollten Incident-Response und Security-Breach-Management-Verfahren für VS-NfD Informationen gestaltet werden?',
+        answer: "Incident-Response und Security-Breach-Management für VS-NfD Informationen erfordern spezialisierte Verfahren, die über Standard-Incident-Response hinausgehen. Diese Verfahren müssen sowohl die technischen Aspekte der Incident-Behandlung als auch die spezifischen Melde- und Dokumentationspflichten für klassifizierte Informationen berücksichtigen. Eine effektive Incident-Response-Capability ist essentiell für die Minimierung von Schäden und die Aufrechterhaltung der Compliance.\n\n🚨 Incident-Klassifizierung und -Priorisierung:\n• Entwicklung spezifischer Klassifizierungsschemata für VS-NfD bezogene Sicherheitsvorfälle\n• Definition von Severity-Levels basierend auf potentiellen Auswirkungen auf klassifizierte Informationen\n• Etablierung von Eskalationsmatrizen für verschiedene Incident-Typen und -Schweregrade\n• Implementierung automatisierter Alerting-Systeme für kritische VS-NfD Sicherheitsereignisse\n• Berücksichtigung regulatorischer Meldepflichten bei der Incident-Priorisierung\n\n⚡ Sofortmaßnahmen und Containment:\n• Entwicklung von Playbooks für verschiedene Incident-Szenarien mit VS-NfD Bezug\n• Implementierung von Isolation und Containment-Verfahren für kompromittierte Systeme\n• Etablierung von Emergency-Response-Teams mit spezialisierten VS-NfD Kenntnissen\n• Sichere Kommunikationskanäle für Incident-Response-Koordination\n• Verfahren für die sichere Beweissicherung und Forensik bei VS-NfD Incidents\n\n🔍 Incident-Investigation und Forensik:\n• Spezialisierte forensische Verfahren für VS-NfD Umgebungen unter Berücksichtigung der Klassifizierung\n• Sichere Handhabung und Analyse von Beweismitteln aus klassifizierten Systemen\n• Koordination mit externen Forensik-Experten unter Wahrung der Vertraulichkeitsanforderungen\n• Dokumentation von Incident-Timelines und Impact-Assessments\n• Entwicklung von Lessons-Learned und Root-Cause-Analysis-Verfahren\n\n📢 Meldewesen und Kommunikation:\n• Implementierung spezifischer Meldeverfahren für VS-NfD Sicherheitsvorfälle an relevante Behörden\n• Entwicklung von Kommunikationsprotokollen für interne und externe Stakeholder\n• Berücksichtigung von Vertraulichkeitsanforderungen bei der Incident-Kommunikation\n• Etablierung von Media-Response und Public-Relations-Verfahren für öffentliche Incidents\n• Koordination mit Rechtsabteilung und Compliance-Teams für regulatorische Meldungen\n\n🔧 Recovery und Wiederherstellung:\n• Entwicklung spezifischer Recovery-Verfahren für VS-NfD Systeme und Daten\n• Implementierung von Backup-Restoration-Prozessen unter Berücksichtigung der Klassifizierung\n• Verfahren für die Validierung der Systemintegrität nach Incident-Recovery\n• Post-Incident-Monitoring und Überwachung für weitere Kompromittierungszeichen\n• Dokumentation von Recovery-Aktivitäten und Validation-Tests\n\n📚 Training und Preparedness:\n• Regelmäßige Incident-Response-Übungen und Tabletop-Exercises für VS-NfD Szenarien\n• Spezialisierte Schulungen für Incident-Response-Teams zu VS-NfD Besonderheiten\n• Entwicklung von Incident-Response-Handbüchern und Quick-Reference-Guides\n• Cross-Training und Backup-Ressourcen für kritische Incident-Response-Rollen\n• Regelmäßige Updates und Verbesserungen der Incident-Response-Verfahren basierend auf Übungen und realen Incidents"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 11),
+        question: 'Welche Dokumentenmanagement und Lifecycle-Management-Prozesse sind für VS-NfD Informationen erforderlich?',
+        answer: "Dokumentenmanagement und Lifecycle-Management für VS-NfD Informationen erfordern spezielle Verfahren, die den gesamten Lebenszyklus klassifizierter Informationen von der Erstellung bis zur sicheren Vernichtung abdecken. Diese Prozesse müssen sowohl physische als auch digitale Dokumente berücksichtigen und sicherstellen, dass alle Handling-, Speicher- und Archivierungsanforderungen erfüllt werden. Ein systematischer Ansatz ist essentiell für die Aufrechterhaltung der Informationssicherheit.\n\n📄 Dokumentenerstellung und -klassifizierung:\n• Implementierung standardisierter Verfahren für die Klassifizierung neuer Dokumente als VS-NfD\n• Entwicklung von Templates und Formatvorgaben für VS-NfD Dokumente\n• Automatisierte Klassifizierungstools und Metadaten-Management für digitale Dokumente\n• Schulung der Mitarbeiter in korrekter Dokumentenklassifizierung und -kennzeichnung\n• Etablierung von Review-Prozessen für Klassifizierungsentscheidungen\n\n🏷️ Kennzeichnung und Metadaten-Management:\n• Standardisierte Kennzeichnungsverfahren für physische und digitale VS-NfD Dokumente\n• Implementierung von Metadaten-Schemata für umfassende Dokumentenverfolgung\n• Automatisierte Kennzeichnungssysteme für digitale Dokumentenmanagement-Plattformen\n• Versionskontrolle und Change-Tracking für alle VS-NfD Dokumente\n• Integration von Klassifizierungsmarkierungen in Dokumentenworkflows\n\n💾 Speicherung und Archivierung:\n• Implementierung sicherer Speicherlösungen für physische und digitale VS-NfD Dokumente\n• Entwicklung von Archivierungsstrategien mit angemessenen Aufbewahrungszeiten\n• Sichere Backup-Verfahren für alle klassifizierten Dokumentenbestände\n• Implementierung von Zugangskontrollen für Archiv- und Speichersysteme\n• Regelmäßige Integritätsprüfungen und Validierung archivierter Dokumente\n\n🔄 Dokumentenzirkulation und -freigabe:\n• Etablierung kontrollierter Verfahren für die Weitergabe von VS-NfD Dokumenten\n• Implementierung von Approval-Workflows für Dokumentenfreigaben\n• Sichere Übertragungsverfahren für interne und externe Dokumentenaustausche\n• Tracking und Logging aller Dokumentenzugriffe und -bewegungen\n• Entwicklung von Verfahren für die Rückholung verteilter Dokumente\n\n📋 Lifecycle-Management und Retention:\n• Entwicklung umfassender Retention-Policies für verschiedene VS-NfD Dokumententypen\n• Automatisierte Lifecycle-Management-Systeme für digitale Dokumentenbestände\n• Regelmäßige Reviews von Dokumentenbeständen und Klassifizierungsstatus\n• Implementierung von Disposition-Schedules und Vernichtungsverfahren\n• Dokumentation aller Lifecycle-Entscheidungen und -Aktivitäten\n\n🗑️ Sichere Vernichtung und Disposal:\n• Entwicklung spezifischer Vernichtungsverfahren für VS-NfD Dokumente\n• Implementierung zertifizierter Vernichtungsmethoden für verschiedene Medientypen\n• Sichere Löschverfahren für digitale Dokumente und Speichermedien\n• Dokumentation und Zertifizierung aller Vernichtungsaktivitäten\n• Regelmäßige Audits der Vernichtungsverfahren und -nachweise"
+      },
+      {
+        _type: 'object',
+        _key: generateKey('faq', 12),
+        question: 'Wie können Drittanbieter und externe Dienstleister sicher in VS-NfD Compliance-Prozesse integriert werden?',
+        answer: "Die Integration von Drittanbietern und externen Dienstleistern in VS-NfD Compliance-Prozesse erfordert besondere Sorgfalt und umfassende Sicherheitsmaßnahmen. Diese Partner müssen die gleichen Sicherheitsstandards erfüllen wie interne Prozesse, was spezielle Vertragsgestaltung, Due-Diligence-Verfahren und kontinuierliche Überwachung erfordert. Ein strukturierter Ansatz für Vendor-Management ist essentiell für die Aufrechterhaltung der Compliance-Integrität.\n\n🔍 Vendor-Assessment und Due-Diligence:\n• Umfassende Sicherheitsbewertungen aller Drittanbieter vor Vertragsabschluss\n• Evaluierung der VS-NfD Compliance-Fähigkeiten und -Erfahrungen potentieller Partner\n• Überprüfung von Zertifizierungen, Akkreditierungen und Sicherheitsnachweisen\n• On-Site-Audits und Facility-Inspektionen für kritische Dienstleister\n• Bewertung der finanziellen Stabilität und Geschäftskontinuität von Drittanbietern\n\n📋 Vertragsgestaltung und rechtliche Anforderungen:\n• Entwicklung spezifischer Vertragsklauseln für VS-NfD Compliance-Anforderungen\n• Implementierung von Service-Level-Agreements mit Sicherheits- und Compliance-Metriken\n• Vereinbarung von Audit-Rechten und regelmäßigen Compliance-Überprüfungen\n• Klare Definition von Haftung und Verantwortlichkeiten bei Sicherheitsvorfällen\n• Implementierung von Termination-Klauseln bei Compliance-Verstößen\n\n🔐 Zugangskontrollen und Berechtigungsmanagement:\n• Implementierung strikter Zugangskontrollen für externe Dienstleister\n• Verwendung des Least-Privilege-Prinzips für alle Drittanbieter-Zugriffe\n• Etablierung temporärer und projektbezogener Zugriffsberechtigungen\n• Implementierung von Multi-Faktor-Authentifizierung für alle externen Zugriffe\n• Regelmäßige Review und Rezertifizierung aller Drittanbieter-Berechtigungen\n\n📊 Monitoring und Compliance-Überwachung:\n• Kontinuierliche Überwachung aller Drittanbieter-Aktivitäten in VS-NfD Umgebungen\n• Implementierung von Real-Time-Monitoring und Alerting für externe Zugriffe\n• Regelmäßige Compliance-Assessments und Audit-Programme für Drittanbieter\n• Integration von Vendor-Monitoring in das übergeordnete Security-Operations-Center\n• Entwicklung von Vendor-Scorecards und Performance-Dashboards\n\n🚨 Incident-Response und Breach-Management:\n• Entwicklung koordinierter Incident-Response-Verfahren mit Drittanbietern\n• Etablierung von Kommunikationsprotokollen für Sicherheitsvorfälle\n• Implementierung von Breach-Notification-Verfahren und Meldepflichten\n• Koordination von Forensik-Aktivitäten bei Incidents mit Drittanbieter-Beteiligung\n• Entwicklung von Lessons-Learned-Prozessen aus Vendor-bezogenen Incidents\n\n🔄 Lifecycle-Management und Exit-Strategien:\n• Entwicklung umfassender Onboarding-Prozesse für neue Drittanbieter\n• Implementierung regelmäßiger Vendor-Reviews und Performance-Bewertungen\n• Etablierung von Exit-Strategien und Datenrückgabe-Verfahren\n• Sichere Deprovisioning-Prozesse bei Vertragsbeendigung\n• Dokumentation und Archivierung aller Vendor-Compliance-Aktivitäten"
+      }
+    ]
+    
+    // Update the document with new FAQs
+    const updatedFaqs = [...(existingDoc.faq || []), ...newFaqs]
+    
+    console.log(`Adding ${newFaqs.length} new FAQs to the document...`)
+    const transaction = client.transaction()
+    transaction.patch(existingDoc._id, {
+      set: {
+        faq: updatedFaqs
+      }
+    })
+    
+    await transaction.commit()
+    console.log('✅ FAQ batch 3 added successfully')
+  } catch (error) {
+    console.error('Error:', error)
+    throw error
+  }
+}
+
+run()
