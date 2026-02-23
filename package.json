@@ -20,7 +20,10 @@
     "validate-report": "tsx src/tools/validate-batch-report.ts",
     "upload": "tsx src/tools/upload-page.ts",
     "upload-batch": "tsx src/tools/upload-batch.ts",
-    "rollback-upload": "tsx src/tools/rollback-upload.ts"
+    "rollback-upload": "tsx src/tools/rollback-upload.ts",
+    "link": "tsx src/tools/link-translation.ts",
+    "link-batch": "tsx src/tools/link-batch.ts",
+    "verify-i18n": "tsx src/tools/verify-i18n.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.78.0",
