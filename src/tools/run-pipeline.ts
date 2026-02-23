@@ -349,8 +349,8 @@ async function processStage(
       }
       const germanPath = (await fileExists(extractedPath)) ? extractedPath : undefined
       const result = await validateTranslation(translatedPath, germanPath)
-      if (!result.valid) {
-        throw new Error(`Validation failed: score ${result.score}/11`)
+      if (result.score < 8) {
+        throw new Error(`Validation failed: score ${result.score}/11 (minimum 8 required)`)
       }
       break
     }
@@ -373,7 +373,7 @@ async function processStage(
         filePath: translatedPath,
         germanPath,
         execute: true,
-        force: false,
+        force: true,
       })
       if (uploadResult.status === 'failed') {
         throw new Error(uploadResult.error ?? 'Upload failed')

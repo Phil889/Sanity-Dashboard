@@ -63,7 +63,7 @@ function getAnthropicConfig(): AnthropicConfig {
 
   _anthropicConfig = {
     apiKey,
-    model: process.env.ANTHROPIC_MODEL || 'claude-sonnet-4-20250514',
+    model: process.env.ANTHROPIC_MODEL || 'claude-sonnet-4-6',
   };
 
   return _anthropicConfig;

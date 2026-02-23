@@ -391,7 +391,7 @@ export async function translatePage(
     async () => {
       return anthropic.messages.create({
         model: translationModel,
-        max_tokens: 8192,
+        max_tokens: 16384,
         temperature: 0.3,
         system: SYSTEM_PROMPT,
         messages: [{ role: 'user', content: userPrompt }],
@@ -427,7 +427,7 @@ export async function translatePage(
       async () => {
         return anthropic.messages.create({
           model: translationModel,
-          max_tokens: 8192,
+          max_tokens: 16384,
           temperature: 0.1,
           system: SYSTEM_PROMPT,
           messages: [
