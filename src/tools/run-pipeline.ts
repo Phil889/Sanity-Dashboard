@@ -321,8 +321,9 @@ async function processStage(
   ctx: StageContext,
 ): Promise<void> {
   const englishId = `${germanId}-en`
-  const extractedPath = join(ctx.extractedDir, `${slug}.json`)
-  const translatedPath = join(ctx.translatedDir, `${slug}-en.json`)
+  const safeSlug = slug.replace(/\//g, '--')
+  const extractedPath = join(ctx.extractedDir, `${safeSlug}.json`)
+  const translatedPath = join(ctx.translatedDir, `${safeSlug}-en.json`)
 
   switch (stage) {
     case 'extracted': {

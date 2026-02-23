@@ -106,7 +106,7 @@ export interface TranslationConfig {
 
 /** Default translation configuration values. */
 export const DEFAULT_TRANSLATION_CONFIG: TranslationConfig = {
-  model: 'claude-sonnet-4-5-20250514',
+  model: 'claude-sonnet-4-20250514',
   maxTokens: 8192,
   temperature: 0.3,
 }
