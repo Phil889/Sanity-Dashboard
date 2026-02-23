@@ -17,7 +17,10 @@
     "translate-batch": "tsx src/tools/translate-batch.ts",
     "validate-translation": "tsx src/tools/validate-translation.ts",
     "fix-translation": "tsx src/tools/fix-translation.ts",
-    "validate-report": "tsx src/tools/validate-batch-report.ts"
+    "validate-report": "tsx src/tools/validate-batch-report.ts",
+    "upload": "tsx src/tools/upload-page.ts",
+    "upload-batch": "tsx src/tools/upload-batch.ts",
+    "rollback-upload": "tsx src/tools/rollback-upload.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.78.0",
