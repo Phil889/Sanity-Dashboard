@@ -23,7 +23,8 @@
     "rollback-upload": "tsx src/tools/rollback-upload.ts",
     "link": "tsx src/tools/link-translation.ts",
     "link-batch": "tsx src/tools/link-batch.ts",
-    "verify-i18n": "tsx src/tools/verify-i18n.ts"
+    "verify-i18n": "tsx src/tools/verify-i18n.ts",
+    "pipeline": "tsx src/tools/run-pipeline.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.78.0",
