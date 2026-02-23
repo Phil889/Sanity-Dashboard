@@ -247,7 +247,7 @@ export function validateExtractedPage(data: unknown): ValidationResult {
     if (isNonEmptyArray(hero.benefits)) {
       stats.hasBenefits = true
     } else {
-      errors.push('heroSection.benefits is missing or empty')
+      warnings.push('heroSection.benefits is missing or empty')
     }
     // heroImage is optional
     if (isObject(hero.heroImage)) {
@@ -268,7 +268,7 @@ export function validateExtractedPage(data: unknown): ValidationResult {
   if (isObject(page.overview)) {
     const overview = page.overview as Record<string, unknown>
     if (!isNonEmptyString(overview.heading)) {
-      errors.push('overview.heading is missing or empty')
+      warnings.push('overview.heading is missing or empty')
     }
     if (!isNonEmptyString(overview.description)) {
       errors.push('overview.description is missing or empty')
@@ -300,20 +300,20 @@ export function validateExtractedPage(data: unknown): ValidationResult {
     errors.push('Missing overview')
   }
 
-  // ── Approach ──
+  // ── Approach (optional — not all pages have this section) ──
   if (isObject(page.approach)) {
     const approach = page.approach as Record<string, unknown>
     if (!isNonEmptyString(approach.title)) {
-      errors.push('approach.title is missing or empty')
+      warnings.push('approach.title is missing or empty')
     }
     if (!isNonEmptyString(approach.description)) {
-      errors.push('approach.description is missing or empty')
+      warnings.push('approach.description is missing or empty')
     }
     if (!isNonEmptyArray(approach.points)) {
-      errors.push('approach.points is missing or empty')
+      warnings.push('approach.points is missing or empty')
     }
   } else {
-    errors.push('Missing approach')
+    warnings.push('Missing approach')
   }
 
   // ── Services ──
@@ -333,14 +333,14 @@ export function validateExtractedPage(data: unknown): ValidationResult {
         errors.push(`services[${i}].description is missing or empty`)
       }
       if (!isNonEmptyArray(svc.features)) {
-        errors.push(`services[${i}].features is missing or empty`)
+        warnings.push(`services[${i}].features is missing or empty`)
       }
     }
   } else {
     errors.push('services is missing or empty (min 1 required)')
   }
 
-  // ── FAQ ──
+  // ── FAQ (optional — some pages may not have FAQs) ──
   if (isNonEmptyArray(page.faq)) {
     const faq = page.faq as Record<string, unknown>[]
     stats.faqCount = faq.length
@@ -358,7 +358,7 @@ export function validateExtractedPage(data: unknown): ValidationResult {
       }
     }
   } else {
-    errors.push('faq is missing or empty (min 1 required)')
+    warnings.push('faq is missing or empty')
   }
 
   // ── SEO ──
@@ -377,11 +377,11 @@ export function validateExtractedPage(data: unknown): ValidationResult {
     errors.push('Missing seo')
   }
 
-  // ── Testimonial ──
+  // ── Testimonial (optional — many pages lack testimonials) ──
   if (isObject(page.testimonial)) {
     const testimonial = page.testimonial as Record<string, unknown>
     if (!isNonEmptyString(testimonial.quote)) {
-      errors.push('testimonial.quote is missing or empty')
+      warnings.push('testimonial.quote is missing or empty')
     }
     // Author details are optional (~80% missing)
     if (isNonEmptyString(testimonial.name) || isNonEmptyString(testimonial.position)) {
@@ -393,7 +393,7 @@ export function validateExtractedPage(data: unknown): ValidationResult {
       warnings.push('testimonial.company is missing')
     }
   } else {
-    errors.push('Missing testimonial')
+    warnings.push('Missing testimonial')
   }
 
   // ── Parent/References (optional for root pages) ──
