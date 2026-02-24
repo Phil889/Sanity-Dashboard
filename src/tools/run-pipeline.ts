@@ -36,7 +36,7 @@ import {
 } from '../lib/pipeline-state.js'
 import { detectTranslationStatus } from './detect-untranslated.js'
 import { extractPage } from './extract-page.js'
-import { validateExtractedPage } from '../lib/extraction-types.js'
+import { validateSourceQuality } from '../lib/extraction-types.js'
 import { fixGermanSource } from './fix-german-source.js'
 import { translatePage } from './translate-page.js'
 import { validateTranslation } from './validate-translation.js'
@@ -332,10 +332,10 @@ async function processStage(
       let extracted = await extractPage(germanId)
 
       // ── Quality gate: validate German source before proceeding ──
-      const sourceValidation = validateExtractedPage(extracted as unknown as Record<string, unknown>)
+      const sourceValidation = validateSourceQuality(extracted as unknown as Record<string, unknown>)
       if (!sourceValidation.valid) {
         const autoFixableErrors = sourceValidation.errors.filter((e) =>
-          /^(seo\.|Missing seo|heroSection\.(heading|tagline|description)|overview\.description)/.test(e)
+          /^(seo\.|Missing seo|heroSection\.(heading|tagline|description)|overview\.(heading|description))/.test(e)
         )
         const hasAutoFixes = autoFixableErrors.length > 0
 
@@ -349,7 +349,7 @@ async function processStage(
             extracted = await extractPage(germanId)
 
             // Re-validate after fix
-            const revalidation = validateExtractedPage(extracted as unknown as Record<string, unknown>)
+            const revalidation = validateSourceQuality(extracted as unknown as Record<string, unknown>)
             if (!revalidation.valid) {
               const remaining = revalidation.errors.length
               logger.warn(`  [QUALITY-GATE] ${remaining} error(s) remain after fix — proceeding with warnings`)

@@ -33,7 +33,7 @@ import { resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { sanityClient } from '../lib/sanity-client.js'
 import { withRetry } from '../lib/errors.js'
-import { validateExtractedPage } from '../lib/extraction-types.js'
+import { validateSourceQuality } from '../lib/extraction-types.js'
 import { logger } from '../lib/logger.js'
 import type { AuditReport } from './audit-german-pages.js'
 
@@ -123,7 +123,7 @@ export function computeFixes(doc: Record<string, unknown>): { fixes: FixAction[]
   const seoDesc = seo && isStr(seo.description) ? seo.description : null
 
   // Run validation to see what's actually broken
-  const validation = validateExtractedPage(doc)
+  const validation = validateSourceQuality(doc)
   const errors = new Set(validation.errors)
 
   // ── SEO object entirely missing ──
@@ -203,7 +203,17 @@ export function computeFixes(doc: Record<string, unknown>): { fixes: FixAction[]
     }
   }
 
-  // ── Overview description ──
+  // ── Overview fields ──
+  if (errors.has('overview.heading is missing or empty')) {
+    if (overview && title) {
+      fixes.push({ field: 'overview.heading', value: title, reason: 'Copy from title' })
+    } else if (!overview) {
+      unfixable.push('overview.heading: overview object is missing entirely')
+    } else {
+      unfixable.push('overview.heading: no title to copy from')
+    }
+  }
+
   if (errors.has('overview.description is missing or empty')) {
     if (overview && heroDesc) {
       fixes.push({ field: 'overview.description', value: heroDesc, reason: 'Copy from heroSection.description' })
@@ -212,6 +222,53 @@ export function computeFixes(doc: Record<string, unknown>): { fixes: FixAction[]
     } else {
       unfixable.push('overview.description: no heroSection.description to copy from')
     }
+  }
+
+  // ── Structural sections that cannot be auto-created ──
+  if (errors.has('Missing approach')) {
+    unfixable.push('Missing approach: cannot auto-create entire section')
+  }
+  if (errors.has('approach.title is missing or empty')) {
+    unfixable.push('approach.title: requires manual content')
+  }
+  if (errors.has('approach.description is missing or empty')) {
+    unfixable.push('approach.description: requires manual content')
+  }
+  if (errors.has('approach.points is missing or empty')) {
+    unfixable.push('approach.points: requires manual content')
+  }
+  if (errors.has('Missing testimonial')) {
+    unfixable.push('Missing testimonial: cannot auto-create')
+  }
+  if (errors.has('testimonial.quote is missing or empty')) {
+    unfixable.push('testimonial.quote: requires manual content')
+  }
+  if (errors.has('overview.whyUs is missing')) {
+    unfixable.push('overview.whyUs: cannot auto-create section')
+  }
+  if (errors.has('overview.whyUs.title is missing or empty')) {
+    unfixable.push('overview.whyUs.title: requires manual content')
+  }
+  if (errors.has('overview.whyUs.points is missing or empty')) {
+    unfixable.push('overview.whyUs.points: requires manual content')
+  }
+  if (errors.has('overview.alert is missing')) {
+    unfixable.push('overview.alert: cannot auto-create section')
+  }
+  if (errors.has('overview.alert.title is missing or empty')) {
+    unfixable.push('overview.alert.title: requires manual content')
+  }
+  if (errors.has('overview.alert.content is missing or empty')) {
+    unfixable.push('overview.alert.content: requires manual content')
+  }
+  if (errors.has('overview.points is missing or empty')) {
+    unfixable.push('overview.points: requires manual content')
+  }
+  if (errors.has('heroSection.benefits is missing or empty')) {
+    unfixable.push('heroSection.benefits: requires manual content')
+  }
+  if (errors.has('faq is missing or empty (min 1 required)')) {
+    unfixable.push('Missing FAQ: cannot auto-create FAQ entries')
   }
 
   // ── Completely unfixable structural errors ──
@@ -283,7 +340,7 @@ export async function fixGermanSource(germanId: string, execute = false): Promis
   const title = isStr(doc.title) ? doc.title : '(no title)'
 
   // Validate before
-  const validationBefore = validateExtractedPage(cleanDoc)
+  const validationBefore = validateSourceQuality(cleanDoc)
   if (validationBefore.valid) {
     return {
       _id: germanId,
@@ -340,7 +397,7 @@ export async function fixGermanSource(germanId: string, execute = false): Promis
     let validAfter = false
     if (updatedDoc) {
       for (const field of SYSTEM_FIELDS) delete updatedDoc[field]
-      validAfter = validateExtractedPage(updatedDoc).valid
+      validAfter = validateSourceQuality(updatedDoc).valid
     }
 
     return {

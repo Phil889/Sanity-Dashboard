@@ -412,6 +412,259 @@ export function validateExtractedPage(data: unknown): ValidationResult {
   }
 }
 
+// ─── Strict Source Quality Validation ────────────────────────────────────────
+
+/**
+ * Strict quality gate validator for German source pages.
+ *
+ * Unlike validateExtractedPage() which treats many fields as warnings,
+ * this function requires ALL sections to be present and populated:
+ *   SEO, Hero Section, Overview, Approach, Testimonial, Services,
+ *   Why Us, Alert, FAQ, and all their sub-fields.
+ *
+ * Used by the quality gate in the pipeline to ensure German pages are
+ * complete before translation.
+ *
+ * @param data - Unknown data to validate (typically parsed JSON)
+ * @returns ValidationResult with strict error checking
+ */
+export function validateSourceQuality(data: unknown): ValidationResult {
+  const errors: string[] = []
+  const warnings: string[] = []
+  const stats: ValidationStats = {
+    faqCount: 0,
+    servicesCount: 0,
+    hasBenefits: false,
+    hasHeroImage: false,
+    hasTestimonialAuthor: false,
+    hasWhyUs: false,
+    hasAlert: false,
+  }
+
+  // Top-level must be an object
+  if (!isObject(data)) {
+    return { valid: false, errors: ['Data is not an object'], warnings, stats }
+  }
+
+  const page = data as Record<string, unknown>
+
+  // ── Required top-level fields ──
+  if (!isNonEmptyString(page._id)) {
+    errors.push('Missing or empty _id')
+  }
+  if (page._type !== 'servicePage') {
+    errors.push(`_type must be "servicePage", got "${String(page._type)}"`)
+  }
+  if (!isNonEmptyString(page.title)) {
+    errors.push('Missing or empty title')
+  }
+  if (page.language !== 'de') {
+    errors.push(`language must be "de", got "${String(page.language)}"`)
+  }
+
+  // ── Slug ──
+  if (isObject(page.slug)) {
+    const slug = page.slug as Record<string, unknown>
+    if (!isNonEmptyString(slug.current)) {
+      errors.push('slug.current is missing or empty')
+    }
+  } else {
+    errors.push('Missing slug object')
+  }
+
+  // ── SEO (all fields required) ──
+  if (isObject(page.seo)) {
+    const seo = page.seo as Record<string, unknown>
+    if (!isNonEmptyString(seo.title)) {
+      errors.push('seo.title is missing or empty')
+    }
+    if (!isNonEmptyString(seo.description)) {
+      errors.push('seo.description is missing or empty')
+    }
+    if (!isNonEmptyString(seo.keywords)) {
+      errors.push('seo.keywords is missing or empty')
+    }
+  } else {
+    errors.push('Missing seo')
+  }
+
+  // ── Hero Section (all fields required) ──
+  if (isObject(page.heroSection)) {
+    const hero = page.heroSection as Record<string, unknown>
+    if (!isNonEmptyString(hero.heading)) {
+      errors.push('heroSection.heading is missing or empty')
+    }
+    if (!isNonEmptyString(hero.tagline)) {
+      errors.push('heroSection.tagline is missing or empty')
+    }
+    if (!isNonEmptyString(hero.description)) {
+      errors.push('heroSection.description is missing or empty')
+    }
+    if (isNonEmptyArray(hero.benefits)) {
+      stats.hasBenefits = true
+    } else {
+      errors.push('heroSection.benefits is missing or empty')
+    }
+    // heroImage — optional (only ~20% of pages have this)
+    if (isObject(hero.heroImage) && isObject((hero.heroImage as Record<string, unknown>).asset)) {
+      stats.hasHeroImage = true
+    } else {
+      warnings.push('heroSection.heroImage is missing (only ~20% of pages have this)')
+    }
+  } else {
+    errors.push('Missing heroSection')
+  }
+
+  // ── Overview (all fields required) ──
+  if (isObject(page.overview)) {
+    const overview = page.overview as Record<string, unknown>
+    if (!isNonEmptyString(overview.heading)) {
+      errors.push('overview.heading is missing or empty')
+    }
+    if (!isNonEmptyString(overview.description)) {
+      errors.push('overview.description is missing or empty')
+    }
+    if (!isNonEmptyArray(overview.points)) {
+      errors.push('overview.points is missing or empty')
+    }
+
+    // ── Why Us (required sub-section) ──
+    if (isObject(overview.whyUs)) {
+      stats.hasWhyUs = true
+      const whyUs = overview.whyUs as Record<string, unknown>
+      if (!isNonEmptyString(whyUs.title)) {
+        errors.push('overview.whyUs.title is missing or empty')
+      }
+      if (!isNonEmptyArray(whyUs.points)) {
+        errors.push('overview.whyUs.points is missing or empty')
+      }
+    } else {
+      errors.push('overview.whyUs is missing')
+    }
+
+    // ── Alert (required sub-section) ──
+    if (isObject(overview.alert)) {
+      stats.hasAlert = true
+      const alert = overview.alert as Record<string, unknown>
+      if (!isNonEmptyString(alert.title)) {
+        errors.push('overview.alert.title is missing or empty')
+      }
+      if (!isNonEmptyString(alert.content)) {
+        errors.push('overview.alert.content is missing or empty')
+      }
+    } else {
+      errors.push('overview.alert is missing')
+    }
+
+    // Additional optional overview fields (warnings only)
+    if (!isNonEmptyString(overview.additionalInfo)) {
+      warnings.push('overview.additionalInfo is missing')
+    }
+    if (!isNonEmptyString(overview.serviceDescription)) {
+      warnings.push('overview.serviceDescription is missing')
+    }
+    if (!isNonEmptyArray(overview.servicePoints)) {
+      warnings.push('overview.servicePoints is missing or empty')
+    }
+  } else {
+    errors.push('Missing overview')
+  }
+
+  // ── Approach (required section) ──
+  if (isObject(page.approach)) {
+    const approach = page.approach as Record<string, unknown>
+    if (!isNonEmptyString(approach.title)) {
+      errors.push('approach.title is missing or empty')
+    }
+    if (!isNonEmptyString(approach.description)) {
+      errors.push('approach.description is missing or empty')
+    }
+    if (!isNonEmptyArray(approach.points)) {
+      errors.push('approach.points is missing or empty')
+    }
+  } else {
+    errors.push('Missing approach')
+  }
+
+  // ── Services (required, min 1) ──
+  if (isNonEmptyArray(page.services)) {
+    const services = page.services as Record<string, unknown>[]
+    stats.servicesCount = services.length
+    for (let i = 0; i < services.length; i++) {
+      const svc = services[i]
+      if (!isObject(svc)) {
+        errors.push(`services[${i}] is not an object`)
+        continue
+      }
+      if (!isNonEmptyString(svc.title)) {
+        errors.push(`services[${i}].title is missing or empty`)
+      }
+      if (!isNonEmptyString(svc.description)) {
+        errors.push(`services[${i}].description is missing or empty`)
+      }
+      if (!isNonEmptyArray(svc.features)) {
+        errors.push(`services[${i}].features is missing or empty`)
+      }
+    }
+  } else {
+    errors.push('services is missing or empty (min 1 required)')
+  }
+
+  // ── Testimonial (required section) ──
+  if (isObject(page.testimonial)) {
+    const testimonial = page.testimonial as Record<string, unknown>
+    if (!isNonEmptyString(testimonial.quote)) {
+      errors.push('testimonial.quote is missing or empty')
+    }
+    if (isNonEmptyString(testimonial.name) || isNonEmptyString(testimonial.position)) {
+      stats.hasTestimonialAuthor = true
+    } else {
+      warnings.push('testimonial.name and testimonial.position are missing')
+    }
+    if (!isNonEmptyString(testimonial.company)) {
+      warnings.push('testimonial.company is missing')
+    }
+  } else {
+    errors.push('Missing testimonial')
+  }
+
+  // ── FAQ (required, min 1) ──
+  if (isNonEmptyArray(page.faq)) {
+    const faq = page.faq as Record<string, unknown>[]
+    stats.faqCount = faq.length
+    for (let i = 0; i < faq.length; i++) {
+      const item = faq[i]
+      if (!isObject(item)) {
+        errors.push(`faq[${i}] is not an object`)
+        continue
+      }
+      if (!isNonEmptyString(item.question)) {
+        errors.push(`faq[${i}].question is missing or empty`)
+      }
+      if (!isNonEmptyString(item.answer)) {
+        errors.push(`faq[${i}].answer is missing or empty`)
+      }
+    }
+  } else {
+    errors.push('faq is missing or empty (min 1 required)')
+  }
+
+  // ── Parent/References (optional for root pages) ──
+  if (!isObject(page.parent)) {
+    warnings.push('parent reference is missing (expected for root-level pages)')
+  }
+  if (!isObject(page.references)) {
+    warnings.push('references.topLevelParent is missing (expected for root-level pages)')
+  }
+
+  return {
+    valid: errors.length === 0,
+    errors,
+    warnings,
+    stats,
+  }
+}
+
 // ─── Field Completeness Helper ──────────────────────────────────────────────
 
 /**

@@ -21,7 +21,7 @@ import { resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { sanityClient } from '../lib/sanity-client.js'
 import { withRetry } from '../lib/errors.js'
-import { validateExtractedPage, type ValidationResult } from '../lib/extraction-types.js'
+import { validateSourceQuality, type ValidationResult } from '../lib/extraction-types.js'
 import { logger } from '../lib/logger.js'
 
 // ─── System fields to strip (same as extract-page.ts) ───────────────────────
@@ -54,6 +54,7 @@ const AUTO_FIXABLE_PATTERNS: RegExp[] = [
   /^heroSection\.heading is missing or empty$/,
   /^heroSection\.tagline is missing or empty$/,
   /^heroSection\.description is missing or empty$/,
+  /^overview\.heading is missing or empty$/,
   /^overview\.description is missing or empty$/,
 ]
 
@@ -126,7 +127,7 @@ export async function auditGermanPages(options: AuditOptions = {}): Promise<Audi
       delete doc[field]
     }
 
-    const validation = validateExtractedPage(doc)
+    const validation = validateSourceQuality(doc)
 
     // Classify errors
     const autoFixableErrors = validation.errors.filter(isAutoFixable)
@@ -164,7 +165,7 @@ export async function auditGermanPages(options: AuditOptions = {}): Promise<Audi
   // Build stats
   const validPages = pages.filter((doc) => {
     for (const field of SYSTEM_FIELDS) delete doc[field]
-    return validateExtractedPage(doc).valid
+    return validateSourceQuality(doc).valid
   }).length
 
   const totalErrors = Object.values(errorBreakdown).reduce((a, b) => a + b, 0)
@@ -207,24 +208,61 @@ function isStr(val: unknown): val is string {
   return typeof val === 'string' && val.length > 0
 }
 
+function isArr(val: unknown): val is unknown[] {
+  return Array.isArray(val) && val.length > 0
+}
+
 function trackFieldPresence(
   tracker: Record<string, { present: number; total: number }>,
   doc: Record<string, unknown>,
 ): void {
+  const hero = isObj(doc.heroSection) ? (doc.heroSection as Record<string, unknown>) : null
+  const overview = isObj(doc.overview) ? (doc.overview as Record<string, unknown>) : null
+  const seo = isObj(doc.seo) ? (doc.seo as Record<string, unknown>) : null
+  const approach = isObj(doc.approach) ? (doc.approach as Record<string, unknown>) : null
+  const testimonial = isObj(doc.testimonial) ? (doc.testimonial as Record<string, unknown>) : null
+  const whyUs = overview && isObj(overview.whyUs) ? (overview.whyUs as Record<string, unknown>) : null
+  const alert = overview && isObj(overview.alert) ? (overview.alert as Record<string, unknown>) : null
+
   const fields: Array<{ name: string; present: boolean }> = [
+    // Top-level
     { name: 'title', present: isStr(doc.title) },
-    { name: 'seo', present: isObj(doc.seo) },
-    { name: 'seo.title', present: isObj(doc.seo) && isStr((doc.seo as Record<string, unknown>).title) },
-    { name: 'seo.description', present: isObj(doc.seo) && isStr((doc.seo as Record<string, unknown>).description) },
-    { name: 'seo.keywords', present: isObj(doc.seo) && isStr((doc.seo as Record<string, unknown>).keywords) },
-    { name: 'heroSection', present: isObj(doc.heroSection) },
-    { name: 'heroSection.heading', present: isObj(doc.heroSection) && isStr((doc.heroSection as Record<string, unknown>).heading) },
-    { name: 'heroSection.tagline', present: isObj(doc.heroSection) && isStr((doc.heroSection as Record<string, unknown>).tagline) },
-    { name: 'heroSection.description', present: isObj(doc.heroSection) && isStr((doc.heroSection as Record<string, unknown>).description) },
-    { name: 'overview', present: isObj(doc.overview) },
-    { name: 'overview.description', present: isObj(doc.overview) && isStr((doc.overview as Record<string, unknown>).description) },
-    { name: 'services', present: Array.isArray(doc.services) && doc.services.length > 0 },
-    { name: 'faq', present: Array.isArray(doc.faq) && doc.faq.length > 0 },
+    // SEO
+    { name: 'seo', present: seo !== null },
+    { name: 'seo.title', present: seo !== null && isStr(seo.title) },
+    { name: 'seo.description', present: seo !== null && isStr(seo.description) },
+    { name: 'seo.keywords', present: seo !== null && isStr(seo.keywords) },
+    // Hero Section
+    { name: 'heroSection', present: hero !== null },
+    { name: 'heroSection.heading', present: hero !== null && isStr(hero.heading) },
+    { name: 'heroSection.tagline', present: hero !== null && isStr(hero.tagline) },
+    { name: 'heroSection.description', present: hero !== null && isStr(hero.description) },
+    { name: 'heroSection.benefits', present: hero !== null && isArr(hero.benefits) },
+    // Overview
+    { name: 'overview', present: overview !== null },
+    { name: 'overview.heading', present: overview !== null && isStr(overview.heading) },
+    { name: 'overview.description', present: overview !== null && isStr(overview.description) },
+    { name: 'overview.points', present: overview !== null && isArr(overview.points) },
+    // Why Us
+    { name: 'overview.whyUs', present: whyUs !== null },
+    { name: 'overview.whyUs.title', present: whyUs !== null && isStr(whyUs.title) },
+    { name: 'overview.whyUs.points', present: whyUs !== null && isArr(whyUs.points) },
+    // Alert
+    { name: 'overview.alert', present: alert !== null },
+    { name: 'overview.alert.title', present: alert !== null && isStr(alert.title) },
+    { name: 'overview.alert.content', present: alert !== null && isStr(alert.content) },
+    // Approach
+    { name: 'approach', present: approach !== null },
+    { name: 'approach.title', present: approach !== null && isStr(approach.title) },
+    { name: 'approach.description', present: approach !== null && isStr(approach.description) },
+    { name: 'approach.points', present: approach !== null && isArr(approach.points) },
+    // Services
+    { name: 'services', present: isArr(doc.services) },
+    // Testimonial
+    { name: 'testimonial', present: testimonial !== null },
+    { name: 'testimonial.quote', present: testimonial !== null && isStr(testimonial.quote) },
+    // FAQ
+    { name: 'faq', present: isArr(doc.faq) },
   ]
 
   for (const { name, present } of fields) {
