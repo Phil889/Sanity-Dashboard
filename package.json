@@ -24,7 +24,9 @@
     "link": "tsx src/tools/link-translation.ts",
     "link-batch": "tsx src/tools/link-batch.ts",
     "verify-i18n": "tsx src/tools/verify-i18n.ts",
-    "pipeline": "tsx src/tools/run-pipeline.ts"
+    "pipeline": "tsx src/tools/run-pipeline.ts",
+    "audit-german": "tsx src/tools/audit-german-pages.ts",
+    "fix-german": "tsx src/tools/fix-german-source.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.78.0",

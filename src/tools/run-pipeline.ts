@@ -36,6 +36,8 @@ import {
 } from '../lib/pipeline-state.js'
 import { detectTranslationStatus } from './detect-untranslated.js'
 import { extractPage } from './extract-page.js'
+import { validateExtractedPage } from '../lib/extraction-types.js'
+import { fixGermanSource } from './fix-german-source.js'
 import { translatePage } from './translate-page.js'
 import { validateTranslation } from './validate-translation.js'
 import { fixTranslation } from './fix-translation.js'
@@ -327,7 +329,46 @@ async function processStage(
 
   switch (stage) {
     case 'extracted': {
-      const extracted = await extractPage(germanId)
+      let extracted = await extractPage(germanId)
+
+      // ── Quality gate: validate German source before proceeding ──
+      const sourceValidation = validateExtractedPage(extracted as unknown as Record<string, unknown>)
+      if (!sourceValidation.valid) {
+        const autoFixableErrors = sourceValidation.errors.filter((e) =>
+          /^(seo\.|Missing seo|heroSection\.(heading|tagline|description)|overview\.description)/.test(e)
+        )
+        const hasAutoFixes = autoFixableErrors.length > 0
+
+        if (ctx.execute && hasAutoFixes) {
+          // Auto-fix the German source in Sanity, then re-extract
+          logger.warn(`  [QUALITY-GATE] ${germanId}: ${sourceValidation.errors.length} error(s), attempting auto-fix...`)
+          const fixResult = await fixGermanSource(germanId, true)
+
+          if (fixResult.applied && fixResult.fixes.length > 0) {
+            logger.info(`  [QUALITY-GATE] Applied ${fixResult.fixes.length} fix(es), re-extracting...`)
+            extracted = await extractPage(germanId)
+
+            // Re-validate after fix
+            const revalidation = validateExtractedPage(extracted as unknown as Record<string, unknown>)
+            if (!revalidation.valid) {
+              const remaining = revalidation.errors.length
+              logger.warn(`  [QUALITY-GATE] ${remaining} error(s) remain after fix — proceeding with warnings`)
+            } else {
+              logger.success(`  [QUALITY-GATE] All errors fixed for ${germanId}`)
+            }
+          } else {
+            logger.warn(`  [QUALITY-GATE] No auto-fixes could be applied for ${germanId}`)
+          }
+        } else {
+          // Dry-run or no auto-fixes available — log and continue
+          const fixable = hasAutoFixes ? `${autoFixableErrors.length} auto-fixable` : 'none auto-fixable'
+          logger.warn(`  [QUALITY-GATE] ${germanId}: ${sourceValidation.errors.length} error(s) (${fixable})`)
+          for (const err of sourceValidation.errors) {
+            logger.info(`    - ${err}`)
+          }
+        }
+      }
+
       await writeFile(extractedPath, JSON.stringify(extracted, null, 2), 'utf-8')
       break
     }
